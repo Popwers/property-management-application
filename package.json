@@ -1,0 +1,21 @@
+{
+	"name": "loca-board",
+	"version": "1.0.0",
+	"description": "Simple dashboard connect to wordpress for Locatif Project management.",
+	"main": "index.js",
+	"author": "Lionel Bataille",
+	"license": "ISC",
+	"scripts": {
+		"build": "wp-scripts build",
+		"start": "wp-scripts start"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^6.1.1"
+	},
+	"dependencies": {
+		"react-dom": "^16.13.1",
+		"react-router": "^5.1.2",
+		"redux": "^4.0.5",
+		"styled-components": "^5.1.0"
+	}
+}
