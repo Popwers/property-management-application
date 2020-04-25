@@ -10,7 +10,7 @@ class App extends Component {     // instead of: ...extends React.Component
     render() {
         return (
             <Root>
-                <h1>App</h1>
+                <h1>App v1</h1>
             </Root>
         );
     }

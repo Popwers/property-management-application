@@ -7,7 +7,7 @@ const config = {
         rules: [
             ...defaultConfig.module.rules,
             {
-                test: /\.(js|jsx)$/,
+                test: /\.jsx$/,
                 exclude: /node_modules/,
                 use: ['babel-loader']
             }
@@ -16,7 +16,6 @@ const config = {
     resolve: {
         extensions: ['*', '.js', '.jsx']
     },
-    
 };
 
 module.exports = config;
