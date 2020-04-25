@@ -10,6 +10,7 @@
 		"start": "wp-scripts start"
 	},
 	"devDependencies": {
+		"@babel/preset-react": "^7.9.4",
 		"@wordpress/scripts": "^6.1.1"
 	},
 	"dependencies": {
