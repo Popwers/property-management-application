@@ -1,7 +1,22 @@
 const { Component } = wp.element;
-import Root from "./theme/layout/Root";
+import { Switch, Route } from "react-router-dom";
 
-export default class App extends Component {     // instead of: ...extends React.Component
+import Root from "./theme/layout/Root";
+import AppContainer from "./theme/layout/AppContainer";
+
+function Home() {
+    return <h2>Home</h2>;
+}
+
+function About() {
+    return <h2>About</h2>;
+}
+
+function Users() {
+    return <h2>Users</h2>;
+}
+
+export default class App extends Component {  // instead of: ...extends React.Component
     constructor(props) {
         super(props);
         this.state = {};
@@ -10,8 +25,19 @@ export default class App extends Component {     // instead of: ...extends React
     render() {
         return (
             <Root>
-                <h1>App v4</h1>
-                <p>test</p>
+                <AppContainer>
+                    <Switch>
+                        <Route path="/about">
+                            <About />
+                        </Route>
+                        <Route path="/users">
+                            <Users />
+                        </Route>
+                        <Route path="/">
+                            <Home />
+                        </Route>
+                    </Switch>
+                </AppContainer>
             </Root>
         );
     }
