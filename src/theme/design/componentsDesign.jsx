@@ -49,3 +49,15 @@ export const StyledButton = styled.a`
         `
     };
 `
+
+export const TitleSection = styled.h2`
+    position: relative;
+
+    &:after {
+        content: "";
+        position: absolute;
+        width: 35%;
+        height: 3px;
+        background: ${props => props.theme.black};
+    }
+`

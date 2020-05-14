@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+const { Component } = wp.element;
+import styled, { css } from 'styled-components';
 import LogOut from "../../components/LogOutButton";
 import Navigation from "../../components/Navigation";
 
@@ -61,30 +62,47 @@ const Title = styled.h1`
 const Main = styled.main`
     padding: 45px;
     margin-left: 300px;
+    transition: margin 0.4s;
+
+    ${props =>
+        !props.closeMenu &&
+        css`
+            margin-left: 82px;
+        `};
 `
 
-export default function AppContainer(props) {
-    return (
-        <>
-            <BarreTop>
-                <ContainerTitle>
-                    <MenuBurger>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </MenuBurger>
+export default class AppContainer extends Component {
+    constructor(props) {
+        super(props);
 
-                    <Title>Projet<span>locatif</span></Title>
-                </ContainerTitle>
+        this.state = {
+            openMenu: true,
+        }
+    }
 
-                <LogOut />
-            </BarreTop>
-            
-            <Navigation />
+    render() {
+        return (
+            <>
+                <BarreTop>
+                    <ContainerTitle>
+                        <MenuBurger onClick={() => this.setState({ openMenu: !this.state.openMenu })}>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </MenuBurger>
 
-            <Main>
-                {props.children}
-            </Main>
-        </>
-    );
+                        <Title>Projet<span>locatif</span></Title>
+                    </ContainerTitle>
+
+                    <LogOut />
+                </BarreTop>
+
+                <Navigation statMenu={this.state.openMenu} />
+
+                <Main closeMenu={this.state.openMenu}>
+                    {this.props.children}
+                </Main>
+            </>
+        );
+    }
 }

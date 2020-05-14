@@ -9,7 +9,7 @@ const StyledButton = styled.a`
 	outline: none;
 	padding: 4px 16px;
 	border: none;
-	transition: color 0.3s;
+	transition: color 0.3s, transform 0.3s;
 
 	img {
 		height: 12px;
@@ -18,6 +18,7 @@ const StyledButton = styled.a`
 	}
 
 	&:hover {
+		transform: scale(1.1);
 		color: ${props => props.theme.orange};
 
 		img {

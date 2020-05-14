@@ -16,6 +16,7 @@ const NavContainer = styled.nav`
     padding: 45px;
     position: fixed;
     background: ${props => props.theme.black};
+    transition: width 0.4s, padding 0.4s;
 
     ul {
         list-style: none;
@@ -40,13 +41,28 @@ const NavContainer = styled.nav`
                 ${props => 
                     props.current && 
                     css`
-                        width: 95%;
+                        width: 285px;
                     `};
             }
 
             &:hover {
                 &:before {
-                    width: 95%;
+                    width: 285px;
+                }
+
+                img, a {
+                    transform: scale(1.05);
+
+                    span {
+                        opacity: 1;
+                        pointer-events: all;
+                    }
+                }
+            }
+            
+            &:active {
+                img, a {
+                    transform: scale(0.98);
                 }
             }
 
@@ -56,6 +72,7 @@ const NavContainer = styled.nav`
                 object-fit: contain;
                 margin-right: 12px;
                 filter: drop-shadow(0px 3px 15px rgba(0,0,0,0.5));
+                transition: transform 0.3s;
             }
 
             a {
@@ -71,9 +88,27 @@ const NavContainer = styled.nav`
                 color: ${props => props.theme.white};
                 text-shadow: ${props => props.theme.shadows};
                 text-decoration: none;
+                transition: transform 0.3s;
+
+                span {
+                    transition: opacity 0.3s;
+                    white-space: pre;
+                }
             }
         }
     }
+
+    ${props => 
+        !props.closeMenu &&
+        css`
+            width: 42px;
+            padding: 45px 20px;
+
+            li a span {
+                opacity: 0;
+                pointer-events: none;
+            }
+        `};
 `
 
 const Avatar = styled.div`
@@ -84,8 +119,9 @@ const Avatar = styled.div`
 
     .imgContainer {
         overflow: hidden;
-        width: 50px;
-        height: 50px;
+        min-width: 42px;
+        width: 42px;
+        height: 42px;
         border-radius: 50px;
 
         img {
@@ -101,7 +137,17 @@ const Avatar = styled.div`
         color: ${props => props.theme.white};
         font-weight: ${props => props.theme.regular};
         margin-left: 20px;
+        white-space: pre;
+        transition: opacity 0.3s;
     }
+
+    ${props =>
+        !props.closeMenu &&
+        css`
+            h2 {
+                opacity: 0;
+            }
+        `};
 `
 
 const Notification = styled.div`
@@ -128,7 +174,7 @@ const NavLink = (props) => {
             <Link to={props.link} current={props.current}>
                 {props.notifications && <Notification>{props.notifications}</Notification>}
                 <img src={props.src} />
-                {props.name}
+                <span>{props.name}</span>
             </Link>
         </li>
     );
@@ -136,8 +182,8 @@ const NavLink = (props) => {
 
 export default function Navigation(props) {
     return (
-        <NavContainer>
-            <Avatar>
+        <NavContainer closeMenu={props.statMenu}>
+            <Avatar closeMenu={props.statMenu}>
                 <div className='imgContainer'>
                     <img src={props.userAvatar ? props.userAvatar : IconDefault} />
                 </div>
@@ -145,12 +191,12 @@ export default function Navigation(props) {
             </Avatar>
 
             <ul>
-                <NavLink src={Chart} link="/" name="Tableau de bord" current/>
-                <NavLink src={Home} link="/proprietes" name="Propriétés" />
-                <NavLink src={User} link="/chasseurs" name="Chasseurs" />
-                <NavLink src={Users} link="/clients" name="Mes clients" />
-                <NavLink src={Bell} link="/notifications" name="Notifications" />
-                <NavLink src={Folder} link="/dossiers" name="Suivi dossiers" />
+                <NavLink src={Chart} link="/immoTEA/board" name="Tableau de bord" current/>
+                <NavLink src={Home} link="/immoTEA/board/proprietes" name="Propriétés" />
+                <NavLink src={User} link="/immoTEA/board/chasseurs" name="Chasseurs" />
+                <NavLink src={Users} link="/immoTEA/board/clients" name="Mes clients" />
+                <NavLink src={Bell} link="/immoTEA/board/notifications" name="Notifications" />
+                <NavLink src={Folder} link="/immoTEA/board/dossiers" name="Suivi dossiers" />
             </ul>
         </NavContainer>
     );
