@@ -4,6 +4,11 @@ import LogOut from "../../components/LogOutButton";
 import Navigation from "../../components/Navigation";
 
 const BarreTop = styled.div`
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    background: ${props => props.theme.white};
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -60,7 +65,7 @@ const Title = styled.h1`
 `
 
 const Main = styled.main`
-    padding: 45px;
+    padding: 55px 45px 45px 45px;
     margin-left: 300px;
     transition: margin 0.4s;
 

@@ -7,13 +7,16 @@ import AppContainer from "./theme/layout/AppContainer";
 import Board from './views/Board';
 import View from './theme/layout/View';
 
-export default class App extends Component {  // instead of: ...extends React.Component
+export default class App extends Component { 
     constructor(props) {
         super(props);
         this.state = {};
-        this.props = {
-            propriete: { 'frais_de_notaire': 'Frais de notaire', 'ville': 'Ville lala' },
-        }
+
+        this.propriete = { 'ville': 'Ville lala' };
+        this.chasseurs = { 'frais_de_notaire': 'Frais de notaire', 'ville': 'Ville lala' };
+        this.clients = { 'frais_de_notaire': 'Frais de notaire', 'ville': 'Ville lala' };
+        this.notifications = { 'frais_de_notaire': 'Frais de notaire', 'ville': 'Ville lala' };
+        this.dossiers = { 'frais_de_notaire': 'Frais de notaire', 'ville': 'Ville lala' };
     }
 
     render() {
@@ -27,27 +30,27 @@ export default class App extends Component {  // instead of: ...extends React.Co
                         <Route path="/immoTEA/board/proprietes">
                             <View 
                                 title='Liste des propriétés'
-                                listProps={this.props.propriete} />
+                                listProps={this.propriete} />
                         </Route>
                         <Route path="/immoTEA/board/chasseurs">
                             <View 
                                 title='Liste des chasseurs'
-                                listProps={null} />
+                                listProps={this.chasseurs} />
                         </Route>
                         <Route path="/immoTEA/board/clients">
                             <View 
                                 title='Liste des clients'
-                                listProps={null} />
+                                listProps={this.clients} />
                         </Route>
                         <Route path="/immoTEA/board/notifications">
                             <View 
                                 title='Liste des notifications'
-                                listProps={null} />
+                                listProps={this.notifications} />
                         </Route>
                         <Route path="/immoTEA/board/dossiers">
                             <View 
                                 title='Liste des dossiers'
-                                listProps={null} />
+                                listProps={this.dossiers} />
                         </Route>
 
                         <Redirect to="/immoTEA/board" />

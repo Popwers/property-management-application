@@ -1,3 +1,4 @@
+const { Component } = wp.element;
 import { Link } from "react-router-dom";
 import styled, { css } from 'styled-components';
 import IconDefault from '../resources/userDefault.svg';
@@ -9,12 +10,15 @@ import Users from '../resources/users.svg';
 import Bell from '../resources/bell.svg';
 import Folder from '../resources/folder.svg';
 
+import BackSite from '../components/BackSite';
 
 const NavContainer = styled.nav`
     width: 210px;
-    height: 100vh;
+    height: calc(100vh - 55px);
+    top: 55px;
     padding: 45px;
     position: fixed;
+    z-index: 2;
     background: ${props => props.theme.black};
     transition: width 0.4s, padding 0.4s;
 
@@ -37,33 +41,17 @@ const NavContainer = styled.nav`
                 transition: width 0.4s;
                 box-shadow: 0 0 10px rgba(251, 97, 7, 0.5);
                 ${props => props.theme.orangeRadius};
-
-                ${props => 
-                    props.current && 
-                    css`
-                        width: 285px;
-                    `};
             }
 
             &:hover {
                 &:before {
                     width: 285px;
-                }
-
-                img, a {
-                    transform: scale(1.05);
-
-                    span {
-                        opacity: 1;
-                        pointer-events: all;
-                    }
-                }
-            }
-            
-            &:active {
-                img, a {
-                    transform: scale(0.98);
-                }
+				}
+				
+				span, .addButton {
+					opacity: 1;
+					pointer-events: all;
+				}
             }
 
             img {
@@ -80,7 +68,8 @@ const NavContainer = styled.nav`
                 display: flex;
                 flex-direction: row;
                 align-items: center;
-                height: 50px;
+				height: 50px;
+				width: 100%;
                 margin: 0;
                 font-size: 20px;
                 font-family: ${props => props.theme.roboto};
@@ -93,20 +82,45 @@ const NavContainer = styled.nav`
                 span {
                     transition: opacity 0.3s;
                     white-space: pre;
-                }
+				}
+				
+				&:hover {
+                    transform: scale(1.05);
+
+                    span {
+                        opacity: 1;
+                        pointer-events: all;
+                    }
+				}
+
+				&:active {
+					transform: scale(0.98);
+				}
             }
         }
     }
 
-    ${props => 
-        !props.closeMenu &&
-        css`
+    ${props =>
+		!props.closeMenu &&
+		css`
             width: 42px;
             padding: 45px 20px;
 
             li a span {
                 opacity: 0;
                 pointer-events: none;
+            }
+
+            #backSite {
+                img {
+                    width: 42px;
+                    height: 42px;
+                }
+
+                span {
+                    opacity: 0;
+                    pointer-events: none;
+                }
             }
         `};
 `
@@ -142,8 +156,8 @@ const Avatar = styled.div`
     }
 
     ${props =>
-        !props.closeMenu &&
-        css`
+		!props.closeMenu &&
+		css`
             h2 {
                 opacity: 0;
             }
@@ -168,36 +182,165 @@ const Notification = styled.div`
     box-shadow: ${props => props.theme.shadows};
 `
 
+const AddButton = styled.div`
+	position: relative;
+	cursor: pointer;
+	z-index: 2;
+	min-width: 24px;
+	width: 24px;
+	height: 24px;
+	margin-left: 15px;
+	border-radius: 25px;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	background: ${props => props.theme.white};
+	box-shadow: ${props => props.theme.shadows};
+	transition: transform 0.3s, opacity 0.3s;
+
+	&:before,
+	&:after {
+		content: '';
+		position: absolute;
+		width: 14px;
+		height: 2px;
+		border-radius: 30px;
+		background: ${props => props.theme.black};
+	}
+
+	&:after {
+		transform: rotate(90deg);
+	}
+
+	&:hover {
+		transform: scale(1.1);
+	}
+
+	&:active {
+		transform: scale(0.95);
+	}
+
+	${props =>
+		!props.closeMenu &&
+		css`
+            opacity: 0;
+			pointer-events: none;
+        `};
+`
+
+const LinkStyled = styled.li`
+	display: flex;
+    flex-direction: row;
+	align-items: center;
+	
+	${props =>
+		props.current &&
+		css`
+			&:before {
+				width: 285px !important;
+
+				${props =>
+					!props.closeMenu &&
+					css`
+						width: 95% !important;
+				`};
+			}
+
+			&:hover {
+				&:before {
+					width: 285px !important;
+				}
+			}
+		`};
+`
+
 const NavLink = (props) => {
-    return (
-        <li>
-            <Link to={props.link} current={props.current}>
-                {props.notifications && <Notification>{props.notifications}</Notification>}
-                <img src={props.src} />
-                <span>{props.name}</span>
-            </Link>
-        </li>
-    );
+	return (
+		<LinkStyled closeMenu={props.closeMenu} current={props.currentLink == props.name ? true : null} >
+			<Link to={props.link} onClick={() => props.changeView(props.name)} >
+				{props.notifications && <Notification>{props.notifications}</Notification>}
+				<img src={props.src} />
+				<span>{props.name}</span>
+			</Link>
+
+			{props.addButton ? <AddButton className='addButton' closeMenu={props.closeMenu} /> : null}
+		</LinkStyled>
+	);
 }
 
-export default function Navigation(props) {
-    return (
-        <NavContainer closeMenu={props.statMenu}>
-            <Avatar closeMenu={props.statMenu}>
-                <div className='imgContainer'>
-                    <img src={props.userAvatar ? props.userAvatar : IconDefault} />
-                </div>
-                <h2>Benoit</h2>
-            </Avatar>
+export default class Navigation extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			currentLink: 'Tableau de bord',
+		}
 
-            <ul>
-                <NavLink src={Chart} link="/immoTEA/board" name="Tableau de bord" current/>
-                <NavLink src={Home} link="/immoTEA/board/proprietes" name="Propriétés" />
-                <NavLink src={User} link="/immoTEA/board/chasseurs" name="Chasseurs" />
-                <NavLink src={Users} link="/immoTEA/board/clients" name="Mes clients" />
-                <NavLink src={Bell} link="/immoTEA/board/notifications" name="Notifications" />
-                <NavLink src={Folder} link="/immoTEA/board/dossiers" name="Suivi dossiers" />
-            </ul>
-        </NavContainer>
-    );
+		this.handleChangeLink = this.handleChangeLink.bind(this);
+	}
+
+	handleChangeLink(newLink) {
+		this.setState({currentLink: newLink});
+	}
+
+	render() {
+		return (
+			<NavContainer closeMenu={this.props.statMenu}>
+				<Avatar closeMenu={this.props.statMenu}>
+					<div className='imgContainer'>
+						<img src={this.props.userAvatar ? this.props.userAvatar : IconDefault} />
+					</div>
+					<h2>Benoit</h2>
+				</Avatar>
+
+				<ul>
+					<NavLink src={Chart} 
+						link="/immoTEA/board" 
+						name="Tableau de bord"
+						currentLink={this.state.currentLink}
+						changeView={this.handleChangeLink}
+						closeMenu={this.props.statMenu} />
+
+					<NavLink src={Home} 
+						link="/immoTEA/board/proprietes" 
+						name="Propriétés" 
+						currentLink={this.state.currentLink}
+						changeView={this.handleChangeLink}
+						closeMenu={this.props.statMenu}
+						addButton />
+
+					<NavLink src={User} 
+						link="/immoTEA/board/chasseurs" 
+						name="Chasseurs" 
+						currentLink={this.state.currentLink}
+						changeView={this.handleChangeLink}
+						closeMenu={this.props.statMenu}
+						addButton />
+
+					<NavLink src={Users} 
+						link="/immoTEA/board/clients" 
+						name="Mes clients" 
+						currentLink={this.state.currentLink}
+						changeView={this.handleChangeLink}
+						closeMenu={this.props.statMenu}
+						addButton />
+
+					<NavLink src={Bell} 
+						link="/immoTEA/board/notifications" 
+						name="Notifications" 
+						currentLink={this.state.currentLink}
+						changeView={this.handleChangeLink}
+						closeMenu={this.props.statMenu} />
+
+					<NavLink src={Folder} 
+						link="/immoTEA/board/dossiers" 
+						name="Suivi dossiers" 
+						currentLink={this.state.currentLink}
+						changeView={this.handleChangeLink}
+						closeMenu={this.props.statMenu} />
+				</ul>
+
+				<BackSite />
+			</NavContainer>
+		);
+	}
 }
