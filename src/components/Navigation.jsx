@@ -47,11 +47,6 @@ const NavContainer = styled.nav`
                 &:before {
                     width: 285px;
 				}
-				
-				span, .addButton {
-					opacity: 1;
-					pointer-events: all;
-				}
             }
 
             img {
@@ -69,7 +64,6 @@ const NavContainer = styled.nav`
                 flex-direction: row;
                 align-items: center;
 				height: 50px;
-				width: 100%;
                 margin: 0;
                 font-size: 20px;
                 font-family: ${props => props.theme.roboto};
@@ -86,11 +80,6 @@ const NavContainer = styled.nav`
 				
 				&:hover {
                     transform: scale(1.05);
-
-                    span {
-                        opacity: 1;
-                        pointer-events: all;
-                    }
 				}
 
 				&:active {
@@ -103,10 +92,11 @@ const NavContainer = styled.nav`
     ${props =>
 		!props.closeMenu &&
 		css`
+			overflow: hidden;
             width: 42px;
             padding: 45px 20px;
 
-            li a span {
+            li a span, .addButton {
                 opacity: 0;
                 pointer-events: none;
             }
@@ -122,6 +112,32 @@ const NavContainer = styled.nav`
                     pointer-events: none;
                 }
             }
+
+			&:hover {
+				width: 210px;
+				padding: 45px;
+
+				h2 {
+					opacity: 1;
+				}
+
+				li a span, .addButton {
+					opacity: 1;
+					pointer-events: all;
+				}
+
+				#backSite {
+					img {
+						width: 28px;
+						height: 28px;
+					}
+
+					span {
+						opacity: 1;
+						pointer-events: all;
+					}
+				}
+			}
         `};
 `
 
@@ -196,7 +212,7 @@ const AddButton = styled.div`
     align-items: center;
 	background: ${props => props.theme.white};
 	box-shadow: ${props => props.theme.shadows};
-	transition: transform 0.3s, opacity 0.3s;
+	transition: transform 0.3s, opacity 0.8s;
 
 	&:before,
 	&:after {
@@ -244,12 +260,6 @@ const LinkStyled = styled.li`
 					css`
 						width: 95% !important;
 				`};
-			}
-
-			&:hover {
-				&:before {
-					width: 285px !important;
-				}
 			}
 		`};
 `
