@@ -1,110 +1,141 @@
-const { Component } = wp.element;
+import styled from 'styled-components';
+
+const StyledTable = styled.table`
+    margin-top: 40px;
+    border-collapse: collapse;
+` 
+
+const Line = styled.tr`
+    padding: 20px 0;
+    border-bottom: 1px solid #D8D8D8;
+
+    &:last-child {
+         border-bottom: none;
+    }
+` 
+
+const ValThHead = styled.th`
+    padding: 0 10px;
+    font-size: 15px;
+    text-align: center;
+
+    &:first-child {
+        padding-left: 0px;
+    }
+`
+
+const ValTh = styled.th`
+    padding: 20px 10px;
+    font-family: ${props => props.theme.robot};
+    font-size: 13px;
+    font-weight: ${props => props.theme.light};
+    text-align: center;
+
+    &:first-child {
+        padding-left: 0px;
+    }
+
+    img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 15px;
+        box-shadow: ${props => props.theme.shadows};
+    }
+`
+
+const ValTd = styled.td`
+    padding: 20px 10px;
+    font-family: ${props => props.theme.robot};
+    font-size: 13px;
+    font-weight: ${props => props.theme.light};
+    text-align: center;
+
+    &:first-child {
+        padding-left: 0px;
+    }
+
+    img {
+        width: 100%;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 15px;
+        box-shadow: ${props => props.theme.shadows};
+    }
+`
 
 const LineTable = (props) => {
     let listItems = new Array();
 
+    // Pour chaque entête on assigne la valeurs correspondant
     props.orderKeys.forEach(searchKey => {
-        for (let [key, value] of Object.entries(props.object)) {
-            if (searchKey == key) {
-                listItems.push(key == 'id' ? <th scope="row">{value}</th> : <td>{value}</td>);
-                break;
+        let returnVal = props.object[searchKey];
+
+        // Si la clé est un sous element on va le chercher
+        if (searchKey.indexOf('.') != -1) {
+            searchKey = searchKey.split(".");
+
+            let objVal = props.object;
+            searchKey.forEach(key => {
+                objVal = objVal[key];
+            });
+
+            if (searchKey == 'id') {
+                returnVal = <ValTh scope="row">{objVal}</ValTh>;
+            } else if (searchKey.indexOf('photo') != -1 || searchKey == 'thumbnail' && (objVal != null && objVal != false)) {
+                returnVal = <ValTd><img src={objVal} /></ValTd>;
+            } else {
+                returnVal = <ValTd>{objVal}</ValTd>;
             }
+
+            listItems.push(returnVal);
+        } else {
+            if (searchKey == 'id') {
+                returnVal = <ValTh scope="row">{returnVal}</ValTh>;
+            } else if (searchKey.indexOf('photo') != -1 || searchKey == 'thumbnail' && (returnVal != null && returnVal != false)) {
+                returnVal = <ValTd><img src={returnVal} /></ValTd>;
+            } else {
+                returnVal = <ValTd>{returnVal}</ValTd>;
+            }
+
+            listItems.push(returnVal);
         }
     });
 
     return (
-        <tr key={props.id}>
+        <Line key={props.id}>
             {listItems}
-        </tr>
-    )
+        </Line>
+    );
 }
 
-export default class Table extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            items: null,
-            isLoaded: null,
-            error: null,
-        }
-    }
+export default function Table(props) {
+    if (props.statut == 'error') {
+        return <div>Impossible de charger les données ...</div>;
+    } else if (props.statut == null && props.data == null) {
+        return <div>Chargement...</div>;
+    } else if (props.statut != null && props.data == null) {
+        return <div>{props.empty}</div>;
+    } else {
+        const headTable = Object.values(props.listeProps).map(item => (<ValThHead scope="col">{item}</ValThHead>));
+        const contentTable = props.data.map(item => <LineTable
+            id={item.id}
+            object={item}
+            orderKeys={Object.keys(props.listeProps)} />);
 
-    componentDidMount() {
-        fetch("http://immomalin.wpengine.com/wp-json/wp/v2/propriete")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState({
-                        items: result,
-                        isLoaded: true,
-                    });
+        return (
+            <StyledTable>
+                <thead>
+                    <tr>
+                        {headTable}
+                    </tr>
+                </thead>
 
-                    console.log(result);
-
-                    setTimeout(() => {
-                        this.state.items[0]
-                        let newResult = this.state.items;
-                        newResult[0].frais_de_notaire = 34;
-                        newResult[1].frais_de_notaire = 34;
-                        newResult[4].frais_de_notaire = 34;
-                        newResult[3].frais_de_notaire = 34;
-                        newResult.pop();
-                        console.log(newResult);
-
-                        this.setState({
-                            items: newResult,
-                            isLoaded: true,
-                        });
-                    }, 10000);
-                },
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error: null,
-                    })
-                }
-            );
-    }
-
-    render() {
-        if (this.state.error) {
-            return <div>Erreur : {this.state.error.message}</div>;
-        } else if (!this.state.isLoaded) {
-            return <div>Chargement...</div>;
-        } else {
-            let tableItem = new Array();
-
-            this.state.items.forEach(element => {
-                let newElement = new Object;
-                
-                for (const key in element) {
-                    if (Object.keys(this.props.listeProps).includes(key)) {
-                       newElement[key] = element[key];
-                    }
-                }
-
-                tableItem.push(newElement);
-            });
-
-            const headTable = Object.values(this.props.listeProps).map(item => (<th scope="col">{item}</th>));
-            const contentTable = tableItem.map(item => <LineTable 
-                                                            id={item.id} 
-                                                            object={item} 
-                                                            orderKeys={Object.keys(this.props.listeProps)} />);
-
-            return (
-                <table>
-                    <thead>
-                        <tr>
-                            {headTable}
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {contentTable}
-                    </tbody>
-                </table>
-            );
-        }
+                <tbody>
+                    {contentTable}
+                </tbody>
+            </StyledTable>
+        );
     }
 }

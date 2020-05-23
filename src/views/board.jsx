@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import styled, { css } from 'styled-components';
 import { setDocumentTitle, formatPrix } from '../lib/functions';
 import { TitleSection, Text, Inline } from '../theme/design/componentsDesign';
@@ -5,6 +7,8 @@ import { TitleSection, Text, Inline } from '../theme/design/componentsDesign';
 import CardStat from '../components/CardStat';
 import Button from '../components/Button';
 import iconPencil from '../resources/pencil.svg';
+
+import Modal from '../theme/layout/Modal';
 
 const FlexDiv = styled.div`
     display: flex;
@@ -85,7 +89,7 @@ function BarreBonus(props) {
     );
 }
 
-export default function Board(props) {
+function Board(props) {
     setDocumentTitle('Tableau de bord');
 
     return (
@@ -93,7 +97,7 @@ export default function Board(props) {
             <FlexDiv>
                 <HeadDiv>
                     <FlexRow>
-                        <Inline marginRight="20px"><TitleSection>Bonjour, Benoit</TitleSection></Inline>
+                        <Inline marginRight="20px"><TitleSection>Bonjour, {props.myUserData.first_name ? props.myUserData.first_name : 'Utilisateur'}</TitleSection></Inline>
                         <Button small light src={iconPencil} iconRight>Mon compte</Button>
                     </FlexRow>
 
@@ -148,3 +152,9 @@ export default function Board(props) {
         </>
     );
 }
+
+const mapStateToProps = (state) => {
+    return { myUserData: state.general.myData.data };
+}
+
+export default connect(mapStateToProps)(Board)

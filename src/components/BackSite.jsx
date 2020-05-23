@@ -1,3 +1,8 @@
+const { Component } = wp.element;
+
+import { connect } from 'react-redux';
+import { getHomeUrl } from '../actions';
+
 import styled from 'styled-components';
 import Icon from '../resources/back-site.svg';
 
@@ -47,11 +52,33 @@ const StyledButton = styled.a`
 	}
 `
 
-export default function BackSite(props) {
-    return (
-        <StyledButton id='backSite'>
-            <img src={Icon} />
-			<span>Retour sur le site</span>
-        </StyledButton>
-    );
+class BackSite extends Component {
+	constructor(props) {
+		super(props);
+	}
+
+	componentDidMount() {
+		this.props.getHomeUrl();
+	}
+
+	render() {
+		return (
+			<StyledButton id='backSite' href={this.props.href}>
+				<img src={Icon} />
+				<span>Retour sur le site</span>
+			</StyledButton>
+		);
+	}
 }
+
+const mapDispatchToProps = dispatch => {
+	return {
+		getHomeUrl: () => dispatch(getHomeUrl())
+	}
+}
+
+const mapStateToProps = (state) => {
+	return { href: state.general.homeUrl.data };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BackSite)

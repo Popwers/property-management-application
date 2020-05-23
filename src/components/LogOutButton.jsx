@@ -1,3 +1,8 @@
+const { Component } = wp.element;
+
+import { connect } from 'react-redux';
+import { getLogout } from '../actions';
+
 import styled from 'styled-components';
 import Icon from '../resources/logout.svg';
 
@@ -9,6 +14,7 @@ const StyledButton = styled.a`
 	outline: none;
 	padding: 4px 16px;
 	border: none;
+	color: ${props => props.theme.black};
 	transition: color 0.3s, transform 0.3s;
 
 	img {
@@ -35,11 +41,33 @@ const StyledButton = styled.a`
 	}
 `
 
-export default function LogOut(props) {
-    return (
-        <StyledButton>
-            <img src={Icon} />
-            {'Déconnexion'.toUpperCase()}
-        </StyledButton>
-    );
+class LogOut extends Component {
+	constructor(props) {
+		super(props);
+	}
+
+	componentDidMount() {
+		this.props.getLogout();
+	}
+
+	render() {
+		return (
+			<StyledButton href={this.props.href}>
+				<img src={Icon} />
+				{'Déconnexion'.toUpperCase()}
+			</StyledButton>
+		);
+	}
 }
+
+const mapDispatchToProps = dispatch => {
+	return {
+		getLogout: () => dispatch(getLogout())
+	}
+}
+
+const mapStateToProps = (state) => {
+	return { href: state.general.logOut.data };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LogOut)

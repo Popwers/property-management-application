@@ -1,4 +1,8 @@
 const { Component } = wp.element;
+
+import { connect } from 'react-redux';
+import { getPersonalData } from '../actions';
+
 import { Link } from "react-router-dom";
 import styled, { css } from 'styled-components';
 import IconDefault from '../resources/userDefault.svg';
@@ -11,6 +15,7 @@ import Bell from '../resources/bell.svg';
 import Folder from '../resources/folder.svg';
 
 import BackSite from '../components/BackSite';
+import Loader from './Loader';
 
 const NavContainer = styled.nav`
     width: 210px;
@@ -65,12 +70,12 @@ const NavContainer = styled.nav`
                 align-items: center;
 				height: 50px;
                 margin: 0;
-                font-size: 20px;
+                font-size: 17px;
                 font-family: ${props => props.theme.roboto};
                 font-weight: ${props => props.theme.light};
                 color: ${props => props.theme.white};
                 text-shadow: ${props => props.theme.shadows};
-                text-decoration: none;
+				text-decoration: none;
                 transition: transform 0.3s;
 
                 span {
@@ -278,14 +283,23 @@ const NavLink = (props) => {
 	);
 }
 
-export default class Navigation extends Component {
+class Navigation extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			showLoader: true,
 			currentLink: 'Tableau de bord',
 		}
 
 		this.handleChangeLink = this.handleChangeLink.bind(this);
+	}
+
+	componentDidMount() {
+		this.props.getPersonalData();
+	}
+
+	componentDidUpdate() {
+		(this.props.myUserData.role != 'load' && this.state.showLoader) ? this.setState({ showLoader: false }) : null;
 	}
 
 	handleChangeLink(newLink) {
@@ -293,64 +307,97 @@ export default class Navigation extends Component {
 	}
 
 	render() {
+		let showLink = new Array();
+
+		if (this.props.myUserData.role != 'load') {
+
+			// ALL
+			showLink.push(<NavLink src={Chart}
+							link="/immoTEA/board"
+							name="Tableau de bord"
+							currentLink={this.state.currentLink}
+							changeView={this.handleChangeLink}
+							closeMenu={this.props.statMenu} />);
+
+			// ONLY CHASSEUR AND SUPERVISEUR
+			if (this.props.myUserData.role != 'client__investisseur') {
+				showLink.push(<NavLink src={Home}
+								link="/immoTEA/board/proprietes"
+								name="Propriétés"
+								currentLink={this.state.currentLink}
+								changeView={this.handleChangeLink}
+								closeMenu={this.props.statMenu}
+								addButton />);
+
+				// ONLY SUPERVISEUR
+				if (this.props.myUserData.role != 'chasseur') {
+					showLink.push(<NavLink src={User}
+									link="/immoTEA/board/chasseurs"
+									name="Chasseurs"
+									currentLink={this.state.currentLink}
+									changeView={this.handleChangeLink}
+									closeMenu={this.props.statMenu}
+									addButton />);
+				}
+
+				showLink.push(<NavLink src={Users}
+								link="/immoTEA/board/clients"
+								name="Mes clients"
+								currentLink={this.state.currentLink}
+								changeView={this.handleChangeLink}
+								closeMenu={this.props.statMenu}
+								addButton />);
+			}
+
+			// ALL
+			showLink.push(<NavLink src={Bell}
+							link="/immoTEA/board/notifications"
+							name="Notifications"
+							currentLink={this.state.currentLink}
+							changeView={this.handleChangeLink}
+							closeMenu={this.props.statMenu} />);
+
+			// ONLY CHASSEUR AND SUPERVISEUR
+			if (this.props.myUserData.role != 'client__investisseur') {
+				showLink.push(<NavLink src={Folder}
+								link="/immoTEA/board/dossiers"
+								name="Suivi dossiers"
+								currentLink={this.state.currentLink}
+								changeView={this.handleChangeLink}
+								closeMenu={this.props.statMenu} />);
+			}
+
+		}
+
 		return (
 			<NavContainer closeMenu={this.props.statMenu}>
 				<Avatar closeMenu={this.props.statMenu}>
 					<div className='imgContainer'>
-						<img src={this.props.userAvatar ? this.props.userAvatar : IconDefault} />
+						<img src={this.props.myUserData.avatar != 'default' ? this.props.myUserData.avatar : IconDefault} />
 					</div>
-					<h2>Benoit</h2>
+					<h2>{this.props.myUserData.display_name}</h2>
 				</Avatar>
 
 				<ul>
-					<NavLink src={Chart} 
-						link="/immoTEA/board" 
-						name="Tableau de bord"
-						currentLink={this.state.currentLink}
-						changeView={this.handleChangeLink}
-						closeMenu={this.props.statMenu} />
-
-					<NavLink src={Home} 
-						link="/immoTEA/board/proprietes" 
-						name="Propriétés" 
-						currentLink={this.state.currentLink}
-						changeView={this.handleChangeLink}
-						closeMenu={this.props.statMenu}
-						addButton />
-
-					<NavLink src={User} 
-						link="/immoTEA/board/chasseurs" 
-						name="Chasseurs" 
-						currentLink={this.state.currentLink}
-						changeView={this.handleChangeLink}
-						closeMenu={this.props.statMenu}
-						addButton />
-
-					<NavLink src={Users} 
-						link="/immoTEA/board/clients" 
-						name="Mes clients" 
-						currentLink={this.state.currentLink}
-						changeView={this.handleChangeLink}
-						closeMenu={this.props.statMenu}
-						addButton />
-
-					<NavLink src={Bell} 
-						link="/immoTEA/board/notifications" 
-						name="Notifications" 
-						currentLink={this.state.currentLink}
-						changeView={this.handleChangeLink}
-						closeMenu={this.props.statMenu} />
-
-					<NavLink src={Folder} 
-						link="/immoTEA/board/dossiers" 
-						name="Suivi dossiers" 
-						currentLink={this.state.currentLink}
-						changeView={this.handleChangeLink}
-						closeMenu={this.props.statMenu} />
+					{showLink}
 				</ul>
 
 				<BackSite />
+
+				<Loader show={this.state.showLoader} />;
 			</NavContainer>
 		);
 	}
 }
+
+const mapDispatchToProps = dispatch => {
+	return {
+		getPersonalData: () => dispatch(getPersonalData())
+	}
+}
+
+const mapStateToProps = (state) => {
+	return { myUserData: state.general.myData.data };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation)

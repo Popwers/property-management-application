@@ -1,4 +1,5 @@
 const { Component } = wp.element;
+
 import styled, { css } from 'styled-components';
 import LogOut from "../../components/LogOutButton";
 import Navigation from "../../components/Navigation";
