@@ -22,7 +22,8 @@ export default function Button(props) {
             red={props.red}
             green={props.green}
             iconRight={props.iconRight}
-            src={props.src} >
+            src={props.src}
+            onClick={props.onClick ? props.onClick : null} >
 
             {AddIconLeft != null ? AddIconLeft : null}
             {props.children}

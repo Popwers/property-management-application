@@ -151,7 +151,7 @@ export default function Loader(props) {
                 <div></div>
             </div>
 
-            <p class="info">Chargement des données en cours ...</p>
+            <p class="info">{props.message}</p>
         </LoaderStyle>
     );
 }

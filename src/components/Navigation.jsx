@@ -1,7 +1,13 @@
 const { Component } = wp.element;
 
 import { connect } from 'react-redux';
-import { getPersonalData } from '../actions';
+import { 
+	getPersonalData,
+	toogleLoader,
+	toogleAddClient,
+	toogleAddChasseur,
+	toogleAddPropriete
+} from '../actions';
 
 import { Link } from "react-router-dom";
 import styled, { css } from 'styled-components';
@@ -278,7 +284,7 @@ const NavLink = (props) => {
 				<span>{props.name}</span>
 			</Link>
 
-			{props.addButton ? <AddButton className='addButton' closeMenu={props.closeMenu} /> : null}
+			{props.addButton ? <AddButton className='addButton' onClick={props.addButton} closeMenu={props.closeMenu} /> : null}
 		</LinkStyled>
 	);
 }
@@ -296,10 +302,11 @@ class Navigation extends Component {
 
 	componentDidMount() {
 		this.props.getPersonalData();
+		this.props.toogleLoader(true, 'Chargement des données en cours ...');
 	}
 
 	componentDidUpdate() {
-		(this.props.myUserData.role != 'load' && this.state.showLoader) ? this.setState({ showLoader: false }) : null;
+		(this.props.myUserData.role != 'load' && this.props.loaderStat.statut) ? this.props.toogleLoader(false, 'Chargement des données en cours ...') : null;
 	}
 
 	handleChangeLink(newLink) {
@@ -327,7 +334,7 @@ class Navigation extends Component {
 								currentLink={this.state.currentLink}
 								changeView={this.handleChangeLink}
 								closeMenu={this.props.statMenu}
-								addButton />);
+								addButton={this.props.toogleAddPropriete} />);
 
 				// ONLY SUPERVISEUR
 				if (this.props.myUserData.role != 'chasseur') {
@@ -337,7 +344,7 @@ class Navigation extends Component {
 									currentLink={this.state.currentLink}
 									changeView={this.handleChangeLink}
 									closeMenu={this.props.statMenu}
-									addButton />);
+									addButton={this.props.toogleAddChasseur} />);
 				}
 
 				showLink.push(<NavLink src={Users}
@@ -346,7 +353,7 @@ class Navigation extends Component {
 								currentLink={this.state.currentLink}
 								changeView={this.handleChangeLink}
 								closeMenu={this.props.statMenu}
-								addButton />);
+								addButton={this.props.toogleAddClient} />);
 			}
 
 			// ALL
@@ -384,7 +391,7 @@ class Navigation extends Component {
 
 				<BackSite />
 
-				<Loader show={this.state.showLoader} />;
+				<Loader show={this.props.loaderStat.statut} message={this.props.loaderStat.message} />;
 			</NavContainer>
 		);
 	}
@@ -392,12 +399,19 @@ class Navigation extends Component {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		getPersonalData: () => dispatch(getPersonalData())
+		getPersonalData: () => dispatch(getPersonalData()),
+		toogleLoader: (statut, message) => dispatch(toogleLoader(statut, message)),
+		toogleAddClient: () => dispatch(toogleAddClient()),
+		toogleAddChasseur: () => dispatch(toogleAddChasseur()),
+		toogleAddPropriete: () => dispatch(toogleAddPropriete())
 	}
 }
 
 const mapStateToProps = (state) => {
-	return { myUserData: state.general.myData.data };
+	return { 
+		myUserData: state.general.myData.data,
+		loaderStat: state.general.loader
+	};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation)

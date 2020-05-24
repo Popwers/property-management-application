@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { toogleUserModal } from '../actions';
 
 import styled, { css } from 'styled-components';
 import { setDocumentTitle, formatPrix } from '../lib/functions';
@@ -98,7 +99,7 @@ function Board(props) {
                 <HeadDiv>
                     <FlexRow>
                         <Inline marginRight="20px"><TitleSection>Bonjour, {props.myUserData.first_name ? props.myUserData.first_name : 'Utilisateur'}</TitleSection></Inline>
-                        <Button small light src={iconPencil} iconRight>Mon compte</Button>
+                        <Button small light src={iconPencil} iconRight onClick={props.toogleUserModal}>Mon compte</Button>
                     </FlexRow>
 
                     <Text light>Vous avez 3 notifications</Text>
@@ -157,4 +158,10 @@ const mapStateToProps = (state) => {
     return { myUserData: state.general.myData.data };
 }
 
-export default connect(mapStateToProps)(Board)
+const mapDispatchToProps = dispatch => {
+    return {
+        toogleUserModal: () => dispatch(toogleUserModal())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Board)

@@ -27,8 +27,8 @@ export const StyledButton = styled.a`
     }
 
     &:active {
-        transform: scale(0.95);
-        background-color: darken($color: ${props => props.theme.orange}, $amount: 10);
+        transform: scale(0.95) !important;
+        background-color: ${props => props.theme.red};
     }
 
     ${props =>
@@ -171,4 +171,26 @@ export const Text = styled.p`
 export const Inline = styled.div`
     display: inline-block;
     margin-right: ${props => props.marginRight ? props.marginRight : 'initiale'};
+`
+
+export const RowInput = styled.div`
+    display: flex;
+`
+
+export const TitleForm = styled.h3`
+    font-family: ${props => props.theme.montserrat};
+    font-size: 20px;
+    position: relative;
+    padding: 15px 0;
+
+    &:after {
+        content: "";
+        position: absolute;
+        width: 90px;
+        height: 3px;
+        border-radius: 30px;
+        bottom: 0;
+        left: 0;
+        background: ${props => props.theme.black};
+    }
 `

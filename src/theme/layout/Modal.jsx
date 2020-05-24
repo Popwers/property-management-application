@@ -1,5 +1,13 @@
+import { connect } from 'react-redux';
+import {
+    toogleAddClient,
+    toogleAddChasseur,
+    toogleAddPropriete,
+    toogleUserModal,
+    toogleDossierModal,
+    toogleProprieteModal,
+} from '../../actions';
 
-const { Component } = wp.element;
 import styled, { css } from 'styled-components';
 
 const ContainerModal = styled.div`
@@ -26,29 +34,96 @@ const ContainerModal = styled.div`
 `
 
 const StyledModal = styled.div`
+    max-width: 80vw;
+    max-height: 80vh;
+    overflow: scroll;
+    width: 65%;
+    min-width: 200px;
+    min-height: 200px;
     background: ${props => props.theme.white};
     box-shadow: ${props => props.theme.shadows};
     border-radius: 30px;
+    padding: 45px;
+    position: relative;
 `
 
-export default class Modal extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            openStatut: false,
-        }
+const CloseButton = styled.div`
+    position: absolute;
+    top: 20px;
+    right: 20px;
+	cursor: pointer;
+	z-index: 2;
+	min-width: 24px;
+	width: 24px;
+	height: 24px;
+	margin-left: 15px;
+	border-radius: 25px;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	background: ${props => props.theme.black};
+    box-shadow: ${props => props.theme.shadows};
+    transform: rotate(45deg);
+	transition: transform 0.3s, opacity 0.8s;
 
-        const newStat = !this.state.openStatut;
-        this.setState({ openStatut: newStat });
+	&:before,
+	&:after {
+		content: '';
+		position: absolute;
+		width: 14px;
+		height: 2px;
+		border-radius: 30px;
+		background: ${props => props.theme.white};
+	}
+
+	&:after {
+		transform: rotate(90deg);
+	}
+
+	&:hover {
+        transform: scale(1.1) rotate(45deg);
+	}
+
+	&:active {
+        transform: scale(0.95) rotate(45deg);
+	}
+`
+
+function Modal(props) {
+    let closeButton = null;
+    if (props.type == 'addPropriete') {
+        closeButton = <CloseButton onClick={props.toogleAddPropriete} />
+    } else if (props.type == 'addChasseur') {
+        closeButton = <CloseButton onClick={props.toogleAddChasseur} />
+    } else if (props.type == 'addClient') {
+        closeButton = <CloseButton onClick={props.toogleAddClient} />
+    } else if (props.type == 'userModal') {
+        closeButton = <CloseButton onClick={props.toogleUserModal} />
+    } else if (props.type == 'dossierModal') {
+        closeButton = <CloseButton onClick={props.toogleDossierModal} />
+    } else if (props.type == 'proprieteModal') {
+        closeButton = <CloseButton onClick={props.toogleProprieteModal} />
     }
 
-    render() {
-        return (
-            <ContainerModal open={this.state.openStatut}>
-                <StyledModal>
-                    {this.props.children}
-                </StyledModal>
-            </ContainerModal>
-        );
+    return (
+        <ContainerModal open={props.show}>
+            <StyledModal>
+                {closeButton}
+                {props.children}
+            </StyledModal>
+        </ContainerModal>
+    );
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        toogleAddClient: () => dispatch(toogleAddClient()),
+        toogleAddChasseur: () => dispatch(toogleAddChasseur()),
+        toogleAddPropriete: () => dispatch(toogleAddPropriete()),
+        toogleUserModal: () => dispatch(toogleUserModal()),
+        toogleDossierModal: () => dispatch(toogleDossierModal()),
+        toogleProprieteModal: () => dispatch(toogleProprieteModal())
     }
 }
+
+export default connect(null, mapDispatchToProps)(Modal)

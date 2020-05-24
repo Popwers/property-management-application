@@ -15,7 +15,17 @@ import {
     DELETE_USER,
     GET_MY_DATA,
     GET_LOGOUT,
-    GET_ADRESSE_SITE } from "../constants";
+    GET_ADRESSE_SITE,
+    TOOGLE_LOADER,
+    TOOGLE_CLIENT_ADD_MODAL,
+    TOOGLE_CHASSEUR_ADD_MODAL,
+    TOOGLE_PROPRIETE_ADD_MODAL,
+    TOOGLE_USER_MODAL,
+    TOOGLE_DOSSIER_MODAL,
+    TOOGLE_PROPRIETE_MODAL,
+
+
+} from "../constants";
 
 export function getAllProprietes() {
     return async function (dispatch) {
@@ -128,6 +138,39 @@ export function getHomeUrl() {
         dispatch({ type: GET_ADRESSE_SITE, payload: { data: responseReq, statut: statutRes } });
     }
 };
+
+/** LOADER TOOGLE **/
+
+export function toogleLoader(statut = null, messageShow = 'Veuillez patienter ...') {
+    return { type: TOOGLE_LOADER, payload: { statut: statut, message: messageShow} };
+}
+
+/** MODAL TOOGLE **/
+
+export function toogleAddClient() {
+    return { type: TOOGLE_CLIENT_ADD_MODAL };
+}
+
+export function toogleAddChasseur() {
+    return { type: TOOGLE_CHASSEUR_ADD_MODAL };
+}
+
+export function toogleAddPropriete() {
+    return { type: TOOGLE_PROPRIETE_ADD_MODAL };
+}
+
+
+export function toogleUserModal() {
+    return { type: TOOGLE_USER_MODAL };
+}
+
+export function toogleDossierModal() {
+    return { type: TOOGLE_DOSSIER_MODAL };
+}
+
+export function toogleProprieteModal() {
+    return { type: TOOGLE_PROPRIETE_MODAL };
+}
 
 /** PERSONAL DATA **/
 

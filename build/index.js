@@ -5245,6 +5245,1374 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./node_modules/react-number-format/dist/react-number-format.es.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/react-number-format/dist/react-number-format.es.js ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * react-number-format - 4.4.1
+ * Author : Sudhanshu Yadav
+ * Copyright (c) 2016, 2020 to Sudhanshu Yadav, released under the MIT license.
+ * https://github.com/s-yadav/react-number-format
+ */
+
+
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) _setPrototypeOf(subClass, superClass);
+}
+
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (typeof call === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized(self);
+}
+
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
+
+var ReactPropTypesSecret_1 = ReactPropTypesSecret;
+
+function emptyFunction() {}
+function emptyFunctionWithReset() {}
+emptyFunctionWithReset.resetWarningCache = emptyFunction;
+
+var factoryWithThrowingShims = function() {
+  function shim(props, propName, componentName, location, propFullName, secret) {
+    if (secret === ReactPropTypesSecret_1) {
+      // It is still safe when called from React.
+      return;
+    }
+    var err = new Error(
+      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+      'Use PropTypes.checkPropTypes() to call them. ' +
+      'Read more at http://fb.me/use-check-prop-types'
+    );
+    err.name = 'Invariant Violation';
+    throw err;
+  }  shim.isRequired = shim;
+  function getShim() {
+    return shim;
+  }  // Important!
+  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
+  var ReactPropTypes = {
+    array: shim,
+    bool: shim,
+    func: shim,
+    number: shim,
+    object: shim,
+    string: shim,
+    symbol: shim,
+
+    any: shim,
+    arrayOf: getShim,
+    element: shim,
+    elementType: shim,
+    instanceOf: getShim,
+    node: shim,
+    objectOf: getShim,
+    oneOf: getShim,
+    oneOfType: getShim,
+    shape: getShim,
+    exact: getShim,
+
+    checkPropTypes: emptyFunctionWithReset,
+    resetWarningCache: emptyFunction
+  };
+
+  ReactPropTypes.PropTypes = ReactPropTypes;
+
+  return ReactPropTypes;
+};
+
+var propTypes = createCommonjsModule(function (module) {
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+{
+  // By explicitly using `prop-types` you are opting into new production behavior.
+  // http://fb.me/prop-types-in-prod
+  module.exports = factoryWithThrowingShims();
+}
+});
+
+// basic noop function
+function noop() {}
+function returnTrue() {
+  return true;
+}
+function charIsNumber(_char) {
+  return !!(_char || '').match(/\d/);
+}
+function escapeRegExp(str) {
+  return str.replace(/[-[\]/{}()*+?.\\^$|]/g, "\\$&");
+}
+function getThousandsGroupRegex(thousandsGroupStyle) {
+  switch (thousandsGroupStyle) {
+    case 'lakh':
+      return /(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/g;
+
+    case 'wan':
+      return /(\d)(?=(\d{4})+(?!\d))/g;
+
+    case 'thousand':
+    default:
+      return /(\d)(?=(\d{3})+(?!\d))/g;
+  }
+}
+function applyThousandSeparator(str, thousandSeparator, thousandsGroupStyle) {
+  var thousandsGroupRegex = getThousandsGroupRegex(thousandsGroupStyle);
+  var index = str.search(/[1-9]/);
+  index = index === -1 ? str.length : index;
+  return str.substring(0, index) + str.substring(index, str.length).replace(thousandsGroupRegex, '$1' + thousandSeparator);
+} //spilt a float number into different parts beforeDecimal, afterDecimal, and negation
+
+function splitDecimal(numStr) {
+  var allowNegative = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  var hasNagation = numStr[0] === '-';
+  var addNegation = hasNagation && allowNegative;
+  numStr = numStr.replace('-', '');
+  var parts = numStr.split('.');
+  var beforeDecimal = parts[0];
+  var afterDecimal = parts[1] || '';
+  return {
+    beforeDecimal: beforeDecimal,
+    afterDecimal: afterDecimal,
+    hasNagation: hasNagation,
+    addNegation: addNegation
+  };
+}
+function fixLeadingZero(numStr) {
+  if (!numStr) return numStr;
+  var isNegative = numStr[0] === '-';
+  if (isNegative) numStr = numStr.substring(1, numStr.length);
+  var parts = numStr.split('.');
+  var beforeDecimal = parts[0].replace(/^0+/, '') || '0';
+  var afterDecimal = parts[1] || '';
+  return "".concat(isNegative ? '-' : '').concat(beforeDecimal).concat(afterDecimal ? ".".concat(afterDecimal) : '');
+}
+/**
+ * limit decimal numbers to given scale
+ * Not used .fixedTo because that will break with big numbers
+ */
+
+function limitToScale(numStr, scale, fixedDecimalScale) {
+  var str = '';
+  var filler = fixedDecimalScale ? '0' : '';
+
+  for (var i = 0; i <= scale - 1; i++) {
+    str += numStr[i] || filler;
+  }
+
+  return str;
+}
+/**
+ * This method is required to round prop value to given scale.
+ * Not used .round or .fixedTo because that will break with big numbers
+ */
+
+function roundToPrecision(numStr, scale, fixedDecimalScale) {
+  //if number is empty don't do anything return empty string
+  if (['', '-'].indexOf(numStr) !== -1) return numStr;
+  var shoudHaveDecimalSeparator = numStr.indexOf('.') !== -1 && scale;
+
+  var _splitDecimal = splitDecimal(numStr),
+      beforeDecimal = _splitDecimal.beforeDecimal,
+      afterDecimal = _splitDecimal.afterDecimal,
+      hasNagation = _splitDecimal.hasNagation;
+
+  var roundedDecimalParts = parseFloat("0.".concat(afterDecimal || '0')).toFixed(scale).split('.');
+  var intPart = beforeDecimal.split('').reverse().reduce(function (roundedStr, current, idx) {
+    if (roundedStr.length > idx) {
+      return (Number(roundedStr[0]) + Number(current)).toString() + roundedStr.substring(1, roundedStr.length);
+    }
+
+    return current + roundedStr;
+  }, roundedDecimalParts[0]);
+  var decimalPart = limitToScale(roundedDecimalParts[1] || '', Math.min(scale, afterDecimal.length), fixedDecimalScale);
+  var negation = hasNagation ? '-' : '';
+  var decimalSeparator = shoudHaveDecimalSeparator ? '.' : '';
+  return "".concat(negation).concat(intPart).concat(decimalSeparator).concat(decimalPart);
+}
+function omit(obj, keyMaps) {
+  var filteredObj = {};
+  Object.keys(obj).forEach(function (key) {
+    if (!keyMaps[key]) filteredObj[key] = obj[key];
+  });
+  return filteredObj;
+}
+/** set the caret positon in an input field **/
+
+function setCaretPosition(el, caretPos) {
+  el.value = el.value; // ^ this is used to not only get "focus", but
+  // to make sure we don't have it everything -selected-
+  // (it causes an issue in chrome, and having it doesn't hurt any other browser)
+
+  if (el !== null) {
+    if (el.createTextRange) {
+      var range = el.createTextRange();
+      range.move('character', caretPos);
+      range.select();
+      return true;
+    } // (el.selectionStart === 0 added for Firefox bug)
+
+
+    if (el.selectionStart || el.selectionStart === 0) {
+      el.focus();
+      el.setSelectionRange(caretPos, caretPos);
+      return true;
+    } // fail city, fortunately this never happens (as far as I've tested) :)
+
+
+    el.focus();
+    return false;
+  }
+}
+/**
+  Given previous value and newValue it returns the index
+  start - end to which values have changed.
+  This function makes assumption about only consecutive
+  characters are changed which is correct assumption for caret input.
+*/
+
+function findChangedIndex(prevValue, newValue) {
+  var i = 0,
+      j = 0;
+  var prevLength = prevValue.length;
+  var newLength = newValue.length;
+
+  while (prevValue[i] === newValue[i] && i < prevLength) {
+    i++;
+  } //check what has been changed from last
+
+
+  while (prevValue[prevLength - 1 - j] === newValue[newLength - 1 - j] && newLength - j > i && prevLength - j > i) {
+    j++;
+  }
+
+  return {
+    start: i,
+    end: prevLength - j
+  };
+}
+/*
+  Returns a number whose value is limited to the given range
+*/
+
+function clamp(num, min, max) {
+  return Math.min(Math.max(num, min), max);
+}
+function getCurrentCaretPosition(el) {
+  /*Max of selectionStart and selectionEnd is taken for the patch of pixel and other mobile device caret bug*/
+  return Math.max(el.selectionStart, el.selectionEnd);
+}
+
+var propTypes$1 = {
+  thousandSeparator: propTypes.oneOfType([propTypes.string, propTypes.oneOf([true])]),
+  decimalSeparator: propTypes.string,
+  allowedDecimalSeparators: propTypes.arrayOf(propTypes.string),
+  thousandsGroupStyle: propTypes.oneOf(['thousand', 'lakh', 'wan']),
+  decimalScale: propTypes.number,
+  fixedDecimalScale: propTypes.bool,
+  displayType: propTypes.oneOf(['input', 'text']),
+  prefix: propTypes.string,
+  suffix: propTypes.string,
+  format: propTypes.oneOfType([propTypes.string, propTypes.func]),
+  removeFormatting: propTypes.func,
+  mask: propTypes.oneOfType([propTypes.string, propTypes.arrayOf(propTypes.string)]),
+  value: propTypes.oneOfType([propTypes.number, propTypes.string]),
+  defaultValue: propTypes.oneOfType([propTypes.number, propTypes.string]),
+  isNumericString: propTypes.bool,
+  customInput: propTypes.elementType,
+  allowNegative: propTypes.bool,
+  allowEmptyFormatting: propTypes.bool,
+  allowLeadingZeros: propTypes.bool,
+  onValueChange: propTypes.func,
+  onKeyDown: propTypes.func,
+  onMouseUp: propTypes.func,
+  onChange: propTypes.func,
+  onFocus: propTypes.func,
+  onBlur: propTypes.func,
+  type: propTypes.oneOf(['text', 'tel', 'password']),
+  isAllowed: propTypes.func,
+  renderText: propTypes.func,
+  getInputRef: propTypes.oneOfType([propTypes.func, // for legacy refs
+  propTypes.shape({
+    current: propTypes.any
+  })])
+};
+var defaultProps = {
+  displayType: 'input',
+  decimalSeparator: '.',
+  thousandsGroupStyle: 'thousand',
+  fixedDecimalScale: false,
+  prefix: '',
+  suffix: '',
+  allowNegative: true,
+  allowEmptyFormatting: false,
+  allowLeadingZeros: false,
+  isNumericString: false,
+  type: 'text',
+  onValueChange: noop,
+  onChange: noop,
+  onKeyDown: noop,
+  onMouseUp: noop,
+  onFocus: noop,
+  onBlur: noop,
+  isAllowed: returnTrue
+};
+
+var NumberFormat =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(NumberFormat, _React$Component);
+
+  function NumberFormat(props) {
+    var _this;
+
+    _classCallCheck(this, NumberFormat);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(NumberFormat).call(this, props));
+    var defaultValue = props.defaultValue; //validate props
+
+    _this.validateProps();
+
+    var formattedValue = _this.formatValueProp(defaultValue);
+
+    _this.state = {
+      value: formattedValue,
+      numAsString: _this.removeFormatting(formattedValue)
+    };
+    _this.selectionBeforeInput = {
+      selectionStart: 0,
+      selectionEnd: 0
+    };
+    _this.onChange = _this.onChange.bind(_assertThisInitialized(_this));
+    _this.onKeyDown = _this.onKeyDown.bind(_assertThisInitialized(_this));
+    _this.onMouseUp = _this.onMouseUp.bind(_assertThisInitialized(_this));
+    _this.onFocus = _this.onFocus.bind(_assertThisInitialized(_this));
+    _this.onBlur = _this.onBlur.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(NumberFormat, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      this.updateValueIfRequired(prevProps);
+    }
+  }, {
+    key: "updateValueIfRequired",
+    value: function updateValueIfRequired(prevProps) {
+      var props = this.props,
+          state = this.state,
+          focusedElm = this.focusedElm;
+      var stateValue = state.value,
+          _state$numAsString = state.numAsString,
+          lastNumStr = _state$numAsString === void 0 ? '' : _state$numAsString; // If only state changed no need to do any thing
+
+      if (prevProps !== props) {
+        //validate props
+        this.validateProps();
+        var lastValueWithNewFormat = this.formatNumString(lastNumStr);
+        var formattedValue = props.value === undefined ? lastValueWithNewFormat : this.formatValueProp();
+        var numAsString = this.removeFormatting(formattedValue);
+        var floatValue = parseFloat(numAsString);
+        var lastFloatValue = parseFloat(lastNumStr);
+
+        if ( //while typing set state only when float value changes
+        (!isNaN(floatValue) || !isNaN(lastFloatValue)) && floatValue !== lastFloatValue || //can also set state when float value is same and the format props changes
+        lastValueWithNewFormat !== stateValue || //set state always when not in focus and formatted value is changed
+        focusedElm === null && formattedValue !== stateValue) {
+          this.updateValue({
+            formattedValue: formattedValue,
+            numAsString: numAsString,
+            input: focusedElm
+          });
+        }
+      }
+    }
+    /** Misc methods **/
+
+  }, {
+    key: "getFloatString",
+    value: function getFloatString() {
+      var num = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      var decimalScale = this.props.decimalScale;
+
+      var _this$getSeparators = this.getSeparators(),
+          decimalSeparator = _this$getSeparators.decimalSeparator;
+
+      var numRegex = this.getNumberRegex(true); //remove negation for regex check
+
+      var hasNegation = num[0] === '-';
+      if (hasNegation) num = num.replace('-', ''); //if decimal scale is zero remove decimal and number after decimalSeparator
+
+      if (decimalSeparator && decimalScale === 0) {
+        num = num.split(decimalSeparator)[0];
+      }
+
+      num = (num.match(numRegex) || []).join('').replace(decimalSeparator, '.'); //remove extra decimals
+
+      var firstDecimalIndex = num.indexOf('.');
+
+      if (firstDecimalIndex !== -1) {
+        num = "".concat(num.substring(0, firstDecimalIndex), ".").concat(num.substring(firstDecimalIndex + 1, num.length).replace(new RegExp(escapeRegExp(decimalSeparator), 'g'), ''));
+      } //add negation back
+
+
+      if (hasNegation) num = '-' + num;
+      return num;
+    } //returned regex assumes decimalSeparator is as per prop
+
+  }, {
+    key: "getNumberRegex",
+    value: function getNumberRegex(g, ignoreDecimalSeparator) {
+      var _this$props = this.props,
+          format = _this$props.format,
+          decimalScale = _this$props.decimalScale;
+
+      var _this$getSeparators2 = this.getSeparators(),
+          decimalSeparator = _this$getSeparators2.decimalSeparator;
+
+      return new RegExp('\\d' + (decimalSeparator && decimalScale !== 0 && !ignoreDecimalSeparator && !format ? '|' + escapeRegExp(decimalSeparator) : ''), g ? 'g' : undefined);
+    }
+  }, {
+    key: "getSeparators",
+    value: function getSeparators() {
+      var decimalSeparator = this.props.decimalSeparator;
+      var _this$props2 = this.props,
+          thousandSeparator = _this$props2.thousandSeparator,
+          allowedDecimalSeparators = _this$props2.allowedDecimalSeparators;
+
+      if (thousandSeparator === true) {
+        thousandSeparator = ',';
+      }
+
+      if (!allowedDecimalSeparators) {
+        allowedDecimalSeparators = [decimalSeparator, '.'];
+      }
+
+      return {
+        decimalSeparator: decimalSeparator,
+        thousandSeparator: thousandSeparator,
+        allowedDecimalSeparators: allowedDecimalSeparators
+      };
+    }
+  }, {
+    key: "getMaskAtIndex",
+    value: function getMaskAtIndex(index) {
+      var _this$props$mask = this.props.mask,
+          mask = _this$props$mask === void 0 ? ' ' : _this$props$mask;
+
+      if (typeof mask === 'string') {
+        return mask;
+      }
+
+      return mask[index] || ' ';
+    }
+  }, {
+    key: "getValueObject",
+    value: function getValueObject(formattedValue, numAsString) {
+      var floatValue = parseFloat(numAsString);
+      return {
+        formattedValue: formattedValue,
+        value: numAsString,
+        floatValue: isNaN(floatValue) ? undefined : floatValue
+      };
+    }
+  }, {
+    key: "validateProps",
+    value: function validateProps() {
+      var mask = this.props.mask; //validate decimalSeparator and thousandSeparator
+
+      var _this$getSeparators3 = this.getSeparators(),
+          decimalSeparator = _this$getSeparators3.decimalSeparator,
+          thousandSeparator = _this$getSeparators3.thousandSeparator;
+
+      if (decimalSeparator === thousandSeparator) {
+        throw new Error("\n          Decimal separator can't be same as thousand separator.\n          thousandSeparator: ".concat(thousandSeparator, " (thousandSeparator = {true} is same as thousandSeparator = \",\")\n          decimalSeparator: ").concat(decimalSeparator, " (default value for decimalSeparator is .)\n       "));
+      } //validate mask
+
+
+      if (mask) {
+        var maskAsStr = mask === 'string' ? mask : mask.toString();
+
+        if (maskAsStr.match(/\d/g)) {
+          throw new Error("\n          Mask ".concat(mask, " should not contain numeric character;\n        "));
+        }
+      }
+    }
+    /** Misc methods end **/
+
+    /** caret specific methods **/
+
+  }, {
+    key: "setPatchedCaretPosition",
+    value: function setPatchedCaretPosition(el, caretPos, currentValue) {
+      /* setting caret position within timeout of 0ms is required for mobile chrome,
+      otherwise browser resets the caret position after we set it
+      We are also setting it without timeout so that in normal browser we don't see the flickering */
+      setCaretPosition(el, caretPos);
+      setTimeout(function () {
+        if (el.value === currentValue) setCaretPosition(el, caretPos);
+      }, 0);
+    }
+    /* This keeps the caret within typing area so people can't type in between prefix or suffix */
+
+  }, {
+    key: "correctCaretPosition",
+    value: function correctCaretPosition(value, caretPos, direction) {
+      var _this$props3 = this.props,
+          prefix = _this$props3.prefix,
+          suffix = _this$props3.suffix,
+          format = _this$props3.format; //if value is empty return 0
+
+      if (value === '') return 0; //caret position should be between 0 and value length
+
+      caretPos = clamp(caretPos, 0, value.length); //in case of format as number limit between prefix and suffix
+
+      if (!format) {
+        var hasNegation = value[0] === '-';
+        return clamp(caretPos, prefix.length + (hasNegation ? 1 : 0), value.length - suffix.length);
+      } //in case if custom format method don't do anything
+
+
+      if (typeof format === 'function') return caretPos;
+      /* in case format is string find the closest # position from the caret position */
+      //in case the caretPos have input value on it don't do anything
+
+      if (format[caretPos] === '#' && charIsNumber(value[caretPos])) return caretPos; //if caretPos is just after input value don't do anything
+
+      if (format[caretPos - 1] === '#' && charIsNumber(value[caretPos - 1])) return caretPos; //find the nearest caret position
+
+      var firstHashPosition = format.indexOf('#');
+      var lastHashPosition = format.lastIndexOf('#'); //limit the cursor between the first # position and the last # position
+
+      caretPos = clamp(caretPos, firstHashPosition, lastHashPosition + 1);
+      var nextPos = format.substring(caretPos, format.length).indexOf('#');
+      var caretLeftBound = caretPos;
+      var caretRightBound = caretPos + (nextPos === -1 ? 0 : nextPos); //get the position where the last number is present
+
+      while (caretLeftBound > firstHashPosition && (format[caretLeftBound] !== '#' || !charIsNumber(value[caretLeftBound]))) {
+        caretLeftBound -= 1;
+      }
+
+      var goToLeft = !charIsNumber(value[caretRightBound]) || direction === 'left' && caretPos !== firstHashPosition || caretPos - caretLeftBound < caretRightBound - caretPos;
+
+      if (goToLeft) {
+        //check if number should be taken after the bound or after it
+        //if number preceding a valid number keep it after
+        return charIsNumber(value[caretLeftBound]) ? caretLeftBound + 1 : caretLeftBound;
+      }
+
+      return caretRightBound;
+    }
+  }, {
+    key: "getCaretPosition",
+    value: function getCaretPosition(inputValue, formattedValue, caretPos) {
+      var format = this.props.format;
+      var stateValue = this.state.value;
+      var numRegex = this.getNumberRegex(true);
+      var inputNumber = (inputValue.match(numRegex) || []).join('');
+      var formattedNumber = (formattedValue.match(numRegex) || []).join('');
+      var j, i;
+      j = 0;
+
+      for (i = 0; i < caretPos; i++) {
+        var currentInputChar = inputValue[i] || '';
+        var currentFormatChar = formattedValue[j] || ''; //no need to increase new cursor position if formatted value does not have those characters
+        //case inputValue = 1a23 and formattedValue =  123
+
+        if (!currentInputChar.match(numRegex) && currentInputChar !== currentFormatChar) continue; //When we are striping out leading zeros maintain the new cursor position
+        //Case inputValue = 00023 and formattedValue = 23;
+
+        if (currentInputChar === '0' && currentFormatChar.match(numRegex) && currentFormatChar !== '0' && inputNumber.length !== formattedNumber.length) continue; //we are not using currentFormatChar because j can change here
+
+        while (currentInputChar !== formattedValue[j] && j < formattedValue.length) {
+          j++;
+        }
+
+        j++;
+      }
+
+      if (typeof format === 'string' && !stateValue) {
+        //set it to the maximum value so it goes after the last number
+        j = formattedValue.length;
+      } //correct caret position if its outside of editable area
+
+
+      j = this.correctCaretPosition(formattedValue, j);
+      return j;
+    }
+    /** caret specific methods ends **/
+
+    /** methods to remove formattting **/
+
+  }, {
+    key: "removePrefixAndSuffix",
+    value: function removePrefixAndSuffix(val) {
+      var _this$props4 = this.props,
+          format = _this$props4.format,
+          prefix = _this$props4.prefix,
+          suffix = _this$props4.suffix; //remove prefix and suffix
+
+      if (!format && val) {
+        var isNegative = val[0] === '-'; //remove negation sign
+
+        if (isNegative) val = val.substring(1, val.length); //remove prefix
+
+        val = prefix && val.indexOf(prefix) === 0 ? val.substring(prefix.length, val.length) : val; //remove suffix
+
+        var suffixLastIndex = val.lastIndexOf(suffix);
+        val = suffix && suffixLastIndex !== -1 && suffixLastIndex === val.length - suffix.length ? val.substring(0, suffixLastIndex) : val; //add negation sign back
+
+        if (isNegative) val = '-' + val;
+      }
+
+      return val;
+    }
+  }, {
+    key: "removePatternFormatting",
+    value: function removePatternFormatting(val) {
+      var format = this.props.format;
+      var formatArray = format.split('#').filter(function (str) {
+        return str !== '';
+      });
+      var start = 0;
+      var numStr = '';
+
+      for (var i = 0, ln = formatArray.length; i <= ln; i++) {
+        var part = formatArray[i] || ''; //if i is the last fragment take the index of end of the value
+        //For case like +1 (911) 911 91 91 having pattern +1 (###) ### ## ##
+
+        var index = i === ln ? val.length : val.indexOf(part, start);
+        /* in any case if we don't find the pattern part in the value assume the val as numeric string
+        This will be also in case if user has started typing, in any other case it will not be -1
+        unless wrong prop value is provided */
+
+        if (index === -1) {
+          numStr = val;
+          break;
+        } else {
+          numStr += val.substring(start, index);
+          start = index + part.length;
+        }
+      }
+
+      return (numStr.match(/\d/g) || []).join('');
+    }
+  }, {
+    key: "removeFormatting",
+    value: function removeFormatting(val) {
+      var _this$props5 = this.props,
+          format = _this$props5.format,
+          removeFormatting = _this$props5.removeFormatting;
+      if (!val) return val;
+
+      if (!format) {
+        val = this.removePrefixAndSuffix(val);
+        val = this.getFloatString(val);
+      } else if (typeof format === 'string') {
+        val = this.removePatternFormatting(val);
+      } else if (typeof removeFormatting === 'function') {
+        //condition need to be handled if format method is provide,
+        val = removeFormatting(val);
+      } else {
+        val = (val.match(/\d/g) || []).join('');
+      }
+
+      return val;
+    }
+    /** methods to remove formattting end **/
+
+    /*** format specific methods start ***/
+
+    /**
+     * Format when # based string is provided
+     * @param  {string} numStr Numeric String
+     * @return {string}        formatted Value
+     */
+
+  }, {
+    key: "formatWithPattern",
+    value: function formatWithPattern(numStr) {
+      var format = this.props.format;
+      var hashCount = 0;
+      var formattedNumberAry = format.split('');
+
+      for (var i = 0, ln = format.length; i < ln; i++) {
+        if (format[i] === '#') {
+          formattedNumberAry[i] = numStr[hashCount] || this.getMaskAtIndex(hashCount);
+          hashCount += 1;
+        }
+      }
+
+      return formattedNumberAry.join('');
+    }
+    /**
+     * @param  {string} numStr Numeric string/floatString] It always have decimalSeparator as .
+     * @return {string} formatted Value
+     */
+
+  }, {
+    key: "formatAsNumber",
+    value: function formatAsNumber(numStr) {
+      var _this$props6 = this.props,
+          decimalScale = _this$props6.decimalScale,
+          fixedDecimalScale = _this$props6.fixedDecimalScale,
+          prefix = _this$props6.prefix,
+          suffix = _this$props6.suffix,
+          allowNegative = _this$props6.allowNegative,
+          thousandsGroupStyle = _this$props6.thousandsGroupStyle;
+
+      var _this$getSeparators4 = this.getSeparators(),
+          thousandSeparator = _this$getSeparators4.thousandSeparator,
+          decimalSeparator = _this$getSeparators4.decimalSeparator;
+
+      var hasDecimalSeparator = numStr.indexOf('.') !== -1 || decimalScale && fixedDecimalScale;
+
+      var _splitDecimal = splitDecimal(numStr, allowNegative),
+          beforeDecimal = _splitDecimal.beforeDecimal,
+          afterDecimal = _splitDecimal.afterDecimal,
+          addNegation = _splitDecimal.addNegation; // eslint-disable-line prefer-const
+      //apply decimal precision if its defined
+
+
+      if (decimalScale !== undefined) afterDecimal = limitToScale(afterDecimal, decimalScale, fixedDecimalScale);
+
+      if (thousandSeparator) {
+        beforeDecimal = applyThousandSeparator(beforeDecimal, thousandSeparator, thousandsGroupStyle);
+      } //add prefix and suffix
+
+
+      if (prefix) beforeDecimal = prefix + beforeDecimal;
+      if (suffix) afterDecimal = afterDecimal + suffix; //restore negation sign
+
+      if (addNegation) beforeDecimal = '-' + beforeDecimal;
+      numStr = beforeDecimal + (hasDecimalSeparator && decimalSeparator || '') + afterDecimal;
+      return numStr;
+    }
+  }, {
+    key: "formatNumString",
+    value: function formatNumString() {
+      var numStr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      var _this$props7 = this.props,
+          format = _this$props7.format,
+          allowEmptyFormatting = _this$props7.allowEmptyFormatting;
+      var formattedValue = numStr;
+
+      if (numStr === '' && !allowEmptyFormatting) {
+        formattedValue = '';
+      } else if (numStr === '-' && !format) {
+        formattedValue = '-';
+      } else if (typeof format === 'string') {
+        formattedValue = this.formatWithPattern(formattedValue);
+      } else if (typeof format === 'function') {
+        formattedValue = format(formattedValue);
+      } else {
+        formattedValue = this.formatAsNumber(formattedValue);
+      }
+
+      return formattedValue;
+    }
+  }, {
+    key: "formatValueProp",
+    value: function formatValueProp(defaultValue) {
+      var _this$props8 = this.props,
+          format = _this$props8.format,
+          decimalScale = _this$props8.decimalScale,
+          fixedDecimalScale = _this$props8.fixedDecimalScale,
+          allowEmptyFormatting = _this$props8.allowEmptyFormatting;
+      var _this$props9 = this.props,
+          _this$props9$value = _this$props9.value,
+          value = _this$props9$value === void 0 ? defaultValue : _this$props9$value,
+          isNumericString = _this$props9.isNumericString;
+      var isNonNumericFalsy = !value && value !== 0;
+
+      if (isNonNumericFalsy && allowEmptyFormatting) {
+        value = '';
+      } // if value is not defined return empty string
+
+
+      if (isNonNumericFalsy && !allowEmptyFormatting) return '';
+
+      if (typeof value === 'number') {
+        value = value.toString();
+        isNumericString = true;
+      } //change infinity value to empty string
+
+
+      if (value === 'Infinity' && isNumericString) {
+        value = '';
+      } //round the number based on decimalScale
+      //format only if non formatted value is provided
+
+
+      if (isNumericString && !format && typeof decimalScale === 'number') {
+        value = roundToPrecision(value, decimalScale, fixedDecimalScale);
+      }
+
+      var formattedValue = isNumericString ? this.formatNumString(value) : this.formatInput(value);
+      return formattedValue;
+    }
+  }, {
+    key: "formatNegation",
+    value: function formatNegation() {
+      var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      var allowNegative = this.props.allowNegative;
+      var negationRegex = new RegExp('(-)');
+      var doubleNegationRegex = new RegExp('(-)(.)*(-)'); // Check number has '-' value
+
+      var hasNegation = negationRegex.test(value); // Check number has 2 or more '-' values
+
+      var removeNegation = doubleNegationRegex.test(value); //remove negation
+
+      value = value.replace(/-/g, '');
+
+      if (hasNegation && !removeNegation && allowNegative) {
+        value = '-' + value;
+      }
+
+      return value;
+    }
+  }, {
+    key: "formatInput",
+    value: function formatInput() {
+      var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      var format = this.props.format; //format negation only if we are formatting as number
+
+      if (!format) {
+        value = this.removePrefixAndSuffix(value);
+        value = this.formatNegation(value);
+      } //remove formatting from number
+
+
+      value = this.removeFormatting(value);
+      return this.formatNumString(value);
+    }
+    /*** format specific methods end ***/
+
+  }, {
+    key: "isCharacterAFormat",
+    value: function isCharacterAFormat(caretPos, value) {
+      var _this$props10 = this.props,
+          format = _this$props10.format,
+          prefix = _this$props10.prefix,
+          suffix = _this$props10.suffix,
+          decimalScale = _this$props10.decimalScale,
+          fixedDecimalScale = _this$props10.fixedDecimalScale;
+
+      var _this$getSeparators5 = this.getSeparators(),
+          decimalSeparator = _this$getSeparators5.decimalSeparator; //check within format pattern
+
+
+      if (typeof format === 'string' && format[caretPos] !== '#') return true; //check in number format
+
+      if (!format && (caretPos < prefix.length || caretPos >= value.length - suffix.length || decimalScale && fixedDecimalScale && value[caretPos] === decimalSeparator)) {
+        return true;
+      }
+
+      return false;
+    }
+  }, {
+    key: "checkIfFormatGotDeleted",
+    value: function checkIfFormatGotDeleted(start, end, value) {
+      for (var i = start; i < end; i++) {
+        if (this.isCharacterAFormat(i, value)) return true;
+      }
+
+      return false;
+    }
+    /**
+     * This will check if any formatting got removed by the delete or backspace and reset the value
+     * It will also work as fallback if android chome keyDown handler does not work
+     **/
+
+  }, {
+    key: "correctInputValue",
+    value: function correctInputValue(caretPos, lastValue, value) {
+      var _this$props11 = this.props,
+          format = _this$props11.format,
+          allowNegative = _this$props11.allowNegative,
+          prefix = _this$props11.prefix,
+          suffix = _this$props11.suffix,
+          decimalScale = _this$props11.decimalScale;
+
+      var _this$getSeparators6 = this.getSeparators(),
+          allowedDecimalSeparators = _this$getSeparators6.allowedDecimalSeparators,
+          decimalSeparator = _this$getSeparators6.decimalSeparator;
+
+      var lastNumStr = this.state.numAsString || '';
+      var _this$selectionBefore = this.selectionBeforeInput,
+          selectionStart = _this$selectionBefore.selectionStart,
+          selectionEnd = _this$selectionBefore.selectionEnd;
+
+      var _findChangedIndex = findChangedIndex(lastValue, value),
+          start = _findChangedIndex.start,
+          end = _findChangedIndex.end;
+      /** Check for any allowed decimal separator is added in the numeric format and replace it with decimal separator */
+
+
+      if (!format && start === end && allowedDecimalSeparators.indexOf(value[selectionStart]) !== -1) {
+        var separator = decimalScale === 0 ? '' : decimalSeparator;
+        return value.substr(0, selectionStart) + separator + value.substr(selectionStart + 1, value.length);
+      }
+      /* don't do anyhting if something got added,
+       or if value is empty string (when whole input is cleared)
+       or whole input is replace with a number
+      */
+
+
+      var leftBound = !!format ? 0 : prefix.length;
+      var rightBound = lastValue.length - (!!format ? 0 : suffix.length);
+
+      if (value.length > lastValue.length || !value.length || start === end || selectionStart === 0 && selectionEnd === lastValue.length || selectionStart === leftBound && selectionEnd === rightBound) {
+        return value;
+      } //if format got deleted reset the value to last value
+
+
+      if (this.checkIfFormatGotDeleted(start, end, lastValue)) {
+        value = lastValue;
+      } //for numbers check if beforeDecimal got deleted and there is nothing after decimal,
+      //clear all numbers in such case while keeping the - sign
+
+
+      if (!format) {
+        var numericString = this.removeFormatting(value);
+
+        var _splitDecimal2 = splitDecimal(numericString, allowNegative),
+            beforeDecimal = _splitDecimal2.beforeDecimal,
+            afterDecimal = _splitDecimal2.afterDecimal,
+            addNegation = _splitDecimal2.addNegation; // eslint-disable-line prefer-const
+        //clear only if something got deleted
+
+
+        var isBeforeDecimalPoint = caretPos < value.indexOf(decimalSeparator) + 1;
+
+        if (numericString.length < lastNumStr.length && isBeforeDecimalPoint && beforeDecimal === '' && !parseFloat(afterDecimal)) {
+          return addNegation ? '-' : '';
+        }
+      }
+
+      return value;
+    }
+    /** Update value and caret position */
+
+  }, {
+    key: "updateValue",
+    value: function updateValue(params) {
+      var formattedValue = params.formattedValue,
+          input = params.input,
+          _params$setCaretPosit = params.setCaretPosition,
+          setCaretPosition = _params$setCaretPosit === void 0 ? true : _params$setCaretPosit;
+      var numAsString = params.numAsString,
+          caretPos = params.caretPos;
+      var onValueChange = this.props.onValueChange;
+      var lastValue = this.state.value;
+
+      if (input) {
+        //set caret position, and value imperatively when element is provided
+        if (setCaretPosition) {
+          //calculate caret position if not defined
+          if (!caretPos) {
+            var inputValue = params.inputValue || input.value;
+            var currentCaretPosition = getCurrentCaretPosition(input);
+            /**
+             * set the value imperatively, this is required for IE fix
+             * This is also required as if new caret position is beyond the previous value.
+             * Caret position will not be set correctly
+             */
+
+            input.value = formattedValue; //get the caret position
+
+            caretPos = this.getCaretPosition(inputValue, formattedValue, currentCaretPosition);
+          } //set caret position
+
+
+          this.setPatchedCaretPosition(input, caretPos, formattedValue);
+        } else {
+          /**
+           * if we are not setting caret position set the value imperatively.
+           * This is required on onBlur method
+           */
+          input.value = formattedValue;
+        }
+      } //calculate numeric string if not passed
+
+
+      if (numAsString === undefined) {
+        numAsString = this.removeFormatting(formattedValue);
+      } //update state if value is changed
+
+
+      if (formattedValue !== lastValue) {
+        this.setState({
+          value: formattedValue,
+          numAsString: numAsString
+        }); // trigger onValueChange synchronously, so parent is updated along with the number format. Fix for #277, #287
+
+        onValueChange(this.getValueObject(formattedValue, numAsString));
+      }
+    }
+  }, {
+    key: "onChange",
+    value: function onChange(e) {
+      var el = e.target;
+      var inputValue = el.value;
+      var state = this.state,
+          props = this.props;
+      var isAllowed = props.isAllowed;
+      var lastValue = state.value || '';
+      var currentCaretPosition = getCurrentCaretPosition(el);
+      inputValue = this.correctInputValue(currentCaretPosition, lastValue, inputValue);
+      var formattedValue = this.formatInput(inputValue) || '';
+      var numAsString = this.removeFormatting(formattedValue);
+      var valueObj = this.getValueObject(formattedValue, numAsString);
+
+      if (!isAllowed(valueObj)) {
+        formattedValue = lastValue;
+      }
+
+      this.updateValue({
+        formattedValue: formattedValue,
+        numAsString: numAsString,
+        inputValue: inputValue,
+        input: el
+      });
+      props.onChange(e);
+    }
+  }, {
+    key: "onBlur",
+    value: function onBlur(e) {
+      var props = this.props,
+          state = this.state;
+      var format = props.format,
+          onBlur = props.onBlur,
+          allowLeadingZeros = props.allowLeadingZeros;
+      var numAsString = state.numAsString;
+      var lastValue = state.value;
+      this.focusedElm = null;
+
+      if (this.focusTimeout) {
+        clearTimeout(this.focusTimeout);
+      }
+
+      if (!format) {
+        // if the numAsString is not a valid number reset it to empty
+        if (isNaN(parseFloat(numAsString))) {
+          numAsString = '';
+        }
+
+        if (!allowLeadingZeros) {
+          numAsString = fixLeadingZero(numAsString);
+        }
+
+        var formattedValue = this.formatNumString(numAsString); //change the state
+
+        if (formattedValue !== lastValue) {
+          // the event needs to be persisted because its properties can be accessed in an asynchronous way
+          this.updateValue({
+            formattedValue: formattedValue,
+            numAsString: numAsString,
+            input: e.target,
+            setCaretPosition: false
+          });
+          onBlur(e);
+          return;
+        }
+      }
+
+      onBlur(e);
+    }
+  }, {
+    key: "onKeyDown",
+    value: function onKeyDown(e) {
+      var el = e.target;
+      var key = e.key;
+      var selectionStart = el.selectionStart,
+          selectionEnd = el.selectionEnd,
+          _el$value = el.value,
+          value = _el$value === void 0 ? '' : _el$value;
+      var expectedCaretPosition;
+      var _this$props12 = this.props,
+          decimalScale = _this$props12.decimalScale,
+          fixedDecimalScale = _this$props12.fixedDecimalScale,
+          prefix = _this$props12.prefix,
+          suffix = _this$props12.suffix,
+          format = _this$props12.format,
+          onKeyDown = _this$props12.onKeyDown;
+      var ignoreDecimalSeparator = decimalScale !== undefined && fixedDecimalScale;
+      var numRegex = this.getNumberRegex(false, ignoreDecimalSeparator);
+      var negativeRegex = new RegExp('-');
+      var isPatternFormat = typeof format === 'string';
+      this.selectionBeforeInput = {
+        selectionStart: selectionStart,
+        selectionEnd: selectionEnd
+      }; //Handle backspace and delete against non numerical/decimal characters or arrow keys
+
+      if (key === 'ArrowLeft' || key === 'Backspace') {
+        expectedCaretPosition = selectionStart - 1;
+      } else if (key === 'ArrowRight') {
+        expectedCaretPosition = selectionStart + 1;
+      } else if (key === 'Delete') {
+        expectedCaretPosition = selectionStart;
+      } //if expectedCaretPosition is not set it means we don't want to Handle keyDown
+      //also if multiple characters are selected don't handle
+
+
+      if (expectedCaretPosition === undefined || selectionStart !== selectionEnd) {
+        onKeyDown(e);
+        return;
+      }
+
+      var newCaretPosition = expectedCaretPosition;
+      var leftBound = isPatternFormat ? format.indexOf('#') : prefix.length;
+      var rightBound = isPatternFormat ? format.lastIndexOf('#') + 1 : value.length - suffix.length;
+
+      if (key === 'ArrowLeft' || key === 'ArrowRight') {
+        var direction = key === 'ArrowLeft' ? 'left' : 'right';
+        newCaretPosition = this.correctCaretPosition(value, expectedCaretPosition, direction);
+      } else if (key === 'Delete' && !numRegex.test(value[expectedCaretPosition]) && !negativeRegex.test(value[expectedCaretPosition])) {
+        while (!numRegex.test(value[newCaretPosition]) && newCaretPosition < rightBound) {
+          newCaretPosition++;
+        }
+      } else if (key === 'Backspace' && !numRegex.test(value[expectedCaretPosition])) {
+        /* NOTE: This is special case when backspace is pressed on a
+        negative value while the cursor position is after prefix. We can't handle it on onChange because
+        we will not have any information of keyPress
+        */
+        if (selectionStart <= leftBound + 1 && value[0] === '-' && typeof format === 'undefined') {
+          var newValue = value.substring(1);
+          this.updateValue({
+            formattedValue: newValue,
+            caretPos: newCaretPosition,
+            input: el
+          });
+        } else if (!negativeRegex.test(value[expectedCaretPosition])) {
+          while (!numRegex.test(value[newCaretPosition - 1]) && newCaretPosition > leftBound) {
+            newCaretPosition--;
+          }
+
+          newCaretPosition = this.correctCaretPosition(value, newCaretPosition, 'left');
+        }
+      }
+
+      if (newCaretPosition !== expectedCaretPosition || expectedCaretPosition < leftBound || expectedCaretPosition > rightBound) {
+        e.preventDefault();
+        this.setPatchedCaretPosition(el, newCaretPosition, value);
+      }
+      /* NOTE: this is just required for unit test as we need to get the newCaretPosition,
+              Remove this when you find different solution */
+
+
+      if (e.isUnitTestRun) {
+        this.setPatchedCaretPosition(el, newCaretPosition, value);
+      }
+
+      onKeyDown(e);
+    }
+    /** required to handle the caret position when click anywhere within the input **/
+
+  }, {
+    key: "onMouseUp",
+    value: function onMouseUp(e) {
+      var el = e.target;
+      /**
+       * NOTE: we have to give default value for value as in case when custom input is provided
+       * value can come as undefined when nothing is provided on value prop.
+      */
+
+      var selectionStart = el.selectionStart,
+          selectionEnd = el.selectionEnd,
+          _el$value2 = el.value,
+          value = _el$value2 === void 0 ? '' : _el$value2;
+
+      if (selectionStart === selectionEnd) {
+        var caretPosition = this.correctCaretPosition(value, selectionStart);
+
+        if (caretPosition !== selectionStart) {
+          this.setPatchedCaretPosition(el, caretPosition, value);
+        }
+      }
+
+      this.props.onMouseUp(e);
+    }
+  }, {
+    key: "onFocus",
+    value: function onFocus(e) {
+      var _this2 = this;
+
+      // Workaround Chrome and Safari bug https://bugs.chromium.org/p/chromium/issues/detail?id=779328
+      // (onFocus event target selectionStart is always 0 before setTimeout)
+      e.persist();
+      this.focusedElm = e.target;
+      this.focusTimeout = setTimeout(function () {
+        var el = e.target;
+        var selectionStart = el.selectionStart,
+            selectionEnd = el.selectionEnd,
+            _el$value3 = el.value,
+            value = _el$value3 === void 0 ? '' : _el$value3;
+
+        var caretPosition = _this2.correctCaretPosition(value, selectionStart); //setPatchedCaretPosition only when everything is not selected on focus (while tabbing into the field)
+
+
+        if (caretPosition !== selectionStart && !(selectionStart === 0 && selectionEnd === value.length)) {
+          _this2.setPatchedCaretPosition(el, caretPosition, value);
+        }
+
+        _this2.props.onFocus(e);
+      }, 0);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props13 = this.props,
+          type = _this$props13.type,
+          displayType = _this$props13.displayType,
+          customInput = _this$props13.customInput,
+          renderText = _this$props13.renderText,
+          getInputRef = _this$props13.getInputRef;
+      var value = this.state.value;
+      var otherProps = omit(this.props, propTypes$1);
+
+      var inputProps = _extends({
+        inputMode: 'numeric'
+      }, otherProps, {
+        type: type,
+        value: value,
+        onChange: this.onChange,
+        onKeyDown: this.onKeyDown,
+        onMouseUp: this.onMouseUp,
+        onFocus: this.onFocus,
+        onBlur: this.onBlur
+      });
+
+      if (displayType === 'text') {
+        return renderText ? renderText(value) || null : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", _extends({}, otherProps, {
+          ref: getInputRef
+        }), value);
+      } else if (customInput) {
+        var CustomInput = customInput;
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CustomInput, _extends({}, inputProps, {
+          ref: getInputRef
+        }));
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", _extends({}, inputProps, {
+        ref: getInputRef
+      }));
+    }
+  }]);
+
+  return NumberFormat;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+NumberFormat.propTypes = propTypes$1;
+NumberFormat.defaultProps = defaultProps;
+
+/* harmony default export */ __webpack_exports__["default"] = (NumberFormat);
+
+
+/***/ }),
+
 /***/ "./node_modules/react-redux/es/components/Context.js":
 /*!***********************************************************!*\
   !*** ./node_modules/react-redux/es/components/Context.js ***!
@@ -11619,7 +12987,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************!*\
   !*** ./src/actions/index.js ***!
   \******************************/
-/*! exports provided: getAllProprietes, getAllDossiers, getAllUsers, getLogout, getHomeUrl, getPersonalData */
+/*! exports provided: getAllProprietes, getAllDossiers, getAllUsers, getLogout, getHomeUrl, toogleLoader, toogleAddClient, toogleAddChasseur, toogleAddPropriete, toogleUserModal, toogleDossierModal, toogleProprieteModal, getPersonalData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11629,6 +12997,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllUsers", function() { return getAllUsers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLogout", function() { return getLogout; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getHomeUrl", function() { return getHomeUrl; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toogleLoader", function() { return toogleLoader; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toogleAddClient", function() { return toogleAddClient; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toogleAddChasseur", function() { return toogleAddChasseur; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toogleAddPropriete", function() { return toogleAddPropriete; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toogleUserModal", function() { return toogleUserModal; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toogleDossierModal", function() { return toogleDossierModal; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toogleProprieteModal", function() { return toogleProprieteModal; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPersonalData", function() { return getPersonalData; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
@@ -11866,6 +13241,51 @@ function getHomeUrl() {
   }();
 }
 ;
+/** LOADER TOOGLE **/
+
+function toogleLoader() {
+  var statut = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var messageShow = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'Veuillez patienter ...';
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_1__["TOOGLE_LOADER"],
+    payload: {
+      statut: statut,
+      message: messageShow
+    }
+  };
+}
+/** MODAL TOOGLE **/
+
+function toogleAddClient() {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_1__["TOOGLE_CLIENT_ADD_MODAL"]
+  };
+}
+function toogleAddChasseur() {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_1__["TOOGLE_CHASSEUR_ADD_MODAL"]
+  };
+}
+function toogleAddPropriete() {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_1__["TOOGLE_PROPRIETE_ADD_MODAL"]
+  };
+}
+function toogleUserModal() {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_1__["TOOGLE_USER_MODAL"]
+  };
+}
+function toogleDossierModal() {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_1__["TOOGLE_DOSSIER_MODAL"]
+  };
+}
+function toogleProprieteModal() {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_1__["TOOGLE_PROPRIETE_MODAL"]
+  };
+}
 /** PERSONAL DATA **/
 
 function getPersonalData() {
@@ -12069,7 +13489,8 @@ function Button(props) {
     red: props.red,
     green: props.green,
     iconRight: props.iconRight,
-    src: props.src
+    src: props.src,
+    onClick: props.onClick ? props.onClick : null
   }, AddIconLeft != null ? AddIconLeft : null, props.children, AddIconRight != null ? AddIconRight : null);
 }
 
@@ -12162,6 +13583,200 @@ function Card(props) {
 
 /***/ }),
 
+/***/ "./src/components/Input.jsx":
+/*!**********************************!*\
+  !*** ./src/components/Input.jsx ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Input; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var react_number_format__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-number-format */ "./node_modules/react-number-format/dist/react-number-format.es.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _templateObject5() {
+  var data = _taggedTemplateLiteral(["\n\n"]);
+
+  _templateObject5 = function _templateObject5() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject4() {
+  var data = _taggedTemplateLiteral(["\n            display: inline-block;\n            margin-left: 15px;\n        "]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n    ", "\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n            display: inline-block;\n            margin-left: 15px;\n        "]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n    ", "\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var Component = wp.element.Component;
+
+
+var StyledInput = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].input(_templateObject(), function (props) {
+  return props.inlineLabel && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject2());
+});
+var StyledNumberFormat = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(react_number_format__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject3(), function (props) {
+  return props.inlineLabel && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject4());
+});
+var Container = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject5());
+
+var Input = /*#__PURE__*/function (_Component) {
+  _inherits(Input, _Component);
+
+  var _super = _createSuper(Input);
+
+  function Input(props) {
+    var _this;
+
+    _classCallCheck(this, Input);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      inputValue: null,
+      formattedValue: null
+    };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleChangeNumber = _this.handleChangeNumber.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Input, [{
+    key: "handleChange",
+    value: function handleChange(event) {
+      this.setState({
+        inputValue: event.target.value
+      });
+      if (this.props.handleChange) this.props.handleChange(event.target.value);
+    }
+  }, {
+    key: "handleChangeNumber",
+    value: function handleChangeNumber(values) {
+      var formattedValue = values.formattedValue,
+          value = values.value;
+      this.setState({
+        formattedValue: formattedValue,
+        inputValue: value
+      });
+      if (this.props.handleChange) this.props.handleChange(value);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var haveSuffix = null;
+      var input = null;
+
+      if (this.props.euro) {
+        haveSuffix = ' €';
+      } else if (this.props.pourcent) {
+        haveSuffix = ' %';
+      }
+
+      if (this.props.type == 'number') {
+        input = /*#__PURE__*/React.createElement(StyledNumberFormat, {
+          value: this.state.inputValue,
+          step: this.props.step ? this.props.step : null,
+          min: this.props.min ? this.props.min : null,
+          max: this.props.max ? this.props.max : null,
+          id: this.props.id,
+          name: this.props.id,
+          required: this.props.required,
+          readonly: this.props.readonly,
+          disabled: this.props.disabled,
+          thousandSeparator: " ",
+          decimalSeparator: ",",
+          allowNegative: false,
+          allowLeadingZeros: false,
+          suffix: haveSuffix,
+          onValueChange: this.handleChangeNumber,
+          inlineLabel: this.props.inline
+        });
+      } else {
+        input = /*#__PURE__*/React.createElement(StyledInput, {
+          type: this.props.type,
+          value: this.state.inputValue,
+          id: this.props.id,
+          name: this.props.id,
+          required: this.props.required,
+          readonly: this.props.readonly,
+          disabled: this.props.disabled,
+          onChange: this.handleChange,
+          inlineLabel: this.props.inline
+        });
+      }
+
+      return /*#__PURE__*/React.createElement("div", null, this.props.label && /*#__PURE__*/React.createElement("label", {
+        htmlFor: this.props.id
+      }, " ", this.props.label, " "), input);
+    }
+  }]);
+
+  return Input;
+}(Component);
+
+
+
+/***/ }),
+
 /***/ "./src/components/Loader.jsx":
 /*!***********************************!*\
   !*** ./src/components/Loader.jsx ***!
@@ -12207,7 +13822,7 @@ function Loader(props) {
     "class": "lds-default"
   }, /*#__PURE__*/React.createElement("div", null), /*#__PURE__*/React.createElement("div", null), /*#__PURE__*/React.createElement("div", null), /*#__PURE__*/React.createElement("div", null), /*#__PURE__*/React.createElement("div", null), /*#__PURE__*/React.createElement("div", null), /*#__PURE__*/React.createElement("div", null), /*#__PURE__*/React.createElement("div", null), /*#__PURE__*/React.createElement("div", null), /*#__PURE__*/React.createElement("div", null), /*#__PURE__*/React.createElement("div", null), /*#__PURE__*/React.createElement("div", null)), /*#__PURE__*/React.createElement("p", {
     "class": "info"
-  }, "Chargement des donn\xE9es en cours ..."));
+  }, props.message));
 }
 
 /***/ }),
@@ -12545,6 +14160,7 @@ var NavLink = function NavLink(props) {
     src: props.src
   }), /*#__PURE__*/React.createElement("span", null, props.name)), props.addButton ? /*#__PURE__*/React.createElement(AddButton, {
     className: "addButton",
+    onClick: props.addButton,
     closeMenu: props.closeMenu
   }) : null);
 };
@@ -12572,13 +14188,12 @@ var Navigation = /*#__PURE__*/function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.getPersonalData();
+      this.props.toogleLoader(true, 'Chargement des données en cours ...');
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
-      this.props.myUserData.role != 'load' && this.state.showLoader ? this.setState({
-        showLoader: false
-      }) : null;
+      this.props.myUserData.role != 'load' && this.props.loaderStat.statut ? this.props.toogleLoader(false, 'Chargement des données en cours ...') : null;
     }
   }, {
     key: "handleChangeLink",
@@ -12611,7 +14226,7 @@ var Navigation = /*#__PURE__*/function (_Component) {
             currentLink: this.state.currentLink,
             changeView: this.handleChangeLink,
             closeMenu: this.props.statMenu,
-            addButton: true
+            addButton: this.props.toogleAddPropriete
           })); // ONLY SUPERVISEUR
 
           if (this.props.myUserData.role != 'chasseur') {
@@ -12622,7 +14237,7 @@ var Navigation = /*#__PURE__*/function (_Component) {
               currentLink: this.state.currentLink,
               changeView: this.handleChangeLink,
               closeMenu: this.props.statMenu,
-              addButton: true
+              addButton: this.props.toogleAddChasseur
             }));
           }
 
@@ -12633,7 +14248,7 @@ var Navigation = /*#__PURE__*/function (_Component) {
             currentLink: this.state.currentLink,
             changeView: this.handleChangeLink,
             closeMenu: this.props.statMenu,
-            addButton: true
+            addButton: this.props.toogleAddClient
           }));
         } // ALL
 
@@ -12668,7 +14283,8 @@ var Navigation = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/React.createElement("img", {
         src: this.props.myUserData.avatar != 'default' ? this.props.myUserData.avatar : _resources_userDefault_svg__WEBPACK_IMPORTED_MODULE_4___default.a
       })), /*#__PURE__*/React.createElement("h2", null, this.props.myUserData.display_name)), /*#__PURE__*/React.createElement("ul", null, showLink), /*#__PURE__*/React.createElement(_components_BackSite__WEBPACK_IMPORTED_MODULE_11__["default"], null), /*#__PURE__*/React.createElement(_Loader__WEBPACK_IMPORTED_MODULE_12__["default"], {
-        show: this.state.showLoader
+        show: this.props.loaderStat.statut,
+        message: this.props.loaderStat.message
       }), ";");
     }
   }]);
@@ -12680,13 +14296,26 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     getPersonalData: function getPersonalData() {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getPersonalData"])());
+    },
+    toogleLoader: function toogleLoader(statut, message) {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["toogleLoader"])(statut, message));
+    },
+    toogleAddClient: function toogleAddClient() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["toogleAddClient"])());
+    },
+    toogleAddChasseur: function toogleAddChasseur() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["toogleAddChasseur"])());
+    },
+    toogleAddPropriete: function toogleAddPropriete() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["toogleAddPropriete"])());
     }
   };
 };
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    myUserData: state.general.myData.data
+    myUserData: state.general.myData.data,
+    loaderStat: state.general.loader
   };
 };
 
@@ -12853,7 +14482,7 @@ function Table(props) {
 /*!********************************!*\
   !*** ./src/constants/index.js ***!
   \********************************/
-/*! exports provided: GET_PROPRIETE, ADD_PROPRIETE, UPDATE_PROPRIETE, DELETE_PROPRIETE, GET_DOSSIER, ADD_DOSSIER, UPDATE_DOSSIER, DELETE_DOSSIER, GET_USER, ADD_USER, UPDATE_USER, DELETE_USER, GET_MY_DATA, GET_LOGOUT, GET_ADRESSE_SITE */
+/*! exports provided: GET_PROPRIETE, ADD_PROPRIETE, UPDATE_PROPRIETE, DELETE_PROPRIETE, GET_DOSSIER, ADD_DOSSIER, UPDATE_DOSSIER, DELETE_DOSSIER, GET_USER, ADD_USER, UPDATE_USER, DELETE_USER, GET_MY_DATA, GET_LOGOUT, GET_ADRESSE_SITE, TOOGLE_LOADER, TOOGLE_CLIENT_ADD_MODAL, TOOGLE_CHASSEUR_ADD_MODAL, TOOGLE_PROPRIETE_ADD_MODAL, TOOGLE_USER_MODAL, TOOGLE_DOSSIER_MODAL, TOOGLE_PROPRIETE_MODAL */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12873,6 +14502,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_MY_DATA", function() { return GET_MY_DATA; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_LOGOUT", function() { return GET_LOGOUT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ADRESSE_SITE", function() { return GET_ADRESSE_SITE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOOGLE_LOADER", function() { return TOOGLE_LOADER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOOGLE_CLIENT_ADD_MODAL", function() { return TOOGLE_CLIENT_ADD_MODAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOOGLE_CHASSEUR_ADD_MODAL", function() { return TOOGLE_CHASSEUR_ADD_MODAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOOGLE_PROPRIETE_ADD_MODAL", function() { return TOOGLE_PROPRIETE_ADD_MODAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOOGLE_USER_MODAL", function() { return TOOGLE_USER_MODAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOOGLE_DOSSIER_MODAL", function() { return TOOGLE_DOSSIER_MODAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOOGLE_PROPRIETE_MODAL", function() { return TOOGLE_PROPRIETE_MODAL; });
 var GET_PROPRIETE = "GET_PROPRIETE";
 var ADD_PROPRIETE = "ADD_PROPRIETE";
 var UPDATE_PROPRIETE = "UPDATE_PROPRIETE";
@@ -12888,6 +14524,13 @@ var DELETE_USER = "DELETE_USER";
 var GET_MY_DATA = "GET_MY_DATA";
 var GET_LOGOUT = "GET_LOGOUT";
 var GET_ADRESSE_SITE = "GET_ADRESSE_SITE";
+var TOOGLE_LOADER = "TOOGLE_LOADER";
+var TOOGLE_CLIENT_ADD_MODAL = "TOOGLE_CLIENT_ADD_MODAL";
+var TOOGLE_CHASSEUR_ADD_MODAL = "TOOGLE_CHASSEUR_ADD_MODAL";
+var TOOGLE_PROPRIETE_ADD_MODAL = "TOOGLE_PROPRIETE_ADD_MODAL";
+var TOOGLE_USER_MODAL = "TOOGLE_USER_MODAL";
+var TOOGLE_DOSSIER_MODAL = "TOOGLE_DOSSIER_MODAL";
+var TOOGLE_PROPRIETE_MODAL = "TOOGLE_PROPRIETE_MODAL";
 
 /***/ }),
 
@@ -13026,6 +14669,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var initialState = {
+  userModal: false,
+  dossierModal: false,
+  proprieteModal: false,
+  addClientModal: false,
+  addChasseurModal: false,
+  addProprieteModal: false,
+  loader: {
+    statut: false,
+    message: 'Veuillez patienter ...'
+  },
   logOut: '#logout',
   homeUrl: '#homeUrl',
   myData: {
@@ -13057,6 +14710,61 @@ function manageGeneral() {
     case _constants__WEBPACK_IMPORTED_MODULE_0__["GET_ADRESSE_SITE"]:
       newState = _objectSpread(_objectSpread({}, state), {}, {
         homeUrl: action.payload
+      });
+      return newState || state;
+
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["TOOGLE_LOADER"]:
+      if (action.payload.statut == 'null') {
+        newState = _objectSpread(_objectSpread({}, state), {}, {
+          loader: {
+            statut: !state.loader.statut,
+            message: action.payload.message
+          }
+        });
+      } else {
+        newState = _objectSpread(_objectSpread({}, state), {}, {
+          loader: {
+            statut: action.payload.statut,
+            message: action.payload.message
+          }
+        });
+      }
+
+      return newState || state;
+
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["TOOGLE_CLIENT_ADD_MODAL"]:
+      newState = _objectSpread(_objectSpread({}, state), {}, {
+        addClientModal: !state.addClientModal
+      });
+      return newState || state;
+
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["TOOGLE_CHASSEUR_ADD_MODAL"]:
+      newState = _objectSpread(_objectSpread({}, state), {}, {
+        addChasseurModal: !state.addChasseurModal
+      });
+      return newState || state;
+
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["TOOGLE_PROPRIETE_ADD_MODAL"]:
+      newState = _objectSpread(_objectSpread({}, state), {}, {
+        addProprieteModal: !state.addProprieteModal
+      });
+      return newState || state;
+
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["TOOGLE_USER_MODAL"]:
+      newState = _objectSpread(_objectSpread({}, state), {}, {
+        userModal: !state.userModal
+      });
+      return newState || state;
+
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["TOOGLE_DOSSIER_MODAL"]:
+      newState = _objectSpread(_objectSpread({}, state), {}, {
+        dossierModal: !state.dossierModal
+      });
+      return newState || state;
+
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["TOOGLE_PROPRIETE_MODAL"]:
+      newState = _objectSpread(_objectSpread({}, state), {}, {
+        proprieteModal: !state.proprieteModal
       });
       return newState || state;
 
@@ -13368,7 +15076,7 @@ var composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || redux__WEB
 /*!***********************************************!*\
   !*** ./src/theme/design/componentsDesign.jsx ***!
   \***********************************************/
-/*! exports provided: StyledButton, TitleSection, Text, Inline */
+/*! exports provided: StyledButton, TitleSection, Text, Inline, RowInput, TitleForm */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13377,7 +15085,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TitleSection", function() { return TitleSection; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Text", function() { return Text; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Inline", function() { return Inline; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RowInput", function() { return RowInput; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TitleForm", function() { return TitleForm; });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject15() {
+  var data = _taggedTemplateLiteral(["\n    font-family: ", ";\n    font-size: 20px;\n    position: relative;\n    padding: 15px 0;\n\n    &:after {\n        content: \"\";\n        position: absolute;\n        width: 90px;\n        height: 3px;\n        border-radius: 30px;\n        bottom: 0;\n        left: 0;\n        background: ", ";\n    }\n"]);
+
+  _templateObject15 = function _templateObject15() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject14() {
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n"]);
+
+  _templateObject14 = function _templateObject14() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject13() {
   var data = _taggedTemplateLiteral(["\n    display: inline-block;\n    margin-right: ", ";\n"]);
 
@@ -13499,7 +15229,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n    cursor: pointer;    \n    display: inline-block;\n    position: relative;\n    text-decoration: none;\n    font-size: 16px;\n    background: ", ";\n    color: ", ";\n    padding: 10px 20px;\n    margin: 10px;\n    border-radius: 100px;\n    border: none;\n    outline: none;\n    font-weight: ", ";\n    box-shadow: ", ";\n    transition: transform 0.3s,\n                background 0.3s,\n                color 0.3s,\n                opacity 0.3s;\n\n    &:hover {\n        transform: scale(1.1);\n        background-color: ", ";\n        color: ", ";\n    }\n\n    &:active {\n        transform: scale(0.95);\n        background-color: darken($color: ", ", $amount: 10);\n    }\n\n    ", ";\n\n    ", ";\n\n    ", ";\n\n    ", ";\n\n    ", ";\n\n    ", ";\n"]);
+  var data = _taggedTemplateLiteral(["\n    cursor: pointer;    \n    display: inline-block;\n    position: relative;\n    text-decoration: none;\n    font-size: 16px;\n    background: ", ";\n    color: ", ";\n    padding: 10px 20px;\n    margin: 10px;\n    border-radius: 100px;\n    border: none;\n    outline: none;\n    font-weight: ", ";\n    box-shadow: ", ";\n    transition: transform 0.3s,\n                background 0.3s,\n                color 0.3s,\n                opacity 0.3s;\n\n    &:hover {\n        transform: scale(1.1);\n        background-color: ", ";\n        color: ", ";\n    }\n\n    &:active {\n        transform: scale(0.95) !important;\n        background-color: ", ";\n    }\n\n    ", ";\n\n    ", ";\n\n    ", ";\n\n    ", ";\n\n    ", ";\n\n    ", ";\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -13524,7 +15254,7 @@ var StyledButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].a(_
 }, function (props) {
   return props.theme.white;
 }, function (props) {
-  return props.theme.orange;
+  return props.theme.red;
 }, function (props) {
   return props.light && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject2(), function (props) {
     return props.theme.light;
@@ -13597,6 +15327,12 @@ var Text = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].p(_template
 var Inline = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject13(), function (props) {
   return props.marginRight ? props.marginRight : 'initiale';
 });
+var RowInput = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject14());
+var TitleForm = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].h3(_templateObject15(), function (props) {
+  return props.theme.montserrat;
+}, function (props) {
+  return props.theme.black;
+});
 
 /***/ }),
 
@@ -13609,10 +15345,12 @@ var Inline = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_temp
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AppContainer; });
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-/* harmony import */ var _components_LogOutButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/LogOutButton */ "./src/components/LogOutButton.jsx");
-/* harmony import */ var _components_Navigation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/Navigation */ "./src/components/Navigation.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var _components_LogOutButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/LogOutButton */ "./src/components/LogOutButton.jsx");
+/* harmony import */ var _components_Navigation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/Navigation */ "./src/components/Navigation.jsx");
+/* harmony import */ var _Modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Modal */ "./src/theme/layout/Modal.jsx");
+/* harmony import */ var _views_AddPropriete__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../views/AddPropriete */ "./src/views/AddPropriete.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13701,22 +15439,25 @@ var Component = wp.element.Component;
 
 
 
-var BarreTop = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject(), function (props) {
+
+
+
+var BarreTop = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject(), function (props) {
   return props.theme.white;
 }, function (props) {
   return props.theme.shadows;
 });
-var ContainerTitle = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject2());
-var MenuBurger = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3(), function (props) {
+var ContainerTitle = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject2());
+var MenuBurger = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject3(), function (props) {
   return props.theme.black;
 });
-var Title = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].h1(_templateObject4(), function (props) {
+var Title = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].h1(_templateObject4(), function (props) {
   return props.theme.regular;
 }, function (props) {
   return props.theme.light;
 });
-var Main = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].main(_templateObject5(), function (props) {
-  return !props.closeMenu && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject6());
+var Main = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].main(_templateObject5(), function (props) {
+  return !props.closeMenu && Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["css"])(_templateObject6());
 });
 
 var AppContainer = /*#__PURE__*/function (_Component) {
@@ -13747,9 +15488,27 @@ var AppContainer = /*#__PURE__*/function (_Component) {
             openMenu: !_this2.state.openMenu
           });
         }
-      }, /*#__PURE__*/React.createElement("div", null), /*#__PURE__*/React.createElement("div", null), /*#__PURE__*/React.createElement("div", null)), /*#__PURE__*/React.createElement(Title, null, "Projet", /*#__PURE__*/React.createElement("span", null, "locatif"))), /*#__PURE__*/React.createElement(_components_LogOutButton__WEBPACK_IMPORTED_MODULE_1__["default"], null)), /*#__PURE__*/React.createElement(_components_Navigation__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }, /*#__PURE__*/React.createElement("div", null), /*#__PURE__*/React.createElement("div", null), /*#__PURE__*/React.createElement("div", null)), /*#__PURE__*/React.createElement(Title, null, "Projet", /*#__PURE__*/React.createElement("span", null, "locatif"))), /*#__PURE__*/React.createElement(_components_LogOutButton__WEBPACK_IMPORTED_MODULE_2__["default"], null)), /*#__PURE__*/React.createElement(_components_Navigation__WEBPACK_IMPORTED_MODULE_3__["default"], {
         statMenu: this.state.openMenu
-      }), /*#__PURE__*/React.createElement(Main, {
+      }), "/** MODAL ADD **/", /*#__PURE__*/React.createElement(_Modal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        type: "addPropriete",
+        show: this.props.showModalAddPropriete
+      }, /*#__PURE__*/React.createElement(_views_AddPropriete__WEBPACK_IMPORTED_MODULE_5__["default"], null)), /*#__PURE__*/React.createElement(_Modal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        type: "addChasseur",
+        show: this.props.showModalAddChasseur
+      }), /*#__PURE__*/React.createElement(_Modal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        type: "addClient",
+        show: this.props.showModalAddClient
+      }, /*#__PURE__*/React.createElement("p", null, "ADD Client")), "/** MODAL INFOBOX **/", /*#__PURE__*/React.createElement(_Modal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        type: "userModal",
+        show: this.props.showModalUser
+      }, /*#__PURE__*/React.createElement("p", null, "User")), /*#__PURE__*/React.createElement(_Modal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        type: "dossierModal",
+        show: this.props.showModalDossier
+      }, /*#__PURE__*/React.createElement("p", null, "Dossier")), /*#__PURE__*/React.createElement(_Modal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        type: "proprieteModal",
+        show: this.props.showModalPropriete
+      }, /*#__PURE__*/React.createElement("p", null, "propriete")), /*#__PURE__*/React.createElement(Main, {
         closeMenu: this.state.openMenu
       }, this.props.children));
     }
@@ -13758,7 +15517,19 @@ var AppContainer = /*#__PURE__*/function (_Component) {
   return AppContainer;
 }(Component);
 
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    myUserData: state.general.myData.data,
+    showModalAddPropriete: state.general.addProprieteModal,
+    showModalAddChasseur: state.general.addChasseurModal,
+    showModalAddClient: state.general.addClientModal,
+    showModalPropriete: state.general.proprieteModal,
+    showModalDossier: state.general.dossierModal,
+    showModalUser: state.general.userModal
+  };
+};
 
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps)(AppContainer));
 
 /***/ }),
 
@@ -13771,32 +15542,21 @@ var AppContainer = /*#__PURE__*/function (_Component) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Modal; });
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions */ "./src/actions/index.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject4() {
+  var data = _taggedTemplateLiteral(["\n    position: absolute;\n    top: 20px;\n    right: 20px;\n\tcursor: pointer;\n\tz-index: 2;\n\tmin-width: 24px;\n\twidth: 24px;\n\theight: 24px;\n\tmargin-left: 15px;\n\tborder-radius: 25px;\n\tdisplay: flex;\n    justify-content: center;\n    align-items: center;\n\tbackground: ", ";\n    box-shadow: ", ";\n    transform: rotate(45deg);\n\ttransition: transform 0.3s, opacity 0.8s;\n\n\t&:before,\n\t&:after {\n\t\tcontent: '';\n\t\tposition: absolute;\n\t\twidth: 14px;\n\t\theight: 2px;\n\t\tborder-radius: 30px;\n\t\tbackground: ", ";\n\t}\n\n\t&:after {\n\t\ttransform: rotate(90deg);\n\t}\n\n\t&:hover {\n        transform: scale(1.1) rotate(45deg);\n\t}\n\n\t&:active {\n        transform: scale(0.95) rotate(45deg);\n\t}\n"]);
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+  return data;
+}
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n    background: ", ";\n    box-shadow: ", ";\n    border-radius: 30px;\n"]);
+  var data = _taggedTemplateLiteral(["\n    max-width: 80vw;\n    max-height: 80vh;\n    overflow: scroll;\n    width: 65%;\n    min-width: 200px;\n    min-height: 200px;\n    background: ", ";\n    box-shadow: ", ";\n    border-radius: 30px;\n    padding: 45px;\n    position: relative;\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -13827,53 +15587,83 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Component = wp.element.Component;
 
-var ContainerModal = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject(), function (props) {
-  return props.open && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject2());
+
+
+var ContainerModal = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject(), function (props) {
+  return props.open && Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["css"])(_templateObject2());
 });
-var StyledModal = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3(), function (props) {
+var StyledModal = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject3(), function (props) {
   return props.theme.white;
 }, function (props) {
   return props.theme.shadows;
 });
+var CloseButton = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject4(), function (props) {
+  return props.theme.black;
+}, function (props) {
+  return props.theme.shadows;
+}, function (props) {
+  return props.theme.white;
+});
 
-var Modal = /*#__PURE__*/function (_Component) {
-  _inherits(Modal, _Component);
+function Modal(props) {
+  var closeButton = null;
 
-  var _super = _createSuper(Modal);
-
-  function Modal(props) {
-    var _this;
-
-    _classCallCheck(this, Modal);
-
-    _this = _super.call(this, props);
-    _this.state = {
-      openStatut: false
-    };
-    var newStat = !_this.state.openStatut;
-
-    _this.setState({
-      openStatut: newStat
+  if (props.type == 'addPropriete') {
+    closeButton = /*#__PURE__*/React.createElement(CloseButton, {
+      onClick: props.toogleAddPropriete
     });
-
-    return _this;
+  } else if (props.type == 'addChasseur') {
+    closeButton = /*#__PURE__*/React.createElement(CloseButton, {
+      onClick: props.toogleAddChasseur
+    });
+  } else if (props.type == 'addClient') {
+    closeButton = /*#__PURE__*/React.createElement(CloseButton, {
+      onClick: props.toogleAddClient
+    });
+  } else if (props.type == 'userModal') {
+    closeButton = /*#__PURE__*/React.createElement(CloseButton, {
+      onClick: props.toogleUserModal
+    });
+  } else if (props.type == 'dossierModal') {
+    closeButton = /*#__PURE__*/React.createElement(CloseButton, {
+      onClick: props.toogleDossierModal
+    });
+  } else if (props.type == 'proprieteModal') {
+    closeButton = /*#__PURE__*/React.createElement(CloseButton, {
+      onClick: props.toogleProprieteModal
+    });
   }
 
-  _createClass(Modal, [{
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/React.createElement(ContainerModal, {
-        open: this.state.openStatut
-      }, /*#__PURE__*/React.createElement(StyledModal, null, this.props.children));
+  return /*#__PURE__*/React.createElement(ContainerModal, {
+    open: props.show
+  }, /*#__PURE__*/React.createElement(StyledModal, null, closeButton, props.children));
+}
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    toogleAddClient: function toogleAddClient() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["toogleAddClient"])());
+    },
+    toogleAddChasseur: function toogleAddChasseur() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["toogleAddChasseur"])());
+    },
+    toogleAddPropriete: function toogleAddPropriete() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["toogleAddPropriete"])());
+    },
+    toogleUserModal: function toogleUserModal() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["toogleUserModal"])());
+    },
+    toogleDossierModal: function toogleDossierModal() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["toogleDossierModal"])());
+    },
+    toogleProprieteModal: function toogleProprieteModal() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["toogleProprieteModal"])());
     }
-  }]);
+  };
+};
 
-  return Modal;
-}(Component);
-
-
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(null, mapDispatchToProps)(Modal));
 
 /***/ }),
 
@@ -13995,6 +15785,1488 @@ var themeVariable = {
 
 /***/ }),
 
+/***/ "./src/views/AddPropriete.jsx":
+/*!************************************!*\
+  !*** ./src/views/AddPropriete.jsx ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_Input__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Input */ "./src/components/Input.jsx");
+/* harmony import */ var _theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../theme/design/componentsDesign */ "./src/theme/design/componentsDesign.jsx");
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function (props) {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Ajouter une Propri\xE9t\xE9"), /*#__PURE__*/React.createElement("form", {
+    enctype: "multipart/form-data"
+  }, /*#__PURE__*/React.createElement("input", {
+    id: "author",
+    type: "hidden",
+    value: ""
+  }), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "D\xE9tails"), /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "titre"
+  }, "Titre"), /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "text",
+    "class": "form-control",
+    id: "titre",
+    name: "titre"
+  })), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    type: "text",
+    id: "titre",
+    label: "Titre",
+    required: true
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "form-group "
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "custom-file"
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "file",
+    "class": "custom-file-input",
+    id: "filesPhotos",
+    name: "filesPhotos",
+    multiple: "true",
+    value: "",
+    accept: ".png, .jpg, .jpeg"
+  }), /*#__PURE__*/React.createElement("label", {
+    "class": "custom-file-label",
+    id: "labelPhotos",
+    "for": "filesPhotos"
+  }, "Ajouter des photos"))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "description"
+  }, "Courte description"), /*#__PURE__*/React.createElement("textarea", {
+    "class": "form-control",
+    id: "description"
+  })), /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "address"
+  }, "Adresse postale"), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    "class": "form-control",
+    id: "address",
+    name: "address"
+  })), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "ville"
+  }, "Ville"), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    "class": "form-control",
+    id: "ville",
+    name: "ville"
+  }))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "zip"
+  }, "ZIP / Code postal"), /*#__PURE__*/React.createElement("input", {
+    type: "number",
+    step: ".01",
+    min: "0",
+    "class": "form-control",
+    id: "zip",
+    name: "zip"
+  }))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "type"
+  }, "Type"), /*#__PURE__*/React.createElement("select", {
+    required: true,
+    id: "type",
+    "class": "form-control"
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "",
+    selected: true,
+    disabled: true,
+    hidden: true
+  }, "Choisir..."), /*#__PURE__*/React.createElement("option", null, "Appartement"), /*#__PURE__*/React.createElement("option", null, "Maison"), /*#__PURE__*/React.createElement("option", null, "Autre"))))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "anne"
+  }, "Ann\xE9e"), /*#__PURE__*/React.createElement("input", {
+    type: "number",
+    step: ".01",
+    min: "0",
+    "class": "form-control",
+    id: "anne",
+    name: "anne"
+  }))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "superficie"
+  }, "Superficie"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "1",
+    "class": "form-control",
+    id: "superficie",
+    name: "superficie"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "m\xB2"))))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "superficieH"
+  }, "Superficie Habitable"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "number",
+    step: ".01",
+    min: "1",
+    "class": "form-control",
+    id: "superficieH",
+    name: "superficieH"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "m\xB2")))))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Agencement int\xE9rieur"), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "numbPieces"
+  }, "Nombre de Pi\xE8ce(s)"), /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "1",
+    value: "1",
+    "class": "form-control",
+    id: "numbPieces",
+    name: "numbPieces"
+  }))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "numbChamb"
+  }, "Nombre de chambre"), /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "numbChamb",
+    name: "numbChamb"
+  }))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "numbBain"
+  }, "Nombre de salle(s) de bain(s)"), /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "numbBain",
+    name: "numbBain"
+  })))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "numbWC"
+  }, "Nombre de WC"), /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "numbWC",
+    name: "numbWC"
+  }))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "numbCellier"
+  }, "Nombre de Cellier(s)"), /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "numbCellier",
+    name: "numbCellier"
+  }))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "numbSallBuanderie"
+  }, "Nombre de Buanderie(s)"), /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "numbSallBuanderie",
+    name: "numbSallBuanderie"
+  })))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "numbNiveau"
+  }, "Niveaux"), /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "numbNiveau",
+    name: "numbNiveau"
+  }))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", null, "Cuisine :"), /*#__PURE__*/React.createElement("div", {
+    "class": "custom-control custom-checkbox"
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "checkbox",
+    "class": "custom-control-input",
+    id: "cuisineEquip"
+  }), ">", /*#__PURE__*/React.createElement("label", {
+    "class": "custom-control-label",
+    "for": "cuisineEquip"
+  }, "\xC9quip\xE9e")), /*#__PURE__*/React.createElement("div", {
+    "class": "custom-control custom-checkbox"
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "checkbox",
+    "class": "custom-control-input",
+    id: "cuisineSep"
+  }), /*#__PURE__*/React.createElement("label", {
+    "class": "custom-control-label",
+    "for": "cuisineSep"
+  }, "Separ\xE9e")))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", null, "Isolation :"), /*#__PURE__*/React.createElement("div", {
+    "class": "custom-control custom-checkbox"
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "checkbox",
+    "class": "custom-control-input",
+    id: "isolation"
+  }), /*#__PURE__*/React.createElement("label", {
+    "class": "custom-control-label",
+    "for": "isolation"
+  }, "Oui"))))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Copropri\xE9t\xE9"), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "nombLots"
+  }, "Nombre de lots"), /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "nombLots",
+    name: "nombLots"
+  }))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "dernierAssemble"
+  }, "Derni\xE8re assembl\xE9e"), /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "dernierAssemble",
+    name: "dernierAssemble"
+  })))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "syndic"
+  }, "Syndic"), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    "class": "form-control",
+    id: "syndic",
+    name: "syndic"
+  }))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "quotePartMensuelle"
+  }, "Quote part mensuelle"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "quotePartMensuelle",
+    name: "quotePartMensuelle"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "detailsCharges"
+  }, "D\xE9tails charges"), /*#__PURE__*/React.createElement("textarea", {
+    "class": "form-control",
+    id: "detailsCharges",
+    placeholder: "Exemple: Eau, EDF communs, Gardien, Chauffage, Nettoyage, Syndic"
+  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "\xC9quipements"), /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("textarea", {
+    "class": "form-control",
+    id: "detailsEquips",
+    placeholder: "Exemple: Interphone, C\xE2ble, Double vitrage"
+  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Chauffage"), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "type_chauff"
+  }, "Type"), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    "class": "form-control",
+    id: "type_chauff",
+    name: "type_chauff"
+  }))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "mode_chauff"
+  }, "Mode"), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    "class": "form-control",
+    id: "mode_chauff",
+    Modename: "mode_chauff"
+  })))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "energie_chauff"
+  }, "\xC9nergie"), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    "class": "form-control",
+    id: "energie_chauff",
+    name: "energie_chauff"
+  }))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "eauChaude_chauff"
+  }, "Eau chaude"), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    "class": "form-control",
+    id: "eauChaude_chauff",
+    name: "eauChaude_chauff",
+    placeholder: "Chaudi\xE8re"
+  })))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Diagnostics"), /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("textarea", {
+    "class": "form-control",
+    id: "diagnostics"
+  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Agencement ext\xE9rieur"), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "cave"
+  }, "Cave(s)"), /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "cave",
+    name: "cave"
+  }))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "terrase"
+  }, "Terrasse(s)"), /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "terrase",
+    name: "terrase"
+  })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Travaux"), /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "autretravaux"
+  }, "Autres"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "autretravaux",
+    name: "autretravaux"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC"))))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Frais d'acquisition"), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "prixBien"
+  }, "Prix du bien"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    "class": "form-control",
+    id: "prixBien",
+    name: "prixBien"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "fraisAgence"
+  }, "Frais d'agence"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "fraisAgence",
+    name: "fraisAgence"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "fraisNotaire"
+  }, "Frais de notaire"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "fraisNotaire",
+    name: "fraisNotaire"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "fraisTravaux"
+  }, "Estimation Travaux"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "fraisTravaux",
+    name: "fraisTravaux"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "fraisEquipMob"
+  }, "Mobilier / Equipement"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "fraisEquipMob",
+    name: "fraisEquipMob"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "fraisCom"
+  }, "Commission chasseur"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "fraisCom",
+    name: "fraisCom"
+  }), /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "hidden",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "fraisCom",
+    name: "fraisCom"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC"))))))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "projetGlobal"
+  }, "Projet Global (Frais d'acquisition)"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "projetGlobal",
+    name: "projetGlobal",
+    readonly: true,
+    disabled: true
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC")))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "fraisBUDGET"
+  }, "BUDGET"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "fraisBUDGET",
+    name: "fraisBUDGET",
+    readonly: true,
+    disabled: true
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC")))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Charges locatif"), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4 label-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", null, "Charges copropri\xE9t\xE9"))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "chargesCourantesM"
+  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    "class": "form-control",
+    id: "chargesCourantesM",
+    name: "chargesCourantesM"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "chargesCourantesA"
+  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "chargesCourantesA",
+    name: "chargesCourantesA"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4 label-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", null, "Taxe fonci\xE8re"))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "taxeFonciereM"
+  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "taxeFonciereM",
+    name: "taxeFonciereM"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "taxeFonciereA"
+  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "taxeFonciereA",
+    name: "taxeFonciereA"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4 label-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", null, "Assurance PNO"))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "assurancePNOM"
+  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "assurancePNOM",
+    name: "assurancePNOM"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "assurancePNOA"
+  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "assurancePNOA",
+    name: "assurancePNOA"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4 label-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", null, "Assurances locatives"))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "assurancesLocativesM"
+  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "assurancesLocativesM",
+    name: "assurancesLocativesM"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "assurancesLocativesA"
+  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "assurancesLocativesA",
+    name: "assurancesLocativesA"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4 label-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", null, "Gestion locative"))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "gestionLocativeM"
+  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "gestionLocativeM",
+    name: "gestionLocativeM"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "gestionLocativeA"
+  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "gestionLocativeA",
+    name: "gestionLocativeA"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4 label-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", null, "Frais divers"))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "fraisDiversM"
+  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "fraisDiversM",
+    name: "fraisDiversM"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "fraisDiversA"
+  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "fraisDiversA",
+    name: "fraisDiversA"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4 label-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", null, "Eau"))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "eauChargeM"
+  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "eauChargeM",
+    name: "eauChargeM"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "eauChargeA"
+  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "eauChargeA",
+    name: "eauChargeA"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4 label-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", null, "\xC9lectricit\xE9"))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "electriciteM"
+  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "electriciteM",
+    name: "electriciteM"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "electriciteA"
+  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "electriciteA",
+    name: "electriciteA"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4 label-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", null, "Forfait internet"))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "forfaitInternetM"
+  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "forfaitInternetM",
+    name: "forfaitInternetM"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "forfaitInternetA"
+  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "forfaitInternetA",
+    name: "forfaitInternetA"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row mt-5"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4 label-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", null, "TOTAL"))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "totalM"
+  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "totalM",
+    name: "totalM",
+    readonly: true,
+    disabled: true
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "totalA"
+  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "totalA",
+    name: "totalA",
+    readonly: true,
+    disabled: true
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC")))))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Revenus locatif"), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4 label-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", null, "Loyer pr\xE9visionnel"))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "loyerPrevisionnelM"
+  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    "class": "form-control",
+    id: "loyerPrevisionnelM",
+    name: "loyerPrevisionnelM"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "loyerPrevisionnelA"
+  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "loyerPrevisionnelA",
+    name: "loyerPrevisionnelA",
+    readonly: true,
+    disabled: true
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4 label-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", null, "Charges r\xE9cup\xE9rables"))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "chargesRecuperablesM"
+  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "chargesRecuperablesM",
+    name: "chargesRecuperablesM"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "chargesRecuperablesA"
+  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "chargesRecuperablesA",
+    name: "chargesRecuperablesA",
+    readonly: true,
+    disabled: true
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "vacanceLocative"
+  }, "Vacance locative %"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "vacanceLocative",
+    name: "vacanceLocative"
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "%")))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4 label-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", null, "TOTAL"))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "totalRM"
+  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "totalRM",
+    name: "totalRM",
+    readonly: true,
+    disabled: true
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "totalRA"
+  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "totalRA",
+    name: "totalRA",
+    readonly: true,
+    disabled: true
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4 label-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", null, "Solde"))), /*#__PURE__*/React.createElement("div", {
+    "class": "offset-lg-4 col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "soldeRA",
+    name: "soldeRA",
+    readonly: true,
+    disabled: true
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC")))))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Vue synth\xE9tique"), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4 label-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", null, "Rentabilit\xE9"))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "RentabiliteB"
+  }, "Brut"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "RentabiliteB",
+    name: "RentabiliteB",
+    readonly: true,
+    disabled: true
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "%"))))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "RentabiliteN"
+  }, "Net"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "RentabiliteN",
+    name: "RentabiliteN",
+    readonly: true,
+    disabled: true
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "%")))))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-4 label-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", null, "Cashflow mensuel"))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-lg-8"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "cashflowMensuelN"
+  }, "Net"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control",
+    id: "cashflowMensuelN",
+    name: "cashflowMensuelN",
+    readonly: true,
+    disabled: true
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
+    "class": "form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    "for": "prixAuM"
+  }, "Prix au m\xB2"), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    required: true,
+    type: "number",
+    step: ".01",
+    min: "0",
+    value: "0",
+    "class": "form-control devise",
+    id: "prixAuM",
+    name: "prixAuM",
+    readonly: true,
+    disabled: true
+  }), /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-append"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "input-group-text"
+  }, "\u20AC")))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "R\xE9sum\xE9"), /*#__PURE__*/React.createElement("div", {
+    "class": "row resume"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "col-md-4"
+  }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("b", null, "TOTAL Revenus"), " ", /*#__PURE__*/React.createElement("span", {
+    id: "totalRResume"
+  }, "0"))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-md-4"
+  }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("b", null, "TOTAL charge"), " ", /*#__PURE__*/React.createElement("span", {
+    id: "totalCResume"
+  }, "0"))), /*#__PURE__*/React.createElement("div", {
+    "class": "col-md-4"
+  }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("b", null, "Prix au m\xB2"), " ", /*#__PURE__*/React.createElement("span", {
+    id: "totalPrixMResume"
+  }, "0")))), /*#__PURE__*/React.createElement("p", {
+    "class": "error"
+  }, "Une erreur est survenue, veuillez ressayer !"), /*#__PURE__*/React.createElement("button", {
+    type: "submit",
+    "class": "btn btn-primary submit"
+  }, "Enregistrer")));
+});
+
+/***/ }),
+
 /***/ "./src/views/Board.jsx":
 /*!*****************************!*\
   !*** ./src/views/Board.jsx ***!
@@ -14005,14 +17277,15 @@ var themeVariable = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-/* harmony import */ var _lib_functions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/functions */ "./src/lib/functions.js");
-/* harmony import */ var _theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../theme/design/componentsDesign */ "./src/theme/design/componentsDesign.jsx");
-/* harmony import */ var _components_CardStat__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/CardStat */ "./src/components/CardStat.jsx");
-/* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Button */ "./src/components/Button.jsx");
-/* harmony import */ var _resources_pencil_svg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../resources/pencil.svg */ "./src/resources/pencil.svg");
-/* harmony import */ var _resources_pencil_svg__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_resources_pencil_svg__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _theme_layout_Modal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../theme/layout/Modal */ "./src/theme/layout/Modal.jsx");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions */ "./src/actions/index.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var _lib_functions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../lib/functions */ "./src/lib/functions.js");
+/* harmony import */ var _theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../theme/design/componentsDesign */ "./src/theme/design/componentsDesign.jsx");
+/* harmony import */ var _components_CardStat__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/CardStat */ "./src/components/CardStat.jsx");
+/* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Button */ "./src/components/Button.jsx");
+/* harmony import */ var _resources_pencil_svg__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../resources/pencil.svg */ "./src/resources/pencil.svg");
+/* harmony import */ var _resources_pencil_svg__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_resources_pencil_svg__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _theme_layout_Modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../theme/layout/Modal */ "./src/theme/layout/Modal.jsx");
 function _templateObject10() {
   var data = _taggedTemplateLiteral(["\n    min-width: 160px;\n    margin: 0;\n"]);
 
@@ -14123,75 +17396,77 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 
-var FlexDiv = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject(), function (props) {
-  return props.grow && Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["css"])(_templateObject2(), function (props) {
+
+var FlexDiv = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject(), function (props) {
+  return props.grow && Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["css"])(_templateObject2(), function (props) {
     return props.grow != true ? props.grow : 1;
   });
 }, function (props) {
-  return props.width && Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["css"])(_templateObject3(), function (props) {
+  return props.width && Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["css"])(_templateObject3(), function (props) {
     return props.width;
   });
 });
-var HeadDiv = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject4());
-var FlexRow = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject5());
-var CardsContainer = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject6());
-var H2 = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].h2(_templateObject7());
-var BarreContainer = Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])(FlexRow)(_templateObject8());
-var Barre = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject9(), function (props) {
+var HeadDiv = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject4());
+var FlexRow = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject5());
+var CardsContainer = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject6());
+var H2 = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].h2(_templateObject7());
+var BarreContainer = Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["default"])(FlexRow)(_templateObject8());
+var Barre = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject9(), function (props) {
   return props.theme.shadows;
 }, function (props) {
   return props.pourcentage * 100 / props.max;
 }, function (props) {
   return props.theme.orangeRadius;
 });
-var TextBarre = Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_3__["Text"])(_templateObject10());
+var TextBarre = Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["default"])(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Text"])(_templateObject10());
 
 function BarreBonus(props) {
   return /*#__PURE__*/React.createElement(BarreContainer, null, /*#__PURE__*/React.createElement(Barre, {
     pourcentage: props.pourcentage,
     max: props.max
-  }), /*#__PURE__*/React.createElement(TextBarre, null, Object(_lib_functions__WEBPACK_IMPORTED_MODULE_2__["formatPrix"])(props.pourcentage), " \u20AC / ", Object(_lib_functions__WEBPACK_IMPORTED_MODULE_2__["formatPrix"])(props.max), " \u20AC ", /*#__PURE__*/React.createElement("br", null), props.title));
+  }), /*#__PURE__*/React.createElement(TextBarre, null, Object(_lib_functions__WEBPACK_IMPORTED_MODULE_3__["formatPrix"])(props.pourcentage), " \u20AC / ", Object(_lib_functions__WEBPACK_IMPORTED_MODULE_3__["formatPrix"])(props.max), " \u20AC ", /*#__PURE__*/React.createElement("br", null), props.title));
 }
 
 function Board(props) {
-  Object(_lib_functions__WEBPACK_IMPORTED_MODULE_2__["setDocumentTitle"])('Tableau de bord');
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(FlexDiv, null, /*#__PURE__*/React.createElement(HeadDiv, null, /*#__PURE__*/React.createElement(FlexRow, null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_3__["Inline"], {
+  Object(_lib_functions__WEBPACK_IMPORTED_MODULE_3__["setDocumentTitle"])('Tableau de bord');
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(FlexDiv, null, /*#__PURE__*/React.createElement(HeadDiv, null, /*#__PURE__*/React.createElement(FlexRow, null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Inline"], {
     marginRight: "20px"
-  }, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_3__["TitleSection"], null, "Bonjour, ", props.myUserData.first_name ? props.myUserData.first_name : 'Utilisateur')), /*#__PURE__*/React.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["TitleSection"], null, "Bonjour, ", props.myUserData.first_name ? props.myUserData.first_name : 'Utilisateur')), /*#__PURE__*/React.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_6__["default"], {
     small: true,
     light: true,
-    src: _resources_pencil_svg__WEBPACK_IMPORTED_MODULE_6___default.a,
-    iconRight: true
-  }, "Mon compte")), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_3__["Text"], {
+    src: _resources_pencil_svg__WEBPACK_IMPORTED_MODULE_7___default.a,
+    iconRight: true,
+    onClick: props.toogleUserModal
+  }, "Mon compte")), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Text"], {
     light: true
   }, "Vous avez 3 notifications"), /*#__PURE__*/React.createElement(H2, null, "Prochain Bonus"), /*#__PURE__*/React.createElement(BarreBonus, {
     title: "De chiffre d\u2019affaire",
     pourcentage: 70000,
     max: 120000
-  })), /*#__PURE__*/React.createElement(CardsContainer, null, /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  })), /*#__PURE__*/React.createElement(CardsContainer, null, /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_5__["default"], {
     blue: true,
     title: "Nombre de projet en cours",
     value: 12
-  }), /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }), /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_5__["default"], {
     green: true,
     title: "Nombre de projet factur\xE9",
     value: 7
-  }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_3__["TitleSection"], null, "Vos chiffres"), /*#__PURE__*/React.createElement(CardsContainer, null, /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["TitleSection"], null, "Vos chiffres"), /*#__PURE__*/React.createElement(CardsContainer, null, /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_5__["default"], {
     orange: true,
     title: "Total Commission pr\xE9visionnel",
     value: 4000,
     euros: true
-  }), /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }), /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_5__["default"], {
     orange: true,
     title: "Total Chiffre d\u2019affaire ImmoMalin factur\xE9",
     value: 2000,
     euros: true
-  })), /*#__PURE__*/React.createElement(CardsContainer, null, /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  })), /*#__PURE__*/React.createElement(CardsContainer, null, /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_5__["default"], {
     orange: true,
     title: "Total Commission encaiss\xE9",
     value: 4000,
     euros: true
-  }), /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }), /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_5__["default"], {
     orange: true,
     title: "Total Chiffre d\u2019affaire ImmoMalin pr\xE9visionnel",
     value: 2000,
@@ -14205,7 +17480,15 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps)(Board));
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    toogleUserModal: function toogleUserModal() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["toogleUserModal"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(Board));
 
 /***/ }),
 

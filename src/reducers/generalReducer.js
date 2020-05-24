@@ -1,17 +1,36 @@
 import {
     GET_MY_DATA,
     GET_LOGOUT,
-    GET_ADRESSE_SITE
+    GET_ADRESSE_SITE,
+    TOOGLE_LOADER,
+    TOOGLE_CLIENT_ADD_MODAL,
+    TOOGLE_CHASSEUR_ADD_MODAL,
+    TOOGLE_PROPRIETE_ADD_MODAL,
+    TOOGLE_USER_MODAL,
+    TOOGLE_DOSSIER_MODAL,
+    TOOGLE_PROPRIETE_MODAL,
 } from "../constants";
 
 const initialState = {
+    userModal: false,
+    dossierModal: false,
+    proprieteModal: false,
+    addClientModal: false,
+    addChasseurModal: false,
+    addProprieteModal: false,
+    loader: {
+        statut: false,
+        message: 'Veuillez patienter ...'
+    },
     logOut: '#logout',
     homeUrl: '#homeUrl',
-    myData: {data: {
-        avatar: 'default',
-        display_name: 'Utilisateur',
-        role: 'load',
-    }}
+    myData: {
+        data: {
+            avatar: 'default',
+            display_name: 'Utilisateur',
+            role: 'load',
+        }
+    }
 };
 
 export default function manageGeneral(state = initialState, action) {
@@ -38,6 +57,75 @@ export default function manageGeneral(state = initialState, action) {
             newState = {
                 ...state,
                 homeUrl: action.payload
+            }
+
+            return newState || state;
+
+        case TOOGLE_LOADER:
+            if (action.payload.statut == 'null') {
+                newState = {
+                    ...state,
+                    loader: {
+                        statut: !state.loader.statut,
+                        message: action.payload.message
+                    }
+                }
+            } else {
+                newState = {
+                    ...state,
+                    loader: {
+                        statut: action.payload.statut,
+                        message: action.payload.message
+                    }
+                }
+            }
+
+            return newState || state;
+
+        case TOOGLE_CLIENT_ADD_MODAL:
+            newState = {
+                ...state,
+                addClientModal: !state.addClientModal
+            }
+
+            return newState || state;
+
+        case TOOGLE_CHASSEUR_ADD_MODAL:
+            newState = {
+                ...state,
+                addChasseurModal: !state.addChasseurModal
+            }
+
+            return newState || state;
+
+        case TOOGLE_PROPRIETE_ADD_MODAL:
+            newState = {
+                ...state,
+                addProprieteModal: !state.addProprieteModal
+            }
+
+            return newState || state;
+
+        case TOOGLE_USER_MODAL:
+            newState = {
+                ...state,
+                userModal: !state.userModal
+            }
+
+            return newState || state;
+
+        case TOOGLE_DOSSIER_MODAL:
+            newState = {
+                ...state,
+                dossierModal: !state.dossierModal
+            }
+
+            return newState || state;
+
+        case TOOGLE_PROPRIETE_MODAL:
+            newState = {
+                ...state,
+                proprieteModal: !state.proprieteModal
             }
 
             return newState || state;

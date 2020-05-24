@@ -1,8 +1,12 @@
 const { Component } = wp.element;
 
+import { connect } from 'react-redux';
+
 import styled, { css } from 'styled-components';
 import LogOut from "../../components/LogOutButton";
 import Navigation from "../../components/Navigation";
+import Modal from './Modal';
+import AddPropriete from '../../views/AddPropriete';
 
 const BarreTop = styled.div`
     position: fixed;
@@ -77,7 +81,7 @@ const Main = styled.main`
         `};
 `
 
-export default class AppContainer extends Component {
+class AppContainer extends Component {
     constructor(props) {
         super(props);
 
@@ -105,6 +109,34 @@ export default class AppContainer extends Component {
 
                 <Navigation statMenu={this.state.openMenu} />
 
+                /** MODAL ADD **/
+
+                <Modal type='addPropriete' show={this.props.showModalAddPropriete}>
+                    <AddPropriete />
+                </Modal>
+
+                <Modal type='addChasseur' show={this.props.showModalAddChasseur}>
+                    
+                </Modal>
+
+                <Modal type='addClient' show={this.props.showModalAddClient}>
+                    <p>ADD Client</p>
+                </Modal>
+
+                /** MODAL INFOBOX **/
+
+                <Modal type='userModal' show={this.props.showModalUser}>
+                    <p>User</p>
+                </Modal>
+
+                <Modal type='dossierModal' show={this.props.showModalDossier}>
+                    <p>Dossier</p>
+                </Modal>
+
+                <Modal type='proprieteModal' show={this.props.showModalPropriete}>
+                    <p>propriete</p>
+                </Modal>
+
                 <Main closeMenu={this.state.openMenu}>
                     {this.props.children}
                 </Main>
@@ -112,3 +144,19 @@ export default class AppContainer extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return { 
+        myUserData: state.general.myData.data,
+
+        showModalAddPropriete: state.general.addProprieteModal,
+        showModalAddChasseur: state.general.addChasseurModal,
+        showModalAddClient: state.general.addClientModal,
+
+        showModalPropriete: state.general.proprieteModal,
+        showModalDossier: state.general.dossierModal,
+        showModalUser: state.general.userModal,
+    };
+}
+
+export default connect(mapStateToProps)(AppContainer)
