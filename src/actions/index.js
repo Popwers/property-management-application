@@ -23,7 +23,7 @@ import {
     TOOGLE_USER_MODAL,
     TOOGLE_DOSSIER_MODAL,
     TOOGLE_PROPRIETE_MODAL,
-
+    SET_PROPRIETE_ADD_MODAL,
 
 } from "../constants";
 
@@ -195,6 +195,12 @@ export function getPersonalData() {
         dispatch({ type: GET_MY_DATA, payload: { data: responseReq, statut: statutRes } });
     }
 };
+
+/** ADD MODAL **/
+
+export function handleChangeAddProprieteModal(key, data) {
+    return { type: SET_PROPRIETE_ADD_MODAL, payload: { key: key, data: data } };
+}
 
 /***********************************************************/
 

@@ -32,6 +32,13 @@ export const StyledButton = styled.a`
     }
 
     ${props =>
+        props.noMarginLeft &&
+        css`
+            margin-left: 0px;
+        `
+    };
+
+    ${props =>
         props.light &&
         css`
             font-weight: ${props => props.theme.light};
@@ -174,8 +181,34 @@ export const Inline = styled.div`
 `
 
 export const RowInput = styled.div`
+    position: relative;
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-end;
+
+    ${props => 
+        props.dispatch &&
+        css`
+            justify-content: space-between;
+        `}
+
+    ${props => 
+        props.result &&
+        css`
+            margin-top: 40px;
+            color: ${props => props.theme.blue};
+
+            &:before {
+                content: '';
+                position: absolute;
+                width: calc(85% - 90px);
+                height: 1px;
+                top: 0px;
+                background-color: ${props => props.theme.black};
+                opacity: 0.2;
+                border-radius: 5px;
+            }
+        `}
 `
 
 export const TitleForm = styled.h3`
@@ -184,6 +217,8 @@ export const TitleForm = styled.h3`
     font-size: 20px;
     position: relative;
     padding: 15px 0;
+    margin-top: 50px;
+    margin-bottom: 30px;
 
     &:after {
         content: "";
@@ -199,5 +234,11 @@ export const TitleForm = styled.h3`
 
 export const Label = styled.h4`
     font-family: ${props => props.theme.montserrat};
+    font-weight: ${props => props.theme.bold};
     font-size: 15px;
+    min-width: 175px;
+`
+
+export const Form = styled.form`
+    padding: 10px;
 `
