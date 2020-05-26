@@ -13617,8 +13617,68 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _templateObject11() {
+  var data = _taggedTemplateLiteral(["\n    margin-top: 20px;\n    margin-right: 45px;\n"]);
+
+  _templateObject11 = function _templateObject11() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject10() {
+  var data = _taggedTemplateLiteral(["\n            display: inline-block;\n            margin-left: 15px;\n        "]);
+
+  _templateObject10 = function _templateObject10() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject9() {
+  var data = _taggedTemplateLiteral(["\n    font-size: 16px;\n    border: 1px solid #ced4da;\n    width: 100%;\n    margin: 10px 0px;\n    padding: 8px 10px 8px 15px;\n    min-height: 16px;\n    outline: none;\n    border-radius: 30px;\n    display: block;\n    background: ", ";\n    transition: border 0.3s, box-shadow 0.3s;\n\n    &:focus {\n        box-shadow: ", ";\n        border: 1px solid ", ";\n    }\n\n    ", "\n"]);
+
+  _templateObject9 = function _templateObject9() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject8() {
+  var data = _taggedTemplateLiteral(["\n            display: inline-block;\n            margin-left: 15px;\n        "]);
+
+  _templateObject8 = function _templateObject8() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject7() {
+  var data = _taggedTemplateLiteral(["\n    font-size: 16px;\n    border: 1px solid #ced4da;\n    width: 100%;\n    margin: 10px 0px;\n    padding: 8px 10px 8px 15px;\n    min-height: 16px;\n    outline: none;\n    border-radius: 30px;\n    display: block;\n    background: ", ";\n    transition: border 0.3s, box-shadow 0.3s;\n\n    &:focus {\n        box-shadow: ", ";\n        border: 1px solid ", ";\n    }\n\n    ", "\n"]);
+
+  _templateObject7 = function _templateObject7() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject6() {
+  var data = _taggedTemplateLiteral(["\n            display: inline-block;\n            margin-left: 15px;\n        "]);
+
+  _templateObject6 = function _templateObject6() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n\n"]);
+  var data = _taggedTemplateLiteral(["\n    font-size: 16px;\n    border: 1px solid #ced4da;\n    width: 100%;\n    margin: 10px 0px;\n    padding: 8px 10px 8px 15px;\n    min-height: 16px;\n    outline: none;\n    border-radius: 30px;\n    display: block;\n    background: ", ";\n    transition: border 0.3s, box-shadow 0.3s;\n\n    &:focus {\n        box-shadow: ", ";\n        border: 1px solid ", ";\n    }\n\n    ", "\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -13638,7 +13698,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n    ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n    font-size: 16px;\n    border: 1px solid #ced4da;\n    width: 100%;\n    margin: 10px 0px;\n    padding: 8px 10px 8px 15px;\n    min-height: 16px;\n    outline: none;\n    border-radius: 30px;\n    display: block;\n    background: ", ";\n    transition: border 0.3s, box-shadow 0.3s;\n\n    &:focus {\n        box-shadow: ", ";\n        border: 1px solid ", ";\n    }\n\n    ", "\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -13658,7 +13718,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n    ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n    font-size: 16px;\n    padding: 5px;\n    display: block;\n\n    ", "\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -13672,13 +13732,46 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 var Component = wp.element.Component;
 
 
-var StyledInput = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].input(_templateObject(), function (props) {
+var Label = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].label(_templateObject(), function (props) {
   return props.inlineLabel && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject2());
 });
-var StyledNumberFormat = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(react_number_format__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject3(), function (props) {
+var StyledInput = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].input(_templateObject3(), function (props) {
+  return props.theme.white;
+}, function (props) {
+  return props.theme.shadows;
+}, function (props) {
+  return props.theme.blue;
+}, function (props) {
   return props.inlineLabel && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject4());
 });
-var Container = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject5());
+var StyledArea = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].textarea(_templateObject5(), function (props) {
+  return props.theme.white;
+}, function (props) {
+  return props.theme.shadows;
+}, function (props) {
+  return props.theme.blue;
+}, function (props) {
+  return props.inlineLabel && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject6());
+});
+var StyledSelect = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].select(_templateObject7(), function (props) {
+  return props.theme.white;
+}, function (props) {
+  return props.theme.shadows;
+}, function (props) {
+  return props.theme.blue;
+}, function (props) {
+  return props.inlineLabel && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject8());
+});
+var StyledNumberFormat = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(react_number_format__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject9(), function (props) {
+  return props.theme.white;
+}, function (props) {
+  return props.theme.shadows;
+}, function (props) {
+  return props.theme.blue;
+}, function (props) {
+  return props.inlineLabel && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject10());
+});
+var Container = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject11());
 
 var Input = /*#__PURE__*/function (_Component) {
   _inherits(Input, _Component);
@@ -13701,6 +13794,13 @@ var Input = /*#__PURE__*/function (_Component) {
   }
 
   _createClass(Input, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      if (this.props.value != null && this.props.value != '') this.setState({
+        inputValue: this.props.value
+      });
+    }
+  }, {
     key: "handleChange",
     value: function handleChange(event) {
       this.setState({
@@ -13722,49 +13822,85 @@ var Input = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var haveSuffix = null;
+      var haveSuffix = '';
       var input = null;
+      var thousandSeparator = ' ';
+      var decimalSeparator = ',';
 
       if (this.props.euro) {
         haveSuffix = ' €';
       } else if (this.props.pourcent) {
         haveSuffix = ' %';
+      } else if (this.props.suffix) {
+        haveSuffix = ' ' + this.props.suffix;
+      }
+
+      if (this.props.thousandSeparator == 'false') {
+        thousandSeparator = false;
       }
 
       if (this.props.type == 'number') {
         input = /*#__PURE__*/React.createElement(StyledNumberFormat, {
           value: this.state.inputValue,
-          step: this.props.step ? this.props.step : null,
-          min: this.props.min ? this.props.min : null,
+          step: this.props.step ? this.props.step : 1,
+          min: this.props.min ? this.props.min : 0,
           max: this.props.max ? this.props.max : null,
           id: this.props.id,
           name: this.props.id,
           required: this.props.required,
           readonly: this.props.readonly,
           disabled: this.props.disabled,
-          thousandSeparator: " ",
-          decimalSeparator: ",",
+          thousandSeparator: thousandSeparator,
+          decimalSeparator: decimalSeparator,
           allowNegative: false,
           allowLeadingZeros: false,
           suffix: haveSuffix,
+          placeholder: this.props.placeholder,
           onValueChange: this.handleChangeNumber,
           inlineLabel: this.props.inline
         });
+      } else if (this.props.type == 'textearea') {
+        input = /*#__PURE__*/React.createElement(StyledArea, {
+          value: this.state.inputValue,
+          required: this.props.required,
+          id: this.props.id,
+          name: this.props.id,
+          placeholder: this.props.placeholder,
+          onChange: this.handleChange
+        });
+      } else if (this.props.type == 'select') {
+        input = /*#__PURE__*/React.createElement(StyledSelect, {
+          value: this.state.inputValue,
+          required: this.props.required,
+          id: this.props.id,
+          name: this.props.id,
+          onChange: this.handleChange
+        }, /*#__PURE__*/React.createElement("option", {
+          value: "",
+          selected: true,
+          disabled: true,
+          hidden: true
+        }, "Choisir..."), this.props.list.map(function (item) {
+          return /*#__PURE__*/React.createElement("option", null, item);
+        }));
       } else {
         input = /*#__PURE__*/React.createElement(StyledInput, {
           type: this.props.type,
           value: this.state.inputValue,
           id: this.props.id,
           name: this.props.id,
+          multiple: this.props.multiple,
+          accept: this.props.accept,
           required: this.props.required,
           readonly: this.props.readonly,
           disabled: this.props.disabled,
+          placeholder: this.props.placeholder,
           onChange: this.handleChange,
           inlineLabel: this.props.inline
         });
       }
 
-      return /*#__PURE__*/React.createElement("div", null, this.props.label && /*#__PURE__*/React.createElement("label", {
+      return /*#__PURE__*/React.createElement(Container, null, this.props.label && /*#__PURE__*/React.createElement(Label, {
         htmlFor: this.props.id
       }, " ", this.props.label, " "), input);
     }
@@ -15076,7 +15212,7 @@ var composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || redux__WEB
 /*!***********************************************!*\
   !*** ./src/theme/design/componentsDesign.jsx ***!
   \***********************************************/
-/*! exports provided: StyledButton, TitleSection, Text, Inline, RowInput, TitleForm */
+/*! exports provided: StyledButton, TitleSection, Text, Inline, RowInput, TitleForm, Label */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15087,9 +15223,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Inline", function() { return Inline; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RowInput", function() { return RowInput; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TitleForm", function() { return TitleForm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Label", function() { return Label; });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject16() {
+  var data = _taggedTemplateLiteral(["\n    font-family: ", ";\n    font-size: 15px;\n"]);
+
+  _templateObject16 = function _templateObject16() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject15() {
-  var data = _taggedTemplateLiteral(["\n    font-family: ", ";\n    font-size: 20px;\n    position: relative;\n    padding: 15px 0;\n\n    &:after {\n        content: \"\";\n        position: absolute;\n        width: 90px;\n        height: 3px;\n        border-radius: 30px;\n        bottom: 0;\n        left: 0;\n        background: ", ";\n    }\n"]);
+  var data = _taggedTemplateLiteral(["\n    font-family: ", ";\n    font-weight: ", ";\n    font-size: 20px;\n    position: relative;\n    padding: 15px 0;\n\n    &:after {\n        content: \"\";\n        position: absolute;\n        width: 90px;\n        height: 3px;\n        border-radius: 30px;\n        bottom: 0;\n        left: 0;\n        background: ", ";\n    }\n"]);
 
   _templateObject15 = function _templateObject15() {
     return data;
@@ -15099,7 +15246,7 @@ function _templateObject15() {
 }
 
 function _templateObject14() {
-  var data = _taggedTemplateLiteral(["\n    display: flex;\n"]);
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    align-items: flex-end;\n"]);
 
   _templateObject14 = function _templateObject14() {
     return data;
@@ -15331,7 +15478,12 @@ var RowInput = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_te
 var TitleForm = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].h3(_templateObject15(), function (props) {
   return props.theme.montserrat;
 }, function (props) {
+  return props.theme.bold;
+}, function (props) {
   return props.theme.black;
+});
+var Label = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].h4(_templateObject16(), function (props) {
+  return props.theme.montserrat;
 });
 
 /***/ }),
@@ -15492,7 +15644,8 @@ var AppContainer = /*#__PURE__*/function (_Component) {
         statMenu: this.state.openMenu
       }), "/** MODAL ADD **/", /*#__PURE__*/React.createElement(_Modal__WEBPACK_IMPORTED_MODULE_4__["default"], {
         type: "addPropriete",
-        show: this.props.showModalAddPropriete
+        show: this.props.showModalAddPropriete,
+        title: "Ajouter une Propri\xE9t\xE9"
       }, /*#__PURE__*/React.createElement(_views_AddPropriete__WEBPACK_IMPORTED_MODULE_5__["default"], null)), /*#__PURE__*/React.createElement(_Modal__WEBPACK_IMPORTED_MODULE_4__["default"], {
         type: "addChasseur",
         show: this.props.showModalAddChasseur
@@ -15545,8 +15698,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions */ "./src/actions/index.js");
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-function _templateObject4() {
+function _templateObject7() {
+  var data = _taggedTemplateLiteral(["\n    position: absolute;\n    top: 20px;\n    left: 45px;\n    margin: 0;\n    font-family: ", ";\n    font-weight: ", ";\n    font-size: 24px;\n"]);
+
+  _templateObject7 = function _templateObject7() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject6() {
   var data = _taggedTemplateLiteral(["\n    position: absolute;\n    top: 20px;\n    right: 20px;\n\tcursor: pointer;\n\tz-index: 2;\n\tmin-width: 24px;\n\twidth: 24px;\n\theight: 24px;\n\tmargin-left: 15px;\n\tborder-radius: 25px;\n\tdisplay: flex;\n    justify-content: center;\n    align-items: center;\n\tbackground: ", ";\n    box-shadow: ", ";\n    transform: rotate(45deg);\n\ttransition: transform 0.3s, opacity 0.8s;\n\n\t&:before,\n\t&:after {\n\t\tcontent: '';\n\t\tposition: absolute;\n\t\twidth: 14px;\n\t\theight: 2px;\n\t\tborder-radius: 30px;\n\t\tbackground: ", ";\n\t}\n\n\t&:after {\n\t\ttransform: rotate(90deg);\n\t}\n\n\t&:hover {\n        transform: scale(1.1) rotate(45deg);\n\t}\n\n\t&:active {\n        transform: scale(0.95) rotate(45deg);\n\t}\n"]);
+
+  _templateObject6 = function _templateObject6() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject5() {
+  var data = _taggedTemplateLiteral(["\n    overflow: scroll;\n    max-height: 80vh;\n"]);
+
+  _templateObject5 = function _templateObject5() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject4() {
+  var data = _taggedTemplateLiteral(["\n            padding-top: 65px;\n            \n            &:after {\n                content: '';\n                position: absolute;\n                width: calc(85% - 90px);\n                height: 2px;\n                top: 65px;\n                background-color: ", ";\n                opacity: 0.1;\n                border-radius: 5px;\n            }\n        "]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -15556,7 +15739,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n    max-width: 80vw;\n    max-height: 80vh;\n    overflow: scroll;\n    width: 65%;\n    min-width: 200px;\n    min-height: 200px;\n    background: ", ";\n    box-shadow: ", ";\n    border-radius: 30px;\n    padding: 45px;\n    position: relative;\n"]);
+  var data = _taggedTemplateLiteral(["\n    max-width: 80vw;\n    max-height: 80vh;\n    width: 65%;\n    min-width: 200px;\n    min-height: 200px;\n    background: ", ";\n    box-shadow: ", ";\n    border-radius: 30px;\n    padding: 45px;\n    position: relative;\n\n    ", "\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -15597,17 +15780,28 @@ var StyledModal = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div(
   return props.theme.white;
 }, function (props) {
   return props.theme.shadows;
+}, function (props) {
+  return props.haveTitle && Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["css"])(_templateObject4(), function (props) {
+    return props.theme.black;
+  });
 });
-var CloseButton = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject4(), function (props) {
+var ContentModal = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject5());
+var CloseButton = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject6(), function (props) {
   return props.theme.black;
 }, function (props) {
   return props.theme.shadows;
 }, function (props) {
   return props.theme.white;
 });
+var TitleModal = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].h2(_templateObject7(), function (props) {
+  return props.theme.montserrat;
+}, function (props) {
+  return props.theme.regular;
+});
 
 function Modal(props) {
   var closeButton = null;
+  var titleModal = null;
 
   if (props.type == 'addPropriete') {
     closeButton = /*#__PURE__*/React.createElement(CloseButton, {
@@ -15635,9 +15829,15 @@ function Modal(props) {
     });
   }
 
+  if (props.title) {
+    titleModal = /*#__PURE__*/React.createElement(TitleModal, null, props.title);
+  }
+
   return /*#__PURE__*/React.createElement(ContainerModal, {
     open: props.show
-  }, /*#__PURE__*/React.createElement(StyledModal, null, closeButton, props.children));
+  }, /*#__PURE__*/React.createElement(StyledModal, {
+    haveTitle: titleModal != null ? true : false
+  }, titleModal, closeButton, /*#__PURE__*/React.createElement(ContentModal, null, props.children)));
 }
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
@@ -15799,1470 +15999,551 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function (props) {
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Ajouter une Propri\xE9t\xE9"), /*#__PURE__*/React.createElement("form", {
+  return /*#__PURE__*/React.createElement("form", {
     enctype: "multipart/form-data"
-  }, /*#__PURE__*/React.createElement("input", {
-    id: "author",
+  }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     type: "hidden",
+    id: "chasseur",
     value: ""
-  }), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "D\xE9tails"), /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "titre"
-  }, "Titre"), /*#__PURE__*/React.createElement("input", {
+  }), "*", /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "D\xE9tails"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
     type: "text",
-    "class": "form-control",
     id: "titre",
-    name: "titre"
-  })), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
-    type: "text",
-    id: "titre",
-    label: "Titre",
-    required: true
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "form-group "
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "custom-file"
-  }, /*#__PURE__*/React.createElement("input", {
+    label: "Titre"
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     type: "file",
-    "class": "custom-file-input",
     id: "filesPhotos",
-    name: "filesPhotos",
     multiple: "true",
-    value: "",
-    accept: ".png, .jpg, .jpeg"
-  }), /*#__PURE__*/React.createElement("label", {
-    "class": "custom-file-label",
-    id: "labelPhotos",
-    "for": "filesPhotos"
-  }, "Ajouter des photos"))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "description"
-  }, "Courte description"), /*#__PURE__*/React.createElement("textarea", {
-    "class": "form-control",
-    id: "description"
-  })), /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "address"
-  }, "Adresse postale"), /*#__PURE__*/React.createElement("input", {
+    accept: ".png, .jpg, .jpeg",
+    label: "Ajouter des photos"
+  }), "*", /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    type: "textarea",
+    id: "description",
+    label: "Courte description"
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     type: "text",
-    "class": "form-control",
-    id: "address",
-    name: "address"
-  })), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "ville"
-  }, "Ville"), /*#__PURE__*/React.createElement("input", {
+    id: "adresse_postale",
+    label: "Adresse postale"
+  }), "*", /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     type: "text",
-    "class": "form-control",
+    id: "adresse_postale",
+    label: "artisan"
+  }), "*", /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    type: "text",
     id: "ville",
-    name: "ville"
-  }))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "zip"
-  }, "ZIP / Code postal"), /*#__PURE__*/React.createElement("input", {
+    label: "Ville"
+  }), "*", /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     type: "number",
-    step: ".01",
-    min: "0",
-    "class": "form-control",
-    id: "zip",
-    name: "zip"
-  }))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "type"
-  }, "Type"), /*#__PURE__*/React.createElement("select", {
-    required: true,
-    id: "type",
-    "class": "form-control"
-  }, /*#__PURE__*/React.createElement("option", {
-    value: "",
-    selected: true,
-    disabled: true,
-    hidden: true
-  }, "Choisir..."), /*#__PURE__*/React.createElement("option", null, "Appartement"), /*#__PURE__*/React.createElement("option", null, "Maison"), /*#__PURE__*/React.createElement("option", null, "Autre"))))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "anne"
-  }, "Ann\xE9e"), /*#__PURE__*/React.createElement("input", {
+    id: "zip_code_postal",
+    thousandSeparator: "false",
+    label: "ZIP / Code postal"
+  }), "*", /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    type: "select",
+    id: "type_bien",
+    label: "Type de bien",
+    list: ['Appartement', 'Maison', 'Autre'],
+    required: true
+  }), "*"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     type: "number",
-    step: ".01",
-    min: "0",
-    "class": "form-control",
-    id: "anne",
-    name: "anne"
-  }))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "superficie"
-  }, "Superficie"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
-    required: true,
+    id: "annee",
+    thousandSeparator: "false",
+    label: "Ann\xE9e"
+  }), "*", /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     type: "number",
-    step: ".01",
     min: "1",
-    "class": "form-control",
+    label: "Superficie",
     id: "superficie",
-    name: "superficie"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "m\xB2"))))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "superficieH"
-  }, "Superficie Habitable"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    suffix: "m\xB2",
+    required: true
+  }), "*", /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     type: "number",
-    step: ".01",
     min: "1",
-    "class": "form-control",
-    id: "superficieH",
-    name: "superficieH"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "m\xB2")))))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Agencement int\xE9rieur"), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "numbPieces"
-  }, "Nombre de Pi\xE8ce(s)"), /*#__PURE__*/React.createElement("input", {
-    required: true,
+    id: "superficie_habitable",
+    label: "Superficie Habitable",
+    suffix: "m\xB2"
+  }), "*"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Agencement int\xE9rieur"), "*", /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     type: "number",
-    step: ".01",
     min: "1",
     value: "1",
-    "class": "form-control",
-    id: "numbPieces",
-    name: "numbPieces"
-  }))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "numbChamb"
-  }, "Nombre de chambre"), /*#__PURE__*/React.createElement("input", {
-    required: true,
+    id: "nombre_de_pieces",
+    label: "Nombre de Pi\xE8ce",
+    required: true
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     type: "number",
-    step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "numbChamb",
-    name: "numbChamb"
-  }))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "numbBain"
-  }, "Nombre de salle(s) de bain(s)"), /*#__PURE__*/React.createElement("input", {
-    required: true,
+    id: "nombre_de_chambre",
+    label: "Nombre de chambre",
+    required: true
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     type: "number",
-    step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "numbBain",
-    name: "numbBain"
-  })))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "numbWC"
-  }, "Nombre de WC"), /*#__PURE__*/React.createElement("input", {
-    required: true,
+    id: "nombre_de_salles_de_bains",
+    label: "Nombre de salle de Bain",
+    required: true
+  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     type: "number",
-    step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "numbWC",
-    name: "numbWC"
-  }))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "numbCellier"
-  }, "Nombre de Cellier(s)"), /*#__PURE__*/React.createElement("input", {
-    required: true,
+    id: "nombre_de_wc",
+    label: "Nombre de WC",
+    required: true
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     type: "number",
-    step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "numbCellier",
-    name: "numbCellier"
-  }))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "numbSallBuanderie"
-  }, "Nombre de Buanderie(s)"), /*#__PURE__*/React.createElement("input", {
-    required: true,
+    id: "nombre_de_celliers",
+    label: "Nombre de Cellier",
+    required: true
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     type: "number",
-    step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "numbSallBuanderie",
-    name: "numbSallBuanderie"
-  })))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "numbNiveau"
-  }, "Niveaux"), /*#__PURE__*/React.createElement("input", {
-    required: true,
+    id: "nombre_de_buanderies",
+    label: "Nombre de Buanderie",
+    required: true
+  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     type: "number",
-    step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "numbNiveau",
-    name: "numbNiveau"
-  }))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", null, "Cuisine :"), /*#__PURE__*/React.createElement("div", {
-    "class": "custom-control custom-checkbox"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "niveaux",
+    label: "Nombre de Niveaux",
+    required: true
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     type: "checkbox",
-    "class": "custom-control-input",
-    id: "cuisineEquip"
-  }), ">", /*#__PURE__*/React.createElement("label", {
-    "class": "custom-control-label",
-    "for": "cuisineEquip"
-  }, "\xC9quip\xE9e")), /*#__PURE__*/React.createElement("div", {
-    "class": "custom-control custom-checkbox"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "cuisine",
+    label: "Cuisine"
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     type: "checkbox",
-    "class": "custom-control-input",
-    id: "cuisineSep"
-  }), /*#__PURE__*/React.createElement("label", {
-    "class": "custom-control-label",
-    "for": "cuisineSep"
-  }, "Separ\xE9e")))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", null, "Isolation :"), /*#__PURE__*/React.createElement("div", {
-    "class": "custom-control custom-checkbox"
-  }, /*#__PURE__*/React.createElement("input", {
-    type: "checkbox",
-    "class": "custom-control-input",
-    id: "isolation"
-  }), /*#__PURE__*/React.createElement("label", {
-    "class": "custom-control-label",
-    "for": "isolation"
-  }, "Oui"))))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Copropri\xE9t\xE9"), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-6"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "nombLots"
-  }, "Nombre de lots"), /*#__PURE__*/React.createElement("input", {
+    id: "isolation",
+    label: "Isolation"
+  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Copropri\xE9t\xE9"), "*", /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
     type: "number",
-    step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "nombLots",
-    name: "nombLots"
-  }))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-6"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "dernierAssemble"
-  }, "Derni\xE8re assembl\xE9e"), /*#__PURE__*/React.createElement("input", {
+    id: "nombre_de_lots"
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
     type: "number",
-    step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "dernierAssemble",
-    name: "dernierAssemble"
-  })))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-6"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "syndic"
-  }, "Syndic"), /*#__PURE__*/React.createElement("input", {
+    id: "derniere_assemble",
+    thousandSeparator: "false"
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     type: "text",
-    "class": "form-control",
-    id: "syndic",
-    name: "syndic"
-  }))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-6"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "quotePartMensuelle"
-  }, "Quote part mensuelle"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
-    required: true,
-    type: "number",
-    step: ".01",
-    min: "0",
-    value: "0",
-    "class": "form-control",
-    id: "quotePartMensuelle",
-    name: "quotePartMensuelle"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "detailsCharges"
-  }, "D\xE9tails charges"), /*#__PURE__*/React.createElement("textarea", {
-    "class": "form-control",
-    id: "detailsCharges",
+    id: "syndic"
+  })), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    type: "textarea",
+    id: "details_charges_copropriete",
     placeholder: "Exemple: Eau, EDF communs, Gardien, Chauffage, Nettoyage, Syndic"
-  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "\xC9quipements"), /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("textarea", {
-    "class": "form-control",
-    id: "detailsEquips",
+  }), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "\xC9quipements"), "*", /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    type: "textarea",
+    id: "equipements",
     placeholder: "Exemple: Interphone, C\xE2ble, Double vitrage"
-  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Chauffage"), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-6"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "type_chauff"
-  }, "Type"), /*#__PURE__*/React.createElement("input", {
+  }), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Chauffage"), "*", /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     type: "text",
-    "class": "form-control",
-    id: "type_chauff",
-    name: "type_chauff"
-  }))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-6"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "mode_chauff"
-  }, "Mode"), /*#__PURE__*/React.createElement("input", {
+    id: "type_de_chauffage"
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     type: "text",
-    "class": "form-control",
-    id: "mode_chauff",
-    Modename: "mode_chauff"
-  })))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-6"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "energie_chauff"
-  }, "\xC9nergie"), /*#__PURE__*/React.createElement("input", {
+    id: "mode_de_chauffage"
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     type: "text",
-    "class": "form-control",
-    id: "energie_chauff",
-    name: "energie_chauff"
-  }))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-6"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "eauChaude_chauff"
-  }, "Eau chaude"), /*#__PURE__*/React.createElement("input", {
-    type: "text",
-    "class": "form-control",
-    id: "eauChaude_chauff",
-    name: "eauChaude_chauff",
-    placeholder: "Chaudi\xE8re"
-  })))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Diagnostics"), /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("textarea", {
-    "class": "form-control",
+    id: "energie_du_chauffage"
+  }), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Diagnostics"), "*", /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    type: "textarea",
     id: "diagnostics"
-  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Agencement ext\xE9rieur"), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-6"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "cave"
-  }, "Cave(s)"), /*#__PURE__*/React.createElement("input", {
+  }), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Points positifs et n\xE9gatifs"), "*", /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    type: "textarea",
+    id: "points_positif_et_negatifs"
+  }), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Agencement ext\xE9rieur"), "*", /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "cave",
-    name: "cave"
-  }))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-6"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "terrase"
-  }, "Terrasse(s)"), /*#__PURE__*/React.createElement("input", {
+    id: "caves",
+    label: "Nombre de cave"
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "terrase",
-    name: "terrase"
-  })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Travaux"), /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "autretravaux"
-  }, "Autres"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "terrases",
+    label: "Nombre de terrase"
+  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "autretravaux",
-    name: "autretravaux"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC"))))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Frais d'acquisition"), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-6"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "prixBien"
-  }, "Prix du bien"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "balcons",
+    label: "Nombre de balcon"
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
     type: "number",
     step: ".01",
-    min: "0",
-    "class": "form-control",
-    id: "prixBien",
-    name: "prixBien"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-6"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "fraisAgence"
-  }, "Frais d'agence"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    value: "0",
+    id: "varangues",
+    label: "Nombre de varangue"
+  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "fraisAgence",
-    name: "fraisAgence"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-6"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "fraisNotaire"
-  }, "Frais de notaire"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "piscines",
+    label: "Nombre de piscine"
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "fraisNotaire",
-    name: "fraisNotaire"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-6"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "fraisTravaux"
-  }, "Estimation Travaux"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "jacuzzis",
+    label: "Nombre de jacuzzi"
+  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Frais d'acquisition"), "*", /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
     type: "number",
     step: ".01",
-    min: "0",
-    value: "0",
-    "class": "form-control",
-    id: "fraisTravaux",
-    name: "fraisTravaux"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-6"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "fraisEquipMob"
-  }, "Mobilier / Equipement"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "prix_du_bien",
+    euro: true,
+    label: "Prix du bien"
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "fraisEquipMob",
-    name: "fraisEquipMob"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-6"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-6"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "fraisCom"
-  }, "Commission chasseur"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "frais_dagence",
+    euro: true,
+    label: "Frais d'agence"
+  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "fraisCom",
-    name: "fraisCom"
-  }), /*#__PURE__*/React.createElement("input", {
-    required: true,
-    type: "hidden",
-    min: "0",
-    value: "0",
-    "class": "form-control",
-    id: "fraisCom",
-    name: "fraisCom"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC"))))))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "projetGlobal"
-  }, "Projet Global (Frais d'acquisition)"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "frais_de_notaire",
+    euro: true,
+    label: "Frais de notaire"
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "projetGlobal",
-    name: "projetGlobal",
+    id: "frais_de_travaux",
+    euro: true,
+    label: "Estimation Travaux"
+  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    required: true,
+    type: "number",
+    step: ".01",
+    value: "0",
+    id: "mobilier_equipement",
+    euro: true,
+    label: "Mobilier / Equipement"
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    required: true,
+    type: "number",
+    step: ".01",
+    value: "0",
+    id: "honoraires_immomalin",
+    euro: true,
+    label: "Commission chasseur"
+  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    required: true,
+    type: "number",
+    step: ".01",
+    value: "0",
+    id: "projet_global",
+    euro: true,
+    label: "Projet Global (Frais d'acquisition)",
     readonly: true,
     disabled: true
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC")))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "fraisBUDGET"
-  }, "BUDGET"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "fraisBUDGET",
-    name: "fraisBUDGET",
+    id: "budget",
+    euro: true,
+    label: "BUDGET",
     readonly: true,
     disabled: true
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC")))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Charges locatif"), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4 label-center"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", null, "Charges copropri\xE9t\xE9"))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "chargesCourantesM"
-  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Charges locatif"), "***", /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["Label"], null, "Charges copropri\xE9t\xE9"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
-    "class": "form-control",
-    id: "chargesCourantesM",
-    name: "chargesCourantesM"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "chargesCourantesA"
-  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "charges_copropriete_mensuelles",
+    label: "Mensuelles"
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "chargesCourantesA",
-    name: "chargesCourantesA"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4 label-center"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", null, "Taxe fonci\xE8re"))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "taxeFonciereM"
-  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "charges_copropriete_annuelles",
+    label: "Anuelles"
+  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["Label"], null, "Taxe fonci\xE8re"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "taxeFonciereM",
-    name: "taxeFonciereM"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "taxeFonciereA"
-  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "taxe_fonciere_mensuelles",
+    label: "Mensuelles"
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "taxeFonciereA",
-    name: "taxeFonciereA"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4 label-center"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", null, "Assurance PNO"))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "assurancePNOM"
-  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "taxe_fonciere_annuelles",
+    label: "Anuelles"
+  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["Label"], null, "Assurance PNO"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "assurancePNOM",
-    name: "assurancePNOM"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "assurancePNOA"
-  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "assurance_pno_mensuelles",
+    label: "Mensuelles"
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "assurancePNOA",
-    name: "assurancePNOA"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4 label-center"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", null, "Assurances locatives"))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "assurancesLocativesM"
-  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "assurance_pno_annuelles",
+    label: "Anuelles"
+  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["Label"], null, "Assurances locatives"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "assurancesLocativesM",
-    name: "assurancesLocativesM"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "assurancesLocativesA"
-  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "assurances_locatives_mensuelles",
+    label: "Mensuelles"
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "assurancesLocativesA",
-    name: "assurancesLocativesA"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4 label-center"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", null, "Gestion locative"))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "gestionLocativeM"
-  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "assurances_locatives_annuelles",
+    label: "Anuelles"
+  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["Label"], null, "Gestion locative"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "gestionLocativeM",
-    name: "gestionLocativeM"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "gestionLocativeA"
-  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "gestion_locative_mensuelles",
+    label: "Mensuelles"
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "gestionLocativeA",
-    name: "gestionLocativeA"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4 label-center"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", null, "Frais divers"))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "fraisDiversM"
-  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "gestion_locative_annuelles",
+    label: "Anuelles"
+  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["Label"], null, "Frais divers"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "fraisDiversM",
-    name: "fraisDiversM"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "fraisDiversA"
-  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "frais_divers_mensuelles",
+    label: "Mensuelles"
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "fraisDiversA",
-    name: "fraisDiversA"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4 label-center"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", null, "Eau"))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "eauChargeM"
-  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "frais_divers_annuelles",
+    label: "Anuelles"
+  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["Label"], null, "Eau"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "eauChargeM",
-    name: "eauChargeM"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "eauChargeA"
-  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "frais_electricite_mensuelle",
+    label: "Mensuelles"
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "eauChargeA",
-    name: "eauChargeA"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4 label-center"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", null, "\xC9lectricit\xE9"))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "electriciteM"
-  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "frais_electricite_annuelle",
+    label: "Anuelles"
+  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["Label"], null, "\xC9lectricit\xE9"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "electriciteM",
-    name: "electriciteM"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "electriciteA"
-  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "frais_eau_mensuelle",
+    label: "Mensuelles"
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "electriciteA",
-    name: "electriciteA"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4 label-center"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", null, "Forfait internet"))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "forfaitInternetM"
-  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "frais_eau_annuelle",
+    label: "Anuelles"
+  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["Label"], null, "Forfait internet"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "forfaitInternetM",
-    name: "forfaitInternetM"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "forfaitInternetA"
-  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "forfait_internet_mensuelle",
+    label: "Mensuelles"
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "forfaitInternetA",
-    name: "forfaitInternetA"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row mt-5"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4 label-center"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", null, "TOTAL"))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "totalM"
-  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+    id: "forfait_internet_annuelle",
+    label: "Anuelles"
+  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["Label"], null, "TOTAL"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "totalM",
-    name: "totalM",
+    id: "total_charges_mensuelles",
+    readonly: true,
+    disabled: true,
+    label: "Mensuelles"
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    required: true,
+    euro: true,
+    type: "number",
+    step: ".01",
+    value: "0",
+    id: "total_charges_annuelles",
+    readonly: true,
+    disabled: true,
+    label: "Anuelles"
+  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Revenus locatif"), "*", /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["Label"], null, "Loyer pr\xE9visionnel"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    required: true,
+    euro: true,
+    type: "number",
+    step: ".01",
+    id: "loyer_previsionnel_mensuelles",
+    label: "Mensuelles"
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    required: true,
+    euro: true,
+    type: "number",
+    step: ".01",
+    value: "0",
+    id: "loyer_previsionnel_annuelles",
+    label: "Annuelles",
     readonly: true,
     disabled: true
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "totalA"
-  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+  })), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    pourcent: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "totalA",
-    name: "totalA",
+    id: "vacance_locative",
+    label: "Vacance locative"
+  }), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["Label"], null, "TOTAL"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    required: true,
+    euro: true,
+    type: "number",
+    step: ".01",
+    value: "0",
+    id: "total_revenus_mensuelles",
+    label: "Mensuelles",
     readonly: true,
     disabled: true
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC")))))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Revenus locatif"), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4 label-center"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", null, "Loyer pr\xE9visionnel"))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "loyerPrevisionnelM"
-  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
-    "class": "form-control",
-    id: "loyerPrevisionnelM",
-    name: "loyerPrevisionnelM"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "loyerPrevisionnelA"
-  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
-    required: true,
-    type: "number",
-    step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "loyerPrevisionnelA",
-    name: "loyerPrevisionnelA",
+    id: "total_revenus_annuelles",
+    label: "Annuelles",
     readonly: true,
     disabled: true
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4 label-center"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", null, "Charges r\xE9cup\xE9rables"))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "chargesRecuperablesM"
-  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+  })), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "chargesRecuperablesM",
-    name: "chargesRecuperablesM"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "chargesRecuperablesA"
-  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
-    required: true,
-    type: "number",
-    step: ".01",
-    min: "0",
-    value: "0",
-    "class": "form-control",
-    id: "chargesRecuperablesA",
-    name: "chargesRecuperablesA",
+    id: "solde",
     readonly: true,
     disabled: true
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "vacanceLocative"
-  }, "Vacance locative %"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+  }), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Vue synth\xE9tique"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["Label"], null, "Rentabilit\xE9"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    pourcent: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "vacanceLocative",
-    name: "vacanceLocative"
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "%")))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4 label-center"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", null, "TOTAL"))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "totalRM"
-  }, "MENSUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
-    required: true,
-    type: "number",
-    step: ".01",
-    min: "0",
-    value: "0",
-    "class": "form-control",
-    id: "totalRM",
-    name: "totalRM",
+    id: "rentabilite_net",
+    label: "Brut",
     readonly: true,
     disabled: true
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC"))))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "totalRA"
-  }, "ANNUELLES"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    pourcent: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "totalRA",
-    name: "totalRA",
+    id: "rentabilite_brut",
+    label: "Net",
     readonly: true,
     disabled: true
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4 label-center"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", null, "Solde"))), /*#__PURE__*/React.createElement("div", {
-    "class": "offset-lg-4 col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["Label"], null, "Cashflow brut"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "soldeRA",
-    name: "soldeRA",
+    id: "cashflow_mensuel_brut",
+    label: "Mensuelle",
     readonly: true,
     disabled: true
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC")))))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "Vue synth\xE9tique"), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4 label-center"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", null, "Rentabilit\xE9"))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "RentabiliteB"
-  }, "Brut"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
+  })), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
     required: true,
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "RentabiliteB",
-    name: "RentabiliteB",
+    id: "prix_au_m",
     readonly: true,
     disabled: true
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "%"))))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "RentabiliteN"
-  }, "Net"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
-    required: true,
+  }), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "R\xE9sum\xE9"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "RentabiliteN",
-    name: "RentabiliteN",
+    id: "total_revenus_resume",
+    label: "Total des revenus",
     readonly: true,
     disabled: true
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "%")))))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-4 label-center"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", null, "Cashflow mensuel"))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-lg-8"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "cashflowMensuelN"
-  }, "Net"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
-    required: true,
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control",
-    id: "cashflowMensuelN",
-    name: "cashflowMensuelN",
+    id: "total_revenus_resume",
+    label: "Total des charges",
     readonly: true,
     disabled: true
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC")))))), /*#__PURE__*/React.createElement("div", {
-    "class": "form-group"
-  }, /*#__PURE__*/React.createElement("label", {
-    "for": "prixAuM"
-  }, "Prix au m\xB2"), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group"
-  }, /*#__PURE__*/React.createElement("input", {
-    required: true,
+  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    euro: true,
     type: "number",
     step: ".01",
-    min: "0",
     value: "0",
-    "class": "form-control devise",
-    id: "prixAuM",
-    name: "prixAuM",
+    id: "total_revenus_resume",
+    label: "Prix au m\xB2",
     readonly: true,
     disabled: true
-  }), /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-append"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "input-group-text"
-  }, "\u20AC")))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_1__["TitleForm"], null, "R\xE9sum\xE9"), /*#__PURE__*/React.createElement("div", {
-    "class": "row resume"
-  }, /*#__PURE__*/React.createElement("div", {
-    "class": "col-md-4"
-  }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("b", null, "TOTAL Revenus"), " ", /*#__PURE__*/React.createElement("span", {
-    id: "totalRResume"
-  }, "0"))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-md-4"
-  }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("b", null, "TOTAL charge"), " ", /*#__PURE__*/React.createElement("span", {
-    id: "totalCResume"
-  }, "0"))), /*#__PURE__*/React.createElement("div", {
-    "class": "col-md-4"
-  }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("b", null, "Prix au m\xB2"), " ", /*#__PURE__*/React.createElement("span", {
-    id: "totalPrixMResume"
-  }, "0")))), /*#__PURE__*/React.createElement("p", {
-    "class": "error"
-  }, "Une erreur est survenue, veuillez ressayer !"), /*#__PURE__*/React.createElement("button", {
-    type: "submit",
-    "class": "btn btn-primary submit"
-  }, "Enregistrer")));
+  })), /*#__PURE__*/React.createElement("button", {
+    type: "submit"
+  }, "Enregistrer"));
 });
 
 /***/ }),

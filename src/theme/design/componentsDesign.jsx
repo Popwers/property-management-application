@@ -175,10 +175,12 @@ export const Inline = styled.div`
 
 export const RowInput = styled.div`
     display: flex;
+    align-items: flex-end;
 `
 
 export const TitleForm = styled.h3`
     font-family: ${props => props.theme.montserrat};
+    font-weight: ${props => props.theme.bold};
     font-size: 20px;
     position: relative;
     padding: 15px 0;
@@ -193,4 +195,9 @@ export const TitleForm = styled.h3`
         left: 0;
         background: ${props => props.theme.black};
     }
+`
+
+export const Label = styled.h4`
+    font-family: ${props => props.theme.montserrat};
+    font-size: 15px;
 `

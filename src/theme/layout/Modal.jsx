@@ -36,7 +36,6 @@ const ContainerModal = styled.div`
 const StyledModal = styled.div`
     max-width: 80vw;
     max-height: 80vh;
-    overflow: scroll;
     width: 65%;
     min-width: 200px;
     min-height: 200px;
@@ -45,6 +44,28 @@ const StyledModal = styled.div`
     border-radius: 30px;
     padding: 45px;
     position: relative;
+
+    ${props =>
+        props.haveTitle &&
+        css`
+            padding-top: 65px;
+            
+            &:after {
+                content: '';
+                position: absolute;
+                width: calc(85% - 90px);
+                height: 2px;
+                top: 65px;
+                background-color: ${props => props.theme.black};
+                opacity: 0.1;
+                border-radius: 5px;
+            }
+        `}
+`
+
+const ContentModal = styled.div`
+    overflow: scroll;
+    max-height: 80vh;
 `
 
 const CloseButton = styled.div`
@@ -89,8 +110,20 @@ const CloseButton = styled.div`
 	}
 `
 
+const TitleModal = styled.h2`
+    position: absolute;
+    top: 20px;
+    left: 45px;
+    margin: 0;
+    font-family: ${props => props.theme.montserrat};
+    font-weight: ${props => props.theme.regular};
+    font-size: 24px;
+`
+
 function Modal(props) {
     let closeButton = null;
+    let titleModal = null;
+
     if (props.type == 'addPropriete') {
         closeButton = <CloseButton onClick={props.toogleAddPropriete} />
     } else if (props.type == 'addChasseur') {
@@ -105,11 +138,18 @@ function Modal(props) {
         closeButton = <CloseButton onClick={props.toogleProprieteModal} />
     }
 
+    if (props.title) {
+        titleModal = <TitleModal>{props.title}</TitleModal>;
+    }
+
     return (
         <ContainerModal open={props.show}>
-            <StyledModal>
+            <StyledModal haveTitle={titleModal != null ? true : false}>
+                {titleModal}
                 {closeButton}
-                {props.children}
+                <ContentModal>
+                    {props.children}
+                </ContentModal>
             </StyledModal>
         </ContainerModal>
     );

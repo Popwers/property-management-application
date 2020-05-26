@@ -111,7 +111,7 @@ class AppContainer extends Component {
 
                 /** MODAL ADD **/
 
-                <Modal type='addPropriete' show={this.props.showModalAddPropriete}>
+                <Modal type='addPropriete' show={this.props.showModalAddPropriete} title="Ajouter une Propriété">
                     <AddPropriete />
                 </Modal>
 
