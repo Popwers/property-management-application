@@ -12987,7 +12987,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************!*\
   !*** ./src/actions/index.js ***!
   \******************************/
-/*! exports provided: getAllProprietes, getAllDossiers, getAllUsers, getLogout, getHomeUrl, toogleLoader, toogleAddClient, toogleAddChasseur, toogleAddPropriete, toogleUserModal, toogleDossierModal, toogleProprieteModal, getPersonalData, handleChangeAddProprieteModal */
+/*! exports provided: getAllProprietes, getAllDossiers, getAllUsers, getLogout, getHomeUrl, toogleLoader, toogleAddClient, toogleAddChasseur, toogleAddPropriete, toogleUserModal, toogleDossierModal, toogleProprieteModal, getPersonalData, handleChangeAddProprieteModal, handleChangeAddClientModal, handleChangeAddChasseurModal, registerDataProgress */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13006,47 +13006,50 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toogleProprieteModal", function() { return toogleProprieteModal; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPersonalData", function() { return getPersonalData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleChangeAddProprieteModal", function() { return handleChangeAddProprieteModal; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleChangeAddClientModal", function() { return handleChangeAddClientModal; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleChangeAddChasseurModal", function() { return handleChangeAddChasseurModal; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registerDataProgress", function() { return registerDataProgress; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants */ "./src/constants/index.js");
+/* harmony import */ var _lib_functions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/functions */ "./src/lib/functions.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constants */ "./src/constants/index.js");
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
 
+
 function getAllProprietes() {
   return /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch) {
-      var responseReq, statutRes;
+      var responseReq, statutRes, action;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               responseReq = null;
               statutRes = 'success';
-              _context.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('../wp-admin/admin-ajax.php', {
-                params: {
-                  action: 'get_proprietes_data'
-                }
-              }).then(function (response) {
-                responseReq = formatToJson(response.data);
+              action = new FormData();
+              action.append('action', 'get_proprietes_data');
+              _context.next = 6;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../wp-content/themes/themeplocatif/ajax-board.php', action).then(function (response) {
+                responseReq = Object(_lib_functions__WEBPACK_IMPORTED_MODULE_1__["formatToJson"])(response.data);
               })["catch"](function (error) {
                 responseReq = error;
                 statutRes = 'error';
               });
 
-            case 4:
+            case 6:
               dispatch({
-                type: _constants__WEBPACK_IMPORTED_MODULE_1__["GET_PROPRIETE"],
+                type: _constants__WEBPACK_IMPORTED_MODULE_2__["GET_PROPRIETE"],
                 payload: {
                   data: responseReq,
                   statut: statutRes
                 }
               });
 
-            case 5:
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -13063,35 +13066,33 @@ function getAllProprietes() {
 function getAllDossiers() {
   return /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch) {
-      var responseReq, statutRes;
+      var responseReq, statutRes, action;
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               responseReq = null;
               statutRes = 'success';
-              _context2.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('../wp-admin/admin-ajax.php', {
-                params: {
-                  action: 'get_dossiers_data'
-                }
-              }).then(function (response) {
-                responseReq = formatToJson(response.data);
+              action = new FormData();
+              action.append('action', 'get_dossiers_data');
+              _context2.next = 6;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../wp-content/themes/themeplocatif/ajax-board.php', action).then(function (response) {
+                responseReq = Object(_lib_functions__WEBPACK_IMPORTED_MODULE_1__["formatToJson"])(response.data);
               })["catch"](function (error) {
                 responseReq = error;
                 statutRes = 'error';
               });
 
-            case 4:
+            case 6:
               dispatch({
-                type: _constants__WEBPACK_IMPORTED_MODULE_1__["GET_DOSSIER"],
+                type: _constants__WEBPACK_IMPORTED_MODULE_2__["GET_DOSSIER"],
                 payload: {
                   data: responseReq,
                   statut: statutRes
                 }
               });
 
-            case 5:
+            case 7:
             case "end":
               return _context2.stop();
           }
@@ -13108,35 +13109,33 @@ function getAllDossiers() {
 function getAllUsers() {
   return /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch) {
-      var responseReq, statutRes;
+      var responseReq, statutRes, action;
       return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
               responseReq = null;
               statutRes = 'success';
-              _context3.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('../wp-admin/admin-ajax.php', {
-                params: {
-                  action: 'get_users_data'
-                }
-              }).then(function (response) {
-                responseReq = formatToJson(response.data);
+              action = new FormData();
+              action.append('action', 'get_users_data');
+              _context3.next = 6;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../wp-content/themes/themeplocatif/ajax-board.php', action).then(function (response) {
+                responseReq = Object(_lib_functions__WEBPACK_IMPORTED_MODULE_1__["formatToJson"])(response.data);
               })["catch"](function (error) {
                 responseReq = error;
                 statutRes = 'error';
               });
 
-            case 4:
+            case 6:
               dispatch({
-                type: _constants__WEBPACK_IMPORTED_MODULE_1__["GET_USER"],
+                type: _constants__WEBPACK_IMPORTED_MODULE_2__["GET_USER"],
                 payload: {
                   data: responseReq,
                   statut: statutRes
                 }
               });
 
-            case 5:
+            case 7:
             case "end":
               return _context3.stop();
           }
@@ -13155,35 +13154,33 @@ function getAllUsers() {
 function getLogout() {
   return /*#__PURE__*/function () {
     var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch) {
-      var responseReq, statutRes;
+      var responseReq, statutRes, action;
       return regeneratorRuntime.wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
               responseReq = null;
               statutRes = 'success';
-              _context4.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('../wp-admin/admin-ajax.php', {
-                params: {
-                  action: 'get_logOut_data'
-                }
-              }).then(function (response) {
-                responseReq = formatToJson(response.data);
+              action = new FormData();
+              action.append('action', 'get_logOut_data');
+              _context4.next = 6;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../wp-content/themes/themeplocatif/ajax-board.php', action).then(function (response) {
+                responseReq = Object(_lib_functions__WEBPACK_IMPORTED_MODULE_1__["formatToJson"])(response.data);
               })["catch"](function (error) {
                 responseReq = error;
                 statutRes = 'error';
               });
 
-            case 4:
+            case 6:
               dispatch({
-                type: _constants__WEBPACK_IMPORTED_MODULE_1__["GET_LOGOUT"],
+                type: _constants__WEBPACK_IMPORTED_MODULE_2__["GET_LOGOUT"],
                 payload: {
                   data: responseReq,
                   statut: statutRes
                 }
               });
 
-            case 5:
+            case 7:
             case "end":
               return _context4.stop();
           }
@@ -13200,35 +13197,33 @@ function getLogout() {
 function getHomeUrl() {
   return /*#__PURE__*/function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(dispatch) {
-      var responseReq, statutRes;
+      var responseReq, statutRes, action;
       return regeneratorRuntime.wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
               responseReq = null;
               statutRes = 'success';
-              _context5.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('../wp-admin/admin-ajax.php', {
-                params: {
-                  action: 'get_homeUrl_data'
-                }
-              }).then(function (response) {
-                responseReq = formatToJson(response.data);
+              action = new FormData();
+              action.append('action', 'get_homeUrl_data');
+              _context5.next = 6;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../wp-content/themes/themeplocatif/ajax-board.php', action).then(function (response) {
+                responseReq = Object(_lib_functions__WEBPACK_IMPORTED_MODULE_1__["formatToJson"])(response.data);
               })["catch"](function (error) {
                 responseReq = error;
                 statutRes = 'error';
               });
 
-            case 4:
+            case 6:
               dispatch({
-                type: _constants__WEBPACK_IMPORTED_MODULE_1__["GET_ADRESSE_SITE"],
+                type: _constants__WEBPACK_IMPORTED_MODULE_2__["GET_ADRESSE_SITE"],
                 payload: {
                   data: responseReq,
                   statut: statutRes
                 }
               });
 
-            case 5:
+            case 7:
             case "end":
               return _context5.stop();
           }
@@ -13248,7 +13243,7 @@ function toogleLoader() {
   var statut = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
   var messageShow = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'Veuillez patienter ...';
   return {
-    type: _constants__WEBPACK_IMPORTED_MODULE_1__["TOOGLE_LOADER"],
+    type: _constants__WEBPACK_IMPORTED_MODULE_2__["TOOGLE_LOADER"],
     payload: {
       statut: statut,
       message: messageShow
@@ -13259,32 +13254,32 @@ function toogleLoader() {
 
 function toogleAddClient() {
   return {
-    type: _constants__WEBPACK_IMPORTED_MODULE_1__["TOOGLE_CLIENT_ADD_MODAL"]
+    type: _constants__WEBPACK_IMPORTED_MODULE_2__["TOOGLE_CLIENT_ADD_MODAL"]
   };
 }
 function toogleAddChasseur() {
   return {
-    type: _constants__WEBPACK_IMPORTED_MODULE_1__["TOOGLE_CHASSEUR_ADD_MODAL"]
+    type: _constants__WEBPACK_IMPORTED_MODULE_2__["TOOGLE_CHASSEUR_ADD_MODAL"]
   };
 }
 function toogleAddPropriete() {
   return {
-    type: _constants__WEBPACK_IMPORTED_MODULE_1__["TOOGLE_PROPRIETE_ADD_MODAL"]
+    type: _constants__WEBPACK_IMPORTED_MODULE_2__["TOOGLE_PROPRIETE_ADD_MODAL"]
   };
 }
 function toogleUserModal() {
   return {
-    type: _constants__WEBPACK_IMPORTED_MODULE_1__["TOOGLE_USER_MODAL"]
+    type: _constants__WEBPACK_IMPORTED_MODULE_2__["TOOGLE_USER_MODAL"]
   };
 }
 function toogleDossierModal() {
   return {
-    type: _constants__WEBPACK_IMPORTED_MODULE_1__["TOOGLE_DOSSIER_MODAL"]
+    type: _constants__WEBPACK_IMPORTED_MODULE_2__["TOOGLE_DOSSIER_MODAL"]
   };
 }
 function toogleProprieteModal() {
   return {
-    type: _constants__WEBPACK_IMPORTED_MODULE_1__["TOOGLE_PROPRIETE_MODAL"]
+    type: _constants__WEBPACK_IMPORTED_MODULE_2__["TOOGLE_PROPRIETE_MODAL"]
   };
 }
 /** PERSONAL DATA **/
@@ -13292,35 +13287,33 @@ function toogleProprieteModal() {
 function getPersonalData() {
   return /*#__PURE__*/function () {
     var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(dispatch) {
-      var responseReq, statutRes;
+      var responseReq, statutRes, action;
       return regeneratorRuntime.wrap(function _callee6$(_context6) {
         while (1) {
           switch (_context6.prev = _context6.next) {
             case 0:
               responseReq = null;
               statutRes = 'success';
-              _context6.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('../wp-admin/admin-ajax.php', {
-                params: {
-                  action: 'get_personal_data'
-                }
-              }).then(function (response) {
-                responseReq = formatToJson(response.data);
+              action = new FormData();
+              action.append('action', 'get_personal_data');
+              _context6.next = 6;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../wp-content/themes/themeplocatif/ajax-board.php', action).then(function (response) {
+                responseReq = Object(_lib_functions__WEBPACK_IMPORTED_MODULE_1__["formatToJson"])(response.data);
               })["catch"](function (error) {
                 responseReq = error;
                 statutRes = 'error';
               });
 
-            case 4:
+            case 6:
               dispatch({
-                type: _constants__WEBPACK_IMPORTED_MODULE_1__["GET_MY_DATA"],
+                type: _constants__WEBPACK_IMPORTED_MODULE_2__["GET_MY_DATA"],
                 payload: {
                   data: responseReq,
                   statut: statutRes
                 }
               });
 
-            case 5:
+            case 7:
             case "end":
               return _context6.stop();
           }
@@ -13338,18 +13331,41 @@ function getPersonalData() {
 
 function handleChangeAddProprieteModal(key, data) {
   return {
-    type: _constants__WEBPACK_IMPORTED_MODULE_1__["SET_PROPRIETE_ADD_MODAL"],
+    type: _constants__WEBPACK_IMPORTED_MODULE_2__["SET_PROPRIETE_ADD_MODAL"],
     payload: {
       key: key,
       data: data
     }
   };
 }
-/***********************************************************/
+function handleChangeAddClientModal(key, data) {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_2__["SET_CLIENT_ADD_MODAL"],
+    payload: {
+      key: key,
+      data: data
+    }
+  };
+}
+function handleChangeAddChasseurModal(key, data) {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_2__["SET_CHASSEUR_ADD_MODAL"],
+    payload: {
+      key: key,
+      data: data
+    }
+  };
+}
+/** REGISTER DATA **/
 
-function formatToJson(dataToFormat) {
-  var regex = /<!\[CDATA\[(.*)\]\]>/gm;
-  return JSON.parse(regex.exec(dataToFormat)[1]);
+function registerDataProgress(key, data) {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_2__["SET_REGISTER_DATA"],
+    payload: {
+      key: key,
+      data: data
+    }
+  };
 }
 
 /***/ }),
@@ -13609,6 +13625,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_number_format__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-number-format */ "./node_modules/react-number-format/dist/react-number-format.es.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -13629,8 +13657,78 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-function _templateObject17() {
+function _templateObject24() {
   var data = _taggedTemplateLiteral(["\n    position: absolute;\n    cursor: pointer;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background-color: #ccc;\n    border-radius: 34px;\n    -webkit-transition: .4s;\n    transition: .4s;\n\n    &:before {\n        position: absolute;\n        content: \"\";\n        height: 16px;\n        width: 16px;\n        left: 4px;\n        bottom: 4px;\n        background-color: white;\n        border-radius: 50%;\n        -webkit-transition: .4s;\n        transition: .4s;\n    }\n"]);
+
+  _templateObject24 = function _templateObject24() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject23() {
+  var data = _taggedTemplateLiteral(["\n    position: relative;\n    display: inline-block;\n    width: 50px;\n    height: 24px;\n    margin: 0 5px;\n    margin-bottom: 15px;\n\n    input {\n        opacity: 0;\n        width: 0;\n        height: 0;\n\n        &:checked + span {\n            background-color: ", ";\n        }\n\n        &:focus + span {\n            box-shadow: 0 0 1px ", ";\n        }\n\n        &:checked + span:before {\n            -webkit-transform: translateX(26px);\n            -ms-transform: translateX(26px);\n            transform: translateX(26px);\n        }\n    }\n"]);
+
+  _templateObject23 = function _templateObject23() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject22() {
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    width: 100%;\n    max-width: 100%;\n    overflow: scroll;\n"]);
+
+  _templateObject22 = function _templateObject22() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject21() {
+  var data = _taggedTemplateLiteral(["\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    z-index: 1;\n    pointer-events: none;\n\tdisplay: flex;\n    justify-content: center;\n    align-items: center;\n    transform: rotate(45deg);\n    opacity: 0;\n\ttransition: opacity 0.3s;\n\n\t&:before,\n\t&:after {\n\t\tcontent: '';\n\t\tposition: absolute;\n\t\twidth: 45px;\n\t\theight: 2px;\n\t\tborder-radius: 30px;\n\t\tbackground: ", ";\n\t}\n\n\t&:after {\n\t\ttransform: rotate(90deg);\n\t}\n"]);
+
+  _templateObject21 = function _templateObject21() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject20() {
+  var data = _taggedTemplateLiteral(["\n    width: 100px;\n    height: 100px;\n    cursor: pointer;\n    border-radius: 5px;\n    margin-right: 10px;\n    margin-bottom: 10px;\n    margin-top: 10px;\n    position: relative;\n    transition: transform 0.3s, box-shadow 0.3s;\n\n\t&:before,\n\t&:after {\n\t\tcontent: '';\n        position: absolute;\n        top: 0;\n        left: 0;\n        right: 0;\n        bottom: 0;\n        opacity: 0;\n        border-radius: 5px;\n        background: ", ";\n        transition: opacity 0.3s;\n\t}\n\n\t&:hover {\n        box-shadow: ", ";\n        transform: scale(1.1);\n\n        &:before,\n        &:after {\n            opacity: 0.4;\n        }\n\n        div {\n            opacity: 0.8;\n        }\n\t}\n\n\t&:active {\n        transform: scale(0.9);\n\n        &:before,\n        &:after {\n            opacity: 0.7;\n        }\n\n        div {\n            opacity: 1;\n        }\n\t}\n"]);
+
+  _templateObject20 = function _templateObject20() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject19() {
+  var data = _taggedTemplateLiteral(["\n    width: 100px;\n    height: 100px;\n    object-fit: cover;\n    border-radius: 5px;\n"]);
+
+  _templateObject19 = function _templateObject19() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject18() {
+  var data = _taggedTemplateLiteral(["\n    display: none;\n"]);
+
+  _templateObject18 = function _templateObject18() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject17() {
+  var data = _taggedTemplateLiteral(["\n            margin-right: 0px;\n        "]);
 
   _templateObject17 = function _templateObject17() {
     return data;
@@ -13640,7 +13738,7 @@ function _templateObject17() {
 }
 
 function _templateObject16() {
-  var data = _taggedTemplateLiteral(["\n    position: relative;\n    display: inline-block;\n    width: 50px;\n    height: 24px;\n    margin: 0 5px;\n    margin-bottom: 15px;\n\n    input {\n        opacity: 0;\n        width: 0;\n        height: 0;\n\n        &:checked + span {\n            background-color: ", ";\n        }\n\n        &:focus + span {\n            box-shadow: 0 0 1px ", ";\n        }\n\n        &:checked + span:before {\n            -webkit-transform: translateX(26px);\n            -ms-transform: translateX(26px);\n            transform: translateX(26px);\n        }\n    }\n"]);
+  var data = _taggedTemplateLiteral(["\n    margin-top: 20px;\n    margin-right: 45px;\n\n    ", "\n"]);
 
   _templateObject16 = function _templateObject16() {
     return data;
@@ -13650,7 +13748,7 @@ function _templateObject16() {
 }
 
 function _templateObject15() {
-  var data = _taggedTemplateLiteral(["\n    margin-top: 20px;\n    margin-right: 45px;\n"]);
+  var data = _taggedTemplateLiteral(["\n            cursor: not-allowed;\n            background: #ced4da;\n        "]);
 
   _templateObject15 = function _templateObject15() {
     return data;
@@ -13660,7 +13758,7 @@ function _templateObject15() {
 }
 
 function _templateObject14() {
-  var data = _taggedTemplateLiteral(["\n            cursor: not-allowed;\n            background: #ced4da;\n        "]);
+  var data = _taggedTemplateLiteral(["\n            display: inline-block;\n            margin-left: 15px;\n        "]);
 
   _templateObject14 = function _templateObject14() {
     return data;
@@ -13670,7 +13768,7 @@ function _templateObject14() {
 }
 
 function _templateObject13() {
-  var data = _taggedTemplateLiteral(["\n            display: inline-block;\n            margin-left: 15px;\n        "]);
+  var data = _taggedTemplateLiteral(["\n    font-weight: ", "; \n    font-family: ", ";    \n    font-size: 16px;\n    border: 1px solid #ced4da;\n    width: 100%;\n    margin: 10px 0px;\n    padding: 8px 10px 8px 15px;\n    min-height: 16px;\n    outline: none;\n    border-radius: 30px;\n    display: block;\n    background: ", ";\n    transition: border 0.3s, box-shadow 0.3s;\n\n    &:focus {\n        box-shadow: ", ";\n        border: 1px solid ", ";\n    }\n\n    ", "\n\n    ", "\n"]);
 
   _templateObject13 = function _templateObject13() {
     return data;
@@ -13680,7 +13778,7 @@ function _templateObject13() {
 }
 
 function _templateObject12() {
-  var data = _taggedTemplateLiteral(["\n    font-weight: ", "; \n    font-family: ", ";    \n    font-size: 16px;\n    border: 1px solid #ced4da;\n    width: 100%;\n    margin: 10px 0px;\n    padding: 8px 10px 8px 15px;\n    min-height: 16px;\n    outline: none;\n    border-radius: 30px;\n    display: block;\n    background: ", ";\n    transition: border 0.3s, box-shadow 0.3s;\n\n    &:focus {\n        box-shadow: ", ";\n        border: 1px solid ", ";\n    }\n\n    ", "\n\n    ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n            cursor: not-allowed;\n            background: #ced4da;\n        "]);
 
   _templateObject12 = function _templateObject12() {
     return data;
@@ -13690,7 +13788,7 @@ function _templateObject12() {
 }
 
 function _templateObject11() {
-  var data = _taggedTemplateLiteral(["\n            cursor: not-allowed;\n            background: #ced4da;\n        "]);
+  var data = _taggedTemplateLiteral(["\n            display: inline-block;\n            margin-left: 15px;\n        "]);
 
   _templateObject11 = function _templateObject11() {
     return data;
@@ -13700,7 +13798,7 @@ function _templateObject11() {
 }
 
 function _templateObject10() {
-  var data = _taggedTemplateLiteral(["\n            display: inline-block;\n            margin-left: 15px;\n        "]);
+  var data = _taggedTemplateLiteral(["\n    font-weight: ", "; \n    font-family: ", ";    \n    font-size: 16px;\n    border: 1px solid #ced4da;\n    width: 100%;\n    margin: 10px 0px;\n    padding: 8px 15px 8px 5px;\n    min-height: 16px;\n    outline: none;\n    border-radius: 10px;\n    display: block;\n    background: ", ";\n    transition: border 0.3s, box-shadow 0.3s;\n\n    &:focus {\n        box-shadow: ", ";\n        border: 1px solid ", ";\n    }\n\n    ", "\n\n    ", "\n"]);
 
   _templateObject10 = function _templateObject10() {
     return data;
@@ -13710,7 +13808,7 @@ function _templateObject10() {
 }
 
 function _templateObject9() {
-  var data = _taggedTemplateLiteral(["\n    font-weight: ", "; \n    font-family: ", ";    \n    font-size: 16px;\n    border: 1px solid #ced4da;\n    width: 100%;\n    margin: 10px 0px;\n    padding: 8px 15px 8px 5px;\n    min-height: 16px;\n    outline: none;\n    border-radius: 10px;\n    display: block;\n    background: ", ";\n    transition: border 0.3s, box-shadow 0.3s;\n\n    &:focus {\n        box-shadow: ", ";\n        border: 1px solid ", ";\n    }\n\n    ", "\n\n    ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n            cursor: not-allowed;\n            background: #ced4da;\n        "]);
 
   _templateObject9 = function _templateObject9() {
     return data;
@@ -13720,7 +13818,7 @@ function _templateObject9() {
 }
 
 function _templateObject8() {
-  var data = _taggedTemplateLiteral(["\n            cursor: not-allowed;\n            background: #ced4da;\n        "]);
+  var data = _taggedTemplateLiteral(["\n            display: inline-block;\n            margin-left: 15px;\n        "]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -13730,7 +13828,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n            display: inline-block;\n            margin-left: 15px;\n        "]);
+  var data = _taggedTemplateLiteral(["\n    font-weight: ", "; \n    font-family: ", ";    \n    font-size: 16px;\n    border: 1px solid #ced4da;\n    width: 100%;\n    max-width: 100%;\n    min-height: 115px;\n    margin: 10px 0px;\n    padding: 8px 10px 8px 15px;\n    min-height: 16px;\n    outline: none;\n    border-radius: 10px;\n    display: block;\n    background: ", ";\n    transition: border 0.3s, box-shadow 0.3s;\n\n    &:focus {\n        box-shadow: ", ";\n        border: 1px solid ", ";\n    }\n\n    ", "\n\n    ", "\n"]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -13740,7 +13838,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n    font-weight: ", "; \n    font-family: ", ";    \n    font-size: 16px;\n    border: 1px solid #ced4da;\n    width: 100%;\n    max-width: 100%;\n    min-height: 115px;\n    margin: 10px 0px;\n    padding: 8px 10px 8px 15px;\n    min-height: 16px;\n    outline: none;\n    border-radius: 10px;\n    display: block;\n    background: ", ";\n    transition: border 0.3s, box-shadow 0.3s;\n\n    &:focus {\n        box-shadow: ", ";\n        border: 1px solid ", ";\n    }\n\n    ", "\n\n    ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n            cursor: not-allowed;\n            background: #ced4da;\n        "]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -13750,7 +13848,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n            cursor: not-allowed;\n            background: #ced4da;\n        "]);
+  var data = _taggedTemplateLiteral(["\n            display: inline-block;\n            margin-left: 15px;\n        "]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -13760,7 +13858,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n            display: inline-block;\n            margin-left: 15px;\n        "]);
+  var data = _taggedTemplateLiteral(["\n    font-weight: ", "; \n    font-family: ", ";     \n    font-size: 16px;\n    border: 1px solid #ced4da;\n    width: 100%;\n    margin: 10px 0px;\n    padding: 8px 10px 8px 15px;\n    min-height: 16px;\n    outline: none;\n    border-radius: 30px;\n    display: block;\n    background: ", ";\n    transition: border 0.3s, box-shadow 0.3s;\n\n    &:focus {\n        box-shadow: ", ";\n        border: 1px solid ", ";\n    }\n\n    ", "\n\n    ", "\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -13770,7 +13868,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n    font-weight: ", "; \n    font-family: ", ";     \n    font-size: 16px;\n    border: 1px solid #ced4da;\n    width: 100%;\n    margin: 10px 0px;\n    padding: 8px 10px 8px 15px;\n    min-height: 16px;\n    outline: none;\n    border-radius: 30px;\n    display: block;\n    background: ", ";\n    transition: border 0.3s, box-shadow 0.3s;\n\n    &:focus {\n        box-shadow: ", ";\n        border: 1px solid ", ";\n    }\n\n    ", "\n\n    ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n            cursor: pointer;\n            display: inline-block;\n            position: relative;\n            text-decoration: none;\n            font-size: 16px;\n            background: ", ";\n            color: ", ";\n            padding: 10px 20px;\n            margin: 10px 0px;\n            margin-bottom: 30px;\n            border-radius: 100px;\n            border: none;\n            outline: none;\n            font-weight: ", ";\n            box-shadow: ", ";\n            transition: transform 0.3s,\n                        background 0.3s,\n                        color 0.3s,\n                        opacity 0.3s;\n\n            &:hover {\n                transform: scale(1.1);\n                background-color: ", ";\n                color: ", ";\n            }\n\n            &:active {\n                transform: scale(0.95) !important;\n                background-color: ", ";\n            }\n        "]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -13790,7 +13888,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n    font-family: ", ";    \n    font-size: 16px;\n    padding: 5px;\n    display: block;\n\n    ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n    font-family: ", ";    \n    font-size: 16px;\n    padding: 5px;\n    display: block;\n\n    ", "\n\n    ", "\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -13808,8 +13906,24 @@ var Label = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].label(_tem
   return props.theme.roboto;
 }, function (props) {
   return props.inlineLabel && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject2());
+}, function (props) {
+  return props.isFile && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject3(), function (props) {
+    return props.theme.blue;
+  }, function (props) {
+    return props.theme.white;
+  }, function (props) {
+    return props.theme.regular;
+  }, function (props) {
+    return props.theme.shadows;
+  }, function (props) {
+    return props.theme.orange;
+  }, function (props) {
+    return props.theme.white;
+  }, function (props) {
+    return props.theme.red;
+  });
 });
-var StyledInput = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].input(_templateObject3(), function (props) {
+var StyledInput = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].input(_templateObject4(), function (props) {
   return props.theme.light;
 }, function (props) {
   return props.theme.roboto;
@@ -13820,11 +13934,11 @@ var StyledInput = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].inpu
 }, function (props) {
   return props.theme.blue;
 }, function (props) {
-  return props.inlineLabel && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject4());
+  return props.inlineLabel && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject5());
 }, function (props) {
-  return props.disabled && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject5());
+  return props.disabled && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject6());
 });
-var StyledArea = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].textarea(_templateObject6(), function (props) {
+var StyledArea = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].textarea(_templateObject7(), function (props) {
   return props.theme.light;
 }, function (props) {
   return props.theme.roboto;
@@ -13835,11 +13949,11 @@ var StyledArea = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].texta
 }, function (props) {
   return props.theme.blue;
 }, function (props) {
-  return props.inlineLabel && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject7());
+  return props.inlineLabel && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject8());
 }, function (props) {
-  return props.disabled && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject8());
+  return props.disabled && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject9());
 });
-var StyledSelect = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].select(_templateObject9(), function (props) {
+var StyledSelect = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].select(_templateObject10(), function (props) {
   return props.theme.light;
 }, function (props) {
   return props.theme.roboto;
@@ -13850,11 +13964,11 @@ var StyledSelect = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].sel
 }, function (props) {
   return props.theme.blue;
 }, function (props) {
-  return props.inlineLabel && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject10());
+  return props.inlineLabel && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject11());
 }, function (props) {
-  return props.disabled && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject11());
+  return props.disabled && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject12());
 });
-var StyledNumberFormat = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(react_number_format__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject12(), function (props) {
+var StyledNumberFormat = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(react_number_format__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject13(), function (props) {
   return props.theme.light;
 }, function (props) {
   return props.theme.roboto;
@@ -13865,24 +13979,51 @@ var StyledNumberFormat = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["
 }, function (props) {
   return props.theme.blue;
 }, function (props) {
-  return props.inlineLabel && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject13());
+  return props.inlineLabel && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject14());
 }, function (props) {
-  return props.disabled && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject14());
+  return props.disabled && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject15());
 });
-var Container = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject15());
+var Container = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject16(), function (props) {
+  return props.isFile && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject17());
+});
+var StyledFiles = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].input(_templateObject18());
+var StyledFilesImg = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].img(_templateObject19());
+var ImgPrevContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject20(), function (props) {
+  return props.theme.red;
+}, function (props) {
+  return props.theme.shadows;
+});
+var CloseHover = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject21(), function (props) {
+  return props.theme.white;
+});
+var ContainerPreview = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject22());
+
+var ImagePrev = function ImagePrev(props) {
+  function handleClick() {
+    props.onClick(props.src, props.file);
+  }
+
+  return /*#__PURE__*/React.createElement(ImgPrevContainer, {
+    onClick: handleClick
+  }, /*#__PURE__*/React.createElement(CloseHover, null), /*#__PURE__*/React.createElement(StyledFilesImg, {
+    src: props.src
+  }));
+};
 /** SWITCHER **/
 
-var ToogleContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].label(_templateObject16(), function (props) {
+
+var ToogleContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].label(_templateObject23(), function (props) {
   return props.theme.blue;
 }, function (props) {
   return props.theme.blue;
 });
-var SliderRound = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].span(_templateObject17());
+var SliderRound = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].span(_templateObject24());
 
 var ToogleSwith = function ToogleSwith(props) {
   return /*#__PURE__*/React.createElement(ToogleContainer, null, /*#__PURE__*/React.createElement("input", {
     type: props.type,
     value: props.value,
+    checked: props.checked,
     id: props.id,
     name: props.id,
     required: props.required,
@@ -13903,19 +14044,82 @@ var Input = /*#__PURE__*/function (_Component) {
     _this = _super.call(this, props);
     _this.state = {
       inputValue: null,
-      formattedValue: null
+      formattedValue: null,
+      filesList: new Array(),
+      previewImg: new Array()
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleChangeNumber = _this.handleChangeNumber.bind(_assertThisInitialized(_this));
+    _this.handleChangeFiles = _this.handleChangeFiles.bind(_assertThisInitialized(_this));
+    _this.handleDeleteFiles = _this.handleDeleteFiles.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Input, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      if (this.props.value && this.props.onChange) {
+        if (this.props.type == 'file') {
+          this.setState({
+            filesList: this.props.value
+          });
+        } else {
+          this.props.onChange(this.props.id, this.props.value);
+          this.setState({
+            inputValue: this.props.value
+          });
+        }
+      }
+    }
+  }, {
     key: "handleChange",
     value: function handleChange(event) {
-      if (this.props.onChange) this.props.onChange(this.props.id, event.target.value);
+      if (this.props.type == 'checkbox') {
+        if (this.props.onChange) this.props.onChange(this.props.id, event.target.checked);
+        this.setState({
+          inputValue: event.target.checked
+        });
+      } else {
+        if (this.props.onChange) this.props.onChange(this.props.id, event.target.value);
+        this.setState({
+          inputValue: event.target.value
+        });
+      }
+    }
+  }, {
+    key: "handleChangeFiles",
+    value: function handleChangeFiles(event) {
+      var filesArr = Array.prototype.slice.call(event.target.files);
+      var newPrev = new Array();
+      filesArr.forEach(function (element) {
+        newPrev.push({
+          preview: URL.createObjectURL(element),
+          file: element
+        });
+      });
       this.setState({
-        inputValue: event.target.value
+        previewImg: [].concat(_toConsumableArray(this.state.previewImg), newPrev)
+      });
+      if (this.props.onChange) this.props.onChange(this.props.id, [].concat(_toConsumableArray(this.props.value), _toConsumableArray(filesArr)));
+      this.setState({
+        filesList: [].concat(_toConsumableArray(this.state.filesList), _toConsumableArray(filesArr))
+      });
+    }
+  }, {
+    key: "handleDeleteFiles",
+    value: function handleDeleteFiles(img, file) {
+      var newPrev = this.state.previewImg.filter(function (element) {
+        return element.preview != img;
+      });
+      var newData = this.state.filesList.filter(function (element) {
+        return element != file;
+      });
+      this.setState({
+        previewImg: newPrev
+      });
+      if (this.props.onChange) this.props.onChange(this.props.id, newData);
+      this.setState({
+        filesList: newData
       });
     }
   }, {
@@ -13926,20 +14130,28 @@ var Input = /*#__PURE__*/function (_Component) {
       if (this.props.onChange) this.props.onChange(this.props.id, Number(value));
       this.setState({
         formattedValue: formattedValue,
-        inputValue: value
+        inputValue: Number(value)
       });
     }
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var haveSuffix = '';
       var input = null;
       var thousandSeparator = ' ';
       var decimalSeparator = ',';
       var value = null;
+      var listFiles = null;
+      var filesList = new Array();
 
-      if (this.props.value && this.props.onChange) {
-        value = this.props.value;
+      if (this.props.value != null && this.props.onChange) {
+        if (this.props.type == 'file') {
+          filesList = this.props.value;
+        } else {
+          value = this.props.value;
+        }
       } else {
         value = this.state.inputValue;
       }
@@ -13956,9 +14168,20 @@ var Input = /*#__PURE__*/function (_Component) {
         thousandSeparator = false;
       }
 
+      if (this.props.type == 'file' && filesList.length > 0) {
+        listFiles = this.state.previewImg.map(function (element) {
+          return /*#__PURE__*/React.createElement(ImagePrev, {
+            src: element.preview,
+            file: element.file,
+            onClick: _this2.handleDeleteFiles
+          });
+        });
+      }
+
       if (this.props.type == 'number') {
         input = /*#__PURE__*/React.createElement(StyledNumberFormat, {
           value: value,
+          decimalScale: 2,
           step: this.props.step ? this.props.step : 1,
           min: this.props.min ? this.props.min : 0,
           max: this.props.max ? this.props.max : null,
@@ -14004,10 +14227,25 @@ var Input = /*#__PURE__*/function (_Component) {
         input = /*#__PURE__*/React.createElement(ToogleSwith, {
           type: this.props.type,
           value: value,
+          checked: value,
           id: this.props.id,
           name: this.props.id,
           required: this.props.required,
           onChange: this.handleChange,
+          inlineLabel: this.props.inline
+        });
+      } else if (this.props.type == 'file') {
+        input = /*#__PURE__*/React.createElement(StyledFiles, {
+          type: this.props.type,
+          value: value,
+          id: this.props.id,
+          name: this.props.id,
+          multiple: this.props.multiple,
+          accept: this.props.accept,
+          required: this.props.required,
+          disabled: this.props.disabled,
+          placeholder: this.props.placeholder,
+          onChange: this.handleChangeFiles,
           inlineLabel: this.props.inline
         });
       } else {
@@ -14016,8 +14254,6 @@ var Input = /*#__PURE__*/function (_Component) {
           value: value,
           id: this.props.id,
           name: this.props.id,
-          multiple: this.props.multiple,
-          accept: this.props.accept,
           required: this.props.required,
           readonly: this.props.readonly,
           disabled: this.props.disabled,
@@ -14027,10 +14263,13 @@ var Input = /*#__PURE__*/function (_Component) {
         });
       }
 
-      return /*#__PURE__*/React.createElement(Container, null, this.props.label && /*#__PURE__*/React.createElement(Label, {
+      return /*#__PURE__*/React.createElement(Container, {
+        isFile: this.props.type == 'file' ? true : false
+      }, this.props.label && /*#__PURE__*/React.createElement(Label, {
+        isFile: this.props.type == 'file' ? true : false,
         htmlFor: this.props.id,
         inlineLabel: this.props.inline
-      }, " ", this.props.label, " "), input);
+      }, " ", this.props.label, " "), input, this.props.type == 'file' && /*#__PURE__*/React.createElement(ContainerPreview, null, listFiles));
     }
   }]);
 
@@ -14742,11 +14981,175 @@ function Table(props) {
 
 /***/ }),
 
+/***/ "./src/components/Uploader.jsx":
+/*!*************************************!*\
+  !*** ./src/components/Uploader.jsx ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _templateObject6() {
+  var data = _taggedTemplateLiteral(["\n    margin: 0;\n    margin-bottom: 10px;\n"]);
+
+  _templateObject6 = function _templateObject6() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject5() {
+  var data = _taggedTemplateLiteral(["\n            &:before {\n                animation-duration: 1.5s;\n                animation-iteration-count: infinite;\n                animation-name: moveIndeterminate;\n                animation-timing-function: linear;\n            }\n        "]);
+
+  _templateObject5 = function _templateObject5() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject4() {
+  var data = _taggedTemplateLiteral(["\n    position: relative;\n    width: 100%;\n    height: 14px;\n    margin-right: 20px;\n    border-radius: 20px;\n    background: #A5A5A5;\n    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.45);\n\n    &:before {\n        content: \"\";\n        position: absolute;\n        width: ", "%;\n        height: 14px;\n        border-radius: 20px;\n        ", ";\n        transition: width 0.5s, right 0.5s;\n    }\n\n    ", "\n\n    @keyframes moveIndeterminate {\n        0% { \n            width: 0%;\n            right: 0%;\n        }\n\n        50% { \n            width: 100%;\n            right: 0%;\n        }\n\n        100% { \n            width: 0%;\n            right: 100%;\n        }\n    }\n"]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    align-items: center;\n    min-width: 200px;\n    margin: 10px 0px;\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n            bottom: 20px;\n        "]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n    position: fixed;\n    z-index: 10;\n    bottom: -100%;\n    right: 20px;\n    border-radius: 10px;\n    padding: 20px 30px;\n    background: ", ";\n    box-shadow: ", ";\n    transition: bottom 0.5s ease-out;\n\n    ", "\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var Component = wp.element.Component;
+
+
+var UploadContainer = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject(), function (props) {
+  return props.theme.white;
+}, function (props) {
+  return props.theme.shadows;
+}, function (props) {
+  return props.show && Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["css"])(_templateObject2());
+});
+var ItemContainer = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject3());
+var ProgressBarStyle = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject4(), function (props) {
+  return props.pourcentage;
+}, function (props) {
+  return props.theme.orangeRadius;
+}, function (props) {
+  return props.inderterminate && Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["css"])(_templateObject5());
+});
+var TextBarre = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].p(_templateObject6());
+
+function ProgressBar(props) {
+  return /*#__PURE__*/React.createElement(ItemContainer, null, /*#__PURE__*/React.createElement(ProgressBarStyle, {
+    inderterminate: props.pourcentage >= 90,
+    pourcentage: props.pourcentage >= 90 ? 100 : props.pourcentage
+  }), /*#__PURE__*/React.createElement(TextBarre, null, props.pourcentage, "%"));
+}
+
+var Uploader = /*#__PURE__*/function (_Component) {
+  _inherits(Uploader, _Component);
+
+  var _super = _createSuper(Uploader);
+
+  function Uploader(props) {
+    _classCallCheck(this, Uploader);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(Uploader, [{
+    key: "render",
+    value: function render() {
+      var uploads = new Array();
+
+      for (var key in this.props.registerData) {
+        uploads.push( /*#__PURE__*/React.createElement(ProgressBar, {
+          key: key,
+          pourcentage: this.props.registerData[key]
+        }));
+      }
+
+      return /*#__PURE__*/React.createElement(UploadContainer, {
+        show: uploads.length > 0
+      }, /*#__PURE__*/React.createElement(TextBarre, null, "Envoie en cours ..."), uploads);
+    }
+  }]);
+
+  return Uploader;
+}(Component);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    registerData: state.general.registerData
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps)(Uploader));
+
+/***/ }),
+
 /***/ "./src/constants/index.js":
 /*!********************************!*\
   !*** ./src/constants/index.js ***!
   \********************************/
-/*! exports provided: GET_PROPRIETE, ADD_PROPRIETE, UPDATE_PROPRIETE, DELETE_PROPRIETE, GET_DOSSIER, ADD_DOSSIER, UPDATE_DOSSIER, DELETE_DOSSIER, GET_USER, ADD_USER, UPDATE_USER, DELETE_USER, GET_MY_DATA, GET_LOGOUT, GET_ADRESSE_SITE, TOOGLE_LOADER, TOOGLE_CLIENT_ADD_MODAL, TOOGLE_CHASSEUR_ADD_MODAL, TOOGLE_PROPRIETE_ADD_MODAL, TOOGLE_USER_MODAL, TOOGLE_DOSSIER_MODAL, TOOGLE_PROPRIETE_MODAL, SET_PROPRIETE_ADD_MODAL */
+/*! exports provided: GET_PROPRIETE, ADD_PROPRIETE, UPDATE_PROPRIETE, DELETE_PROPRIETE, GET_DOSSIER, ADD_DOSSIER, UPDATE_DOSSIER, DELETE_DOSSIER, GET_USER, ADD_USER, UPDATE_USER, DELETE_USER, GET_MY_DATA, GET_LOGOUT, GET_ADRESSE_SITE, TOOGLE_LOADER, TOOGLE_CLIENT_ADD_MODAL, TOOGLE_CHASSEUR_ADD_MODAL, TOOGLE_PROPRIETE_ADD_MODAL, TOOGLE_USER_MODAL, TOOGLE_DOSSIER_MODAL, TOOGLE_PROPRIETE_MODAL, SET_PROPRIETE_ADD_MOsDAL, SET_CLIENT_ADD_MODAL, SET_CHASSEUR_ADD_MODAL, SET_REGISTER_DATA */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14773,7 +15176,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOOGLE_USER_MODAL", function() { return TOOGLE_USER_MODAL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOOGLE_DOSSIER_MODAL", function() { return TOOGLE_DOSSIER_MODAL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOOGLE_PROPRIETE_MODAL", function() { return TOOGLE_PROPRIETE_MODAL; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PROPRIETE_ADD_MODAL", function() { return SET_PROPRIETE_ADD_MODAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PROPRIETE_ADD_MOsDAL", function() { return SET_PROPRIETE_ADD_MOsDAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_CLIENT_ADD_MODAL", function() { return SET_CLIENT_ADD_MODAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_CHASSEUR_ADD_MODAL", function() { return SET_CHASSEUR_ADD_MODAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_REGISTER_DATA", function() { return SET_REGISTER_DATA; });
 var GET_PROPRIETE = "GET_PROPRIETE";
 var ADD_PROPRIETE = "ADD_PROPRIETE";
 var UPDATE_PROPRIETE = "UPDATE_PROPRIETE";
@@ -14796,7 +15202,10 @@ var TOOGLE_PROPRIETE_ADD_MODAL = "TOOGLE_PROPRIETE_ADD_MODAL";
 var TOOGLE_USER_MODAL = "TOOGLE_USER_MODAL";
 var TOOGLE_DOSSIER_MODAL = "TOOGLE_DOSSIER_MODAL";
 var TOOGLE_PROPRIETE_MODAL = "TOOGLE_PROPRIETE_MODAL";
-var SET_PROPRIETE_ADD_MODAL = "SET_PROPRIETE_ADD_MODAL";
+var SET_PROPRIETE_ADD_MOsDAL = "SET_PROPRIETE_ADD_MODAL";
+var SET_CLIENT_ADD_MODAL = "SET_CLIENT_ADD_MODAL";
+var SET_CHASSEUR_ADD_MODAL = "SET_CHASSEUR_ADD_MODAL";
+var SET_REGISTER_DATA = "SET_REGISTER_DATA";
 
 /***/ }),
 
@@ -14822,13 +15231,30 @@ render( /*#__PURE__*/React.createElement(_App__WEBPACK_IMPORTED_MODULE_0__["defa
 /*!******************************!*\
   !*** ./src/lib/functions.js ***!
   \******************************/
-/*! exports provided: setDocumentTitle, formatPrix */
+/*! exports provided: setDocumentTitle, formatPrix, fixNumber, formatToJson, xmlTojson */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setDocumentTitle", function() { return setDocumentTitle; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatPrix", function() { return formatPrix; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fixNumber", function() { return fixNumber; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatToJson", function() { return formatToJson; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "xmlTojson", function() { return xmlTojson; });
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 // SET WINDOW TITLE
 function setDocumentTitle(title) {
   document.title = title;
@@ -14836,6 +15262,61 @@ function setDocumentTitle(title) {
 
 function formatPrix(num) {
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ');
+} // FIX NUMBER TO 2 DECIMAL
+
+function fixNumber(value) {
+  return Number(Math.round(parseFloat(value + 'e' + 2)) + 'e-' + 2);
+} // FORMAT DATA TO JSON
+
+function formatToJson(dataToFormat) {
+  var parserXML = new DOMParser();
+  var xmlDoc = parserXML.parseFromString(dataToFormat, "text/xml");
+  var json = xmlTojson(xmlDoc);
+  var data = json.wp_ajax.response.object.response_data;
+  var regex = /<!\[CDATA\[(.*)\]\]>/gm;
+  return JSON.parse(regex.exec(data)[1]);
+} // Changes XML to JSON
+
+function xmlTojson(srcDOM) {
+  var children = _toConsumableArray(srcDOM.children);
+
+  if (!children.length) {
+    return srcDOM.innerHTML;
+  }
+
+  var jsonResult = {};
+
+  var _iterator = _createForOfIteratorHelper(children),
+      _step;
+
+  try {
+    var _loop = function _loop() {
+      var child = _step.value;
+      var childIsArray = children.filter(function (eachChild) {
+        return eachChild.nodeName === child.nodeName;
+      }).length > 1;
+
+      if (childIsArray) {
+        if (jsonResult[child.nodeName] === undefined) {
+          jsonResult[child.nodeName] = [xmlTojson(child)];
+        } else {
+          jsonResult[child.nodeName].push(xmlTojson(child));
+        }
+      } else {
+        jsonResult[child.nodeName] = xmlTojson(child);
+      }
+    };
+
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      _loop();
+    }
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
+
+  return jsonResult;
 }
 
 /***/ }),
@@ -14860,7 +15341,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var initialState = {
   addProprieteModal: {
-    titre: 'caca',
+    title: null,
     description: null,
     cashflow_mensuel_brut: 0,
     rentabilite_net: 0,
@@ -14880,8 +15361,8 @@ var initialState = {
     nombre_de_celliers: 0,
     nombre_de_buanderies: 0,
     niveaux: 0,
-    cuisine: 0,
-    isolation: 0,
+    cuisine: false,
+    isolation: false,
     prix_du_bien: null,
     frais_dagence: 0,
     frais_de_travaux: 0,
@@ -14902,12 +15383,12 @@ var initialState = {
     gestion_locative_annuelles: 0,
     frais_divers_mensuelles: 0,
     frais_divers_annuelles: 0,
-    frais_electricite_mensuelle: 0,
-    frais_electricite_annuelle: 0,
-    frais_eau_mensuelle: 0,
-    frais_eau_annuelle: 0,
-    forfait_internet_mensuelle: 0,
-    forfait_internet_annuelle: 0,
+    frais_electricite_mensuelles: 0,
+    frais_electricite_annuelles: 0,
+    frais_eau_mensuelles: 0,
+    frais_eau_annuelles: 0,
+    forfait_internet_mensuelles: 0,
+    forfait_internet_annuelles: 0,
     total_charges_mensuelles: 0,
     total_charges_annuelles: 0,
     loyer_previsionnel_mensuelles: 0,
@@ -14932,10 +15413,13 @@ var initialState = {
     equipements: null,
     diagnostics: null,
     points_positif_et_negatifs: null,
-    filesPhotos: null,
+    filesPhotos: new Array(),
     chasseur: null,
-    artisan: null
-  }
+    artisan: null,
+    interlocuteur: null
+  },
+  addClientModal: {},
+  addChasseurModal: {}
 };
 function manageAddModal() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -14944,11 +15428,261 @@ function manageAddModal() {
 
   switch (action.type) {
     case _constants__WEBPACK_IMPORTED_MODULE_0__["SET_PROPRIETE_ADD_MODAL"]:
-      var newData = Object.assign({}, state.addProprieteModal);
-      newData[action.payload.key] = action.payload.data;
-      newState = _objectSpread(_objectSpread({}, state), {}, {
-        addProprieteModal: newData
-      });
+      if (action.payload.key != 'resetTheForm') {
+        var newData = Object.assign({}, state.addProprieteModal);
+        newData[action.payload.key] = action.payload.data;
+        var theKey = action.payload.key;
+        /* SET MENSUELLES VALUES */
+
+        switch (theKey) {
+          case 'charges_copropriete_annuelles':
+          case 'taxe_fonciere_annuelles':
+          case 'assurance_pno_annuelles':
+          case 'assurances_locatives_annuelles':
+          case 'gestion_locative_annuelles':
+          case 'frais_divers_annuelles':
+          case 'frais_electricite_annuelles':
+          case 'frais_eau_annuelles':
+          case 'forfait_internet_annuelles':
+          case 'loyer_previsionnel_annuelles':
+            var keyForA = theKey.replace(/annuelles$/, "mensuelles");
+            newData[keyForA] = Number((action.payload.data / 12).toFixed(0));
+            break;
+        }
+        /* SET ANNUELLES VALUES */
+
+
+        switch (theKey) {
+          case 'charges_copropriete_mensuelles':
+          case 'taxe_fonciere_mensuelles':
+          case 'assurance_pno_mensuelles':
+          case 'assurances_locatives_mensuelles':
+          case 'gestion_locative_mensuelles':
+          case 'frais_divers_mensuelles':
+          case 'frais_electricite_mensuelles':
+          case 'frais_eau_mensuelles':
+          case 'forfait_internet_mensuelles':
+          case 'loyer_previsionnel_mensuelles':
+            var keyForM = theKey.replace(/mensuelles$/, "annuelles");
+            newData[keyForM] = Number(action.payload.data * 12);
+            break;
+        }
+        /* SET TOTAL CHARGE MENSUELLES VALUES */
+
+
+        switch (theKey) {
+          case 'charges_copropriete_mensuelles':
+          case 'taxe_fonciere_mensuelles':
+          case 'assurance_pno_mensuelles':
+          case 'assurances_locatives_mensuelles':
+          case 'gestion_locative_mensuelles':
+          case 'frais_divers_mensuelles':
+          case 'frais_electricite_mensuelles':
+          case 'frais_eau_mensuelles':
+          case 'forfait_internet_mensuelles':
+            newData.total_charges_mensuelles = Number(newData.charges_copropriete_mensuelles + newData.taxe_fonciere_mensuelles + newData.assurance_pno_mensuelles + newData.assurances_locatives_mensuelles + newData.gestion_locative_mensuelles + newData.frais_divers_mensuelles + newData.frais_electricite_mensuelles + newData.frais_eau_mensuelles + newData.forfait_internet_mensuelles);
+            break;
+        }
+        /* SET TOTAL CHARGE ANNUELLES VALUES */
+
+
+        switch (theKey) {
+          case 'charges_copropriete_annuelles':
+          case 'taxe_fonciere_annuelles':
+          case 'assurance_pno_annuelles':
+          case 'assurances_locatives_annuelles':
+          case 'gestion_locative_annuelles':
+          case 'frais_divers_annuelles':
+          case 'frais_electricite_annuelles':
+          case 'frais_eau_annuelles':
+          case 'forfait_internet_annuelles':
+            newData.total_charges_annuelles = Number(newData.charges_copropriete_annuelles + newData.taxe_fonciere_annuelles + newData.assurance_pno_annuelles + newData.assurances_locatives_annuelles + newData.gestion_locative_annuelles + newData.frais_divers_annuelles + newData.frais_electricite_annuelles + newData.frais_eau_annuelles + newData.forfait_internet_annuelles);
+            break;
+        }
+        /* REVENU ANNUELLES */
+
+
+        switch (theKey) {
+          case 'vacance_locative':
+          case 'loyer_previsionnel_annuelles':
+            newData.total_revenus_annuelles = Number(newData.loyer_previsionnel_annuelles / (newData.vacance_locative / 100 + 1));
+            break;
+        }
+        /* REVENU ANNUELLES */
+
+
+        switch (theKey) {
+          case 'vacance_locative':
+          case 'loyer_previsionnel_mensuelles':
+            newData.total_revenus_mensuelles = Number(newData.loyer_previsionnel_mensuelles / (newData.vacance_locative / 100 + 1));
+            break;
+        }
+        /* PROJET GLOBAL */
+
+
+        switch (theKey) {
+          case 'prix_du_bien':
+          case 'frais_dagence':
+          case 'frais_de_travaux':
+          case 'honoraires_immomalin':
+          case 'mobilier_equipement':
+            newData.projet_global = Number(newData.prix_du_bien + newData.frais_dagence + newData.frais_de_travaux + newData.honoraires_immomalin + newData.mobilier_equipement);
+            break;
+        }
+        /* BUDGET */
+
+
+        switch (theKey) {
+          case 'frais_de_notaire':
+          case 'prix_du_bien':
+          case 'frais_dagence':
+          case 'frais_de_travaux':
+          case 'honoraires_immomalin':
+          case 'mobilier_equipement':
+            newData.budget = Number(newData.frais_de_notaire + newData.prix_du_bien + newData.frais_dagence + newData.frais_de_travaux + newData.honoraires_immomalin + newData.mobilier_equipement);
+            break;
+        }
+        /* SOLDE */
+
+
+        switch (theKey) {
+          case 'total_charges_annuelles':
+          case 'total_revenus_annuelles':
+            newData.solde = Number(newData.total_revenus_annuelles - newData.total_charges_annuelles);
+            break;
+        }
+        /* RENTABILITE NET */
+
+
+        switch (theKey) {
+          case 'loyer_previsionnel_mensuelles':
+          case 'total_charges_mensuelles':
+          case 'frais_de_notaire':
+          case 'prix_du_bien':
+          case 'frais_dagence':
+          case 'frais_de_travaux':
+          case 'honoraires_immomalin':
+          case 'mobilier_equipement':
+            newData.rentabilite_net = Number((newData.loyer_previsionnel_mensuelles - newData.total_charges_mensuelles) * 12 / (newData.prix_du_bien + newData.frais_dagence + newData.frais_de_travaux + newData.frais_de_notaire + newData.honoraires_immomalin + newData.mobilier_equipement));
+            break;
+        }
+        /* RENTABILITE BRUT */
+
+
+        switch (theKey) {
+          case 'loyer_previsionnel_annuelles':
+          case 'prix_du_bien':
+          case 'frais_dagence':
+          case 'frais_de_travaux':
+            newData.rentabilite_brut = Number(newData.loyer_previsionnel_annuelles / (newData.prix_du_bien + newData.frais_dagence + newData.frais_de_travaux));
+            break;
+        }
+        /* CASHFLOW BRUT */
+
+
+        switch (theKey) {
+          case 'loyer_previsionnel_mensuelles':
+          case 'total_charges_mensuelles':
+            newData.cashflow_mensuel_brut = Number(newData.loyer_previsionnel_mensuelles - newData.total_charges_mensuelles);
+            break;
+        }
+        /* PRIX M CARRE */
+
+
+        switch (theKey) {
+          case 'frais_dagence':
+          case 'prix_du_bien':
+          case 'superficie':
+            newData.prix_au_m = Number((newData.prix_du_bien + newData.frais_dagence) / newData.superficie);
+            break;
+        }
+
+        newState = _objectSpread(_objectSpread({}, state), {}, {
+          addProprieteModal: newData
+        });
+      } else {
+        newState = _objectSpread(_objectSpread({}, state), {}, {
+          addProprieteModal: {
+            title: '',
+            description: '',
+            cashflow_mensuel_brut: 0,
+            rentabilite_net: 0,
+            prix_au_m: 0,
+            rentabilite_brut: 0,
+            adresse_postale: '',
+            ville: '',
+            zip_code_postal: '',
+            type_bien: '',
+            annee: '',
+            superficie: 0,
+            superficie_habitable: 0,
+            nombre_de_pieces: '',
+            nombre_de_chambre: 0,
+            nombre_de_salles_de_bains: 0,
+            nombre_de_wc: 0,
+            nombre_de_celliers: 0,
+            nombre_de_buanderies: 0,
+            niveaux: 0,
+            cuisine: false,
+            isolation: false,
+            prix_du_bien: '',
+            frais_dagence: 0,
+            frais_de_travaux: 0,
+            frais_de_notaire: 0,
+            honoraires_immomalin: 0,
+            mobilier_equipement: 0,
+            projet_global: 0,
+            budget: 0,
+            charges_copropriete_mensuelles: '',
+            charges_copropriete_annuelles: 0,
+            taxe_fonciere_mensuelles: 0,
+            taxe_fonciere_annuelles: 0,
+            assurance_pno_mensuelles: 0,
+            assurance_pno_annuelles: 0,
+            assurances_locatives_mensuelles: 0,
+            assurances_locatives_annuelles: 0,
+            gestion_locative_mensuelles: 0,
+            gestion_locative_annuelles: 0,
+            frais_divers_mensuelles: 0,
+            frais_divers_annuelles: 0,
+            frais_electricite_mensuelles: 0,
+            frais_electricite_annuelles: 0,
+            frais_eau_mensuelles: 0,
+            frais_eau_annuelles: 0,
+            forfait_internet_mensuelles: 0,
+            forfait_internet_annuelles: 0,
+            total_charges_mensuelles: 0,
+            total_charges_annuelles: 0,
+            loyer_previsionnel_mensuelles: 0,
+            loyer_previsionnel_annuelles: 0,
+            vacance_locative: 0,
+            total_revenus_mensuelles: 0,
+            total_revenus_annuelles: 0,
+            solde: 0,
+            nombre_de_lots: '',
+            derniere_assemble: '',
+            syndic: '',
+            details_charges_copropriete: '',
+            type_de_chauffage: '',
+            mode_de_chauffage: '',
+            energie_du_chauffage: '',
+            caves: 0,
+            terrases: 0,
+            balcons: 0,
+            varangues: 0,
+            piscines: 0,
+            jacuzzis: 0,
+            equipements: '',
+            diagnostics: '',
+            points_positif_et_negatifs: '',
+            filesPhotos: new Array(),
+            chasseur: '',
+            artisan: '',
+            interlocuteur: ''
+          }
+        });
+      }
+
       return newState || state;
 
     default:
@@ -15063,10 +15797,12 @@ var initialState = {
     statut: false,
     message: 'Veuillez patienter ...'
   },
+  registerData: {},
   logOut: '#logout',
   homeUrl: '#homeUrl',
   myData: {
     data: {
+      id: null,
       avatar: 'default',
       display_name: 'Utilisateur',
       role: 'load'
@@ -15150,6 +15886,20 @@ function manageGeneral() {
       newState = _objectSpread(_objectSpread({}, state), {}, {
         proprieteModal: !state.proprieteModal
       });
+      return newState || state;
+
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["SET_REGISTER_DATA"]:
+      if (action.payload.data < 100) {
+        newState = _objectSpread(_objectSpread({}, state), {}, {
+          registerData: _objectSpread(_objectSpread({}, state.registerData), {}, _defineProperty({}, action.payload.key, action.payload.data))
+        });
+      } else {
+        newState = _objectSpread(_objectSpread({}, state), {}, {
+          registerData: _objectSpread({}, state.registerData)
+        });
+        delete newState.registerData[action.payload.key];
+      }
+
       return newState || state;
 
     default:
@@ -15463,7 +16213,7 @@ var composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || redux__WEB
 /*!***********************************************!*\
   !*** ./src/theme/design/componentsDesign.jsx ***!
   \***********************************************/
-/*! exports provided: StyledButton, TitleSection, Text, Inline, RowInput, TitleForm, Label, Form */
+/*! exports provided: StyledButton, TitleSection, Text, Inline, RowInput, TitleForm, Label, Form, SendButton */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15476,9 +16226,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TitleForm", function() { return TitleForm; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Label", function() { return Label; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Form", function() { return Form; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SendButton", function() { return SendButton; });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-function _templateObject20() {
+function _templateObject22() {
+  var data = _taggedTemplateLiteral(["\n    cursor: pointer;\n    display: inline-block;\n    position: relative;\n    text-decoration: none;\n    font-size: 16px;\n    background: ", ";\n    color: ", ";\n    padding: 10px 20px;\n    margin-right: 10px;\n    margin-top: 50px;\n    margin-left: 0px;\n    margin-bottom: 20px;\n    border-radius: 100px;\n    border: none;\n    outline: none;\n    font-weight: ", ";\n    box-shadow: ", ";\n    transition: transform 0.3s,\n                background 0.3s,\n                color 0.3s,\n                opacity 0.3s;\n\n    &:hover {\n        transform: scale(1.1);\n        background-color: ", ";\n        color: ", ";\n    }\n\n    &:active {\n        transform: scale(0.95) !important;\n        background-color: ", ";\n    }\n"]);
+
+  _templateObject22 = function _templateObject22() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject21() {
   var data = _taggedTemplateLiteral(["\n    padding: 10px;\n"]);
+
+  _templateObject21 = function _templateObject21() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject20() {
+  var data = _taggedTemplateLiteral(["\n    font-family: ", ";\n    font-weight: ", ";\n    font-size: 15px;\n    min-width: 200px;\n"]);
 
   _templateObject20 = function _templateObject20() {
     return data;
@@ -15488,7 +16259,7 @@ function _templateObject20() {
 }
 
 function _templateObject19() {
-  var data = _taggedTemplateLiteral(["\n    font-family: ", ";\n    font-weight: ", ";\n    font-size: 15px;\n    min-width: 175px;\n"]);
+  var data = _taggedTemplateLiteral(["\n            margin-top: 0px;\n        "]);
 
   _templateObject19 = function _templateObject19() {
     return data;
@@ -15498,7 +16269,7 @@ function _templateObject19() {
 }
 
 function _templateObject18() {
-  var data = _taggedTemplateLiteral(["\n    font-family: ", ";\n    font-weight: ", ";\n    font-size: 20px;\n    position: relative;\n    padding: 15px 0;\n    margin-top: 50px;\n    margin-bottom: 30px;\n\n    &:after {\n        content: \"\";\n        position: absolute;\n        width: 90px;\n        height: 3px;\n        border-radius: 30px;\n        bottom: 0;\n        left: 0;\n        background: ", ";\n    }\n"]);
+  var data = _taggedTemplateLiteral(["\n    font-family: ", ";\n    font-weight: ", ";\n    font-size: 20px;\n    position: relative;\n    padding: 15px 0;\n    margin-top: 50px;\n    margin-bottom: 30px;\n\n    &:after {\n        content: \"\";\n        position: absolute;\n        width: 90px;\n        height: 3px;\n        border-radius: 30px;\n        bottom: 0;\n        left: 0;\n        background: ", ";\n    }\n\n    ", "\n"]);
 
   _templateObject18 = function _templateObject18() {
     return data;
@@ -15783,13 +16554,30 @@ var TitleForm = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].h3(_te
   return props.theme.bold;
 }, function (props) {
   return props.theme.black;
+}, function (props) {
+  return props.isFirst && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject19());
 });
-var Label = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].h4(_templateObject19(), function (props) {
+var Label = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].h4(_templateObject20(), function (props) {
   return props.theme.montserrat;
 }, function (props) {
   return props.theme.bold;
 });
-var Form = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].form(_templateObject20());
+var Form = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].form(_templateObject21());
+var SendButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject22(), function (props) {
+  return props.theme.blue;
+}, function (props) {
+  return props.theme.white;
+}, function (props) {
+  return props.theme.regular;
+}, function (props) {
+  return props.theme.shadows;
+}, function (props) {
+  return props.theme.orange;
+}, function (props) {
+  return props.theme.white;
+}, function (props) {
+  return props.theme.red;
+});
 
 /***/ }),
 
@@ -15808,6 +16596,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Navigation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/Navigation */ "./src/components/Navigation.jsx");
 /* harmony import */ var _Modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Modal */ "./src/theme/layout/Modal.jsx");
 /* harmony import */ var _views_AddPropriete__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../views/AddPropriete */ "./src/views/AddPropriete.jsx");
+/* harmony import */ var _components_Uploader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/Uploader */ "./src/components/Uploader.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15899,6 +16688,7 @@ var Component = wp.element.Component;
 
 
 
+
 var BarreTop = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject(), function (props) {
   return props.theme.white;
 }, function (props) {
@@ -15947,7 +16737,7 @@ var AppContainer = /*#__PURE__*/function (_Component) {
         }
       }, /*#__PURE__*/React.createElement("div", null), /*#__PURE__*/React.createElement("div", null), /*#__PURE__*/React.createElement("div", null)), /*#__PURE__*/React.createElement(Title, null, "Projet", /*#__PURE__*/React.createElement("span", null, "locatif"))), /*#__PURE__*/React.createElement(_components_LogOutButton__WEBPACK_IMPORTED_MODULE_2__["default"], null)), /*#__PURE__*/React.createElement(_components_Navigation__WEBPACK_IMPORTED_MODULE_3__["default"], {
         statMenu: this.state.openMenu
-      }), "/** MODAL ADD **/", /*#__PURE__*/React.createElement(_Modal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }), /*#__PURE__*/React.createElement(_Modal__WEBPACK_IMPORTED_MODULE_4__["default"], {
         type: "addPropriete",
         show: this.props.showModalAddPropriete,
         title: "Ajouter une Propri\xE9t\xE9"
@@ -15957,7 +16747,7 @@ var AppContainer = /*#__PURE__*/function (_Component) {
       }), /*#__PURE__*/React.createElement(_Modal__WEBPACK_IMPORTED_MODULE_4__["default"], {
         type: "addClient",
         show: this.props.showModalAddClient
-      }, /*#__PURE__*/React.createElement("p", null, "ADD Client")), "/** MODAL INFOBOX **/", /*#__PURE__*/React.createElement(_Modal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }, /*#__PURE__*/React.createElement("p", null, "ADD Client")), /*#__PURE__*/React.createElement(_Modal__WEBPACK_IMPORTED_MODULE_4__["default"], {
         type: "userModal",
         show: this.props.showModalUser
       }, /*#__PURE__*/React.createElement("p", null, "User")), /*#__PURE__*/React.createElement(_Modal__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -15968,7 +16758,7 @@ var AppContainer = /*#__PURE__*/function (_Component) {
         show: this.props.showModalPropriete
       }, /*#__PURE__*/React.createElement("p", null, "propriete")), /*#__PURE__*/React.createElement(Main, {
         closeMenu: this.state.openMenu
-      }, this.props.children));
+      }, this.props.children), /*#__PURE__*/React.createElement(_components_Uploader__WEBPACK_IMPORTED_MODULE_6__["default"], null));
     }
   }]);
 
@@ -16299,721 +17089,817 @@ var themeVariable = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions */ "./src/actions/index.js");
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-/* harmony import */ var _components_Input__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Input */ "./src/components/Input.jsx");
-/* harmony import */ var _theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../theme/design/componentsDesign */ "./src/theme/design/componentsDesign.jsx");
-function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n    cursor: pointer;\n    display: inline-block;\n    position: relative;\n    text-decoration: none;\n    font-size: 16px;\n    background: ", ";\n    color: ", ";\n    padding: 10px 20px;\n    margin-right: 10px;\n    margin-top: 50px;\n    margin-left: 0px;\n    margin-bottom: 20px;\n    border-radius: 100px;\n    border: none;\n    outline: none;\n    font-weight: ", ";\n    box-shadow: ", ";\n    transition: transform 0.3s,\n                background 0.3s,\n                color 0.3s,\n                opacity 0.3s;\n\n    &:hover {\n        transform: scale(1.1);\n        background-color: ", ";\n        color: ", ";\n    }\n\n    &:active {\n        transform: scale(0.95) !important;\n        background-color: ", ";\n    }\n"]);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ "./src/actions/index.js");
+/* harmony import */ var _lib_functions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../lib/functions */ "./src/lib/functions.js");
+/* harmony import */ var _components_Input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Input */ "./src/components/Input.jsx");
+/* harmony import */ var _theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../theme/design/componentsDesign */ "./src/theme/design/componentsDesign.jsx");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-  _templateObject = function _templateObject() {
-    return data;
-  };
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
-  return data;
-}
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+var Component = wp.element.Component;
 
 
 
 
 
 
-var SendButton = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].button(_templateObject(), function (props) {
-  return props.theme.blue;
-}, function (props) {
-  return props.theme.white;
-}, function (props) {
-  return props.theme.regular;
-}, function (props) {
-  return props.theme.shadows;
-}, function (props) {
-  return props.theme.orange;
-}, function (props) {
-  return props.theme.white;
-}, function (props) {
-  return props.theme.red;
-});
 
-function AddPropriete(props) {
-  return /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Form"], {
-    enctype: "multipart/form-data",
-    onSubmit: function onSubmit() {
-      return console.log('Send' + event.target.value);
+var AddPropriete = /*#__PURE__*/function (_Component) {
+  _inherits(AddPropriete, _Component);
+
+  var _super = _createSuper(AddPropriete);
+
+  function AddPropriete(props) {
+    var _this;
+
+    _classCallCheck(this, AddPropriete);
+
+    _this = _super.call(this, props);
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(AddPropriete, [{
+    key: "handleSubmit",
+    value: function handleSubmit(event) {
+      var _this2 = this;
+
+      var fakeID = '_' + Math.random().toString(36).substr(2, 9);
+      this.props.toogleAddPropriete();
+      this.props.handleChangeModal('resetTheForm', true);
+      event.preventDefault();
+      this.props.handleChangeModal('chasseur', Number(this.props.chasseurID));
+      var data = new FormData();
+      data.append('action', 'form_add_propriete');
+
+      for (var key in this.props.modalData) {
+        if (key != 'filesPhotos' && this.props.modalData[key] != null) {
+          data.append(key, this.props.modalData[key]);
+        } else {
+          if (this.props.modalData[key] != null) {
+            var _iterator = _createForOfIteratorHelper(this.props.modalData[key]),
+                _step;
+
+            try {
+              for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                var item = _step.value;
+                data.append('files[]', item);
+              }
+            } catch (err) {
+              _iterator.e(err);
+            } finally {
+              _iterator.f();
+            }
+          }
+        }
+      }
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../wp-content/themes/themeplocatif/ajax-board.php', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        onUploadProgress: function onUploadProgress(progress) {
+          var loaded = progress.loaded,
+              total = progress.total;
+          var percentageProgress = Math.floor(loaded / total * 90);
+
+          _this2.props.registerDataProgress(fakeID, percentageProgress);
+        }
+      }).then(function (response) {
+        result = Object(_lib_functions__WEBPACK_IMPORTED_MODULE_3__["formatToJson"])(response.data);
+
+        if (result.id == null) {
+          console.log('error');
+        }
+      })["catch"](function (error) {
+        console.log(error);
+      }).then(function () {
+        _this2.props.registerDataProgress(fakeID, 100);
+      });
     }
-  }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.chasseur,
-    onChange: props.handleChangeModal,
-    type: "hidden",
-    id: "chasseur"
-  }), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["TitleForm"], null, "D\xE9tails"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.titre,
-    onChange: props.handleChangeModal,
-    required: true,
-    type: "text",
-    id: "titre",
-    label: "Titre"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.filesPhotos,
-    onChange: props.handleChangeModal,
-    type: "file",
-    id: "filesPhotos",
-    multiple: "true",
-    accept: ".png, .jpg, .jpeg",
-    label: "Ajouter des photos"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.description,
-    onChange: props.handleChangeModal,
-    type: "textarea",
-    id: "description",
-    label: "Courte description"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.adresse_postale,
-    onChange: props.handleChangeModal,
-    type: "text",
-    id: "adresse_postale",
-    label: "Adresse postale"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.artisan,
-    onChange: props.handleChangeModal,
-    type: "text",
-    id: "artisan",
-    label: "Artisan"
-  }), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.ville,
-    onChange: props.handleChangeModal,
-    type: "text",
-    id: "ville",
-    label: "Ville"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.zip_code_postal,
-    onChange: props.handleChangeModal,
-    type: "number",
-    id: "zip_code_postal",
-    thousandSeparator: "false",
-    label: "ZIP / Code postal"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.type_bien,
-    onChange: props.handleChangeModal,
-    type: "select",
-    id: "type_bien",
-    label: "Type de bien",
-    list: ['Appartement', 'Maison', 'Autre'],
-    required: true
-  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.annee,
-    onChange: props.handleChangeModal,
-    type: "number",
-    id: "annee",
-    thousandSeparator: "false",
-    label: "Ann\xE9e"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.superficie,
-    onChange: props.handleChangeModal,
-    type: "number",
-    min: "1",
-    label: "Superficie",
-    id: "superficie",
-    suffix: "m\xB2",
-    required: true
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.superficie_habitable,
-    onChange: props.handleChangeModal,
-    type: "number",
-    min: "1",
-    id: "superficie_habitable",
-    label: "Superficie Habitable",
-    suffix: "m\xB2"
-  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["TitleForm"], null, "Agencement int\xE9rieur"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.nombre_de_pieces,
-    onChange: props.handleChangeModal,
-    type: "number",
-    min: "1",
-    id: "nombre_de_pieces",
-    label: "Nombre de Pi\xE8ce",
-    required: true
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.nombre_de_chambre,
-    onChange: props.handleChangeModal,
-    type: "number",
-    id: "nombre_de_chambre",
-    label: "Nombre de chambre",
-    required: true
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.nombre_de_salles_de_bains,
-    onChange: props.handleChangeModal,
-    type: "number",
-    id: "nombre_de_salles_de_bains",
-    label: "Nombre de salle de Bain",
-    required: true
-  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.nombre_de_wc,
-    onChange: props.handleChangeModal,
-    type: "number",
-    id: "nombre_de_wc",
-    label: "Nombre de WC",
-    required: true
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.nombre_de_celliers,
-    onChange: props.handleChangeModal,
-    type: "number",
-    id: "nombre_de_celliers",
-    label: "Nombre de Cellier",
-    required: true
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.nombre_de_buanderies,
-    onChange: props.handleChangeModal,
-    type: "number",
-    id: "nombre_de_buanderies",
-    label: "Nombre de Buanderie",
-    required: true
-  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.niveaux,
-    onChange: props.handleChangeModal,
-    type: "number",
-    id: "niveaux",
-    label: "Nombre de Niveaux",
-    required: true
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.cuisine,
-    onChange: props.handleChangeModal,
-    type: "checkbox",
-    id: "cuisine",
-    label: "Cuisine"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.isolation,
-    onChange: props.handleChangeModal,
-    type: "checkbox",
-    id: "isolation",
-    label: "Isolation"
-  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["TitleForm"], null, "Agencement ext\xE9rieur"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.caves,
-    onChange: props.handleChangeModal,
-    required: true,
-    type: "number",
-    step: ".01",
-    id: "caves",
-    label: "Nombre de cave"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.terrases,
-    onChange: props.handleChangeModal,
-    required: true,
-    type: "number",
-    step: ".01",
-    id: "terrases",
-    label: "Nombre de terrase"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.balcons,
-    onChange: props.handleChangeModal,
-    required: true,
-    type: "number",
-    step: ".01",
-    id: "balcons",
-    label: "Nombre de balcon"
-  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.varangues,
-    onChange: props.handleChangeModal,
-    required: true,
-    type: "number",
-    step: ".01",
-    id: "varangues",
-    label: "Nombre de varangue"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.piscines,
-    onChange: props.handleChangeModal,
-    required: true,
-    type: "number",
-    step: ".01",
-    id: "piscines",
-    label: "Nombre de piscine"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.jacuzzis,
-    onChange: props.handleChangeModal,
-    required: true,
-    type: "number",
-    step: ".01",
-    id: "jacuzzis",
-    label: "Nombre de jacuzzi"
-  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["TitleForm"], null, "Copropri\xE9t\xE9"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.nombre_de_lots,
-    onChange: props.handleChangeModal,
-    required: true,
-    type: "number",
-    id: "nombre_de_lots",
-    label: "Nombre de lots"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.derniere_assemble,
-    onChange: props.handleChangeModal,
-    required: true,
-    type: "number",
-    id: "derniere_assemble",
-    thousandSeparator: "false",
-    label: "Derni\xE8re assembl\xE9e"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.syndic,
-    onChange: props.handleChangeModal,
-    type: "text",
-    id: "syndic",
-    label: "Syndic"
-  })), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.details_charges_copropriete,
-    onChange: props.handleChangeModal,
-    type: "textarea",
-    id: "details_charges_copropriete",
-    label: "D\xE9tails charges",
-    placeholder: "Exemple: Eau, EDF communs, Gardien, Chauffage, Nettoyage, Syndic"
-  }), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["TitleForm"], null, "Chauffage"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.type_de_chauffage,
-    onChange: props.handleChangeModal,
-    type: "text",
-    id: "type_de_chauffage",
-    label: "Type"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.mode_de_chauffage,
-    onChange: props.handleChangeModal,
-    type: "text",
-    id: "mode_de_chauffage",
-    label: "Mode"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.energie_du_chauffage,
-    onChange: props.handleChangeModal,
-    type: "text",
-    id: "energie_du_chauffage",
-    label: "\xC9nergie"
-  }), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["TitleForm"], null, "\xC9quipements"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.equipements,
-    onChange: props.handleChangeModal,
-    type: "textarea",
-    id: "equipements",
-    placeholder: "Exemple: Interphone, C\xE2ble, Double vitrage"
-  }), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["TitleForm"], null, "Diagnostics"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.diagnostics,
-    onChange: props.handleChangeModal,
-    type: "textarea",
-    id: "diagnostics"
-  }), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["TitleForm"], null, "Points positifs et n\xE9gatifs"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.points_positif_et_negatifs,
-    onChange: props.handleChangeModal,
-    type: "textarea",
-    id: "points_positif_et_negatifs"
-  }), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["TitleForm"], null, "Frais d'acquisition"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.prix_du_bien,
-    onChange: props.handleChangeModal,
-    required: true,
-    type: "number",
-    step: ".01",
-    id: "prix_du_bien",
-    euro: true,
-    label: "Prix du bien"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.frais_dagence,
-    onChange: props.handleChangeModal,
-    required: true,
-    type: "number",
-    step: ".01",
-    id: "frais_dagence",
-    euro: true,
-    label: "Frais d'agence"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.frais_de_notaire,
-    onChange: props.handleChangeModal,
-    required: true,
-    type: "number",
-    step: ".01",
-    id: "frais_de_notaire",
-    euro: true,
-    label: "Frais de notaire"
-  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.frais_de_travaux,
-    onChange: props.handleChangeModal,
-    required: true,
-    type: "number",
-    step: ".01",
-    id: "frais_de_travaux",
-    euro: true,
-    label: "Estimation Travaux"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.mobilier_equipement,
-    onChange: props.handleChangeModal,
-    required: true,
-    type: "number",
-    step: ".01",
-    id: "mobilier_equipement",
-    euro: true,
-    label: "Mobilier / Equipement"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.honoraires_immomalin,
-    onChange: props.handleChangeModal,
-    required: true,
-    type: "number",
-    step: ".01",
-    id: "honoraires_immomalin",
-    euro: true,
-    label: "Commission chasseur"
-  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], {
-    result: true
-  }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.projet_global,
-    onChange: props.handleChangeModal,
-    required: true,
-    type: "number",
-    step: ".01",
-    id: "projet_global",
-    euro: true,
-    label: "Projet Global (Hors frais de notaire)",
-    readonly: true,
-    disabled: true
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.budget,
-    onChange: props.handleChangeModal,
-    required: true,
-    type: "number",
-    step: ".01",
-    id: "budget",
-    euro: true,
-    label: "BUDGET",
-    readonly: true,
-    disabled: true
-  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["TitleForm"], null, "Charges locatif"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Label"], null, "Charges copropri\xE9t\xE9"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], {
-    dispatch: true
-  }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.charges_copropriete_mensuelles,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "charges_copropriete_mensuelles",
-    label: "Mensuelles"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.charges_copropriete_annuelles,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "charges_copropriete_annuelles",
-    label: "Annuelles"
-  }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Label"], null, "Taxe fonci\xE8re"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], {
-    dispatch: true
-  }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.taxe_fonciere_mensuelles,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "taxe_fonciere_mensuelles",
-    label: "Mensuelles"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.taxe_fonciere_annuelles,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "taxe_fonciere_annuelles",
-    label: "Annuelles"
-  }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Label"], null, "Assurance PNO"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], {
-    dispatch: true
-  }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.assurance_pno_mensuelles,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "assurance_pno_mensuelles",
-    label: "Mensuelles"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.assurance_pno_annuelles,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "assurance_pno_annuelles",
-    label: "Annuelles"
-  }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Label"], null, "Assurances locatives"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], {
-    dispatch: true
-  }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.assurances_locatives_mensuelles,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "assurances_locatives_mensuelles",
-    label: "Mensuelles"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.assurances_locatives_annuelles,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "assurances_locatives_annuelles",
-    label: "Annuelles"
-  }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Label"], null, "Gestion locative"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], {
-    dispatch: true
-  }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.gestion_locative_mensuelles,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "gestion_locative_mensuelles",
-    label: "Mensuelles"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.gestion_locative_annuelles,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "gestion_locative_annuelles",
-    label: "Annuelles"
-  }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Label"], null, "Frais divers"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], {
-    dispatch: true
-  }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.frais_divers_mensuelles,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "frais_divers_mensuelles",
-    label: "Mensuelles"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.frais_divers_annuelles,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "frais_divers_annuelles",
-    label: "Annuelles"
-  }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Label"], null, "Eau"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], {
-    dispatch: true
-  }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.frais_electricite_mensuelle,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "frais_electricite_mensuelle",
-    label: "Mensuelles"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.frais_electricite_annuelle,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "frais_electricite_annuelle",
-    label: "Annuelles"
-  }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Label"], null, "\xC9lectricit\xE9"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], {
-    dispatch: true
-  }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.frais_eau_mensuelle,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "frais_eau_mensuelle",
-    label: "Mensuelles"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.frais_eau_annuelle,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "frais_eau_annuelle",
-    label: "Annuelles"
-  }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Label"], null, "Forfait internet"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], {
-    dispatch: true
-  }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.forfait_internet_mensuelle,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "forfait_internet_mensuelle",
-    label: "Mensuelles"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.forfait_internet_annuelle,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "forfait_internet_annuelle",
-    label: "Annuelles"
-  }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], {
-    result: true
-  }, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Label"], null, "TOTAL"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], {
-    dispatch: true
-  }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.total_charges_mensuelles,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "total_charges_mensuelles",
-    readonly: true,
-    disabled: true,
-    label: "Mensuelles"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.total_charges_annuelles,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "total_charges_annuelles",
-    readonly: true,
-    disabled: true,
-    label: "Annuelles"
-  }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["TitleForm"], null, "Revenus locatif"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Label"], null, "Loyer pr\xE9visionnel"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], {
-    dispatch: true
-  }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.loyer_previsionnel_mensuelles,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "loyer_previsionnel_mensuelles",
-    label: "Mensuelles"
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.loyer_previsionnel_annuelles,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "loyer_previsionnel_annuelles",
-    label: "Annuelles",
-    readonly: true,
-    disabled: true
-  }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Label"], null, "Vacance locative"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.vacance_locative,
-    onChange: props.handleChangeModal,
-    required: true,
-    pourcent: true,
-    type: "number",
-    step: ".01",
-    id: "vacance_locative"
-  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], {
-    result: true
-  }, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Label"], null, "TOTAL"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], {
-    dispatch: true
-  }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.total_revenus_mensuelles,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "total_revenus_mensuelles",
-    label: "Mensuelles",
-    readonly: true,
-    disabled: true
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.total_revenus_annuelles,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "total_revenus_annuelles",
-    label: "Annuelles",
-    readonly: true,
-    disabled: true
-  }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Label"], null, "Solde"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.solde,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "solde",
-    readonly: true,
-    disabled: true
-  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["TitleForm"], null, "Vue synth\xE9tique"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Label"], null, "Rentabilit\xE9"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], {
-    dispatch: true
-  }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.rentabilite_net,
-    onChange: props.handleChangeModal,
-    required: true,
-    pourcent: true,
-    type: "number",
-    step: ".01",
-    id: "rentabilite_net",
-    label: "Brut",
-    readonly: true,
-    disabled: true
-  }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.rentabilite_brut,
-    onChange: props.handleChangeModal,
-    required: true,
-    pourcent: true,
-    type: "number",
-    step: ".01",
-    id: "rentabilite_brut",
-    label: "Net",
-    readonly: true,
-    disabled: true
-  }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Label"], null, "Cashflow Brut"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.cashflow_mensuel_brut,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "cashflow_mensuel_brut",
-    label: "mensuelle",
-    readonly: true,
-    disabled: true
-  })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Label"], null, "Prix au m\xB2"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: props.modalData.prix_au_m,
-    onChange: props.handleChangeModal,
-    required: true,
-    euro: true,
-    type: "number",
-    step: ".01",
-    id: "prix_au_m",
-    readonly: true,
-    disabled: true
-  })), /*#__PURE__*/React.createElement(SendButton, {
-    noMarginLeft: true,
-    type: "submit"
-  }, "Enregistrer"));
-}
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["Form"], {
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.chasseur,
+        onChange: this.props.handleChangeModal,
+        type: "hidden",
+        id: "chasseur"
+      }), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], {
+        dispatch: true
+      }, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["TitleForm"], {
+        isFirst: true
+      }, "D\xE9tails"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.filesPhotos,
+        onChange: this.props.handleChangeModal,
+        type: "file",
+        id: "filesPhotos",
+        multiple: "true",
+        accept: ".png, .jpg, .jpeg",
+        label: "Ajouter des photos"
+      })), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.titre,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "text",
+        id: "title",
+        label: "Titre"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.description,
+        onChange: this.props.handleChangeModal,
+        type: "textarea",
+        id: "description",
+        label: "Courte description"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.adresse_postale,
+        onChange: this.props.handleChangeModal,
+        type: "text",
+        id: "adresse_postale",
+        label: "Adresse postale"
+      }), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.artisan,
+        onChange: this.props.handleChangeModal,
+        type: "text",
+        id: "artisan",
+        label: "Artisan"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.interlocuteur,
+        onChange: this.props.handleChangeModal,
+        type: "text",
+        id: "interlocuteur",
+        label: "Interlocuteur"
+      })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.ville,
+        onChange: this.props.handleChangeModal,
+        type: "text",
+        id: "ville",
+        label: "Ville"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.zip_code_postal,
+        onChange: this.props.handleChangeModal,
+        type: "number",
+        id: "zip_code_postal",
+        thousandSeparator: "false",
+        label: "ZIP / Code postal"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.type_bien,
+        onChange: this.props.handleChangeModal,
+        type: "select",
+        id: "type_bien",
+        label: "Type de bien",
+        list: ['Appartement', 'Maison', 'Autre'],
+        required: true
+      })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.annee,
+        onChange: this.props.handleChangeModal,
+        type: "number",
+        id: "annee",
+        thousandSeparator: "false",
+        label: "Ann\xE9e"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.superficie,
+        onChange: this.props.handleChangeModal,
+        type: "number",
+        min: "1",
+        label: "Superficie",
+        id: "superficie",
+        suffix: "m\xB2",
+        required: true
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.superficie_habitable,
+        onChange: this.props.handleChangeModal,
+        type: "number",
+        min: "1",
+        id: "superficie_habitable",
+        label: "Superficie Habitable",
+        suffix: "m\xB2"
+      })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["TitleForm"], null, "Agencement int\xE9rieur"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.nombre_de_pieces,
+        onChange: this.props.handleChangeModal,
+        type: "number",
+        min: "1",
+        id: "nombre_de_pieces",
+        label: "Nombre de Pi\xE8ce",
+        required: true
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.nombre_de_chambre,
+        onChange: this.props.handleChangeModal,
+        type: "number",
+        id: "nombre_de_chambre",
+        label: "Nombre de chambre",
+        required: true
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.nombre_de_salles_de_bains,
+        onChange: this.props.handleChangeModal,
+        type: "number",
+        id: "nombre_de_salles_de_bains",
+        label: "Nombre de salle de Bain",
+        required: true
+      })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.nombre_de_wc,
+        onChange: this.props.handleChangeModal,
+        type: "number",
+        id: "nombre_de_wc",
+        label: "Nombre de WC",
+        required: true
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.nombre_de_celliers,
+        onChange: this.props.handleChangeModal,
+        type: "number",
+        id: "nombre_de_celliers",
+        label: "Nombre de Cellier",
+        required: true
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.nombre_de_buanderies,
+        onChange: this.props.handleChangeModal,
+        type: "number",
+        id: "nombre_de_buanderies",
+        label: "Nombre de Buanderie",
+        required: true
+      })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.niveaux,
+        onChange: this.props.handleChangeModal,
+        type: "number",
+        id: "niveaux",
+        label: "Nombre de Niveaux",
+        required: true
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.cuisine,
+        onChange: this.props.handleChangeModal,
+        type: "checkbox",
+        id: "cuisine",
+        label: "Cuisine"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.isolation,
+        onChange: this.props.handleChangeModal,
+        type: "checkbox",
+        id: "isolation",
+        label: "Isolation"
+      })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["TitleForm"], null, "Agencement ext\xE9rieur"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.caves,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "number",
+        step: ".01",
+        id: "caves",
+        label: "Nombre de cave"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.terrases,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "number",
+        step: ".01",
+        id: "terrases",
+        label: "Nombre de terrase"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.balcons,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "number",
+        step: ".01",
+        id: "balcons",
+        label: "Nombre de balcon"
+      })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.varangues,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "number",
+        step: ".01",
+        id: "varangues",
+        label: "Nombre de varangue"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.piscines,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "number",
+        step: ".01",
+        id: "piscines",
+        label: "Nombre de piscine"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.jacuzzis,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "number",
+        step: ".01",
+        id: "jacuzzis",
+        label: "Nombre de jacuzzi"
+      })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["TitleForm"], null, "Copropri\xE9t\xE9"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.nombre_de_lots,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "number",
+        id: "nombre_de_lots",
+        label: "Nombre de lots"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.derniere_assemble,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "number",
+        id: "derniere_assemble",
+        thousandSeparator: "false",
+        label: "Derni\xE8re assembl\xE9e"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.syndic,
+        onChange: this.props.handleChangeModal,
+        type: "text",
+        id: "syndic",
+        label: "Syndic"
+      })), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.details_charges_copropriete,
+        onChange: this.props.handleChangeModal,
+        type: "textarea",
+        id: "details_charges_copropriete",
+        label: "D\xE9tails charges",
+        placeholder: "Exemple: Eau, EDF communs, Gardien, Chauffage, Nettoyage, Syndic"
+      }), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["TitleForm"], null, "Chauffage"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.type_de_chauffage,
+        onChange: this.props.handleChangeModal,
+        type: "text",
+        id: "type_de_chauffage",
+        label: "Type"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.mode_de_chauffage,
+        onChange: this.props.handleChangeModal,
+        type: "text",
+        id: "mode_de_chauffage",
+        label: "Mode"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.energie_du_chauffage,
+        onChange: this.props.handleChangeModal,
+        type: "text",
+        id: "energie_du_chauffage",
+        label: "\xC9nergie"
+      }), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["TitleForm"], null, "\xC9quipements"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.equipements,
+        onChange: this.props.handleChangeModal,
+        type: "textarea",
+        id: "equipements",
+        placeholder: "Exemple: Interphone, C\xE2ble, Double vitrage"
+      }), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["TitleForm"], null, "Diagnostics"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.diagnostics,
+        onChange: this.props.handleChangeModal,
+        type: "textarea",
+        id: "diagnostics"
+      }), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["TitleForm"], null, "Points positifs et n\xE9gatifs"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.points_positif_et_negatifs,
+        onChange: this.props.handleChangeModal,
+        type: "textarea",
+        id: "points_positif_et_negatifs"
+      }), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["TitleForm"], null, "Frais d'acquisition"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.prix_du_bien,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "number",
+        step: ".01",
+        id: "prix_du_bien",
+        euro: true,
+        label: "Prix du bien"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.frais_dagence,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "number",
+        step: ".01",
+        id: "frais_dagence",
+        euro: true,
+        label: "Frais d'agence"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.frais_de_notaire,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "number",
+        step: ".01",
+        id: "frais_de_notaire",
+        euro: true,
+        label: "Frais de notaire"
+      })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.frais_de_travaux,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "number",
+        step: ".01",
+        id: "frais_de_travaux",
+        euro: true,
+        label: "Estimation Travaux"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.mobilier_equipement,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "number",
+        step: ".01",
+        id: "mobilier_equipement",
+        euro: true,
+        label: "Mobilier / Equipement"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.honoraires_immomalin,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "number",
+        step: ".01",
+        id: "honoraires_immomalin",
+        euro: true,
+        label: "Commission chasseur"
+      })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], {
+        result: true
+      }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.projet_global,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "number",
+        step: ".01",
+        id: "projet_global",
+        euro: true,
+        label: "Projet Global (Hors frais de notaire)",
+        readonly: true,
+        disabled: true
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.budget,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "number",
+        step: ".01",
+        id: "budget",
+        euro: true,
+        label: "BUDGET",
+        readonly: true,
+        disabled: true
+      })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["TitleForm"], null, "Charges locatif"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["Label"], null, "Charges copropri\xE9t\xE9"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], {
+        dispatch: true
+      }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.charges_copropriete_mensuelles,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "charges_copropriete_mensuelles",
+        label: "Mensuelles"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.charges_copropriete_annuelles,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "charges_copropriete_annuelles",
+        label: "Annuelles"
+      }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["Label"], null, "Taxe fonci\xE8re"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], {
+        dispatch: true
+      }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.taxe_fonciere_mensuelles,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "taxe_fonciere_mensuelles",
+        label: "Mensuelles"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.taxe_fonciere_annuelles,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "taxe_fonciere_annuelles",
+        label: "Annuelles"
+      }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["Label"], null, "Assurance PNO"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], {
+        dispatch: true
+      }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.assurance_pno_mensuelles,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "assurance_pno_mensuelles",
+        label: "Mensuelles"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.assurance_pno_annuelles,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "assurance_pno_annuelles",
+        label: "Annuelles"
+      }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["Label"], null, "Assurances locatives"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], {
+        dispatch: true
+      }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.assurances_locatives_mensuelles,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "assurances_locatives_mensuelles",
+        label: "Mensuelles"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.assurances_locatives_annuelles,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "assurances_locatives_annuelles",
+        label: "Annuelles"
+      }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["Label"], null, "Gestion locative"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], {
+        dispatch: true
+      }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.gestion_locative_mensuelles,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "gestion_locative_mensuelles",
+        label: "Mensuelles"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.gestion_locative_annuelles,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "gestion_locative_annuelles",
+        label: "Annuelles"
+      }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["Label"], null, "Frais divers"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], {
+        dispatch: true
+      }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.frais_divers_mensuelles,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "frais_divers_mensuelles",
+        label: "Mensuelles"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.frais_divers_annuelles,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "frais_divers_annuelles",
+        label: "Annuelles"
+      }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["Label"], null, "Eau"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], {
+        dispatch: true
+      }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.frais_electricite_mensuelles,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "frais_electricite_mensuelles",
+        label: "Mensuelles"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.frais_electricite_annuelles,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "frais_electricite_annuelles",
+        label: "Annuelles"
+      }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["Label"], null, "\xC9lectricit\xE9"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], {
+        dispatch: true
+      }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.frais_eau_mensuelles,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "frais_eau_mensuelles",
+        label: "Mensuelles"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.frais_eau_annuelles,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "frais_eau_annuelles",
+        label: "Annuelles"
+      }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["Label"], null, "Forfait internet"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], {
+        dispatch: true
+      }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.forfait_internet_mensuelles,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "forfait_internet_mensuelles",
+        label: "Mensuelles"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.forfait_internet_annuelles,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "forfait_internet_annuelles",
+        label: "Annuelles"
+      }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], {
+        result: true
+      }, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["Label"], null, "TOTAL"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], {
+        dispatch: true
+      }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.total_charges_mensuelles,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "total_charges_mensuelles",
+        readonly: true,
+        disabled: true,
+        label: "Mensuelles"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.total_charges_annuelles,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "total_charges_annuelles",
+        readonly: true,
+        disabled: true,
+        label: "Annuelles"
+      }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["TitleForm"], null, "Revenus locatif"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["Label"], null, "Loyer pr\xE9visionnel"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], {
+        dispatch: true
+      }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.loyer_previsionnel_mensuelles,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "loyer_previsionnel_mensuelles",
+        label: "Mensuelles"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.loyer_previsionnel_annuelles,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "loyer_previsionnel_annuelles",
+        label: "Annuelles"
+      }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["Label"], null, "Vacance locative"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.vacance_locative,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        pourcent: true,
+        type: "number",
+        step: ".01",
+        id: "vacance_locative"
+      })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], {
+        result: true
+      }, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["Label"], null, "TOTAL"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], {
+        dispatch: true
+      }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.total_revenus_mensuelles,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "total_revenus_mensuelles",
+        label: "Mensuelles",
+        readonly: true,
+        disabled: true
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.total_revenus_annuelles,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "total_revenus_annuelles",
+        label: "Annuelles",
+        readonly: true,
+        disabled: true
+      }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["Label"], null, "Solde"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.solde,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "solde",
+        readonly: true,
+        disabled: true
+      })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["TitleForm"], null, "Vue synth\xE9tique"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["Label"], null, "Rentabilit\xE9"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], {
+        dispatch: true
+      }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.rentabilite_net,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        pourcent: true,
+        type: "number",
+        step: ".01",
+        id: "rentabilite_net",
+        label: "Brut",
+        readonly: true,
+        disabled: true
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.rentabilite_brut,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        pourcent: true,
+        type: "number",
+        step: ".01",
+        id: "rentabilite_brut",
+        label: "Net",
+        readonly: true,
+        disabled: true
+      }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["Label"], null, "Cashflow Brut"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.cashflow_mensuel_brut,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "cashflow_mensuel_brut",
+        label: "mensuelle",
+        readonly: true,
+        disabled: true
+      })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["Label"], null, "Prix au m\xB2"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.prix_au_m,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        euro: true,
+        type: "number",
+        step: ".01",
+        id: "prix_au_m",
+        readonly: true,
+        disabled: true
+      })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["SendButton"], {
+        noMarginLeft: true,
+        type: "submit"
+      }, "Enregistrer"));
+    }
+  }]);
+
+  return AddPropriete;
+}(Component);
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     handleChangeModal: function handleChangeModal(key, data) {
-      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["handleChangeAddProprieteModal"])(key, data));
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["handleChangeAddProprieteModal"])(key, data));
+    },
+    registerDataProgress: function registerDataProgress(key, data) {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["registerDataProgress"])(key, data));
+    },
+    toogleAddPropriete: function toogleAddPropriete() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["toogleAddPropriete"])());
     }
   };
 };
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
+    chasseurID: state.general.myData.data.id,
     modalData: state.addModal.addProprieteModal
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(AddPropriete));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(AddPropriete));
 
 /***/ }),
 

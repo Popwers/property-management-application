@@ -7,6 +7,7 @@ import LogOut from "../../components/LogOutButton";
 import Navigation from "../../components/Navigation";
 import Modal from './Modal';
 import AddPropriete from '../../views/AddPropriete';
+import Uploader from '../../components/Uploader';
 
 const BarreTop = styled.div`
     position: fixed;
@@ -109,7 +110,7 @@ class AppContainer extends Component {
 
                 <Navigation statMenu={this.state.openMenu} />
 
-                /** MODAL ADD **/
+                {/** MODAL ADD **/}
 
                 <Modal type='addPropriete' show={this.props.showModalAddPropriete} title="Ajouter une Propriété">
                     <AddPropriete />
@@ -123,7 +124,7 @@ class AppContainer extends Component {
                     <p>ADD Client</p>
                 </Modal>
 
-                /** MODAL INFOBOX **/
+                {/** MODAL INFOBOX **/}
 
                 <Modal type='userModal' show={this.props.showModalUser}>
                     <p>User</p>
@@ -140,6 +141,8 @@ class AppContainer extends Component {
                 <Main closeMenu={this.state.openMenu}>
                     {this.props.children}
                 </Main>
+
+                <Uploader />
             </>
         );
     }

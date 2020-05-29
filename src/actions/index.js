@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { formatToJson } from '../lib/functions';
 
 import {
     GET_PROPRIETE,
@@ -24,6 +25,9 @@ import {
     TOOGLE_DOSSIER_MODAL,
     TOOGLE_PROPRIETE_MODAL,
     SET_PROPRIETE_ADD_MODAL,
+    SET_CLIENT_ADD_MODAL,
+    SET_CHASSEUR_ADD_MODAL,
+    SET_REGISTER_DATA
 
 } from "../constants";
 
@@ -32,11 +36,10 @@ export function getAllProprietes() {
         let responseReq = null;
         let statutRes = 'success';
 
-        await axios.get('../wp-admin/admin-ajax.php', {
-            params: {
-                action: 'get_proprietes_data'
-            }
-        })
+        let action = new FormData();
+        action.append('action', 'get_proprietes_data');
+
+        await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', action)
         .then(function (response) {
             responseReq = formatToJson(response.data);
         })
@@ -54,11 +57,10 @@ export function getAllDossiers() {
         let responseReq = null;
         let statutRes = 'success';
 
-        await axios.get('../wp-admin/admin-ajax.php', {
-            params: {
-                action: 'get_dossiers_data'
-            }
-        })
+        let action = new FormData();
+        action.append('action', 'get_dossiers_data');
+
+        await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', action)
             .then(function (response) {
                 responseReq = formatToJson(response.data);
             })
@@ -75,19 +77,18 @@ export function getAllUsers() {
     return async function (dispatch) {
         let responseReq = null;
         let statutRes = 'success';
+        
+        let action = new FormData();
+        action.append('action', 'get_users_data');
 
-        await axios.get('../wp-admin/admin-ajax.php', {
-            params: {
-                action: 'get_users_data'
-            }
+        await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', action)
+        .then(function (response) {
+            responseReq = formatToJson(response.data);
         })
-            .then(function (response) {
-                responseReq = formatToJson(response.data);
-            })
-            .catch(function (error) {
-                responseReq = error;
-                statutRes = 'error';
-            });
+        .catch(function (error) {
+            responseReq = error;
+            statutRes = 'error';
+        });
 
         dispatch({ type: GET_USER, payload: { data: responseReq, statut: statutRes } });
     }
@@ -100,18 +101,17 @@ export function getLogout() {
         let responseReq = null;
         let statutRes = 'success';
 
-        await axios.get('../wp-admin/admin-ajax.php', {
-            params: {
-                action: 'get_logOut_data'
-            }
+        let action = new FormData();
+        action.append('action', 'get_logOut_data');
+
+        await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', action)
+        .then(function (response) {
+            responseReq = formatToJson(response.data);
         })
-            .then(function (response) {
-                responseReq = formatToJson(response.data);
-            })
-            .catch(function (error) {
-                responseReq = error;
-                statutRes = 'error';
-            });
+        .catch(function (error) {
+            responseReq = error;
+            statutRes = 'error';
+        });
 
         dispatch({ type: GET_LOGOUT, payload: { data: responseReq, statut: statutRes } });
     }
@@ -122,18 +122,17 @@ export function getHomeUrl() {
         let responseReq = null;
         let statutRes = 'success';
 
-        await axios.get('../wp-admin/admin-ajax.php', {
-            params: {
-                action: 'get_homeUrl_data'
-            }
+        let action = new FormData();
+        action.append('action', 'get_homeUrl_data');
+        
+        await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', action)
+        .then(function (response) {
+            responseReq = formatToJson(response.data);
         })
-            .then(function (response) {
-                responseReq = formatToJson(response.data);
-            })
-            .catch(function (error) {
-                responseReq = error;
-                statutRes = 'error';
-            });
+        .catch(function (error) {
+            responseReq = error;
+            statutRes = 'error';
+        });
 
         dispatch({ type: GET_ADRESSE_SITE, payload: { data: responseReq, statut: statutRes } });
     }
@@ -179,18 +178,17 @@ export function getPersonalData() {
         let responseReq = null;
         let statutRes = 'success';
 
-        await axios.get('../wp-admin/admin-ajax.php', {
-            params: {
-                action: 'get_personal_data'
-            }
+        let action = new FormData();
+        action.append('action', 'get_personal_data');
+
+        await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', action)
+        .then(function (response) {
+            responseReq = formatToJson(response.data);
         })
-            .then(function (response) {
-                responseReq = formatToJson(response.data);
-            })
-            .catch(function (error) {
-                responseReq = error;
-                statutRes = 'error';
-            });
+        .catch(function (error) {
+            responseReq = error;
+            statutRes = 'error';
+        });
 
         dispatch({ type: GET_MY_DATA, payload: { data: responseReq, statut: statutRes } });
     }
@@ -202,9 +200,16 @@ export function handleChangeAddProprieteModal(key, data) {
     return { type: SET_PROPRIETE_ADD_MODAL, payload: { key: key, data: data } };
 }
 
-/***********************************************************/
+export function handleChangeAddClientModal(key, data) {
+    return { type: SET_CLIENT_ADD_MODAL, payload: { key: key, data: data } };
+}
 
-function formatToJson(dataToFormat) {
-    var regex = /<!\[CDATA\[(.*)\]\]>/gm;
-    return JSON.parse(regex.exec(dataToFormat)[1]);
+export function handleChangeAddChasseurModal(key, data) {
+    return { type: SET_CHASSEUR_ADD_MODAL, payload: { key: key, data: data } };
+}
+
+
+/** REGISTER DATA **/
+export function registerDataProgress(key, data) {
+    return { type: SET_REGISTER_DATA, payload: { key: key, data: data } };
 }

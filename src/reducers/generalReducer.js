@@ -9,6 +9,7 @@ import {
     TOOGLE_USER_MODAL,
     TOOGLE_DOSSIER_MODAL,
     TOOGLE_PROPRIETE_MODAL,
+    SET_REGISTER_DATA,
 } from "../constants";
 
 const initialState = {
@@ -22,10 +23,12 @@ const initialState = {
         statut: false,
         message: 'Veuillez patienter ...'
     },
+    registerData: {},
     logOut: '#logout',
     homeUrl: '#homeUrl',
     myData: {
         data: {
+            id: null,
             avatar: 'default',
             display_name: 'Utilisateur',
             role: 'load',
@@ -126,6 +129,28 @@ export default function manageGeneral(state = initialState, action) {
             newState = {
                 ...state,
                 proprieteModal: !state.proprieteModal
+            }
+
+            return newState || state;
+
+        case SET_REGISTER_DATA:
+            if (action.payload.data < 100) {
+                newState = {
+                    ...state,
+                    registerData: {
+                        ...state.registerData,
+                        [action.payload.key]: action.payload.data
+                    }
+                }
+            } else {
+                newState = {
+                    ...state,
+                    registerData: {
+                        ...state.registerData
+                    }
+                }
+
+                delete newState.registerData[action.payload.key];
             }
 
             return newState || state;

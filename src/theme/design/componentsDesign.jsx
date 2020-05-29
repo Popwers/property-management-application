@@ -230,15 +230,56 @@ export const TitleForm = styled.h3`
         left: 0;
         background: ${props => props.theme.black};
     }
+
+    ${props =>
+        props.isFirst &&
+        css`
+            margin-top: 0px;
+        `}
 `
 
 export const Label = styled.h4`
     font-family: ${props => props.theme.montserrat};
     font-weight: ${props => props.theme.bold};
     font-size: 15px;
-    min-width: 175px;
+    min-width: 200px;
 `
 
 export const Form = styled.form`
     padding: 10px;
+`
+
+export const SendButton = styled.button`
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    font-size: 16px;
+    background: ${props => props.theme.blue};
+    color: ${props => props.theme.white};
+    padding: 10px 20px;
+    margin-right: 10px;
+    margin-top: 50px;
+    margin-left: 0px;
+    margin-bottom: 20px;
+    border-radius: 100px;
+    border: none;
+    outline: none;
+    font-weight: ${props => props.theme.regular};
+    box-shadow: ${props => props.theme.shadows};
+    transition: transform 0.3s,
+                background 0.3s,
+                color 0.3s,
+                opacity 0.3s;
+
+    &:hover {
+        transform: scale(1.1);
+        background-color: ${props => props.theme.orange};
+        color: ${props => props.theme.white};
+    }
+
+    &:active {
+        transform: scale(0.95) !important;
+        background-color: ${props => props.theme.red};
+    }
 `
