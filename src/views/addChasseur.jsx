@@ -2,7 +2,7 @@ const { Component } = wp.element;
 
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { handleChangeAddChasseurModal, registerDataProgress, toogleAddChasseur } from '../actions';
+import { handleChangeAddChasseurModal, registerDataProgress, toogleAddChasseur, getAllUsers } from '../actions';
 import { formatToJson } from '../lib/functions';
 
 import Input from '../components/Input';
@@ -14,7 +14,7 @@ class AddChasseur extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         const fakeID = '_' + Math.random().toString(36).substr(2, 9);
         this.props.toogleAddChasseur();
         this.props.handleChangeModal('resetTheForm', true);
@@ -35,7 +35,7 @@ class AddChasseur extends Component {
             }
         }
 
-        axios.post('../wp-content/themes/themeplocatif/ajax-board.php', data, {
+        await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', data, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             },
@@ -45,18 +45,20 @@ class AddChasseur extends Component {
                 this.props.registerDataProgress(fakeID, percentageProgress);
             },
         })
-            .then(response => {
-                let result = formatToJson(response.data);
-                if (result.id == null) {
-                    console.log('error');
-                }
-            })
-            .catch(error => {
-                console.log(error);
-            })
-            .then(() => {
-                this.props.registerDataProgress(fakeID, 100);
-            });
+        .then(response => {
+            let result = formatToJson(response.data);
+            if (result.id == null) {
+                console.log('error');
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        })
+        .then(() => {
+            this.props.registerDataProgress(fakeID, 100);
+        });
+
+        this.props.getAllUsers();
     }
 
     render() {
@@ -90,6 +92,7 @@ const mapDispatchToProps = dispatch => {
         handleChangeModal: (key, data) => dispatch(handleChangeAddChasseurModal(key, data)),
         registerDataProgress: (key, data) => dispatch(registerDataProgress(key, data)),
         toogleAddChasseur: () => dispatch(toogleAddChasseur()),
+        getAllUsers: () => dispatch(getAllUsers()),
     }
 }
 

@@ -14493,6 +14493,10 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -14538,61 +14542,85 @@ var AddChasseur = /*#__PURE__*/function (_Component) {
 
   _createClass(AddChasseur, [{
     key: "handleSubmit",
-    value: function handleSubmit(event) {
-      var _this2 = this;
+    value: function () {
+      var _handleSubmit = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
+        var _this2 = this;
 
-      var fakeID = '_' + Math.random().toString(36).substr(2, 9);
-      this.props.toogleAddChasseur();
-      this.props.handleChangeModal('resetTheForm', true);
-      event.preventDefault();
-      var data = new FormData();
-      data.append('action', 'form_add_user');
+        var fakeID, data, key, _iterator, _step, item;
 
-      for (var key in this.props.modalData) {
-        if (key != 'filesPhotosChasseur' && this.props.modalData[key] != null) {
-          data.append(key, this.props.modalData[key]);
-        } else {
-          if (this.props.modalData[key] != null) {
-            var _iterator = _createForOfIteratorHelper(this.props.modalData[key]),
-                _step;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                fakeID = '_' + Math.random().toString(36).substr(2, 9);
+                this.props.toogleAddChasseur();
+                this.props.handleChangeModal('resetTheForm', true);
+                event.preventDefault();
+                data = new FormData();
+                data.append('action', 'form_add_user');
 
-            try {
-              for (_iterator.s(); !(_step = _iterator.n()).done;) {
-                var item = _step.value;
-                data.append('files[]', item);
-              }
-            } catch (err) {
-              _iterator.e(err);
-            } finally {
-              _iterator.f();
+                for (key in this.props.modalData) {
+                  if (key != 'filesPhotosChasseur' && this.props.modalData[key] != null) {
+                    data.append(key, this.props.modalData[key]);
+                  } else {
+                    if (this.props.modalData[key] != null) {
+                      _iterator = _createForOfIteratorHelper(this.props.modalData[key]);
+
+                      try {
+                        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                          item = _step.value;
+                          data.append('files[]', item);
+                        }
+                      } catch (err) {
+                        _iterator.e(err);
+                      } finally {
+                        _iterator.f();
+                      }
+                    }
+                  }
+                }
+
+                _context.next = 9;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../wp-content/themes/themeplocatif/ajax-board.php', data, {
+                  headers: {
+                    'Content-Type': 'multipart/form-data'
+                  },
+                  onUploadProgress: function onUploadProgress(progress) {
+                    var loaded = progress.loaded,
+                        total = progress.total;
+                    var percentageProgress = Math.floor(loaded / total * 90);
+
+                    _this2.props.registerDataProgress(fakeID, percentageProgress);
+                  }
+                }).then(function (response) {
+                  var result = Object(_lib_functions__WEBPACK_IMPORTED_MODULE_3__["formatToJson"])(response.data);
+
+                  if (result.id == null) {
+                    console.log('error');
+                  }
+                })["catch"](function (error) {
+                  console.log(error);
+                }).then(function () {
+                  _this2.props.registerDataProgress(fakeID, 100);
+                });
+
+              case 9:
+                this.props.getAllUsers();
+
+              case 10:
+              case "end":
+                return _context.stop();
             }
           }
-        }
+        }, _callee, this);
+      }));
+
+      function handleSubmit(_x) {
+        return _handleSubmit.apply(this, arguments);
       }
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../wp-content/themes/themeplocatif/ajax-board.php', data, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        onUploadProgress: function onUploadProgress(progress) {
-          var loaded = progress.loaded,
-              total = progress.total;
-          var percentageProgress = Math.floor(loaded / total * 90);
-
-          _this2.props.registerDataProgress(fakeID, percentageProgress);
-        }
-      }).then(function (response) {
-        var result = Object(_lib_functions__WEBPACK_IMPORTED_MODULE_3__["formatToJson"])(response.data);
-
-        if (result.id == null) {
-          console.log('error');
-        }
-      })["catch"](function (error) {
-        console.log(error);
-      }).then(function () {
-        _this2.props.registerDataProgress(fakeID, 100);
-      });
-    }
+      return handleSubmit;
+    }()
   }, {
     key: "render",
     value: function render() {
@@ -14666,6 +14694,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     toogleAddChasseur: function toogleAddChasseur() {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["toogleAddChasseur"])());
+    },
+    getAllUsers: function getAllUsers() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getAllUsers"])());
     }
   };
 };
@@ -14703,6 +14734,10 @@ function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -14750,61 +14785,85 @@ var AddClient = /*#__PURE__*/function (_Component) {
 
   _createClass(AddClient, [{
     key: "handleSubmit",
-    value: function handleSubmit(event) {
-      var _this2 = this;
+    value: function () {
+      var _handleSubmit = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
+        var _this2 = this;
 
-      var fakeID = '_' + Math.random().toString(36).substr(2, 9);
-      this.props.toogleAddClient();
-      this.props.handleChangeModal('resetTheForm', true);
-      event.preventDefault();
-      var data = new FormData();
-      data.append('action', 'form_add_user');
+        var fakeID, data, key, _iterator, _step, item;
 
-      for (var key in this.props.modalData) {
-        if (key != 'filesPhotosClient' && this.props.modalData[key] != null) {
-          data.append(key, this.props.modalData[key]);
-        } else {
-          if (this.props.modalData[key] != null) {
-            var _iterator = _createForOfIteratorHelper(this.props.modalData[key]),
-                _step;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                fakeID = '_' + Math.random().toString(36).substr(2, 9);
+                this.props.toogleAddClient();
+                this.props.handleChangeModal('resetTheForm', true);
+                event.preventDefault();
+                data = new FormData();
+                data.append('action', 'form_add_user');
 
-            try {
-              for (_iterator.s(); !(_step = _iterator.n()).done;) {
-                var item = _step.value;
-                data.append('files[]', item);
-              }
-            } catch (err) {
-              _iterator.e(err);
-            } finally {
-              _iterator.f();
+                for (key in this.props.modalData) {
+                  if (key != 'filesPhotosClient' && this.props.modalData[key] != null) {
+                    data.append(key, this.props.modalData[key]);
+                  } else {
+                    if (this.props.modalData[key] != null) {
+                      _iterator = _createForOfIteratorHelper(this.props.modalData[key]);
+
+                      try {
+                        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                          item = _step.value;
+                          data.append('files[]', item);
+                        }
+                      } catch (err) {
+                        _iterator.e(err);
+                      } finally {
+                        _iterator.f();
+                      }
+                    }
+                  }
+                }
+
+                _context.next = 9;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../wp-content/themes/themeplocatif/ajax-board.php', data, {
+                  headers: {
+                    'Content-Type': 'multipart/form-data'
+                  },
+                  onUploadProgress: function onUploadProgress(progress) {
+                    var loaded = progress.loaded,
+                        total = progress.total;
+                    var percentageProgress = Math.floor(loaded / total * 90);
+
+                    _this2.props.registerDataProgress(fakeID, percentageProgress);
+                  }
+                }).then(function (response) {
+                  var result = Object(_lib_functions__WEBPACK_IMPORTED_MODULE_3__["formatToJson"])(response.data);
+
+                  if (result.id == null) {
+                    console.log('error');
+                  }
+                })["catch"](function (error) {
+                  console.log(error);
+                }).then(function () {
+                  _this2.props.registerDataProgress(fakeID, 100);
+                });
+
+              case 9:
+                this.props.getAllUsers();
+
+              case 10:
+              case "end":
+                return _context.stop();
             }
           }
-        }
+        }, _callee, this);
+      }));
+
+      function handleSubmit(_x) {
+        return _handleSubmit.apply(this, arguments);
       }
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../wp-content/themes/themeplocatif/ajax-board.php', data, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        onUploadProgress: function onUploadProgress(progress) {
-          var loaded = progress.loaded,
-              total = progress.total;
-          var percentageProgress = Math.floor(loaded / total * 90);
-
-          _this2.props.registerDataProgress(fakeID, percentageProgress);
-        }
-      }).then(function (response) {
-        var result = Object(_lib_functions__WEBPACK_IMPORTED_MODULE_3__["formatToJson"])(response.data);
-
-        if (result.id == null) {
-          console.log('error');
-        }
-      })["catch"](function (error) {
-        console.log(error);
-      }).then(function () {
-        _this2.props.registerDataProgress(fakeID, 100);
-      });
-    }
+      return handleSubmit;
+    }()
   }, {
     key: "render",
     value: function render() {
@@ -14919,6 +14978,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     toogleAddClient: function toogleAddClient() {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["toogleAddClient"])());
+    },
+    getAllUsers: function getAllUsers() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getAllUsers"])());
     }
   };
 };
@@ -14956,6 +15018,10 @@ function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -15002,62 +15068,86 @@ var AddPropriete = /*#__PURE__*/function (_Component) {
 
   _createClass(AddPropriete, [{
     key: "handleSubmit",
-    value: function handleSubmit(event) {
-      var _this2 = this;
+    value: function () {
+      var _handleSubmit = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
+        var _this2 = this;
 
-      var fakeID = '_' + Math.random().toString(36).substr(2, 9);
-      this.props.toogleAddPropriete();
-      this.props.handleChangeModal('resetTheForm', true);
-      event.preventDefault();
-      this.props.handleChangeModal('chasseur', Number(this.props.chasseurID));
-      var data = new FormData();
-      data.append('action', 'form_add_propriete');
+        var fakeID, data, key, _iterator, _step, item;
 
-      for (var key in this.props.modalData) {
-        if (key != 'filesPhotos' && this.props.modalData[key] != null) {
-          data.append(key, this.props.modalData[key]);
-        } else {
-          if (this.props.modalData[key] != null) {
-            var _iterator = _createForOfIteratorHelper(this.props.modalData[key]),
-                _step;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                fakeID = '_' + Math.random().toString(36).substr(2, 9);
+                this.props.toogleAddPropriete();
+                this.props.handleChangeModal('resetTheForm', true);
+                event.preventDefault();
+                this.props.handleChangeModal('chasseur', Number(this.props.chasseurID));
+                data = new FormData();
+                data.append('action', 'form_add_propriete');
 
-            try {
-              for (_iterator.s(); !(_step = _iterator.n()).done;) {
-                var item = _step.value;
-                data.append('files[]', item);
-              }
-            } catch (err) {
-              _iterator.e(err);
-            } finally {
-              _iterator.f();
+                for (key in this.props.modalData) {
+                  if (key != 'filesPhotos' && this.props.modalData[key] != null) {
+                    data.append(key, this.props.modalData[key]);
+                  } else {
+                    if (this.props.modalData[key] != null) {
+                      _iterator = _createForOfIteratorHelper(this.props.modalData[key]);
+
+                      try {
+                        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                          item = _step.value;
+                          data.append('files[]', item);
+                        }
+                      } catch (err) {
+                        _iterator.e(err);
+                      } finally {
+                        _iterator.f();
+                      }
+                    }
+                  }
+                }
+
+                _context.next = 10;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../wp-content/themes/themeplocatif/ajax-board.php', data, {
+                  headers: {
+                    'Content-Type': 'multipart/form-data'
+                  },
+                  onUploadProgress: function onUploadProgress(progress) {
+                    var loaded = progress.loaded,
+                        total = progress.total;
+                    var percentageProgress = Math.floor(loaded / total * 90);
+
+                    _this2.props.registerDataProgress(fakeID, percentageProgress);
+                  }
+                }).then(function (response) {
+                  var result = Object(_lib_functions__WEBPACK_IMPORTED_MODULE_3__["formatToJson"])(response.data);
+
+                  if (result.id == null) {
+                    console.log('error');
+                  }
+                })["catch"](function (error) {
+                  console.log(error);
+                }).then(function () {
+                  _this2.props.registerDataProgress(fakeID, 100);
+                });
+
+              case 10:
+                this.props.getAllProprietes();
+
+              case 11:
+              case "end":
+                return _context.stop();
             }
           }
-        }
+        }, _callee, this);
+      }));
+
+      function handleSubmit(_x) {
+        return _handleSubmit.apply(this, arguments);
       }
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../wp-content/themes/themeplocatif/ajax-board.php', data, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        onUploadProgress: function onUploadProgress(progress) {
-          var loaded = progress.loaded,
-              total = progress.total;
-          var percentageProgress = Math.floor(loaded / total * 90);
-
-          _this2.props.registerDataProgress(fakeID, percentageProgress);
-        }
-      }).then(function (response) {
-        var result = Object(_lib_functions__WEBPACK_IMPORTED_MODULE_3__["formatToJson"])(response.data);
-
-        if (result.id == null) {
-          console.log('error');
-        }
-      })["catch"](function (error) {
-        console.log(error);
-      }).then(function () {
-        _this2.props.registerDataProgress(fakeID, 100);
-      });
-    }
+      return handleSubmit;
+    }()
   }, {
     key: "render",
     value: function render() {
@@ -15740,6 +15830,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     toogleAddPropriete: function toogleAddPropriete() {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["toogleAddPropriete"])());
+    },
+    getAllProprietes: function getAllProprietes() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getAllProprietes"])());
     }
   };
 };
@@ -16060,6 +16153,10 @@ var Chasseur = /*#__PURE__*/function (_Component) {
         data = this.props.list.data.filter(function (user) {
           return user.role == 'chasseur';
         });
+
+        if (data.length < 1) {
+          data = null;
+        }
       }
 
       return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_3__["TitleSection"], null, title), /*#__PURE__*/React.createElement(_components_Table__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -16169,6 +16266,10 @@ var Client = /*#__PURE__*/function (_Component) {
         data = this.props.list.data.filter(function (user) {
           return user.role == 'client__investisseur';
         });
+
+        if (data.length < 1) {
+          data = null;
+        }
       }
 
       return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_3__["TitleSection"], null, title), /*#__PURE__*/React.createElement(_components_Table__WEBPACK_IMPORTED_MODULE_4__["default"], {

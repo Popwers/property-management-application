@@ -34,6 +34,10 @@ class Chasseur extends Component {
 
         if (this.props.list.data != null) {
             data = this.props.list.data.filter(user => user.role == 'chasseur');
+
+            if (data.length < 1) {
+                data = null;
+            }
         }
 
         return (

@@ -2,7 +2,7 @@ const { Component } = wp.element;
 
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { handleChangeAddProprieteModal, registerDataProgress, toogleAddPropriete } from '../actions';
+import { handleChangeAddProprieteModal, registerDataProgress, toogleAddPropriete, getAllProprietes } from '../actions';
 import { formatToJson } from '../lib/functions';
 
 import Input from '../components/Input';
@@ -14,7 +14,7 @@ class AddPropriete extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         const fakeID = '_' + Math.random().toString(36).substr(2, 9);
         this.props.toogleAddPropriete();
         this.props.handleChangeModal('resetTheForm', true);
@@ -37,7 +37,7 @@ class AddPropriete extends Component {
             }
         }
 
-        axios.post('../wp-content/themes/themeplocatif/ajax-board.php', data, {
+        await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', data, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             },
@@ -59,6 +59,8 @@ class AddPropriete extends Component {
         .then(() => {
             this.props.registerDataProgress(fakeID, 100);
         });
+
+        this.props.getAllProprietes();
     }
 
     render() {
@@ -323,6 +325,7 @@ const mapDispatchToProps = dispatch => {
         handleChangeModal: (key, data) => dispatch(handleChangeAddProprieteModal(key, data)),
         registerDataProgress: (key, data) => dispatch(registerDataProgress(key, data)),
         toogleAddPropriete: () => dispatch(toogleAddPropriete()),
+        getAllProprietes: () => dispatch(getAllProprietes()),
     }
 }
 

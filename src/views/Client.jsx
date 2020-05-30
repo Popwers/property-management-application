@@ -31,6 +31,10 @@ class Client extends Component {
 
         if (this.props.list.data != null) {
             data = this.props.list.data.filter(user => user.role == 'client__investisseur');
+
+            if (data.length < 1) {
+                data = null;
+            }
         }
 
         return (
