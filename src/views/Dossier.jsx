@@ -17,7 +17,7 @@ const entete = {
     'id_fiche_produit.ville': 'Ville',
     'id_fiche_produit.interlocuteur': 'Nom de l\'interlocuteur',
     'id_fiche_produit.artisan': 'Artisan',
-    'dede': 'CA ImmoMalin'
+    'id_fiche_produit.honoraires_immomalin': 'CA ImmoMalin'
 };
 
 class Dossier extends Component {

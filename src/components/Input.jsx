@@ -302,6 +302,7 @@ const ContainerPreview = styled.div`
     width: 100%;
     max-width: 100%;
     overflow: scroll;
+    justify-content: center;
 `
 
 const ImagePrev = (props) => {
@@ -428,26 +429,42 @@ export default class Input extends Component {
     }
 
     handleChangeFiles(event) {
-        let filesArr = Array.prototype.slice.call(event.target.files);
-        let newPrev = new Array();
-        filesArr.forEach(element => {
-            newPrev.push({ preview: URL.createObjectURL(element), file: element });
-        });
+        if (this.props.multiple == true) {
+            let filesArr = Array.prototype.slice.call(event.target.files);
+            let newPrev = new Array();
+            filesArr.forEach(element => {
+                newPrev.push({ preview: URL.createObjectURL(element), file: element });
+            });
 
-        this.setState({ previewImg: [...this.state.previewImg, ...newPrev] });
+            this.setState({ previewImg: [...this.state.previewImg, ...newPrev] });
 
-        if (this.props.onChange) this.props.onChange(this.props.id, [...this.props.value, ...filesArr]);
-        this.setState({ filesList: [...this.state.filesList, ...filesArr] });
+            if (this.props.onChange) this.props.onChange(this.props.id, [...this.props.value, ...filesArr]);
+            this.setState({ filesList: [...this.state.filesList, ...filesArr] });
+        } else {
+            if (event.target.files.length > 0) {
+                const theFile = event.target.files[0];
+                let newPrev = [{ preview: URL.createObjectURL(theFile), file: theFile }];
+                this.setState({ previewImg: newPrev });
+                if (this.props.onChange) this.props.onChange(this.props.id, [theFile]);
+                this.setState({ filesList: [theFile] });
+            }
+        }
     }
 
     handleDeleteFiles(img, file) {
-        const newPrev = this.state.previewImg.filter(element => element.preview != img);
-        const newData = this.state.filesList.filter(element => element != file);
+        if (this.props.multiple == true) {
+            const newPrev = this.state.previewImg.filter(element => element.preview != img);
+            const newData = this.state.filesList.filter(element => element != file);
 
-        this.setState({ previewImg: newPrev });
+            this.setState({ previewImg: newPrev });
 
-        if (this.props.onChange) this.props.onChange(this.props.id, newData);
-        this.setState({ filesList: newData });
+            if (this.props.onChange) this.props.onChange(this.props.id, newData);
+            this.setState({ filesList: newData });
+        } else {
+            this.setState({ previewImg: new Array() });
+            if (this.props.onChange) this.props.onChange(this.props.id, null);
+            this.setState({ filesList: new Array() });
+        }
     }
 
     handleChangeNumber(values) {
@@ -494,8 +511,9 @@ export default class Input extends Component {
 
         if (this.props.type == 'number') {
             input = <StyledNumberFormat
+                        format={this.props.tel ? "##.## ## ## ##" : null}
                         value={value}
-                        decimalScale={2}
+                        decimalScale={this.props.tel ? null : 2}
                         step={this.props.step ? this.props.step : 1}
                         min={this.props.min ? this.props.min : 0}
                         max={this.props.max ? this.props.max : null}
@@ -504,11 +522,11 @@ export default class Input extends Component {
                         required={this.props.required}
                         readonly={this.props.readonly}
                         disabled={this.props.disabled}
-                        thousandSeparator={thousandSeparator}
-                        decimalSeparator={decimalSeparator}
+                        thousandSeparator={this.props.tel ? false : thousandSeparator}
+                        decimalSeparator={this.props.tel ? null : decimalSeparator}
                         allowNegative={false}
-                        allowLeadingZeros={false}
-                        suffix={haveSuffix}
+                        allowLeadingZeros={this.props.tel ? true : false}
+                        suffix={this.props.tel ? null : haveSuffix}
                         placeholder={this.props.placeholder}
                         onValueChange={this.handleChangeNumber}
                         inlineLabel={this.props.inline}

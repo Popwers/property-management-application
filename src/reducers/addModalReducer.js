@@ -84,10 +84,31 @@ const initialState = {
         interlocuteur: null,
     },
     addClientModal: {
-
+        id: null,
+        role: 'client__investisseur',
+        pseudo: null,
+        first_name: null,
+        last_name: null,
+        mail: null,
+        telephone: null,
+        adresse: null,
+        adresse_postale_1: null,
+        adresse_postale_2: null,
+        ville: null,
+        etat_province_region: null,
+        zip_code_postal: null,
+        pays: null,
+        filesPhotosClient: new Array(),
     },
     addChasseurModal: {
-        
+        id: null,
+        role: 'chasseur',
+        pseudo: null,
+        first_name: null,
+        last_name: null,
+        mail: null,
+        telephone: null,
+        filesPhotosChasseur: new Array(),
     },
 };
 
@@ -357,6 +378,67 @@ export default function manageAddModal(state = initialState, action) {
                         chasseur: '',
                         artisan: '',
                         interlocuteur: '',
+                    }
+                }
+            }
+
+            return newState || state;
+        
+        case SET_CLIENT_ADD_MODAL:
+            if (action.payload.key != 'resetTheForm') {
+                let newData = Object.assign({}, state.addClientModal);
+                newData[action.payload.key] = action.payload.data;
+
+                newState = {
+                    ...state,
+                    addClientModal: newData
+                }
+            } else {
+                newState = {
+                    ...state,
+                    addClientModal: {
+                        id: '',
+                        role: 'client__investisseur',
+                        pseudo: '',
+                        first_name: '',
+                        last_name: '',
+                        mail: '',
+                        telephone: '',
+                        adresse: '',
+                        adresse_postale_1: '',
+                        adresse_postale_2: '',
+                        ville: '',
+                        etat_province_region: '',
+                        zip_code_postal: '',
+                        pays: '',
+                        filesPhotosClient: new Array(),
+                    }
+                }
+            }
+            
+            return newState || state;
+
+        case SET_CHASSEUR_ADD_MODAL:
+            if (action.payload.key != 'resetTheForm') {
+                let newData = Object.assign({}, state.addChasseurModal);
+                newData[action.payload.key] = action.payload.data;
+
+                newState = {
+                    ...state,
+                    addChasseurModal: newData
+                }
+            } else {
+                newState = {
+                    ...state,
+                    addChasseurModal: {
+                        id: '',
+                        role: 'chasseur',
+                        pseudo: '',
+                        first_name: '',
+                        last_name: '',
+                        mail: '',
+                        telephone: '',
+                        filesPhotosChasseur: new Array(),
                     }
                 }
             }

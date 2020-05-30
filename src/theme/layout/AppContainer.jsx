@@ -7,6 +7,8 @@ import LogOut from "../../components/LogOutButton";
 import Navigation from "../../components/Navigation";
 import Modal from './Modal';
 import AddPropriete from '../../views/AddPropriete';
+import AddClient from '../../views/AddClient';
+import AddChasseur from '../../views/AddChasseur';
 import Uploader from '../../components/Uploader';
 
 const BarreTop = styled.div`
@@ -117,11 +119,11 @@ class AppContainer extends Component {
                 </Modal>
 
                 <Modal type='addChasseur' show={this.props.showModalAddChasseur}>
-                    
+                    <AddChasseur />
                 </Modal>
 
                 <Modal type='addClient' show={this.props.showModalAddClient}>
-                    <p>ADD Client</p>
+                    <AddClient />
                 </Modal>
 
                 {/** MODAL INFOBOX **/}

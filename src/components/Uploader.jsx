@@ -69,9 +69,14 @@ const ProgressBarStyle = styled.div`
             right: 0%;
         }
 
-        100% { 
+        750% { 
             width: 0%;
             right: 100%;
+        }
+
+        100% { 
+            width: 0%;
+            right: 0%;
         }
     }
 `

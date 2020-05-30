@@ -13678,7 +13678,7 @@ function _templateObject23() {
 }
 
 function _templateObject22() {
-  var data = _taggedTemplateLiteral(["\n    display: flex;\n    width: 100%;\n    max-width: 100%;\n    overflow: scroll;\n"]);
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    width: 100%;\n    max-width: 100%;\n    overflow: scroll;\n    justify-content: center;\n"]);
 
   _templateObject22 = function _templateObject22() {
     return data;
@@ -14089,38 +14089,65 @@ var Input = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleChangeFiles",
     value: function handleChangeFiles(event) {
-      var filesArr = Array.prototype.slice.call(event.target.files);
-      var newPrev = new Array();
-      filesArr.forEach(function (element) {
-        newPrev.push({
-          preview: URL.createObjectURL(element),
-          file: element
+      if (this.props.multiple == true) {
+        var filesArr = Array.prototype.slice.call(event.target.files);
+        var newPrev = new Array();
+        filesArr.forEach(function (element) {
+          newPrev.push({
+            preview: URL.createObjectURL(element),
+            file: element
+          });
         });
-      });
-      this.setState({
-        previewImg: [].concat(_toConsumableArray(this.state.previewImg), newPrev)
-      });
-      if (this.props.onChange) this.props.onChange(this.props.id, [].concat(_toConsumableArray(this.props.value), _toConsumableArray(filesArr)));
-      this.setState({
-        filesList: [].concat(_toConsumableArray(this.state.filesList), _toConsumableArray(filesArr))
-      });
+        this.setState({
+          previewImg: [].concat(_toConsumableArray(this.state.previewImg), newPrev)
+        });
+        if (this.props.onChange) this.props.onChange(this.props.id, [].concat(_toConsumableArray(this.props.value), _toConsumableArray(filesArr)));
+        this.setState({
+          filesList: [].concat(_toConsumableArray(this.state.filesList), _toConsumableArray(filesArr))
+        });
+      } else {
+        if (event.target.files.length > 0) {
+          var theFile = event.target.files[0];
+          var _newPrev = [{
+            preview: URL.createObjectURL(theFile),
+            file: theFile
+          }];
+          this.setState({
+            previewImg: _newPrev
+          });
+          if (this.props.onChange) this.props.onChange(this.props.id, [theFile]);
+          this.setState({
+            filesList: [theFile]
+          });
+        }
+      }
     }
   }, {
     key: "handleDeleteFiles",
     value: function handleDeleteFiles(img, file) {
-      var newPrev = this.state.previewImg.filter(function (element) {
-        return element.preview != img;
-      });
-      var newData = this.state.filesList.filter(function (element) {
-        return element != file;
-      });
-      this.setState({
-        previewImg: newPrev
-      });
-      if (this.props.onChange) this.props.onChange(this.props.id, newData);
-      this.setState({
-        filesList: newData
-      });
+      if (this.props.multiple == true) {
+        var newPrev = this.state.previewImg.filter(function (element) {
+          return element.preview != img;
+        });
+        var newData = this.state.filesList.filter(function (element) {
+          return element != file;
+        });
+        this.setState({
+          previewImg: newPrev
+        });
+        if (this.props.onChange) this.props.onChange(this.props.id, newData);
+        this.setState({
+          filesList: newData
+        });
+      } else {
+        this.setState({
+          previewImg: new Array()
+        });
+        if (this.props.onChange) this.props.onChange(this.props.id, null);
+        this.setState({
+          filesList: new Array()
+        });
+      }
     }
   }, {
     key: "handleChangeNumber",
@@ -14180,8 +14207,9 @@ var Input = /*#__PURE__*/function (_Component) {
 
       if (this.props.type == 'number') {
         input = /*#__PURE__*/React.createElement(StyledNumberFormat, {
+          format: this.props.tel ? "##.## ## ## ##" : null,
           value: value,
-          decimalScale: 2,
+          decimalScale: this.props.tel ? null : 2,
           step: this.props.step ? this.props.step : 1,
           min: this.props.min ? this.props.min : 0,
           max: this.props.max ? this.props.max : null,
@@ -14190,11 +14218,11 @@ var Input = /*#__PURE__*/function (_Component) {
           required: this.props.required,
           readonly: this.props.readonly,
           disabled: this.props.disabled,
-          thousandSeparator: thousandSeparator,
-          decimalSeparator: decimalSeparator,
+          thousandSeparator: this.props.tel ? false : thousandSeparator,
+          decimalSeparator: this.props.tel ? null : decimalSeparator,
           allowNegative: false,
-          allowLeadingZeros: false,
-          suffix: haveSuffix,
+          allowLeadingZeros: this.props.tel ? true : false,
+          suffix: this.props.tel ? null : haveSuffix,
           placeholder: this.props.placeholder,
           onValueChange: this.handleChangeNumber,
           inlineLabel: this.props.inline
@@ -15035,7 +15063,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n    position: relative;\n    width: 100%;\n    height: 14px;\n    margin-right: 20px;\n    border-radius: 20px;\n    background: #A5A5A5;\n    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.45);\n\n    &:before {\n        content: \"\";\n        position: absolute;\n        width: ", "%;\n        height: 14px;\n        border-radius: 20px;\n        ", ";\n        transition: width 0.5s, right 0.5s;\n    }\n\n    ", "\n\n    @keyframes moveIndeterminate {\n        0% { \n            width: 0%;\n            right: 0%;\n        }\n\n        50% { \n            width: 100%;\n            right: 0%;\n        }\n\n        100% { \n            width: 0%;\n            right: 100%;\n        }\n    }\n"]);
+  var data = _taggedTemplateLiteral(["\n    position: relative;\n    width: 100%;\n    height: 14px;\n    margin-right: 20px;\n    border-radius: 20px;\n    background: #A5A5A5;\n    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.45);\n\n    &:before {\n        content: \"\";\n        position: absolute;\n        width: ", "%;\n        height: 14px;\n        border-radius: 20px;\n        ", ";\n        transition: width 0.5s, right 0.5s;\n    }\n\n    ", "\n\n    @keyframes moveIndeterminate {\n        0% { \n            width: 0%;\n            right: 0%;\n        }\n\n        50% { \n            width: 100%;\n            right: 0%;\n        }\n\n        750% { \n            width: 0%;\n            right: 100%;\n        }\n\n        100% { \n            width: 0%;\n            right: 0%;\n        }\n    }\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -15149,7 +15177,7 @@ var mapStateToProps = function mapStateToProps(state) {
 /*!********************************!*\
   !*** ./src/constants/index.js ***!
   \********************************/
-/*! exports provided: GET_PROPRIETE, ADD_PROPRIETE, UPDATE_PROPRIETE, DELETE_PROPRIETE, GET_DOSSIER, ADD_DOSSIER, UPDATE_DOSSIER, DELETE_DOSSIER, GET_USER, ADD_USER, UPDATE_USER, DELETE_USER, GET_MY_DATA, GET_LOGOUT, GET_ADRESSE_SITE, TOOGLE_LOADER, TOOGLE_CLIENT_ADD_MODAL, TOOGLE_CHASSEUR_ADD_MODAL, TOOGLE_PROPRIETE_ADD_MODAL, TOOGLE_USER_MODAL, TOOGLE_DOSSIER_MODAL, TOOGLE_PROPRIETE_MODAL, SET_PROPRIETE_ADD_MOsDAL, SET_CLIENT_ADD_MODAL, SET_CHASSEUR_ADD_MODAL, SET_REGISTER_DATA */
+/*! exports provided: GET_PROPRIETE, ADD_PROPRIETE, UPDATE_PROPRIETE, DELETE_PROPRIETE, GET_DOSSIER, ADD_DOSSIER, UPDATE_DOSSIER, DELETE_DOSSIER, GET_USER, ADD_USER, UPDATE_USER, DELETE_USER, GET_MY_DATA, GET_LOGOUT, GET_ADRESSE_SITE, TOOGLE_LOADER, TOOGLE_CLIENT_ADD_MODAL, TOOGLE_CHASSEUR_ADD_MODAL, TOOGLE_PROPRIETE_ADD_MODAL, TOOGLE_USER_MODAL, TOOGLE_DOSSIER_MODAL, TOOGLE_PROPRIETE_MODAL, SET_PROPRIETE_ADD_MODAL, SET_CLIENT_ADD_MODAL, SET_CHASSEUR_ADD_MODAL, SET_REGISTER_DATA */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15176,7 +15204,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOOGLE_USER_MODAL", function() { return TOOGLE_USER_MODAL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOOGLE_DOSSIER_MODAL", function() { return TOOGLE_DOSSIER_MODAL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOOGLE_PROPRIETE_MODAL", function() { return TOOGLE_PROPRIETE_MODAL; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PROPRIETE_ADD_MOsDAL", function() { return SET_PROPRIETE_ADD_MOsDAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PROPRIETE_ADD_MODAL", function() { return SET_PROPRIETE_ADD_MODAL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_CLIENT_ADD_MODAL", function() { return SET_CLIENT_ADD_MODAL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_CHASSEUR_ADD_MODAL", function() { return SET_CHASSEUR_ADD_MODAL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_REGISTER_DATA", function() { return SET_REGISTER_DATA; });
@@ -15202,7 +15230,7 @@ var TOOGLE_PROPRIETE_ADD_MODAL = "TOOGLE_PROPRIETE_ADD_MODAL";
 var TOOGLE_USER_MODAL = "TOOGLE_USER_MODAL";
 var TOOGLE_DOSSIER_MODAL = "TOOGLE_DOSSIER_MODAL";
 var TOOGLE_PROPRIETE_MODAL = "TOOGLE_PROPRIETE_MODAL";
-var SET_PROPRIETE_ADD_MOsDAL = "SET_PROPRIETE_ADD_MODAL";
+var SET_PROPRIETE_ADD_MODAL = "SET_PROPRIETE_ADD_MODAL";
 var SET_CLIENT_ADD_MODAL = "SET_CLIENT_ADD_MODAL";
 var SET_CHASSEUR_ADD_MODAL = "SET_CHASSEUR_ADD_MODAL";
 var SET_REGISTER_DATA = "SET_REGISTER_DATA";
@@ -15418,8 +15446,33 @@ var initialState = {
     artisan: null,
     interlocuteur: null
   },
-  addClientModal: {},
-  addChasseurModal: {}
+  addClientModal: {
+    id: null,
+    role: 'client__investisseur',
+    pseudo: null,
+    first_name: null,
+    last_name: null,
+    mail: null,
+    telephone: null,
+    adresse: null,
+    adresse_postale_1: null,
+    adresse_postale_2: null,
+    ville: null,
+    etat_province_region: null,
+    zip_code_postal: null,
+    pays: null,
+    filesPhotosClient: new Array()
+  },
+  addChasseurModal: {
+    id: null,
+    role: 'chasseur',
+    pseudo: null,
+    first_name: null,
+    last_name: null,
+    mail: null,
+    telephone: null,
+    filesPhotosChasseur: new Array()
+  }
 };
 function manageAddModal() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -15679,6 +15732,63 @@ function manageAddModal() {
             chasseur: '',
             artisan: '',
             interlocuteur: ''
+          }
+        });
+      }
+
+      return newState || state;
+
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["SET_CLIENT_ADD_MODAL"]:
+      if (action.payload.key != 'resetTheForm') {
+        var _newData = Object.assign({}, state.addClientModal);
+
+        _newData[action.payload.key] = action.payload.data;
+        newState = _objectSpread(_objectSpread({}, state), {}, {
+          addClientModal: _newData
+        });
+      } else {
+        newState = _objectSpread(_objectSpread({}, state), {}, {
+          addClientModal: {
+            id: '',
+            role: 'client__investisseur',
+            pseudo: '',
+            first_name: '',
+            last_name: '',
+            mail: '',
+            telephone: '',
+            adresse: '',
+            adresse_postale_1: '',
+            adresse_postale_2: '',
+            ville: '',
+            etat_province_region: '',
+            zip_code_postal: '',
+            pays: '',
+            filesPhotosClient: new Array()
+          }
+        });
+      }
+
+      return newState || state;
+
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["SET_CHASSEUR_ADD_MODAL"]:
+      if (action.payload.key != 'resetTheForm') {
+        var _newData2 = Object.assign({}, state.addChasseurModal);
+
+        _newData2[action.payload.key] = action.payload.data;
+        newState = _objectSpread(_objectSpread({}, state), {}, {
+          addChasseurModal: _newData2
+        });
+      } else {
+        newState = _objectSpread(_objectSpread({}, state), {}, {
+          addChasseurModal: {
+            id: '',
+            role: 'chasseur',
+            pseudo: '',
+            first_name: '',
+            last_name: '',
+            mail: '',
+            telephone: '',
+            filesPhotosChasseur: new Array()
           }
         });
       }
@@ -16596,7 +16706,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Navigation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/Navigation */ "./src/components/Navigation.jsx");
 /* harmony import */ var _Modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Modal */ "./src/theme/layout/Modal.jsx");
 /* harmony import */ var _views_AddPropriete__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../views/AddPropriete */ "./src/views/AddPropriete.jsx");
-/* harmony import */ var _components_Uploader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/Uploader */ "./src/components/Uploader.jsx");
+/* harmony import */ var _views_AddClient__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../views/AddClient */ "./src/views/AddClient.jsx");
+/* harmony import */ var _views_AddChasseur__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../views/AddChasseur */ "./src/views/AddChasseur.jsx");
+/* harmony import */ var _components_Uploader__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/Uploader */ "./src/components/Uploader.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16689,6 +16801,8 @@ var Component = wp.element.Component;
 
 
 
+
+
 var BarreTop = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject(), function (props) {
   return props.theme.white;
 }, function (props) {
@@ -16744,10 +16858,10 @@ var AppContainer = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/React.createElement(_views_AddPropriete__WEBPACK_IMPORTED_MODULE_5__["default"], null)), /*#__PURE__*/React.createElement(_Modal__WEBPACK_IMPORTED_MODULE_4__["default"], {
         type: "addChasseur",
         show: this.props.showModalAddChasseur
-      }), /*#__PURE__*/React.createElement(_Modal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }, /*#__PURE__*/React.createElement(_views_AddChasseur__WEBPACK_IMPORTED_MODULE_7__["default"], null)), /*#__PURE__*/React.createElement(_Modal__WEBPACK_IMPORTED_MODULE_4__["default"], {
         type: "addClient",
         show: this.props.showModalAddClient
-      }, /*#__PURE__*/React.createElement("p", null, "ADD Client")), /*#__PURE__*/React.createElement(_Modal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }, /*#__PURE__*/React.createElement(_views_AddClient__WEBPACK_IMPORTED_MODULE_6__["default"], null)), /*#__PURE__*/React.createElement(_Modal__WEBPACK_IMPORTED_MODULE_4__["default"], {
         type: "userModal",
         show: this.props.showModalUser
       }, /*#__PURE__*/React.createElement("p", null, "User")), /*#__PURE__*/React.createElement(_Modal__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -16758,7 +16872,7 @@ var AppContainer = /*#__PURE__*/function (_Component) {
         show: this.props.showModalPropriete
       }, /*#__PURE__*/React.createElement("p", null, "propriete")), /*#__PURE__*/React.createElement(Main, {
         closeMenu: this.state.openMenu
-      }, this.props.children), /*#__PURE__*/React.createElement(_components_Uploader__WEBPACK_IMPORTED_MODULE_6__["default"], null));
+      }, this.props.children), /*#__PURE__*/React.createElement(_components_Uploader__WEBPACK_IMPORTED_MODULE_8__["default"], null));
     }
   }]);
 
@@ -17077,6 +17191,470 @@ var themeVariable = {
   blueRadius: 'background: rgb(53,51,255);background: -moz-linear-gradient(120deg, rgba(53,51,255,1) 0%, rgba(32,31,170,1) 100%);background: -webkit-linear-gradient(120deg, rgba(53,51,255,1) 0%, rgba(32,31,170,1) 100%);background: linear-gradient(120deg, rgba(53,51,255,1) 0%, rgba(32,31,170,1) 100%);filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#3533ff",endColorstr="#201faa",GradientType=1);',
   greenRadius: 'background: rgb(13,171,118);background: -moz-linear-gradient(120deg, rgba(13,171,118,1) 0%, rgba(37,141,105,1) 100%);background: -webkit-linear-gradient(120deg, rgba(13,171,118,1) 0%, rgba(37,141,105,1) 100%);background: linear-gradient(120deg, rgba(13,171,118,1) 0%, rgba(37,141,105,1) 100%);filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0dab76",endColorstr="#258d69",GradientType=1);'
 };
+
+/***/ }),
+
+/***/ "./src/views/AddChasseur.jsx":
+/*!***********************************!*\
+  !*** ./src/views/AddChasseur.jsx ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ "./src/actions/index.js");
+/* harmony import */ var _lib_functions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../lib/functions */ "./src/lib/functions.js");
+/* harmony import */ var _components_Input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Input */ "./src/components/Input.jsx");
+/* harmony import */ var _theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../theme/design/componentsDesign */ "./src/theme/design/componentsDesign.jsx");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+var Component = wp.element.Component;
+
+
+
+
+
+
+
+var AddChasseur = /*#__PURE__*/function (_Component) {
+  _inherits(AddChasseur, _Component);
+
+  var _super = _createSuper(AddChasseur);
+
+  function AddChasseur(props) {
+    var _this;
+
+    _classCallCheck(this, AddChasseur);
+
+    _this = _super.call(this, props);
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(AddChasseur, [{
+    key: "handleSubmit",
+    value: function handleSubmit(event) {
+      var _this2 = this;
+
+      var fakeID = '_' + Math.random().toString(36).substr(2, 9);
+      this.props.toogleAddChasseur();
+      this.props.handleChangeModal('resetTheForm', true);
+      event.preventDefault();
+      var data = new FormData();
+      data.append('action', 'form_add_user');
+
+      for (var key in this.props.modalData) {
+        if (key != 'filesPhotosChasseur' && this.props.modalData[key] != null) {
+          data.append(key, this.props.modalData[key]);
+        } else {
+          if (this.props.modalData[key] != null) {
+            var _iterator = _createForOfIteratorHelper(this.props.modalData[key]),
+                _step;
+
+            try {
+              for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                var item = _step.value;
+                data.append('files[]', item);
+              }
+            } catch (err) {
+              _iterator.e(err);
+            } finally {
+              _iterator.f();
+            }
+          }
+        }
+      }
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../wp-content/themes/themeplocatif/ajax-board.php', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        onUploadProgress: function onUploadProgress(progress) {
+          var loaded = progress.loaded,
+              total = progress.total;
+          var percentageProgress = Math.floor(loaded / total * 90);
+
+          _this2.props.registerDataProgress(fakeID, percentageProgress);
+        }
+      }).then(function (response) {
+        result = Object(_lib_functions__WEBPACK_IMPORTED_MODULE_3__["formatToJson"])(response.data);
+
+        if (result.id == null) {
+          console.log('error');
+        }
+      })["catch"](function (error) {
+        console.log(error);
+      }).then(function () {
+        _this2.props.registerDataProgress(fakeID, 100);
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["Form"], {
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], {
+        dispatch: true
+      }, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["TitleForm"], {
+        isFirst: true
+      }, "D\xE9tails"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.filesPhotosChasseur,
+        onChange: this.props.handleChangeModal,
+        type: "file",
+        id: "filesPhotosChasseur",
+        multiple: "false",
+        accept: ".png, .jpg, .jpeg",
+        label: "Ajouter une photo de profil"
+      })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.pseudo,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "text",
+        id: "pseudo",
+        label: "Pseudo"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.first_name,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "text",
+        id: "first_name",
+        label: "Pr\xE9nom"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.last_name,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "text",
+        id: "last_name",
+        label: "Nom"
+      })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.telephone,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        tel: true,
+        type: "number",
+        id: "telephone",
+        label: "T\xE9l\xE9phone"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.mail,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "email",
+        id: "mail",
+        label: "e-Mail"
+      })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["SendButton"], {
+        noMarginLeft: true,
+        type: "submit"
+      }, "Enregistrer"));
+    }
+  }]);
+
+  return AddChasseur;
+}(Component);
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    handleChangeModal: function handleChangeModal(key, data) {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["handleChangeAddChasseurModal"])(key, data));
+    },
+    registerDataProgress: function registerDataProgress(key, data) {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["registerDataProgress"])(key, data));
+    },
+    toogleAddChasseur: function toogleAddChasseur() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["toogleAddChasseur"])());
+    }
+  };
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    modalData: state.addModal.addChasseurModal
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(AddChasseur));
+
+/***/ }),
+
+/***/ "./src/views/AddClient.jsx":
+/*!*********************************!*\
+  !*** ./src/views/AddClient.jsx ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ "./src/actions/index.js");
+/* harmony import */ var _lib_functions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../lib/functions */ "./src/lib/functions.js");
+/* harmony import */ var _components_Input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Input */ "./src/components/Input.jsx");
+/* harmony import */ var _theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../theme/design/componentsDesign */ "./src/theme/design/componentsDesign.jsx");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+var Component = wp.element.Component;
+
+
+
+
+
+
+var listPays = ['Afghanistan', 'Afrique du Sud', 'Albanie', 'Algérie', 'Allemagne', 'Andorre', 'Angola', 'Antigua-et-Barbuda', 'Arabie saoudite', 'Argentine', 'Arménie', 'Australie', 'Autriche', 'Azerbaïdjan', 'Bahamas', 'Bahreïn', 'Bangladesh', 'Barbade', 'Belgique', 'Belize', 'Bénin', 'Bhoutan', 'Biélorussie', 'Birmanie', 'Bolivie', 'Bosnie-Herzégovine', 'Botswana', 'Brésil', 'Brunei', 'Bulgarie', 'Burkina Faso', 'Burundi', 'Cambodge', 'Cameroun', 'Canada', 'Cap-Vert', 'République centrafricaine', 'Chili', 'Chine', 'Chypre', 'Colombie', 'Comores', 'République du Congo', 'République démocratique du Congo', 'Îles Cook', 'Corée du Nord', 'Corée du Sud', 'Costa Rica', 'Côte d’Ivoire', 'Croatie', 'Cuba', 'Danemark', 'Djibouti', 'République dominicaine', 'Dominique', 'Égypte', 'Émirats arabes unis', 'Équateur', 'Érythrée', 'Espagne', 'Estonie', 'États-Unis', 'Éthiopie', 'Fidji', 'Finlande', 'France', 'La Réunion', 'Gabon', 'Gambie', 'Géorgie', 'Ghana', 'Grèce', 'Grenade', 'Guatemala', 'Guinée', 'Guinée-Bissau', 'Guinée équatoriale', 'Guyana', 'Haïti', 'Honduras', 'Hongrie', 'Inde', 'Indonésie', 'Irak', 'Iran', 'Irlande', 'Islande', 'Israël', 'Italie', 'Jamaïque', 'Japon', 'Jordanie', 'Kazakhstan', 'Kenya', 'Kirghizistan', 'Kiribati', 'Koweït', 'Laos', 'Lesotho', 'Lettonie', 'Liban', 'Liberia', 'Libye', 'Liechtenstein', 'Lituanie', 'Luxembourg', 'Macédoine du Nord', 'Madagascar', 'Malaisie', 'Malawi', 'Maldives', 'Mali', 'Malte', 'Maroc', 'Îles Marshall', 'Maurice', 'Mauritanie', 'Mexique', 'Micronésie', 'Moldavie', 'Monaco', 'Mongolie', 'Monténégro', 'Mozambique', 'Namibie', 'Nauru', 'Népal', 'Nicaragua', 'Niger', 'Nigeria', 'Niue', 'Norvège', 'Nouvelle-Zélande', 'Oman', 'Ouganda', 'Ouzbékistan', 'Pakistan', 'Palaos', 'Palestine', 'Panamá', 'Papouasie-Nouvelle-Guinée', 'Paraguay', 'Pays-Bas', 'Pérou', 'Philippines', 'Pologne', 'Portugal', 'Qatar', 'Roumanie', 'Royaume-Uni', 'Russie', 'Rwanda', 'Saint-Christophe-et-Niévès', 'Saint-Marin', 'Saint-Vincent-et-les Grenadines', 'Sainte-Lucie', 'Îles Salomon', 'Salvador', 'Samoa', 'São Tomé-et-Principe', 'Sénégal', 'Serbie', 'Seychelles', 'Sierra Leone', 'Singapour', 'Slovaquie', 'Slovénie', 'Somalie', 'Soudan', 'Soudan du Sud', 'Sri Lanka', 'Suède', 'Suisse', 'Suriname', 'Eswatini', 'Syrie', 'Tadjikistan', 'Tanzanie', 'Tchad', 'République tchèque', 'Thaïlande', 'Timor oriental', 'Togo', 'Tonga', 'Trinité-et-Tobago', 'Tunisie', 'Turkménistan', 'Turquie', 'Tuvalu', 'Ukraine', 'Uruguay', 'Vanuatu', 'Vatican', 'Venezuela', 'Viêt Nam', 'Yémen', 'Zambie', 'Zimbabwe', 'Abkhazie', 'Chypre du Nord', 'Kosovo', 'Ossétie du Sud', 'Sahara occidental', 'Taïwan'];
+
+var AddClient = /*#__PURE__*/function (_Component) {
+  _inherits(AddClient, _Component);
+
+  var _super = _createSuper(AddClient);
+
+  function AddClient(props) {
+    var _this;
+
+    _classCallCheck(this, AddClient);
+
+    _this = _super.call(this, props);
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(AddClient, [{
+    key: "handleSubmit",
+    value: function handleSubmit(event) {
+      var _this2 = this;
+
+      var fakeID = '_' + Math.random().toString(36).substr(2, 9);
+      this.props.toogleAddClient();
+      this.props.handleChangeModal('resetTheForm', true);
+      event.preventDefault();
+      var data = new FormData();
+      data.append('action', 'form_add_user');
+
+      for (var key in this.props.modalData) {
+        if (key != 'filesPhotosClient' && this.props.modalData[key] != null) {
+          data.append(key, this.props.modalData[key]);
+        } else {
+          if (this.props.modalData[key] != null) {
+            var _iterator = _createForOfIteratorHelper(this.props.modalData[key]),
+                _step;
+
+            try {
+              for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                var item = _step.value;
+                data.append('files[]', item);
+              }
+            } catch (err) {
+              _iterator.e(err);
+            } finally {
+              _iterator.f();
+            }
+          }
+        }
+      }
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../wp-content/themes/themeplocatif/ajax-board.php', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        onUploadProgress: function onUploadProgress(progress) {
+          var loaded = progress.loaded,
+              total = progress.total;
+          var percentageProgress = Math.floor(loaded / total * 90);
+
+          _this2.props.registerDataProgress(fakeID, percentageProgress);
+        }
+      }).then(function (response) {
+        result = Object(_lib_functions__WEBPACK_IMPORTED_MODULE_3__["formatToJson"])(response.data);
+
+        if (result.id == null) {
+          console.log('error');
+        }
+      })["catch"](function (error) {
+        console.log(error);
+      }).then(function () {
+        _this2.props.registerDataProgress(fakeID, 100);
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["Form"], {
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], {
+        dispatch: true
+      }, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["TitleForm"], {
+        isFirst: true
+      }, "D\xE9tails"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.filesPhotosClient,
+        onChange: this.props.handleChangeModal,
+        type: "file",
+        id: "filesPhotosClient",
+        multiple: "false",
+        accept: ".png, .jpg, .jpeg",
+        label: "Ajouter une photo de profil"
+      })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.pseudo,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "text",
+        id: "pseudo",
+        label: "Pseudo"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.first_name,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "text",
+        id: "first_name",
+        label: "Pr\xE9nom"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.last_name,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "text",
+        id: "last_name",
+        label: "Nom"
+      })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.telephone,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        tel: true,
+        type: "number",
+        id: "telephone",
+        label: "T\xE9l\xE9phone"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.mail,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "email",
+        id: "mail",
+        label: "e-Mail"
+      })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.adresse_postale_1,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "text",
+        id: "adresse_postale_1",
+        label: "Adresse postale"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.adresse_postale_2,
+        onChange: this.props.handleChangeModal,
+        type: "text",
+        id: "adresse_postale_2",
+        label: "Adresse postale 2"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.ville,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "text",
+        id: "ville",
+        label: "Ville"
+      })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.etat_province_region,
+        onChange: this.props.handleChangeModal,
+        type: "text",
+        id: "etat_province_region",
+        label: "\xC9tat / Province / R\xE9gion"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.zip_code_postal,
+        onChange: this.props.handleChangeModal,
+        required: true,
+        type: "text",
+        id: "zip_code_postal",
+        label: "ZIP / Code postal"
+      }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        value: this.props.modalData.pays,
+        onChange: this.props.handleChangeModal,
+        type: "select",
+        id: "pays",
+        label: "Pays",
+        list: listPays,
+        required: true
+      })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["SendButton"], {
+        noMarginLeft: true,
+        type: "submit"
+      }, "Enregistrer"));
+    }
+  }]);
+
+  return AddClient;
+}(Component);
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    handleChangeModal: function handleChangeModal(key, data) {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["handleChangeAddClientModal"])(key, data));
+    },
+    registerDataProgress: function registerDataProgress(key, data) {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["registerDataProgress"])(key, data));
+    },
+    toogleAddClient: function toogleAddClient() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["toogleAddClient"])());
+    }
+  };
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    modalData: state.addModal.addClientModal
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(AddClient));
 
 /***/ }),
 
@@ -18399,7 +18977,7 @@ var entete = {
   'id_fiche_produit.ville': 'Ville',
   'id_fiche_produit.interlocuteur': 'Nom de l\'interlocuteur',
   'id_fiche_produit.artisan': 'Artisan',
-  'dede': 'CA ImmoMalin'
+  'id_fiche_produit.honoraires_immomalin': 'CA ImmoMalin'
 };
 
 var Dossier = /*#__PURE__*/function (_Component) {
@@ -18594,6 +19172,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var Component = wp.element.Component;
 
 
@@ -18601,15 +19181,15 @@ var Component = wp.element.Component;
 
 
 var title = 'Liste des propriétés';
-var entete = {
+
+var entete = _defineProperty({
   'chasseur.first_name': 'Prénom du chasseur',
   'thumbnail': 'Photo',
   'type_bien': 'Type de bien',
   'ville': 'Ville',
   'interlocuteur': 'Nom de l\'interlocuteur',
-  'CA': 'CA ImmoMalin',
-  'honoraires_immomalin': 'Commission Chasseur'
-};
+  'honoraires_immomalin': 'CA ImmoMalin'
+}, "honoraires_immomalin", 'Commission Chasseur');
 
 var Propriete = /*#__PURE__*/function (_Component) {
   _inherits(Propriete, _Component);
