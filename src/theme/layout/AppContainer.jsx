@@ -1,5 +1,6 @@
 const { Component } = wp.element;
 
+import Switcher from '../layout/Switcher';
 import { connect } from 'react-redux';
 
 import styled, { css } from 'styled-components';
@@ -90,7 +91,14 @@ class AppContainer extends Component {
 
         this.state = {
             openMenu: true,
+            view: 'Tableau de bord',   
         }
+
+        this.handleChangeView = this.handleChangeView.bind(this);
+    }
+
+    handleChangeView(newView) {
+        this.setState({ view: newView });
     }
 
     render() {
@@ -110,7 +118,7 @@ class AppContainer extends Component {
                     <LogOut />
                 </BarreTop>
 
-                <Navigation statMenu={this.state.openMenu} />
+                <Navigation statMenu={this.state.openMenu} onChangeView={this.handleChangeView} />
 
                 {/** MODAL ADD **/}
 
@@ -141,7 +149,7 @@ class AppContainer extends Component {
                 </Modal>
 
                 <Main closeMenu={this.state.openMenu}>
-                    {this.props.children}
+                    <Switcher view={this.state.view} />
                 </Main>
 
                 <Uploader />

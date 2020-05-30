@@ -38,6 +38,7 @@ class Notification extends Component {
                 <TitleSection>{title}</TitleSection>
                 <Table
                     listeProps={entete}
+                    empty='Aucune notification pour le moment'
                     data={this.props.list.data ? this.props.list.data : null}
                     statut={this.props.list.statut ? this.props.list.statut : null} />
             </>

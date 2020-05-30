@@ -46,7 +46,7 @@ class AddChasseur extends Component {
             },
         })
             .then(response => {
-                result = formatToJson(response.data);
+                let result = formatToJson(response.data);
                 if (result.id == null) {
                     console.log('error');
                 }

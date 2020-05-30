@@ -57,6 +57,10 @@ export function getAllDossiers() {
         await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', action)
             .then(function (response) {
                 responseReq = formatToJson(response.data);
+                if (responseReq == 'fail') {
+                    statutRes = 'success';
+                    responseReq = null;
+                }
             })
             .catch(function (error) {
                 responseReq = error;
@@ -78,6 +82,10 @@ export function getAllUsers() {
         await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', action)
         .then(function (response) {
             responseReq = formatToJson(response.data);
+            if (responseReq == 'fail') {
+                statutRes = 'success';
+                responseReq = null;
+            }
         })
         .catch(function (error) {
             responseReq = error;
@@ -101,6 +109,10 @@ export function getLogout() {
         await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', action)
         .then(function (response) {
             responseReq = formatToJson(response.data);
+            if (responseReq == 'fail') {
+                statutRes = 'success';
+                responseReq = null;
+            }
         })
         .catch(function (error) {
             responseReq = error;
@@ -122,6 +134,10 @@ export function getHomeUrl() {
         await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', action)
         .then(function (response) {
             responseReq = formatToJson(response.data);
+            if (responseReq == 'fail') {
+                statutRes = 'success';
+                responseReq = null;
+            }
         })
         .catch(function (error) {
             responseReq = error;
@@ -178,6 +194,10 @@ export function getPersonalData() {
         await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', action)
         .then(function (response) {
             responseReq = formatToJson(response.data);
+            if (responseReq == 'fail') {
+                statutRes = 'success';
+                responseReq = null;
+            }
         })
         .catch(function (error) {
             responseReq = error;

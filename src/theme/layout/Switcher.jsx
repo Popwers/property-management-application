@@ -1,5 +1,3 @@
-import { Switch, Route, Redirect } from "react-router-dom";
-
 import Board from '../../views/Board';
 import Notification from '../../views/Notification';
 import Chasseur from '../../views/Chasseur';
@@ -7,29 +5,42 @@ import Client from '../../views/Client';
 import Dossier from '../../views/Dossier';
 import Propriete from '../../views/Propriete';
 
-export default function Switcher() {
-    return (
-        <Switch>
-            <Route exact path="/immoTEA/board">
-                <Board />
-            </Route>
-            <Route path="/immoTEA/board/proprietes">
-                <Propriete />
-            </Route>
-            <Route path="/immoTEA/board/chasseurs">
-                <Chasseur />
-            </Route>
-            <Route path="/immoTEA/board/clients">
-                <Client />
-            </Route>
-            <Route path="/immoTEA/board/notifications">
-                <Notification />
-            </Route>
-            <Route path="/immoTEA/board/dossiers">
-                <Dossier />
-            </Route>
+export default function Switcher(props) {
+    let renderView = <Board />;
 
-            <Redirect to="/immoTEA/board" />
-        </Switch>
+    switch (props.view) {
+        case 'Tableau de bord':
+            renderView = <Board />;
+            break;
+
+        case 'Propriétés':
+            renderView = <Propriete />;
+            break;
+
+        case 'Chasseurs':
+            renderView = <Chasseur />;
+            break;
+            
+        case 'Mes clients':
+            renderView = <Client />;
+            break;
+
+        case 'Notifications':
+            renderView = <Notification />;
+            break;
+
+        case 'Suivi dossiers':
+            renderView = <Dossier />;
+            break;
+    
+        default:
+            renderView = <Board />;
+            break;
+    }
+
+    return (
+        <>
+            {renderView}
+        </>
     );
 }

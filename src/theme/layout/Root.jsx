@@ -1,4 +1,3 @@
-import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { themeVariable } from '../variable';
 
@@ -14,11 +13,9 @@ const GlobalStyle = createGlobalStyle`
 
 export default (props) => {
     return (
-        <BrowserRouter>
-            <ThemeProvider theme={themeVariable}>
-                <GlobalStyle />
-                {props.children}
-            </ThemeProvider>
-        </BrowserRouter>
+        <ThemeProvider theme={themeVariable}>
+            <GlobalStyle />
+            {props.children}
+        </ThemeProvider>
     );
 }

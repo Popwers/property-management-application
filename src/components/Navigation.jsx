@@ -9,7 +9,6 @@ import {
 	toogleAddPropriete
 } from '../actions';
 
-import { Link } from "react-router-dom";
 import styled, { css } from 'styled-components';
 import IconDefault from '../resources/userDefault.svg';
 
@@ -276,13 +275,14 @@ const LinkStyled = styled.li`
 `
 
 const NavLink = (props) => {
+	const linkFormat = props.name.trim().toLowerCase().replace(/é/gi, 'e').replace(/ /gi, '_');
 	return (
 		<LinkStyled closeMenu={props.closeMenu} current={props.currentLink == props.name ? true : null} >
-			<Link to={props.link} onClick={() => props.changeView(props.name)} >
+			<a href={'#' + linkFormat} onClick={() => props.changeView(props.name)} >
 				{props.notifications && <Notification>{props.notifications}</Notification>}
 				<img src={props.src} />
 				<span>{props.name}</span>
-			</Link>
+			</a>
 
 			{props.addButton ? <AddButton className='addButton' onClick={props.addButton} closeMenu={props.closeMenu} /> : null}
 		</LinkStyled>
@@ -311,6 +311,7 @@ class Navigation extends Component {
 
 	handleChangeLink(newLink) {
 		this.setState({currentLink: newLink});
+		this.props.onChangeView(newLink);
 	}
 
 	render() {
@@ -319,8 +320,7 @@ class Navigation extends Component {
 		if (this.props.myUserData.role != 'load') {
 
 			// ALL
-			showLink.push(<NavLink src={Chart}
-							link="/immoTEA/board"
+			showLink.push(<NavLink src={Chart}							
 							name="Tableau de bord"
 							currentLink={this.state.currentLink}
 							changeView={this.handleChangeLink}
@@ -328,8 +328,7 @@ class Navigation extends Component {
 
 			// ONLY CHASSEUR AND SUPERVISEUR
 			if (this.props.myUserData.role != 'client__investisseur') {
-				showLink.push(<NavLink src={Home}
-								link="/immoTEA/board/proprietes"
+				showLink.push(<NavLink src={Home}								
 								name="Propriétés"
 								currentLink={this.state.currentLink}
 								changeView={this.handleChangeLink}
@@ -338,8 +337,7 @@ class Navigation extends Component {
 
 				// ONLY SUPERVISEUR
 				if (this.props.myUserData.role != 'chasseur') {
-					showLink.push(<NavLink src={User}
-									link="/immoTEA/board/chasseurs"
+					showLink.push(<NavLink src={User}									
 									name="Chasseurs"
 									currentLink={this.state.currentLink}
 									changeView={this.handleChangeLink}
@@ -347,8 +345,7 @@ class Navigation extends Component {
 									addButton={this.props.toogleAddChasseur} />);
 				}
 
-				showLink.push(<NavLink src={Users}
-								link="/immoTEA/board/clients"
+				showLink.push(<NavLink src={Users}								
 								name="Mes clients"
 								currentLink={this.state.currentLink}
 								changeView={this.handleChangeLink}
@@ -357,8 +354,7 @@ class Navigation extends Component {
 			}
 
 			// ALL
-			showLink.push(<NavLink src={Bell}
-							link="/immoTEA/board/notifications"
+			showLink.push(<NavLink src={Bell}							
 							name="Notifications"
 							currentLink={this.state.currentLink}
 							changeView={this.handleChangeLink}
@@ -366,8 +362,7 @@ class Navigation extends Component {
 
 			// ONLY CHASSEUR AND SUPERVISEUR
 			if (this.props.myUserData.role != 'client__investisseur') {
-				showLink.push(<NavLink src={Folder}
-								link="/immoTEA/board/dossiers"
+				showLink.push(<NavLink src={Folder}								
 								name="Suivi dossiers"
 								currentLink={this.state.currentLink}
 								changeView={this.handleChangeLink}

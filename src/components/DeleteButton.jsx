@@ -61,12 +61,17 @@ function DeleteButton(props) {
             await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', formData)
             .then(function (response) {
                 responseReq = formatToJson(response.data);
+                if (responseReq == 'fail') {
+                    statutRes = 'success';
+                    responseReq = null;
+                }
             })
             .catch(function (error) {
                 responseReq = error;
                 statutRes = 'error';
-            })
-            .then(props.getAllProprietes());
+            });
+
+            props.getAllProprietes();
         };
 
         async function deleteUser(id) {
@@ -80,12 +85,17 @@ function DeleteButton(props) {
             await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', formData)
             .then(function (response) {
                 responseReq = formatToJson(response.data);
+                if (responseReq == 'fail') {
+                    statutRes = 'success';
+                    responseReq = null;
+                }
             })
             .catch(function (error) {
                 responseReq = error;
                 statutRes = 'error';
-            })
-            .then(props.getAllUsers());
+            });
+
+            props.getAllUsers();
         };
 
         async function deleteDossier(id) {
@@ -99,12 +109,17 @@ function DeleteButton(props) {
             await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', formData)
             .then(function (response) {
                 responseReq = formatToJson(response.data);
+                if (responseReq == 'fail') {
+                    statutRes = 'success';
+                    responseReq = null;
+                }
             })
             .catch(function (error) {
                 responseReq = error;
                 statutRes = 'error';
-            })
-            .then(props.getAllDossiers());
+            });
+
+            props.getAllDossiers()
         };
     }
 
