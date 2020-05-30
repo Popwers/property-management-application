@@ -39,6 +39,7 @@ class Client extends Component {
                 <Table
                     listeProps={entete}
                     data={data}
+                    deleteType='user'
                     empty='Aucun client enregistré pour le moment'
                     statut={this.props.list.statut ? this.props.list.statut : null} />
             </>

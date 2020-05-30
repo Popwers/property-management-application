@@ -36,6 +36,7 @@ class Propriete extends Component {
                 <Table
                     listeProps={entete}
                     empty='Aucune propriétée enregistré pour le moment'
+                    deleteType='propriete'
                     data={this.props.list.data ? this.props.list.data : null}
                     statut={this.props.list.statut ? this.props.list.statut : null} />
             </>

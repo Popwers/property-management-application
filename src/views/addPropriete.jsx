@@ -83,7 +83,7 @@ class AddPropriete extends Component {
 
                 <RowInput>
                     <Input value={this.props.modalData.ville} onChange={this.props.handleChangeModal} type='text' id="ville" label='Ville' />
-                    <Input value={this.props.modalData.zip_code_postal} onChange={this.props.handleChangeModal} type='number' id="zip_code_postal" thousandSeparator='false' label='ZIP / Code postal' />
+                    <Input value={this.props.modalData.zip_code_postal} onChange={this.props.handleChangeModal} type='text' id="zip_code_postal" label='ZIP / Code postal' />
                     <Input value={this.props.modalData.type_bien} onChange={this.props.handleChangeModal} type='select' id="type_bien" label='Type de bien' list={['Appartement', 'Maison', 'Autre']} required />
                 </RowInput>
 

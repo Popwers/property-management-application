@@ -42,6 +42,7 @@ class Chasseur extends Component {
                 <Table
                     listeProps={entete}
                     data={data}
+                    deleteType='user'
                     empty='Aucun chasseur enregistré pour le moment'
                     statut={this.props.list.statut ? this.props.list.statut : null} />
             </>

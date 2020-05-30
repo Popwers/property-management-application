@@ -3,17 +3,11 @@ import { formatToJson } from '../lib/functions';
 
 import {
     GET_PROPRIETE,
-    ADD_PROPRIETE,
     UPDATE_PROPRIETE,
-    DELETE_PROPRIETE,
     GET_DOSSIER,
-    ADD_DOSSIER,
     UPDATE_DOSSIER,
-    DELETE_DOSSIER,
     GET_USER,
-    ADD_USER,
     UPDATE_USER,
-    DELETE_USER,
     GET_MY_DATA,
     GET_LOGOUT,
     GET_ADRESSE_SITE,
@@ -210,6 +204,7 @@ export function handleChangeAddChasseurModal(key, data) {
 
 
 /** REGISTER DATA **/
+
 export function registerDataProgress(key, data) {
     return { type: SET_REGISTER_DATA, payload: { key: key, data: data } };
 }
