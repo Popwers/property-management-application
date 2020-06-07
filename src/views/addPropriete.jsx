@@ -70,7 +70,7 @@ class AddPropriete extends Component {
 
                 <RowInput dispatch>
                     <TitleForm isFirst>Détails</TitleForm>
-                    <Input value={this.props.modalData.filesPhotos} onChange={this.props.handleChangeModal} type="file" id="filesPhotos" multiple="true" accept=".png, .jpg, .jpeg" label='Ajouter des photos' />
+                    <Input value={this.props.modalData.filesPhotos} onChange={this.props.handleChangeModal} type="file" id="filesPhotos" multiple accept=".png, .jpg, .jpeg" label='Ajouter des photos' />
                 </RowInput>
 
                 <Input value={this.props.modalData.titre} onChange={this.props.handleChangeModal} required type="text" id="title" label="Titre" />

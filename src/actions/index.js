@@ -4,10 +4,13 @@ import { formatToJson } from '../lib/functions';
 import {
     GET_PROPRIETE,
     UPDATE_PROPRIETE,
+    SEE_PROPRIETE,
     GET_DOSSIER,
     UPDATE_DOSSIER,
+    SEE_DOSSIER,
     GET_USER,
     UPDATE_USER,
+    SEE_USER,
     GET_MY_DATA,
     GET_LOGOUT,
     GET_ADRESSE_SITE,
@@ -227,4 +230,18 @@ export function handleChangeAddChasseurModal(key, data) {
 
 export function registerDataProgress(key, data) {
     return { type: SET_REGISTER_DATA, payload: { key: key, data: data } };
+}
+
+/** SEE DATA **/
+
+export function seeUserData(id) {
+    return { type: SEE_USER, payload: id };
+}
+
+export function seeProprieteData(id, dossiers) {
+    return { type: SEE_PROPRIETE, payload: { id: id, dossiers: dossiers }};
+}
+
+export function seeDossierData(id) {
+    return { type: SEE_DOSSIER, payload: id };
 }

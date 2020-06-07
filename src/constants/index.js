@@ -1,11 +1,14 @@
 export const GET_PROPRIETE = "GET_PROPRIETE";
 export const UPDATE_PROPRIETE = "UPDATE_PROPRIETE";
+export const SEE_PROPRIETE = "SEE_PROPRIETE";
 
 export const GET_DOSSIER = "GET_DOSSIER";
 export const UPDATE_DOSSIER = "UPDATE_DOSSIER";
+export const SEE_DOSSIER = "SEE_DOSSIER";
 
 export const GET_USER = "GET_USER";
 export const UPDATE_USER = "UPDATE_USER";
+export const SEE_USER = "SEE_USER";
 
 export const GET_MY_DATA = "GET_MY_DATA";
 export const GET_LOGOUT = "GET_LOGOUT";

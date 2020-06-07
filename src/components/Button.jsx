@@ -1,6 +1,8 @@
+import { connect } from 'react-redux';
+import { seeUserData, seeProprieteData, seeDossierData, toogleUserModal, toogleProprieteModal, toogleDossierModal } from '../actions';
 import {StyledButton} from '../theme/design/componentsDesign'
 
-export default function Button(props) {
+function Button(props) {
     let AddIconLeft = null;
     let AddIconRight = null;
 
@@ -12,8 +14,33 @@ export default function Button(props) {
         }
     }
 
+    function handleClick(event) {
+        event.preventDefault();
+        if (props.onClick) props.onClick();
+        if (props.action && props.idToSee) {
+            switch (props.action) {
+                case "user":
+                    props.seeUserData(props.idToSee);
+                    props.toogleUserModal();
+                    break;
+
+                case "propriete":
+                    props.seeProprieteData(props.idToSee, props.listDossiers);
+                    props.toogleProprieteModal();
+                    break;
+
+                case "dossier":
+                    props.seeDossierData(props.idToSee);
+                    props.toogleDossierModal();
+                    break;
+            }
+        }
+    }
+
     return (
-        <StyledButton 
+        <StyledButton
+            hide={props.hide}
+            disable={props.disable}
             href={props.link ? props.link : "#"}
             small={props.small}
             light={props.light}
@@ -23,7 +50,9 @@ export default function Button(props) {
             green={props.green}
             iconRight={props.iconRight}
             src={props.src}
-            onClick={props.onClick ? props.onClick : null} >
+            isImg={props.isImg}
+            noInvert={props.noInvert}
+            onClick={handleClick} >
 
             {AddIconLeft != null ? AddIconLeft : null}
             {props.children}
@@ -31,3 +60,22 @@ export default function Button(props) {
         </StyledButton>
     );
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        seeUserData: (id) => dispatch(seeUserData(id)),
+        seeProprieteData: (id, dossiers) => dispatch(seeProprieteData(id, dossiers)),
+        seeDossierData: (id) => dispatch(seeDossierData(id)),
+        toogleUserModal: () => dispatch(toogleUserModal()),
+        toogleProprieteModal: () => dispatch(toogleProprieteModal()),
+        toogleDossierModal: () => dispatch(toogleDossierModal()),
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        listDossiers: state.manageDossier.listDossier.data,
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Button)

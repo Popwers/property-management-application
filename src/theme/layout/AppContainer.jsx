@@ -2,6 +2,12 @@ const { Component } = wp.element;
 
 import Switcher from '../layout/Switcher';
 import { connect } from 'react-redux';
+import {
+    getAllProprietes,
+    getAllDossiers,
+    getAllUsers,
+    getPersonalData
+} from '../../actions';
 
 import styled, { css } from 'styled-components';
 import LogOut from "../../components/LogOutButton";
@@ -11,6 +17,10 @@ import AddPropriete from '../../views/AddPropriete';
 import AddClient from '../../views/AddClient';
 import AddChasseur from '../../views/AddChasseur';
 import Uploader from '../../components/Uploader';
+import UserModal from '../../views/UserModal';
+import ProprieteModal from '../../views/ProprieteModal';
+import DossierModal from '../../views/DosssierModal';
+
 
 const BarreTop = styled.div`
     position: fixed;
@@ -91,10 +101,19 @@ class AppContainer extends Component {
 
         this.state = {
             openMenu: true,
-            view: 'Tableau de bord',   
+            view: 'Tableau de bord',
         }
 
         this.handleChangeView = this.handleChangeView.bind(this);
+    }
+
+    componentDidMount() {
+        setInterval(() => {
+            this.props.getAllProprietes();
+            this.props.getAllDossiers();
+            this.props.getAllUsers();
+            this.props.getPersonalData();
+        }, 15000);
     }
 
     handleChangeView(newView) {
@@ -136,16 +155,16 @@ class AppContainer extends Component {
 
                 {/** MODAL INFOBOX **/}
 
-                <Modal type='userModal' show={this.props.showModalUser}>
-                    <p>User</p>
+                <Modal type='userModal' show={this.props.showModalUser} fitContent alignCenter>
+                    <UserModal />
                 </Modal>
 
-                <Modal type='dossierModal' show={this.props.showModalDossier}>
-                    <p>Dossier</p>
+                <Modal type='dossierModal' show={this.props.showModalDossier} fitContent>
+                    <DossierModal />
                 </Modal>
 
-                <Modal type='proprieteModal' show={this.props.showModalPropriete}>
-                    <p>propriete</p>
+                <Modal type='proprieteModal' show={this.props.showModalPropriete} fitContent>
+                    <ProprieteModal />
                 </Modal>
 
                 <Main closeMenu={this.state.openMenu}>
@@ -158,8 +177,17 @@ class AppContainer extends Component {
     }
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+        getAllProprietes: () => dispatch(getAllProprietes()),
+        getAllDossiers: () => dispatch(getAllDossiers()),
+        getAllUsers: () => dispatch(getAllUsers()),
+        getPersonalData: () => dispatch(getPersonalData()),
+    }
+}
+
 const mapStateToProps = (state) => {
-    return { 
+    return {
         myUserData: state.general.myData.data,
 
         showModalAddPropriete: state.general.addProprieteModal,
@@ -172,4 +200,4 @@ const mapStateToProps = (state) => {
     };
 }
 
-export default connect(mapStateToProps)(AppContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(AppContainer)

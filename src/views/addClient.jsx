@@ -274,7 +274,7 @@ class AddClient extends Component {
 
                 <RowInput dispatch>
                     <TitleForm isFirst>Détails</TitleForm>
-                    <Input value={this.props.modalData.filesPhotosClient} onChange={this.props.handleChangeModal} type="file" id="filesPhotosClient" multiple="false" accept=".png, .jpg, .jpeg" label='Ajouter une photo de profil' />
+                    <Input value={this.props.modalData.filesPhotosClient} onChange={this.props.handleChangeModal} type="file" id="filesPhotosClient" accept=".png, .jpg, .jpeg" label='Ajouter une photo de profil' />
                 </RowInput>
 
                 <RowInput>

@@ -32,6 +32,13 @@ export const StyledButton = styled.a`
     }
 
     ${props =>
+        props.alignCenter &&
+        css`
+            margin: 0 auto;
+        `
+    };
+
+    ${props =>
         props.noMarginLeft &&
         css`
             margin-left: 0px;
@@ -92,11 +99,11 @@ export const StyledButton = styled.a`
             background: ${props => props.theme.green};
 
             &:hover {
-                background-color: ${props => props.theme.red};
+                background-color: ${props => props.theme.orange};
             }
 
             &:active {
-                background-color: darken($color: ${props => props.theme.red}, $amount: 10);
+                background-color: darken($color: ${props => props.theme.orange}, $amount: 10);
             }
         `
     };
@@ -134,7 +141,72 @@ export const StyledButton = styled.a`
                     }
 
                     padding: ${props => props.iconRight ? '4px 40px 4px 20px' : '4px 20px 4px 40px'};
-                `};
+            `};
+
+            ${props =>
+                props.noInvert &&
+                css`
+                    img {
+                        height: 25px;
+                        width: 25px;
+                        position: absolute;
+                        top: 1px;
+                        margin-left: ${props => props.iconRight ? '5px' : '0'};
+                        margin-right: ${props => props.iconRight ? '0px' : '5px'};
+                        left: ${props => props.iconRight ? 'initiale' : '10px'};
+                        transition: filter 0.3s;
+                        filter: invert(0) !important;
+                    }
+
+                    padding: ${props => props.iconRight ? '4px 40px 4px 20px' : '4px 20px 4px 40px'};
+            `};
+        `};
+    
+    ${props =>
+        props.isImg &&
+        css`
+            padding: 0;
+            width: 40px;
+            height: 45px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            background: transparent;
+            border-radius: initial;
+            box-shadow: none;
+
+            &:hover {
+                background: transparent;
+                transform: scale(1.05);
+            }
+
+            &:active {
+                background: transparent;
+                transform: scale(0.95);
+            }
+
+            img {
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: contain !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+            }
+        `};
+
+    ${props =>
+        props.hide &&
+        css`
+            display: none;
+        `
+    };
+
+
+    ${props =>
+        props.disable &&
+        css`
+            opacity: 0.4;
+            pointer-events: none;
         `
     };
 `
@@ -157,10 +229,12 @@ export const TitleSection = styled.h2`
 `
 
 export const Text = styled.p`
-    font-size: 15px;
+    font-size: ${props => props.fontSize ? props.fontSize : '15px'};
     font-weight: ${props => props.theme.regular};
     font-family: ${props => props.theme.roboto};
     color: ${props => props.theme.black};
+    margin: ${props => props.margin ? props.margin : null};
+    text-align: ${props => props.textCenter ? 'center' : null};
 
     ${props =>
         props.light &&
@@ -173,6 +247,43 @@ export const Text = styled.p`
         css`
             font-weight: ${props => props.theme.bold};
         `};
+
+    ${props =>
+        props.montserrat &&
+        css`
+            font-family: ${props => props.theme.montserrat};
+        `};
+
+        ${props =>
+            props.badge &&
+            css`
+                white-space: nowrap;
+                background: ${props => props.theme.blue};
+                display: inline-block;
+                color: ${props => props.theme.white};
+                padding: 5px 20px;
+                border-radius: 100px;
+                font-weight: ${props => props.theme.light};
+                box-shadow: ${props => props.theme.shadows};
+
+                ${props =>
+                    props.orange &&
+                    css`
+                        background: ${props => props.theme.orange};
+                    `};
+
+                ${props =>
+                    props.red &&
+                    css`
+                        background: ${props => props.theme.red};
+                    `};
+
+                ${props =>
+                    props.green &&
+                    css`
+                        background: ${props => props.theme.green};
+                    `};
+            `}
 `
 
 export const Inline = styled.div`
@@ -282,4 +393,20 @@ export const SendButton = styled.button`
         transform: scale(0.95) !important;
         background-color: ${props => props.theme.red};
     }
+`
+
+export const Row = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    ${props =>
+        props.alignCenter &&
+        css`
+            align-items: center;
+        `};
+`
+
+export const AlignCenter = styled.div`
+    text-align: center;
 `

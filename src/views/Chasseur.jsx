@@ -14,8 +14,8 @@ const entete = {
     'telephone': 'Téléphone',
     'user_email': 'Mail',
     '': 'Secteur',
-    '': 'Total CA réalisé',
-    '': 'Total CA prévisionnel',
+    '': ['Total CA réalisé', '€'],
+    '': ['Total CA prévisionnel', '€'],
     '': 'Barre de progession vers son prochain BONUS'
 };
 
@@ -35,7 +35,11 @@ class Chasseur extends Component {
         if (this.props.list.data != null) {
             data = this.props.list.data.filter(user => user.role == 'chasseur');
 
-            if (data.length < 1) {
+            if (Array.isArray(data)) {
+                if (data.length < 1) {
+                    data = null;
+                }
+            } else {
                 data = null;
             }
         }
@@ -46,6 +50,7 @@ class Chasseur extends Component {
                 <Table
                     listeProps={entete}
                     data={data}
+                    actionType='user'
                     deleteType='user'
                     empty='Aucun chasseur enregistré pour le moment'
                     statut={this.props.list.statut ? this.props.list.statut : null} />

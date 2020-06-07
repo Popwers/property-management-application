@@ -36,7 +36,7 @@ const ContainerModal = styled.div`
 const StyledModal = styled.div`
     max-width: 80vw;
     max-height: 80vh;
-    width: 65%;
+    width: ${props => props.fitContent ? null : '65%'};
     min-width: 200px;
     min-height: 200px;
     background: ${props => props.theme.white};
@@ -44,6 +44,7 @@ const StyledModal = styled.div`
     border-radius: 30px;
     padding: 45px;
     position: relative;
+    text-align: ${props => props.alignCenter ? 'center' : 'null'};
 
     ${props =>
         props.haveTitle &&
@@ -144,7 +145,7 @@ function Modal(props) {
 
     return (
         <ContainerModal open={props.show}>
-            <StyledModal haveTitle={titleModal != null ? true : false}>
+            <StyledModal haveTitle={titleModal != null ? true : false} fitContent={props.fitContent} alignCenter={props.alignCenter} >
                 {titleModal}
                 {closeButton}
                 <ContentModal>

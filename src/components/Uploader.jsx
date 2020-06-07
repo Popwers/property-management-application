@@ -12,7 +12,7 @@ const UploadContainer = styled.div`
     padding: 20px 30px;
     background: ${props => props.theme.white};
     box-shadow: ${props => props.theme.shadows};
-    transition: bottom 0.5s ease-out;
+    transition: bottom 0.8s ease-out;
 
     ${props =>
         props.show &&
@@ -69,7 +69,7 @@ const ProgressBarStyle = styled.div`
             right: 0%;
         }
 
-        750% { 
+        75% { 
             width: 0%;
             right: 100%;
         }

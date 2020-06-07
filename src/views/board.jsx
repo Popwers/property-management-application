@@ -1,5 +1,7 @@
+const { Component } = wp.element;
+
 import { connect } from 'react-redux';
-import { toogleUserModal } from '../actions';
+import { getAllDossiers, toogleUserModal, getAllUsers } from '../actions';
 
 import styled, { css } from 'styled-components';
 import { setDocumentTitle, formatPrix } from '../lib/functions';
@@ -9,7 +11,13 @@ import CardStat from '../components/CardStat';
 import Button from '../components/Button';
 import iconPencil from '../resources/pencil.svg';
 
-import Modal from '../theme/layout/Modal';
+const enteteDossier = {
+    'id': 'ID Projet',
+    'id_fiche_produit.chasseur.display_name': 'Prénom Chasseur',
+    'id_fiche_produit.chasseur.telephone': 'Téléphone du chasseur',
+    '': 'Suivi',
+    '': 'Date de la dernière étape',
+};
 
 const FlexDiv = styled.div`
     display: flex;
@@ -90,77 +98,131 @@ function BarreBonus(props) {
     );
 }
 
-function Board(props) {
-    setDocumentTitle('Tableau de bord');
+class Board extends Component {
+    constructor(props) {
+        super(props);
+    }
 
-    return (
-        <>
-            <FlexDiv>
-                <HeadDiv>
-                    <FlexRow>
-                        <Inline marginRight="20px"><TitleSection>Bonjour, {props.myUserData.first_name ? props.myUserData.first_name : 'Utilisateur'}</TitleSection></Inline>
-                        <Button small light src={iconPencil} iconRight onClick={props.toogleUserModal}>Mon compte</Button>
-                    </FlexRow>
+    componentDidMount() {
+        setDocumentTitle('Tableau de bord');
+        this.props.getAllDossiers();
+        this.props.getAllUsers();
+    }
 
-                    <Text light>Vous avez 3 notifications</Text>
-                    
-                    <H2>Prochain Bonus</H2>
-                    <BarreBonus title="De chiffre d’affaire" pourcentage={70000} max={120000} />
-                </HeadDiv>
+    render() {
+        let data = null;
 
-                <CardsContainer>
-                    <CardStat
-                        blue 
-                        title="Nombre de projet en cours" 
-                        value={12} />
+        if (this.props.list.data != null) {
+            if (this.props.userData.role == 'client__investisseur') {
+                data = this.props.list.data.filter(dossier => dossier.id_client.id == this.props.userData.id);
+            }
 
-                    <CardStat
-                        green
-                        title="Nombre de projet facturé" 
-                        value={7} />
-                </CardsContainer>
-            </FlexDiv>
-            
-            <TitleSection>Vos chiffres</TitleSection>
+            if (Array.isArray(data)) {
+                if (data.length < 1) {
+                    data = null;
+                }
+            } else {
+                data = null;
+            }
+        }
 
-            <CardsContainer>
-                <CardStat
-                    orange
-                    title="Total Commission prévisionnel" 
-                    value={4000}
-                    euros />
+        return (
+            <>
+                <FlexDiv>
+                    <HeadDiv>
+                        <FlexRow>
+                            <Inline marginRight="20px"><TitleSection>Bonjour, {this.props.myUserData.first_name ? this.props.myUserData.first_name : 'Utilisateur'}</TitleSection></Inline>
+                            <Button 
+                                small 
+                                light 
+                                src={iconPencil} 
+                                iconRight 
+                                action='user'
+                                idToSee={this.props.myUserData.id} >Mon compte</Button>
+                        </FlexRow>
 
-                <CardStat
-                    orange 
-                    title="Total Chiffre d’affaire ImmoMalin facturé" 
-                    value={2000}
-                    euros />
-            </CardsContainer>
+                        <Text light>Vous avez 3 notifications</Text>
+                        
+                        <H2>Prochain Bonus</H2>
+                        <BarreBonus title="De chiffre d’affaire" pourcentage={70000} max={120000} />
+                    </HeadDiv>
 
-            <CardsContainer>
-                <CardStat
-                    orange
-                    title="Total Commission encaissé"
-                    value={4000}
-                    euros />
+                    <CardsContainer>
+                        <CardStat
+                            blue 
+                            title="Nombre de projet en cours" 
+                            value={12} />
 
-                <CardStat
-                    orange
-                    title="Total Chiffre d’affaire ImmoMalin prévisionnel"
-                    value={2000}
-                    euros />
-            </CardsContainer>
-        </>
-    );
+                        <CardStat
+                            green
+                            title="Nombre de projet facturé" 
+                            value={7} />
+                    </CardsContainer>
+                </FlexDiv>
+
+
+                {(this.props.userData.role != 'client__investisseur') &&
+                    <>
+                        <TitleSection>Vos chiffres</TitleSection>
+
+                        <CardsContainer>
+                            <CardStat
+                                orange
+                                title="Total Commission prévisionnel" 
+                                value={4000}
+                                euros />
+
+                            <CardStat
+                                orange 
+                                title="Total Chiffre d’affaire ImmoMalin facturé" 
+                                value={2000}
+                                euros />
+                        </CardsContainer>
+
+                        <CardsContainer>
+                            <CardStat
+                                orange
+                                title="Total Commission encaissé"
+                                value={4000}
+                                euros />
+
+                            <CardStat
+                                orange
+                                title="Total Chiffre d’affaire ImmoMalin prévisionnel"
+                                value={2000}
+                                euros />
+                        </CardsContainer>
+                    </>
+                }
+
+                {(this.props.userData.role == 'client__investisseur') &&
+                    <>
+                        <TitleSection>Vos projets</TitleSection>
+
+                        <Table
+                            listeProps={enteteDossier}
+                            data={data}
+                            deleteType='user'
+                            empty='Aucun chasseur enregistré pour le moment'
+                            statut={this.props.list.statut ? this.props.list.statut : null} />
+                    </>
+                }
+            </>
+        );
+    }
 }
 
 const mapStateToProps = (state) => {
-    return { myUserData: state.general.myData.data };
+    return { 
+        myUserData: state.general.myData.data,
+        list: state.manageDossier.listDossier
+    };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        toogleUserModal: () => dispatch(toogleUserModal())
+        getAllDossiers: () => dispatch(getAllDossiers()),
+        getAllUsers: () => dispatch(getAllUsers())
     }
 }
 

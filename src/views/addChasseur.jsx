@@ -67,7 +67,7 @@ class AddChasseur extends Component {
 
                 <RowInput dispatch>
                     <TitleForm isFirst>Détails</TitleForm>
-                    <Input value={this.props.modalData.filesPhotosChasseur} onChange={this.props.handleChangeModal} type="file" id="filesPhotosChasseur" multiple="false" accept=".png, .jpg, .jpeg" label='Ajouter une photo de profil' />
+                    <Input value={this.props.modalData.filesPhotosChasseur} onChange={this.props.handleChangeModal} type="file" id="filesPhotosChasseur" accept=".png, .jpg, .jpeg" label='Ajouter une photo de profil' />
                 </RowInput>
 
                 <RowInput>

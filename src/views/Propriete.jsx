@@ -9,14 +9,23 @@ import Table from '../components/Table';
 
 const title = 'Liste des propriétés';
 
-const entete = {
+const enteteSuperviseur = {
     'chasseur.first_name': 'Prénom du chasseur',
     'thumbnail': 'Photo',
     'type_bien': 'Type de bien',
     'ville': 'Ville',
     'interlocuteur': 'Nom de l\'interlocuteur',
-    'honoraires_immomalin': 'CA ImmoMalin',
-    'honoraires_immomalin': 'Commission Chasseur'
+    'honoraires_immomalin': ['CA ImmoMalin', '€'],
+    'honoraires_immomalin': ['Commission Chasseur', '€'],
+};
+
+const enteteChasseur = {
+    'thumbnail': 'Photo',
+    'type_bien': 'Type de bien',
+    'ville': 'Ville',
+    'interlocuteur': 'Nom de l\'interlocuteur',
+    'honoraires_immomalin': ['CA ImmoMalin', '€'],
+    'honoraires_immomalin': ['Commission Chasseur', '€'],
 };
 
 class Propriete extends Component {
@@ -30,14 +39,35 @@ class Propriete extends Component {
     }
 
     render() {
+        let data = null;
+        let entete = enteteSuperviseur;
+
+        if (this.props.list.data != null) {
+            if (this.props.userData.role == 'chasseur') {
+                data = this.props.list.data.filter(propriete => propriete.chasseur.id == this.props.userData.id);
+                entete = enteteChasseur;
+            } else {
+                data = this.props.list.data;
+            }
+
+            if (Array.isArray(data)) {
+                if (data.length < 1) {
+                    data = null;
+                }
+            } else {
+                data = null;
+            }
+        }
+
         return (
             <>
                 <TitleSection>{title}</TitleSection>
                 <Table
                     listeProps={entete}
                     empty='Aucune propriétée enregistré pour le moment'
+                    actionType='propriete'
                     deleteType='propriete'
-                    data={this.props.list.data ? this.props.list.data : null}
+                    data={data}
                     statut={this.props.list.statut ? this.props.list.statut : null} />
             </>
         );

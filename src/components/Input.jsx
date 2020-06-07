@@ -429,7 +429,7 @@ export default class Input extends Component {
     }
 
     handleChangeFiles(event) {
-        if (this.props.multiple == true) {
+        if (this.props.multiple) {
             let filesArr = Array.prototype.slice.call(event.target.files);
             let newPrev = new Array();
             filesArr.forEach(element => {
@@ -452,7 +452,7 @@ export default class Input extends Component {
     }
 
     handleDeleteFiles(img, file) {
-        if (this.props.multiple == true) {
+        if (this.props.multiple) {
             const newPrev = this.state.previewImg.filter(element => element.preview != img);
             const newData = this.state.filesList.filter(element => element != file);
 

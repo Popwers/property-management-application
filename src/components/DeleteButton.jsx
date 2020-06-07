@@ -33,8 +33,9 @@ const Button = styled.button`
 
 function DeleteButton(props) {
     function handleDelete() {
-        console.log(props.id);
-        console.log(props.type);
+        if (props.onClick) {
+            props.onClick(true);
+        }
 
         switch (props.type) {
             case 'propriete':
@@ -64,11 +65,13 @@ function DeleteButton(props) {
                 if (responseReq == 'fail') {
                     statutRes = 'success';
                     responseReq = null;
+                    props.onClick(false);
                 }
             })
             .catch(function (error) {
                 responseReq = error;
                 statutRes = 'error';
+                props.onClick(false);
             });
 
             props.getAllProprietes();

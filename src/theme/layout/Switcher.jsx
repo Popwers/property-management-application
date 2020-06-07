@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import Board from '../../views/Board';
 import Notification from '../../views/Notification';
 import Chasseur from '../../views/Chasseur';
@@ -5,36 +7,36 @@ import Client from '../../views/Client';
 import Dossier from '../../views/Dossier';
 import Propriete from '../../views/Propriete';
 
-export default function Switcher(props) {
+function Switcher(props) {
     let renderView = <Board />;
 
     switch (props.view) {
         case 'Tableau de bord':
-            renderView = <Board />;
+            renderView = <Board userData={props.myUserData} />;
             break;
 
         case 'Propriétés':
-            renderView = <Propriete />;
+            renderView = <Propriete userData={props.myUserData} />;
             break;
 
         case 'Chasseurs':
-            renderView = <Chasseur />;
+            renderView = <Chasseur userData={props.myUserData} />;
             break;
             
         case 'Mes clients':
-            renderView = <Client />;
+            renderView = <Client userData={props.myUserData} />;
             break;
 
         case 'Notifications':
-            renderView = <Notification />;
+            renderView = <Notification userData={props.myUserData} />;
             break;
 
         case 'Suivi dossiers':
-            renderView = <Dossier />;
+            renderView = <Dossier userData={props.myUserData} />;
             break;
     
         default:
-            renderView = <Board />;
+            renderView = <Board userData={props.myUserData} />;
             break;
     }
 
@@ -44,3 +46,11 @@ export default function Switcher(props) {
         </>
     );
 }
+
+const mapStateToProps = (state) => {
+    return {
+        myUserData: state.general.myData.data
+    };
+}
+
+export default connect(mapStateToProps)(Switcher)
