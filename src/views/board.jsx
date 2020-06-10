@@ -7,6 +7,7 @@ import styled, { css } from 'styled-components';
 import { setDocumentTitle, formatPrix } from '../lib/functions';
 import { TitleSection, Text, Inline } from '../theme/design/componentsDesign';
 
+import Table from '../components/Table';
 import CardStat from '../components/CardStat';
 import Button from '../components/Button';
 import iconPencil from '../resources/pencil.svg';
@@ -15,8 +16,8 @@ const enteteDossier = {
     'id': 'ID Projet',
     'id_fiche_produit.chasseur.display_name': 'Prénom Chasseur',
     'id_fiche_produit.chasseur.telephone': 'Téléphone du chasseur',
-    '': 'Suivi',
-    '': 'Date de la dernière étape',
+    'statut': 'Suivi',
+    'last_update': 'Date de la dernière étape',
 };
 
 const FlexDiv = styled.div`
@@ -111,10 +112,16 @@ class Board extends Component {
 
     render() {
         let data = null;
+        let countProjet = 0;
+        let countProjetFinal = 0;
 
         if (this.props.list.data != null) {
             if (this.props.userData.role == 'client__investisseur') {
                 data = this.props.list.data.filter(dossier => dossier.id_client.id == this.props.userData.id);
+            } else if (this.props.userData.role == 'chasseur') {
+                data = this.props.list.data.filter(dossier => dossier.id_fiche_produit.id == this.props.userData.id);
+            } else {
+                data = this.props.list.data;
             }
 
             if (Array.isArray(data)) {
@@ -123,6 +130,11 @@ class Board extends Component {
                 }
             } else {
                 data = null;
+            }
+
+            if (data != null) {
+                countProjetFinal = data.filter(dossier => dossier.statut == 'Projet loué').length;
+                countProjet = data.length - countProjetFinal;
             }
         }
 
@@ -141,22 +153,26 @@ class Board extends Component {
                                 idToSee={this.props.myUserData.id} >Mon compte</Button>
                         </FlexRow>
 
-                        <Text light>Vous avez 3 notifications</Text>
+                        <Text light>Vous avez 0 notifications</Text>
                         
-                        <H2>Prochain Bonus</H2>
-                        <BarreBonus title="De chiffre d’affaire" pourcentage={70000} max={120000} />
+                        {(this.props.userData.role == 'chasseur') &&
+                            <>
+                                <H2>Prochain Bonus</H2>
+                                <BarreBonus title="De chiffre d’affaire" pourcentage={70000} max={120000} />
+                            </>
+                        }
                     </HeadDiv>
 
                     <CardsContainer>
                         <CardStat
                             blue 
                             title="Nombre de projet en cours" 
-                            value={12} />
+                            value={countProjet} />
 
                         <CardStat
                             green
-                            title="Nombre de projet facturé" 
-                            value={7} />
+                            title={this.props.userData.role == 'client__investisseur' ? 'Nombre de projet finalisé' : 'Nombre de projet facturé'} 
+                            value={countProjetFinal} />
                     </CardsContainer>
                 </FlexDiv>
 
@@ -202,8 +218,8 @@ class Board extends Component {
                         <Table
                             listeProps={enteteDossier}
                             data={data}
-                            deleteType='user'
-                            empty='Aucun chasseur enregistré pour le moment'
+                            deleteType='dossier'
+                            empty='Aucun projet en cours'
                             statut={this.props.list.statut ? this.props.list.statut : null} />
                     </>
                 }

@@ -6,7 +6,6 @@ import {
     UPDATE_PROPRIETE,
     SEE_PROPRIETE,
     GET_DOSSIER,
-    UPDATE_DOSSIER,
     SEE_DOSSIER,
     GET_USER,
     UPDATE_USER,
@@ -244,4 +243,14 @@ export function seeProprieteData(id, dossiers) {
 
 export function seeDossierData(id) {
     return { type: SEE_DOSSIER, payload: id };
+}
+
+/** UPDATE DATA **/
+
+export function updateUserData(userData) {
+    return { type: UPDATE_USER, payload: userData };
+}
+
+export function updateProprieteData(proprieteData) {
+    return { type: UPDATE_PROPRIETE, payload: proprieteData };
 }

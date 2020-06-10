@@ -98,10 +98,26 @@ export default class Galery extends Component {
     }
 
     componentDidMount() {
-        this.setState({ currentImg: this.props.images[0].guid });
+        let current = this.props.images[0].guid;
+        if (this.props.thumbnail) {
+            current = this.props.thumbnail;
+        }
+        this.setState({ currentImg: current });
     }
 
     render() {
+        let haveThumbnail = false;
+        let nbImages = 0;
+
+        if (this.props.images.length > 0) {
+            nbImages = this.props.images.length;
+        }
+
+        if (this.props.thumbnail) {
+            haveThumbnail = true;
+            nbImages++;
+        }
+        
         return (
             <>
                 <GaleryStyled>
@@ -111,15 +127,25 @@ export default class Galery extends Component {
                             onClick={() => this.setState({ showFullscreen: true, imgFullscreen: this.state.currentImg })} />
                     </ContainerPictures>
 
-                    {this.props.images > 1 &&
+                    {nbImages > 1 &&
                         <SlidePictures>
-                            {this.props.images.map(img => 
+                            {haveThumbnail &&
                                 <div>
-                                    <img 
-                                        src={img.guid} 
-                                        alt='Photo Slide' 
-                                        onClick={() => this.setState({ currentImg: img.guid })} />
-                                </div>)
+                                    <img
+                                        src={this.props.thumbnail}
+                                        alt='Photo Slide'
+                                        onClick={() => this.setState({ currentImg: this.props.thumbnail })} />
+                                </div>
+                            }
+
+                            {this.props.images.length > 0 &&
+                                this.props.images.map(img =>
+                                    <div>
+                                        <img
+                                            src={img.guid}
+                                            alt='Photo Slide'
+                                            onClick={() => this.setState({ currentImg: img.guid })} />
+                                    </div>)
                             }
                         </SlidePictures>
                     }

@@ -7,6 +7,7 @@ import { Text, AlignCenter, Row } from '../theme/design/componentsDesign';
 import { getAllDossiers, seeDossierData } from '../actions';
 import Button from '../components/Button';
 import Galery from '../components/Galery';
+import { formatPrix } from '../lib/functions';
 
 const ContainerBlue = styled.div`
     display: flex;
@@ -167,13 +168,12 @@ const LiStyled = styled.li`
 `
 
 const StatutDossier = (props) => {
-    console.log(props.step);
     return (
         <StepProcess>
             <ul>
                 {props.step.map(item => {
                     return(
-                        <LiStyled key={item[0] + '' + props.id} validate={item[1] != null && item[1] != '' && item[1] != '0000-00-00'} current={props.current == item[0]}>
+                        <LiStyled key={item[0] + '' + props.id} validate={item[1] != null && item[1] != '' && item[1] != '0000-00-00'} current={props.current == item[0] && props.current != 'Projet loué'}>
                             <h3>{item[0]}<br />{item[1] != '0000-00-00' && item[1] != '' && item[1] != null ? convertDate(item[1]) : null}</h3>
                         </LiStyled>
                     );
@@ -347,7 +347,7 @@ class DossierModal extends Component {
 
                             <AssociateText label='Prix au m²'>
                                 {prix_au_m != null
-                                    && prix_au_m != '' ? prix_au_m + ' €' : 'Non renseigné'}
+                                    && prix_au_m != '' ? formatPrix(prix_au_m, true) + ' €' : 'Non renseigné'}
                             </AssociateText>
                         </div>
                     </ContainerBlue>

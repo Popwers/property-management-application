@@ -1,6 +1,5 @@
 import {
     GET_PROPRIETE,
-    UPDATE_PROPRIETE,
     SEE_PROPRIETE,
 } from "../constants";
 
@@ -113,9 +112,11 @@ export default function managePropriete(state = initialState, action) {
 
             proprieteToSee.clientPositionne = new Array();
             let dossiers = action.payload.dossiers;
-            for (let dossier of dossiers) {
-                if (dossier.id_fiche_produit.id == idToSee) {
-                    proprieteToSee.clientPositionne.push(dossier.id_client);
+            if (dossiers != null && Array.isArray(dossiers)) {
+                for (let dossier of dossiers) {
+                    if (dossier.id_fiche_produit.id == idToSee) {
+                        proprieteToSee.clientPositionne.push(dossier.id_client);
+                    }
                 }
             }
 
@@ -125,26 +126,6 @@ export default function managePropriete(state = initialState, action) {
             }
 
             return newState || state;
-
-        case UPDATE_PROPRIETE:
-            /*const favoriteFilmIndex = state.favoritesFilm.findIndex(item => item.id === action.value.id)
-            if (favoriteFilmIndex !== -1) {
-                // Le film est déjà dans les favoris, on le supprime de la liste
-                newState = {
-                    ...state,
-                    favoritesFilm: state.favoritesFilm.filter((item, index) => index !== favoriteFilmIndex)
-                }
-            }
-            else {
-                // Le film n'est pas dans les films favoris, on l'ajoute à la liste
-                newState = {
-                    ...state,
-                    favoritesFilm: [...state.favoritesFilm, action.value]
-                }
-            }*/
-
-            return newState || state;
-
         default:
             return state;
     }

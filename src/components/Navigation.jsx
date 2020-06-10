@@ -1,12 +1,14 @@
 const { Component } = wp.element;
 
 import { connect } from 'react-redux';
-import { 
+import {
 	getPersonalData,
 	toogleLoader,
 	toogleAddClient,
 	toogleAddChasseur,
-	toogleAddPropriete
+	toogleAddPropriete,
+	updateUserData,
+	updateProprieteData,
 } from '../actions';
 
 import styled, { css } from 'styled-components';
@@ -266,8 +268,8 @@ const LinkStyled = styled.li`
 				width: 285px !important;
 
 				${props =>
-					!props.closeMenu &&
-					css`
+				!props.closeMenu &&
+				css`
 						width: 95% !important;
 				`};
 			}
@@ -310,7 +312,7 @@ class Navigation extends Component {
 	}
 
 	handleChangeLink(newLink) {
-		this.setState({currentLink: newLink});
+		this.setState({ currentLink: newLink });
 		this.props.onChangeView(newLink);
 	}
 
@@ -320,53 +322,62 @@ class Navigation extends Component {
 		if (this.props.myUserData.role != 'load') {
 
 			// ALL
-			showLink.push(<NavLink src={Chart}							
-							name="Tableau de bord"
-							currentLink={this.state.currentLink}
-							changeView={this.handleChangeLink}
-							closeMenu={this.props.statMenu} />);
+			showLink.push(<NavLink src={Chart}
+				name="Tableau de bord"
+				currentLink={this.state.currentLink}
+				changeView={this.handleChangeLink}
+				closeMenu={this.props.statMenu} />);
 
 			// ONLY CHASSEUR AND SUPERVISEUR
 			if (this.props.myUserData.role != 'client__investisseur') {
-				showLink.push(<NavLink src={Home}								
-								name="Propriétés"
-								currentLink={this.state.currentLink}
-								changeView={this.handleChangeLink}
-								closeMenu={this.props.statMenu}
-								addButton={this.props.toogleAddPropriete} />);
+				showLink.push(<NavLink src={Home}
+					name="Propriétés"
+					currentLink={this.state.currentLink}
+					changeView={this.handleChangeLink}
+					closeMenu={this.props.statMenu}
+					addButton={() => {
+						this.props.updateProprieteData('null')
+						this.props.toogleAddPropriete();
+					}} />);
 
 				// ONLY SUPERVISEUR
 				if (this.props.myUserData.role != 'chasseur') {
-					showLink.push(<NavLink src={User}									
-									name="Chasseurs"
-									currentLink={this.state.currentLink}
-									changeView={this.handleChangeLink}
-									closeMenu={this.props.statMenu}
-									addButton={this.props.toogleAddChasseur} />);
+					showLink.push(<NavLink src={User}
+						name="Chasseurs"
+						currentLink={this.state.currentLink}
+						changeView={this.handleChangeLink}
+						closeMenu={this.props.statMenu}
+						addButton={() => {
+							this.props.updateUserData('null')
+							this.props.toogleAddChasseur();
+						}} />);
 				}
 
-				showLink.push(<NavLink src={Users}								
-								name="Mes clients"
-								currentLink={this.state.currentLink}
-								changeView={this.handleChangeLink}
-								closeMenu={this.props.statMenu}
-								addButton={this.props.toogleAddClient} />);
+				showLink.push(<NavLink src={Users}
+					name="Mes clients"
+					currentLink={this.state.currentLink}
+					changeView={this.handleChangeLink}
+					closeMenu={this.props.statMenu}
+					addButton={() => {
+						this.props.updateUserData('null')
+						this.props.toogleAddClient();
+					}} />);
 			}
 
 			// ALL
-			showLink.push(<NavLink src={Bell}							
+			{/*showLink.push(<NavLink src={Bell}							
 							name="Notifications"
 							currentLink={this.state.currentLink}
 							changeView={this.handleChangeLink}
-							closeMenu={this.props.statMenu} />);
+							closeMenu={this.props.statMenu} />);*/}
 
 			// ONLY CHASSEUR AND SUPERVISEUR
 			if (this.props.myUserData.role != 'client__investisseur') {
-				showLink.push(<NavLink src={Folder}								
-								name="Suivi dossiers"
-								currentLink={this.state.currentLink}
-								changeView={this.handleChangeLink}
-								closeMenu={this.props.statMenu} />);
+				showLink.push(<NavLink src={Folder}
+					name="Suivi dossiers"
+					currentLink={this.state.currentLink}
+					changeView={this.handleChangeLink}
+					closeMenu={this.props.statMenu} />);
 			}
 
 		}
@@ -398,12 +409,14 @@ const mapDispatchToProps = dispatch => {
 		toogleLoader: (statut, message) => dispatch(toogleLoader(statut, message)),
 		toogleAddClient: () => dispatch(toogleAddClient()),
 		toogleAddChasseur: () => dispatch(toogleAddChasseur()),
-		toogleAddPropriete: () => dispatch(toogleAddPropriete())
+		toogleAddPropriete: () => dispatch(toogleAddPropriete()),
+		updateUserData: (data) => dispatch(updateUserData(data)),
+		updateProprieteData: (data) => dispatch(updateProprieteData(data)),
 	}
 }
 
 const mapStateToProps = (state) => {
-	return { 
+	return {
 		myUserData: state.general.myData.data,
 		loaderStat: state.general.loader
 	};

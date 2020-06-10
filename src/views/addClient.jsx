@@ -269,6 +269,8 @@ class AddClient extends Component {
     }
 
     render() {
+        let editMod = false;
+        if (this.props.modalData.edit) editMod = true;
         return (
             <Form onSubmit={this.handleSubmit}>
 
@@ -278,14 +280,18 @@ class AddClient extends Component {
                 </RowInput>
 
                 <RowInput>
-                    <Input value={this.props.modalData.pseudo} onChange={this.props.handleChangeModal} required type="text" id="pseudo" label="Pseudo" />
+                    {!editMod &&
+                        <Input value={this.props.modalData.pseudo} onChange={this.props.handleChangeModal} required type="text" id="pseudo" label="Pseudo" />
+                    }
                     <Input value={this.props.modalData.first_name} onChange={this.props.handleChangeModal} required type="text" id="first_name" label="Prénom" />
                     <Input value={this.props.modalData.last_name} onChange={this.props.handleChangeModal} required type="text" id="last_name" label="Nom" />
                 </RowInput>
 
                 <RowInput>
                     <Input value={this.props.modalData.telephone} onChange={this.props.handleChangeModal} required tel type="number" id="telephone" label="Téléphone" />
-                    <Input value={this.props.modalData.mail} onChange={this.props.handleChangeModal} required type="email" id="mail" label="e-Mail" />
+                    {!editMod &&
+                        <Input value={this.props.modalData.mail} onChange={this.props.handleChangeModal} required type="email" id="mail" label="e-Mail" />
+                    }
                 </RowInput>
 
                 <RowInput>

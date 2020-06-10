@@ -1,6 +1,5 @@
 import {
     GET_DOSSIER,
-    UPDATE_DOSSIER,
     SEE_DOSSIER,
 } from "../constants";
 

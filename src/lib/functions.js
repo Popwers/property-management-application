@@ -4,8 +4,12 @@ export function setDocumentTitle(title) {
 }
 
 // FORMAT PRICE FOR OUTPUT
-export function formatPrix(num) {
-    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ');
+export function formatPrix(num, fixNumberTo = false) {
+    let number = num;
+    if (fixNumberTo) {
+        number = fixNumber(num);
+    }
+    return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ');
 }
 
 // FIX NUMBER TO 2 DECIMAL

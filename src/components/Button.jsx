@@ -1,6 +1,18 @@
 import { connect } from 'react-redux';
-import { seeUserData, seeProprieteData, seeDossierData, toogleUserModal, toogleProprieteModal, toogleDossierModal } from '../actions';
-import {StyledButton} from '../theme/design/componentsDesign'
+import {
+    seeUserData,
+    seeProprieteData,
+    seeDossierData,
+    toogleUserModal,
+    toogleProprieteModal,
+    toogleDossierModal,
+    toogleAddClient,
+    toogleAddChasseur,
+    toogleAddPropriete,
+    updateUserData,
+    updateProprieteData,
+} from '../actions';
+import { StyledButton } from '../theme/design/componentsDesign'
 
 function Button(props) {
     let AddIconLeft = null;
@@ -14,7 +26,7 @@ function Button(props) {
         }
     }
 
-    function handleClick(event) {
+    async function handleClick(event) {
         event.preventDefault();
         if (props.onClick) props.onClick();
         if (props.action && props.idToSee) {
@@ -32,6 +44,26 @@ function Button(props) {
                 case "dossier":
                     props.seeDossierData(props.idToSee);
                     props.toogleDossierModal();
+                    break;
+
+                case "updatePropriete":
+                    let returnProp = props.listPropriete.filter(item => item.id == props.idToSee);
+                    props.updateProprieteData('null');
+                    props.updateProprieteData(returnProp);
+                    props.toogleAddPropriete();
+                    break;
+
+                case "updateUser":
+                    let returnUser = props.listUser.filter(item => item.id == props.idToSee)[0];
+                    await props.updateUserData('null');
+                    props.updateUserData(returnUser);
+                    props.toogleUserModal();
+
+                    if (returnUser.role == 'client__investisseur') {                        
+                        props.toogleAddClient();
+                    } else {
+                        props.toogleAddChasseur();
+                    }                    
                     break;
             }
         }
@@ -69,12 +101,20 @@ const mapDispatchToProps = dispatch => {
         toogleUserModal: () => dispatch(toogleUserModal()),
         toogleProprieteModal: () => dispatch(toogleProprieteModal()),
         toogleDossierModal: () => dispatch(toogleDossierModal()),
+
+        toogleAddClient: () => dispatch(toogleAddClient()),
+        toogleAddChasseur: () => dispatch(toogleAddChasseur()),
+        toogleAddPropriete: () => dispatch(toogleAddPropriete()),
+        updateUserData: (data) => dispatch(updateUserData(data)),
+        updateProprieteData: (data) => dispatch(updateProprieteData(data)),
     }
 }
 
 const mapStateToProps = (state) => {
     return {
         listDossiers: state.manageDossier.listDossier.data,
+        listUser: state.manageUser.listUser.data,
+        listPropriete: state.managePropriete.listPropriete.data,
     };
 }
 

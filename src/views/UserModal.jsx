@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import IconPencil from '../resources/pencil.svg';
 import IconDefault from '../resources/userDefault.svg';
-import { Text, StyledButton } from '../theme/design/componentsDesign';
+import Button from '../components/Button';
+import { Text } from '../theme/design/componentsDesign';
 
 const Avatar = styled.div`
     overflow: hidden;
@@ -40,14 +41,18 @@ class UserModal extends Component {
                 <Avatar>
                     <img src={avatar} />
                 </Avatar>
-                <StyledButton src iconRight small alignCenter>Modifier <img src={IconPencil} /></StyledButton>
+                <Button action='updateUser' idToSee={this.props.modalData.id} src={IconPencil} iconRight small alignCenter>Modifier</Button>
                 <Text textCenter margin='30px 0px 20px 0px' fontSize='26px'>{this.props.modalData.first_name} {this.props.modalData.last_name}</Text>
                 <Text textCenter light margin='5px 0px'>{this.props.modalData.telephone}</Text>
                 <Text textCenter light margin='5px 0px'>{this.props.modalData.user_email}</Text>
-                <Text textCenter margin='40px 0px 20px 0px' fontSize='20px'>Adresse</Text>
-                <Text textCenter light margin='5px 0px'>{this.props.modalData.adresse_postale_1}</Text>
-                <Text textCenter light margin='5px 0px'>{this.props.modalData.ville}, {this.props.modalData.zip_code_postal}</Text>
-                <Text textCenter light margin='5px 0px'>{this.props.modalData.pays}</Text>
+                {this.props.modalData.role == 'client__investisseur' &&
+                    <>
+                        <Text textCenter margin='40px 0px 20px 0px' fontSize='20px'>Adresse</Text>
+                        <Text textCenter light margin='5px 0px'>{this.props.modalData.adresse_postale_1}</Text>
+                        <Text textCenter light margin='5px 0px'>{this.props.modalData.ville}, {this.props.modalData.zip_code_postal}</Text>
+                        <Text textCenter light margin='5px 0px'>{this.props.modalData.pays}</Text>
+                    </>
+                }
             </>
         );
     }

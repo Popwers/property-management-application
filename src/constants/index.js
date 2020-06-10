@@ -3,7 +3,6 @@ export const UPDATE_PROPRIETE = "UPDATE_PROPRIETE";
 export const SEE_PROPRIETE = "SEE_PROPRIETE";
 
 export const GET_DOSSIER = "GET_DOSSIER";
-export const UPDATE_DOSSIER = "UPDATE_DOSSIER";
 export const SEE_DOSSIER = "SEE_DOSSIER";
 
 export const GET_USER = "GET_USER";

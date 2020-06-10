@@ -1,6 +1,5 @@
 import {
     GET_USER,
-    UPDATE_USER,
     SEE_USER,
 } from "../constants";
 
@@ -53,18 +52,6 @@ export default function manageUser(state = initialState, action) {
             }
 
             return newState || state;
-
-        case UPDATE_USER:
-            /*let id = action.payload;
-            let userToSee = state.listUser.filter(user => user.id == id);
-
-            newState = {
-                ...state,
-                seeUser: userToSee
-            }
-
-            return newState || state;*/
-
         default:
             return state;
     }

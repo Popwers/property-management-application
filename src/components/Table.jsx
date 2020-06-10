@@ -5,6 +5,7 @@ import Button from '../components/Button';
 import DeleteButton from '../components/DeleteButton';
 import { Text } from '../theme/design/componentsDesign';
 import IconView from '../resources/eye.svg';
+import { formatPrix } from '../lib/functions';
 
 const StyledTable = styled.table`
     margin-top: 40px;
@@ -164,7 +165,11 @@ class LineTable extends Component {
                     returnVal = <ValTd><img src={objVal} /></ValTd>;
                 } else {
                     if (Array.isArray(value) && (objVal != null && objVal != '')) {
-                        returnVal = <ValTd>{objVal} {value[1]}</ValTd>;
+                        if (value[1] == '%' || value[1] == '€') {                        
+                            returnVal = <ValTd>{formatPrix(objVal, true)} {value[1]}</ValTd>;
+                        } else {
+                            returnVal = <ValTd>{objVal} {value[1]}</ValTd>;
+                        }
                     } else {
                         returnVal = <ValTd>{objVal}</ValTd>;
                     }
@@ -190,7 +195,11 @@ class LineTable extends Component {
                     returnVal = <ValTd><img src={returnVal} /></ValTd>;
                 } else {
                     if (Array.isArray(value) && (returnVal != null && returnVal != '')) {
-                        returnVal = <ValTd>{returnVal} {value[1]}</ValTd>;
+                        if (value[1] == '%' || value[1] == '€') {
+                            returnVal = <ValTd>{formatPrix(returnVal, true)} {value[1]}</ValTd>;
+                        } else {
+                            returnVal = <ValTd>{returnVal} {value[1]}</ValTd>;
+                        }
                     } else {
                         returnVal = <ValTd>{returnVal}</ValTd>;
                     }

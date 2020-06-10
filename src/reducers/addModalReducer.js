@@ -2,6 +2,8 @@ import {
     SET_PROPRIETE_ADD_MODAL,
     SET_CLIENT_ADD_MODAL,
     SET_CHASSEUR_ADD_MODAL,
+    UPDATE_USER,
+    UPDATE_PROPRIETE,
 } from "../constants";
 
 const initialState = {
@@ -257,7 +259,7 @@ export default function manageAddModal(state = initialState, action) {
                 switch (theKey) {
                     case 'loyer_previsionnel_mensuelles':
                     case 'total_charges_mensuelles':
-                    case 'frais_de_notaire': 
+                    case 'frais_de_notaire':
                     case 'prix_du_bien':
                     case 'frais_dagence':
                     case 'frais_de_travaux':
@@ -383,7 +385,7 @@ export default function manageAddModal(state = initialState, action) {
             }
 
             return newState || state;
-        
+
         case SET_CLIENT_ADD_MODAL:
             if (action.payload.key != 'resetTheForm') {
                 let newData = Object.assign({}, state.addClientModal);
@@ -415,7 +417,7 @@ export default function manageAddModal(state = initialState, action) {
                     }
                 }
             }
-            
+
             return newState || state;
 
         case SET_CHASSEUR_ADD_MODAL:
@@ -441,6 +443,73 @@ export default function manageAddModal(state = initialState, action) {
                         filesPhotosChasseur: new Array(),
                     }
                 }
+            }
+
+            return newState || state;
+
+        case UPDATE_USER:
+            if (action.payload != null && action.payload.role != null) {
+                if (action.payload.role == 'client__investisseur') {
+                    let initiale = Object.assign({}, initialState.addClientModal);
+                    let newData = Object.assign(initiale, action.payload);
+                    newData['pseudo'] = action.payload.user_login;
+                    newData['mail'] = action.payload.user_email;
+                    newData['edit'] = true;
+                    newState = {
+                        ...state,
+                        addClientModal: newData
+                    }
+                } else {
+                    let initiale = Object.assign({}, initialState.addChasseurModal);
+                    let newData = Object.assign(initiale, action.payload);
+                    newData['pseudo'] = action.payload.user_login;
+                    newData['mail'] = action.payload.user_email;
+                    newData['edit'] = true;
+                    newState = {
+                        ...state,
+                        addChasseurModal: newData
+                    }
+                }
+            } else {
+                newState = {
+                    ...state,
+                    addClientModal: {
+                        id: null,
+                        role: 'client__investisseur',
+                        pseudo: '',
+                        first_name: '',
+                        last_name: '',
+                        mail: '',
+                        telephone: '',
+                        adresse: '',
+                        adresse_postale_1: '',
+                        adresse_postale_2: '',
+                        ville: '',
+                        etat_province_region: '',
+                        zip_code_postal: '',
+                        pays: '',
+                        filesPhotosClient: new Array(),
+                    },
+                    addChasseurModal: {
+                        id: null,
+                        role: 'chasseur',
+                        pseudo: '',
+                        first_name: '',
+                        last_name: '',
+                        mail: '',
+                        telephone: '',
+                        filesPhotosChasseur: new Array(),
+                    },
+                }
+            }
+
+            return newState || state;
+
+        case UPDATE_PROPRIETE:
+
+            newState = {
+                ...state,
+                addProprieteModal: action.payload
             }
 
             return newState || state;
