@@ -114,6 +114,8 @@ class Board extends Component {
         let data = null;
         let countProjet = 0;
         let countProjetFinal = 0;
+        let chiffreEstimationProjet = 0;
+        let chiffreProjetFacture = 0;
 
         if (this.props.list.data != null) {
             if (this.props.userData.role == 'client__investisseur') {
@@ -133,8 +135,28 @@ class Board extends Component {
             }
 
             if (data != null) {
-                countProjetFinal = data.filter(dossier => dossier.statut == 'Projet loué').length;
-                countProjet = data.length - countProjetFinal;
+                let projetEnCours = data.filter(dossier => dossier.statut != 'Projet loué');
+                let projetFinaux = data.filter(dossier => dossier.statut == 'Projet loué');
+
+                if (Array.isArray(projetEnCours)) {
+                    if (projetEnCours.length > 0) {
+                        countProjet = projetEnCours.length;
+                        projetEnCours.forEach(element => {
+                            let honoraire = Number(element.honoraires_immomalin);
+                            if (!Number.isNaN(honoraire)) chiffreEstimationProjet += honoraire;
+                        });
+                    }
+                }
+
+                if (Array.isArray(projetFinaux)) {
+                    if (projetFinaux.length > 0) {
+                        countProjetFinal = projetFinaux.length;
+                        projetFinaux.forEach(element => {
+                            let honoraire = Number(element.honoraires_immomalin);
+                            if (!Number.isNaN(honoraire)) chiffreProjetFacture += honoraire;
+                        });
+                    }
+                }
             }
         }
 
@@ -191,7 +213,7 @@ class Board extends Component {
                             <CardStat
                                 orange 
                                 title="Total Chiffre d’affaire ImmoMalin facturé" 
-                                value={2000}
+                                value={chiffreProjetFacture}
                                 euros />
                         </CardsContainer>
 
@@ -205,7 +227,7 @@ class Board extends Component {
                             <CardStat
                                 orange
                                 title="Total Chiffre d’affaire ImmoMalin prévisionnel"
-                                value={2000}
+                                value={chiffreEstimationProjet}
                                 euros />
                         </CardsContainer>
                     </>

@@ -17171,6 +17171,8 @@ var Board = /*#__PURE__*/function (_Component) {
       var data = null;
       var countProjet = 0;
       var countProjetFinal = 0;
+      var chiffreEstimationProjet = 0;
+      var chiffreProjetFacture = 0;
 
       if (this.props.list.data != null) {
         if (this.props.userData.role == 'client__investisseur') {
@@ -17194,10 +17196,32 @@ var Board = /*#__PURE__*/function (_Component) {
         }
 
         if (data != null) {
-          countProjetFinal = data.filter(function (dossier) {
+          var projetEnCours = data.filter(function (dossier) {
+            return dossier.statut != 'Projet loué';
+          });
+          var projetFinaux = data.filter(function (dossier) {
             return dossier.statut == 'Projet loué';
-          }).length;
-          countProjet = data.length - countProjetFinal;
+          });
+
+          if (Array.isArray(projetEnCours)) {
+            if (projetEnCours.length > 0) {
+              countProjet = projetEnCours.length;
+              projetEnCours.forEach(function (element) {
+                var honoraire = Number(element.honoraires_immomalin);
+                if (!Number.isNaN(honoraire)) chiffreEstimationProjet += honoraire;
+              });
+            }
+          }
+
+          if (Array.isArray(projetFinaux)) {
+            if (projetFinaux.length > 0) {
+              countProjetFinal = projetFinaux.length;
+              projetFinaux.forEach(function (element) {
+                var honoraire = Number(element.honoraires_immomalin);
+                if (!Number.isNaN(honoraire)) chiffreProjetFacture += honoraire;
+              });
+            }
+          }
         }
       }
 
@@ -17232,7 +17256,7 @@ var Board = /*#__PURE__*/function (_Component) {
       }), /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_6__["default"], {
         orange: true,
         title: "Total Chiffre d\u2019affaire ImmoMalin factur\xE9",
-        value: 2000,
+        value: chiffreProjetFacture,
         euros: true
       })), /*#__PURE__*/React.createElement(CardsContainer, null, /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_6__["default"], {
         orange: true,
@@ -17242,7 +17266,7 @@ var Board = /*#__PURE__*/function (_Component) {
       }), /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_6__["default"], {
         orange: true,
         title: "Total Chiffre d\u2019affaire ImmoMalin pr\xE9visionnel",
-        value: 2000,
+        value: chiffreEstimationProjet,
         euros: true
       }))), this.props.userData.role == 'client__investisseur' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["TitleSection"], null, "Vos projets"), /*#__PURE__*/React.createElement(_components_Table__WEBPACK_IMPORTED_MODULE_5__["default"], {
         listeProps: enteteDossier,
