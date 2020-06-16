@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import IconPencil from '../resources/pencil.svg';
 import { Text, StyledButton, Row } from '../theme/design/componentsDesign';
 import Galery from '../components/Galery';
+import Button from '../components/Button';
 import { formatPrix } from '../lib/functions';
 
 const ContainerBlue = styled.div`
@@ -119,6 +120,7 @@ class ProprieteModal extends Component {
                     <Text badge red={this.props.modalData.statut == 'Hors ligne'} green={this.props.modalData.statut == 'En ligne'} margin='0 20px'>{this.props.modalData.statut}</Text>
                     {this.props.role == 'superviseur' || this.props.role == 'administrator' &&
                         <div>
+                            <Button action='updatePropriete' idToSee={this.props.modalData.id} src={IconPencil} iconRight small alignCenter>Modifier</Button>
                             <StyledButton
                                 onClick={this.handleClick}
                                 red={this.props.modalData.statut != 'Hors ligne'}
@@ -129,9 +131,6 @@ class ProprieteModal extends Component {
                             </StyledButton>
                         </div>
                     }
-                    {/*<div>
-                        <StyledButton src iconRight small alignCenter>Modifier <img src={IconPencil} /></StyledButton>
-                    </div>*/}
                 </Row>
 
                 <Text bold margin='0'>{this.props.modalData.type_bien}</Text>

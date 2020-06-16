@@ -7,6 +7,7 @@ import {
 } from "../constants";
 
 const initialState = {
+    isAnnuelleModif: false,
     addProprieteModal: {
         title: null,
         description: null,
@@ -118,11 +119,137 @@ export default function manageAddModal(state = initialState, action) {
     let newState;
 
     switch (action.type) {
+        case UPDATE_PROPRIETE:
+            if (action.payload != 'null') {
+                let initiale = Object.assign({}, initialState.addProprieteModal);
+                let newData = Object.assign(initiale, action.payload);
+                for (let key in newData) {
+                    if (newData[key] != null && key != "cuisine" && key != "isolation") {
+                        if (key == "chasseur") {
+                            newData[key] = newData[key].id.toString();
+                        } else {
+                            newData[key] = newData[key].toString();
+                            newData[key] = newData[key].replace('.', ',');
+                        }
+                    }
+                }
+                newData['edit'] = true;
+                newState = {
+                    ...state,
+                    addProprieteModal: newData
+                }
+            } else {
+                newState = {
+                    ...state,
+                    addProprieteModal: {
+                        title: '',
+                        description: '',
+                        cashflow_mensuel_brut: 0,
+                        rentabilite_net: 0,
+                        prix_au_m: 0,
+                        rentabilite_brut: 0,
+                        adresse_postale: '',
+                        ville: '',
+                        zip_code_postal: '',
+                        type_bien: '',
+                        annee: 0,
+                        superficie: 0,
+                        superficie_habitable: 0,
+                        nombre_de_pieces: 0,
+                        nombre_de_chambre: 0,
+                        nombre_de_salles_de_bains: 0,
+                        nombre_de_wc: 0,
+                        nombre_de_celliers: 0,
+                        nombre_de_buanderies: 0,
+                        niveaux: 0,
+                        cuisine: false,
+                        isolation: false,
+                        prix_du_bien: 0,
+                        frais_dagence: 0,
+                        frais_de_travaux: 0,
+                        frais_de_notaire: 0,
+                        honoraires_immomalin: 0,
+                        mobilier_equipement: 0,
+                        projet_global: 0,
+                        budget: 0,
+                        charges_copropriete_mensuelles: 0,
+                        charges_copropriete_annuelles: 0,
+                        taxe_fonciere_mensuelles: 0,
+                        taxe_fonciere_annuelles: 0,
+                        assurance_pno_mensuelles: 0,
+                        assurance_pno_annuelles: 0,
+                        assurances_locatives_mensuelles: 0,
+                        assurances_locatives_annuelles: 0,
+                        gestion_locative_mensuelles: 0,
+                        gestion_locative_annuelles: 0,
+                        frais_divers_mensuelles: 0,
+                        frais_divers_annuelles: 0,
+                        frais_electricite_mensuelles: 0,
+                        frais_electricite_annuelles: 0,
+                        frais_eau_mensuelles: 0,
+                        frais_eau_annuelles: 0,
+                        forfait_internet_mensuelles: 0,
+                        forfait_internet_annuelles: 0,
+                        total_charges_mensuelles: 0,
+                        total_charges_annuelles: 0,
+                        loyer_previsionnel_mensuelles: 0,
+                        loyer_previsionnel_annuelles: 0,
+                        vacance_locative: 0,
+                        total_revenus_mensuelles: 0,
+                        total_revenus_annuelles: 0,
+                        solde: 0,
+                        nombre_de_lots: 0,
+                        derniere_assemble: 0,
+                        syndic: '',
+                        details_charges_copropriete: '',
+                        type_de_chauffage: '',
+                        mode_de_chauffage: '',
+                        energie_du_chauffage: '',
+                        caves: 0,
+                        terrases: 0,
+                        balcons: 0,
+                        varangues: 0,
+                        piscines: 0,
+                        jacuzzis: 0,
+                        equipements: '',
+                        diagnostics: '',
+                        points_positif_et_negatifs: '',
+                        filesPhotos: new Array(),
+                        chasseur: '',
+                        artisan: '',
+                        interlocuteur: '',
+                    },
+                }
+            }
+
+            return newState || state;
+            break;
+
         case SET_PROPRIETE_ADD_MODAL:
             if (action.payload.key != 'resetTheForm') {
+                let setModif = false;
                 let newData = Object.assign({}, state.addProprieteModal);
                 newData[action.payload.key] = action.payload.data;
                 const theKey = action.payload.key;
+
+                /* SET ANNUELLES VALUES */
+                switch (theKey) {
+                    case 'charges_copropriete_mensuelles':
+                    case 'taxe_fonciere_mensuelles':
+                    case 'assurance_pno_mensuelles':
+                    case 'assurances_locatives_mensuelles':
+                    case 'gestion_locative_mensuelles':
+                    case 'frais_divers_mensuelles':
+                    case 'frais_electricite_mensuelles':
+                    case 'frais_eau_mensuelles':
+                    case 'forfait_internet_mensuelles':
+                    case 'loyer_previsionnel_mensuelles':
+                        if (!state.isAnnuelleModif) {
+                            let keyForM = theKey.replace(/mensuelles$/, "annuelles");
+                            newData[keyForM] = Number(action.payload.data * 12.0);
+                            break;
+                        }
+                }
 
                 /* SET MENSUELLES VALUES */
                 switch (theKey) {
@@ -137,24 +264,8 @@ export default function manageAddModal(state = initialState, action) {
                     case 'forfait_internet_annuelles':
                     case 'loyer_previsionnel_annuelles':
                         let keyForA = theKey.replace(/annuelles$/, "mensuelles");
-                        newData[keyForA] = Number((action.payload.data / 12).toFixed(0));
-                        break;
-                }
-
-                /* SET ANNUELLES VALUES */
-                switch (theKey) {
-                    case 'charges_copropriete_mensuelles':
-                    case 'taxe_fonciere_mensuelles':
-                    case 'assurance_pno_mensuelles':
-                    case 'assurances_locatives_mensuelles':
-                    case 'gestion_locative_mensuelles':
-                    case 'frais_divers_mensuelles':
-                    case 'frais_electricite_mensuelles':
-                    case 'frais_eau_mensuelles':
-                    case 'forfait_internet_mensuelles':
-                    case 'loyer_previsionnel_mensuelles':
-                        let keyForM = theKey.replace(/mensuelles$/, "annuelles");
-                        newData[keyForM] = Number(action.payload.data * 12);
+                        setModif = true;
+                        newData[keyForA] = Number((action.payload.data / 12.0));
                         break;
                 }
 
@@ -298,6 +409,7 @@ export default function manageAddModal(state = initialState, action) {
 
                 newState = {
                     ...state,
+                    isAnnuelleModif: setModif,
                     addProprieteModal: newData
                 }
             } else {
@@ -501,15 +613,6 @@ export default function manageAddModal(state = initialState, action) {
                         filesPhotosChasseur: new Array(),
                     },
                 }
-            }
-
-            return newState || state;
-
-        case UPDATE_PROPRIETE:
-
-            newState = {
-                ...state,
-                addProprieteModal: action.payload
             }
 
             return newState || state;

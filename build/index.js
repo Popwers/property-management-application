@@ -7999,7 +7999,7 @@ function isStyledComponent(target) {
 var SC_ATTR = typeof process !== 'undefined' && (process.env.REACT_APP_SC_ATTR || process.env.SC_ATTR) || 'data-styled';
 var SC_ATTR_ACTIVE = 'active';
 var SC_ATTR_VERSION = 'data-styled-version';
-var SC_VERSION = "5.1.0";
+var SC_VERSION = "5.1.1";
 var SPLITTER = '/*!sc*/\n';
 var IS_BROWSER = typeof window !== 'undefined' && 'HTMLElement' in window;
 var DISABLE_SPEEDY = typeof SC_DISABLE_SPEEDY === 'boolean' && SC_DISABLE_SPEEDY || typeof process !== 'undefined' && (process.env.REACT_APP_SC_DISABLE_SPEEDY || process.env.SC_DISABLE_SPEEDY) || "development" !== 'production'; // Shared empty execution context when generating static styles
@@ -9266,7 +9266,9 @@ var determineTheme = (function (props, providedTheme, defaultProps) {
 });
 
 // 
-var escapeRegex = /[[\].#*$><+~=|^:(),"'`-]+/g;
+// Source: https://www.w3.org/TR/cssom-1/#serialize-an-identifier
+// Control characters and non-letter first symbols are not supported
+var escapeRegex = /[!"#$%&'()*+,./:;<=>?@[\\\]^`{|}~-]+/g;
 var dashesAtEnds = /(^-|-$)/g;
 /**
  * TODO: Explore using CSS.escape when it becomes more available
@@ -9807,7 +9809,7 @@ var __PRIVATE__ = {
 // 
 /* Define bundle version for export */
 
-var version = "5.1.0";
+var version = "5.1.1";
 /* Warning if you've imported this file on React Native */
 
 if ( true && typeof navigator !== 'undefined' && navigator.product === 'ReactNative') {
@@ -10073,7 +10075,6 @@ function getAllProprietes() {
     };
   }();
 }
-;
 function getAllDossiers() {
   return /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch) {
@@ -10121,7 +10122,6 @@ function getAllDossiers() {
     };
   }();
 }
-;
 function getAllUsers() {
   return /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch) {
@@ -10169,7 +10169,6 @@ function getAllUsers() {
     };
   }();
 }
-;
 /** UTILITY ACTIONS **/
 
 function getLogout() {
@@ -10219,7 +10218,6 @@ function getLogout() {
     };
   }();
 }
-;
 function getHomeUrl() {
   return /*#__PURE__*/function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(dispatch) {
@@ -10267,7 +10265,6 @@ function getHomeUrl() {
     };
   }();
 }
-;
 /** LOADER TOOGLE **/
 
 function toogleLoader() {
@@ -10362,7 +10359,6 @@ function getPersonalData() {
     };
   }();
 }
-;
 /** ADD MODAL **/
 
 function handleChangeAddProprieteModal(key, data) {
@@ -10469,7 +10465,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -10491,6 +10487,7 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
+/* eslint-disable react/react-in-jsx-scope */
 var Component = wp.element.Component;
 
 
@@ -10604,46 +10601,47 @@ function Button(props) {
               if (props.onClick) props.onClick();
 
               if (!(props.action && props.idToSee)) {
-                _context.next = 27;
+                _context.next = 28;
                 break;
               }
 
               _context.t0 = props.action;
-              _context.next = _context.t0 === "user" ? 6 : _context.t0 === "propriete" ? 9 : _context.t0 === "dossier" ? 12 : _context.t0 === "updatePropriete" ? 15 : _context.t0 === "updateUser" ? 20 : 27;
+              _context.next = _context.t0 === "user" ? 6 : _context.t0 === "propriete" ? 9 : _context.t0 === "dossier" ? 12 : _context.t0 === "updatePropriete" ? 15 : _context.t0 === "updateUser" ? 21 : 28;
               break;
 
             case 6:
               props.seeUserData(props.idToSee);
               props.toogleUserModal();
-              return _context.abrupt("break", 27);
+              return _context.abrupt("break", 28);
 
             case 9:
               props.seeProprieteData(props.idToSee, props.listDossiers);
               props.toogleProprieteModal();
-              return _context.abrupt("break", 27);
+              return _context.abrupt("break", 28);
 
             case 12:
               props.seeDossierData(props.idToSee);
               props.toogleDossierModal();
-              return _context.abrupt("break", 27);
+              return _context.abrupt("break", 28);
 
             case 15:
               returnProp = props.listPropriete.filter(function (item) {
                 return item.id == props.idToSee;
-              });
+              })[0];
               props.updateProprieteData('null');
               props.updateProprieteData(returnProp);
+              props.toogleProprieteModal();
               props.toogleAddPropriete();
-              return _context.abrupt("break", 27);
+              return _context.abrupt("break", 28);
 
-            case 20:
+            case 21:
               returnUser = props.listUser.filter(function (item) {
                 return item.id == props.idToSee;
               })[0];
-              _context.next = 23;
+              _context.next = 24;
               return props.updateUserData('null');
 
-            case 23:
+            case 24:
               props.updateUserData(returnUser);
               props.toogleUserModal();
 
@@ -10653,9 +10651,9 @@ function Button(props) {
                 props.toogleAddChasseur();
               }
 
-              return _context.abrupt("break", 27);
+              return _context.abrupt("break", 28);
 
-            case 27:
+            case 28:
             case "end":
               return _context.stop();
           }
@@ -11063,7 +11061,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -11270,7 +11268,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -11790,6 +11788,7 @@ var Input = /*#__PURE__*/function (_Component) {
 
       var haveSuffix = '';
       var input = null;
+      var decimalScale = 0;
       var thousandSeparator = ' ';
       var decimalSeparator = ',';
       var value = null;
@@ -11828,11 +11827,17 @@ var Input = /*#__PURE__*/function (_Component) {
         });
       }
 
+      if (this.props.step) {
+        if (this.props.step == '.01') {
+          decimalScale = 2;
+        }
+      }
+
       if (this.props.type == 'number') {
         input = /*#__PURE__*/React.createElement(StyledNumberFormat, {
           format: this.props.tel ? "##.## ## ## ##" : null,
           value: value,
-          decimalScale: this.props.tel ? null : 2,
+          decimalScale: this.props.tel ? null : decimalScale,
           step: this.props.step ? this.props.step : 1,
           min: this.props.min ? this.props.min : 0,
           max: this.props.max ? this.props.max : null,
@@ -12007,7 +12012,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -12128,7 +12133,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -12532,7 +12537,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -12908,7 +12913,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -13137,7 +13142,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fixNumber", function() { return fixNumber; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatToJson", function() { return formatToJson; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "xmlTojson", function() { return xmlTojson; });
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -13243,6 +13248,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var initialState = {
+  isAnnuelleModif: false,
   addProprieteModal: {
     title: null,
     description: null,
@@ -13355,12 +13361,142 @@ function manageAddModal() {
   var newState;
 
   switch (action.type) {
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["UPDATE_PROPRIETE"]:
+      if (action.payload != 'null') {
+        var initiale = Object.assign({}, initialState.addProprieteModal);
+        var newData = Object.assign(initiale, action.payload);
+
+        for (var key in newData) {
+          if (newData[key] != null && key != "cuisine" && key != "isolation") {
+            if (key == "chasseur") {
+              newData[key] = newData[key].id.toString();
+            } else {
+              newData[key] = newData[key].toString();
+              newData[key] = newData[key].replace('.', ',');
+            }
+          }
+        }
+
+        newData['edit'] = true;
+        newState = _objectSpread(_objectSpread({}, state), {}, {
+          addProprieteModal: newData
+        });
+      } else {
+        newState = _objectSpread(_objectSpread({}, state), {}, {
+          addProprieteModal: {
+            title: '',
+            description: '',
+            cashflow_mensuel_brut: 0,
+            rentabilite_net: 0,
+            prix_au_m: 0,
+            rentabilite_brut: 0,
+            adresse_postale: '',
+            ville: '',
+            zip_code_postal: '',
+            type_bien: '',
+            annee: 0,
+            superficie: 0,
+            superficie_habitable: 0,
+            nombre_de_pieces: 0,
+            nombre_de_chambre: 0,
+            nombre_de_salles_de_bains: 0,
+            nombre_de_wc: 0,
+            nombre_de_celliers: 0,
+            nombre_de_buanderies: 0,
+            niveaux: 0,
+            cuisine: false,
+            isolation: false,
+            prix_du_bien: 0,
+            frais_dagence: 0,
+            frais_de_travaux: 0,
+            frais_de_notaire: 0,
+            honoraires_immomalin: 0,
+            mobilier_equipement: 0,
+            projet_global: 0,
+            budget: 0,
+            charges_copropriete_mensuelles: 0,
+            charges_copropriete_annuelles: 0,
+            taxe_fonciere_mensuelles: 0,
+            taxe_fonciere_annuelles: 0,
+            assurance_pno_mensuelles: 0,
+            assurance_pno_annuelles: 0,
+            assurances_locatives_mensuelles: 0,
+            assurances_locatives_annuelles: 0,
+            gestion_locative_mensuelles: 0,
+            gestion_locative_annuelles: 0,
+            frais_divers_mensuelles: 0,
+            frais_divers_annuelles: 0,
+            frais_electricite_mensuelles: 0,
+            frais_electricite_annuelles: 0,
+            frais_eau_mensuelles: 0,
+            frais_eau_annuelles: 0,
+            forfait_internet_mensuelles: 0,
+            forfait_internet_annuelles: 0,
+            total_charges_mensuelles: 0,
+            total_charges_annuelles: 0,
+            loyer_previsionnel_mensuelles: 0,
+            loyer_previsionnel_annuelles: 0,
+            vacance_locative: 0,
+            total_revenus_mensuelles: 0,
+            total_revenus_annuelles: 0,
+            solde: 0,
+            nombre_de_lots: 0,
+            derniere_assemble: 0,
+            syndic: '',
+            details_charges_copropriete: '',
+            type_de_chauffage: '',
+            mode_de_chauffage: '',
+            energie_du_chauffage: '',
+            caves: 0,
+            terrases: 0,
+            balcons: 0,
+            varangues: 0,
+            piscines: 0,
+            jacuzzis: 0,
+            equipements: '',
+            diagnostics: '',
+            points_positif_et_negatifs: '',
+            filesPhotos: new Array(),
+            chasseur: '',
+            artisan: '',
+            interlocuteur: ''
+          }
+        });
+      }
+
+      return newState || state;
+      break;
+
     case _constants__WEBPACK_IMPORTED_MODULE_0__["SET_PROPRIETE_ADD_MODAL"]:
       if (action.payload.key != 'resetTheForm') {
-        var newData = Object.assign({}, state.addProprieteModal);
-        newData[action.payload.key] = action.payload.data;
+        var setModif = false;
+
+        var _newData = Object.assign({}, state.addProprieteModal);
+
+        _newData[action.payload.key] = action.payload.data;
         var theKey = action.payload.key;
+        /* SET ANNUELLES VALUES */
+
+        switch (theKey) {
+          case 'charges_copropriete_mensuelles':
+          case 'taxe_fonciere_mensuelles':
+          case 'assurance_pno_mensuelles':
+          case 'assurances_locatives_mensuelles':
+          case 'gestion_locative_mensuelles':
+          case 'frais_divers_mensuelles':
+          case 'frais_electricite_mensuelles':
+          case 'frais_eau_mensuelles':
+          case 'forfait_internet_mensuelles':
+          case 'loyer_previsionnel_mensuelles':
+            if (!state.isAnnuelleModif) {
+              var keyForM = theKey.replace(/mensuelles$/, "annuelles");
+              _newData[keyForM] = Number(action.payload.data * 12.0);
+              break;
+            }
+
+        }
         /* SET MENSUELLES VALUES */
+
 
         switch (theKey) {
           case 'charges_copropriete_annuelles':
@@ -13374,25 +13510,8 @@ function manageAddModal() {
           case 'forfait_internet_annuelles':
           case 'loyer_previsionnel_annuelles':
             var keyForA = theKey.replace(/annuelles$/, "mensuelles");
-            newData[keyForA] = Number((action.payload.data / 12).toFixed(0));
-            break;
-        }
-        /* SET ANNUELLES VALUES */
-
-
-        switch (theKey) {
-          case 'charges_copropriete_mensuelles':
-          case 'taxe_fonciere_mensuelles':
-          case 'assurance_pno_mensuelles':
-          case 'assurances_locatives_mensuelles':
-          case 'gestion_locative_mensuelles':
-          case 'frais_divers_mensuelles':
-          case 'frais_electricite_mensuelles':
-          case 'frais_eau_mensuelles':
-          case 'forfait_internet_mensuelles':
-          case 'loyer_previsionnel_mensuelles':
-            var keyForM = theKey.replace(/mensuelles$/, "annuelles");
-            newData[keyForM] = Number(action.payload.data * 12);
+            setModif = true;
+            _newData[keyForA] = Number(action.payload.data / 12.0);
             break;
         }
         /* SET TOTAL CHARGE MENSUELLES VALUES */
@@ -13408,7 +13527,7 @@ function manageAddModal() {
           case 'frais_electricite_mensuelles':
           case 'frais_eau_mensuelles':
           case 'forfait_internet_mensuelles':
-            newData.total_charges_mensuelles = Number(newData.charges_copropriete_mensuelles + newData.taxe_fonciere_mensuelles + newData.assurance_pno_mensuelles + newData.assurances_locatives_mensuelles + newData.gestion_locative_mensuelles + newData.frais_divers_mensuelles + newData.frais_electricite_mensuelles + newData.frais_eau_mensuelles + newData.forfait_internet_mensuelles);
+            _newData.total_charges_mensuelles = Number(_newData.charges_copropriete_mensuelles + _newData.taxe_fonciere_mensuelles + _newData.assurance_pno_mensuelles + _newData.assurances_locatives_mensuelles + _newData.gestion_locative_mensuelles + _newData.frais_divers_mensuelles + _newData.frais_electricite_mensuelles + _newData.frais_eau_mensuelles + _newData.forfait_internet_mensuelles);
             break;
         }
         /* SET TOTAL CHARGE ANNUELLES VALUES */
@@ -13424,7 +13543,7 @@ function manageAddModal() {
           case 'frais_electricite_annuelles':
           case 'frais_eau_annuelles':
           case 'forfait_internet_annuelles':
-            newData.total_charges_annuelles = Number(newData.charges_copropriete_annuelles + newData.taxe_fonciere_annuelles + newData.assurance_pno_annuelles + newData.assurances_locatives_annuelles + newData.gestion_locative_annuelles + newData.frais_divers_annuelles + newData.frais_electricite_annuelles + newData.frais_eau_annuelles + newData.forfait_internet_annuelles);
+            _newData.total_charges_annuelles = Number(_newData.charges_copropriete_annuelles + _newData.taxe_fonciere_annuelles + _newData.assurance_pno_annuelles + _newData.assurances_locatives_annuelles + _newData.gestion_locative_annuelles + _newData.frais_divers_annuelles + _newData.frais_electricite_annuelles + _newData.frais_eau_annuelles + _newData.forfait_internet_annuelles);
             break;
         }
         /* REVENU ANNUELLES */
@@ -13433,7 +13552,7 @@ function manageAddModal() {
         switch (theKey) {
           case 'vacance_locative':
           case 'loyer_previsionnel_annuelles':
-            newData.total_revenus_annuelles = Number(newData.loyer_previsionnel_annuelles / (newData.vacance_locative / 100 + 1));
+            _newData.total_revenus_annuelles = Number(_newData.loyer_previsionnel_annuelles / (_newData.vacance_locative / 100 + 1));
             break;
         }
         /* REVENU ANNUELLES */
@@ -13442,7 +13561,7 @@ function manageAddModal() {
         switch (theKey) {
           case 'vacance_locative':
           case 'loyer_previsionnel_mensuelles':
-            newData.total_revenus_mensuelles = Number(newData.loyer_previsionnel_mensuelles / (newData.vacance_locative / 100 + 1));
+            _newData.total_revenus_mensuelles = Number(_newData.loyer_previsionnel_mensuelles / (_newData.vacance_locative / 100 + 1));
             break;
         }
         /* PROJET GLOBAL */
@@ -13454,7 +13573,7 @@ function manageAddModal() {
           case 'frais_de_travaux':
           case 'honoraires_immomalin':
           case 'mobilier_equipement':
-            newData.projet_global = Number(newData.prix_du_bien + newData.frais_dagence + newData.frais_de_travaux + newData.honoraires_immomalin + newData.mobilier_equipement);
+            _newData.projet_global = Number(_newData.prix_du_bien + _newData.frais_dagence + _newData.frais_de_travaux + _newData.honoraires_immomalin + _newData.mobilier_equipement);
             break;
         }
         /* BUDGET */
@@ -13467,7 +13586,7 @@ function manageAddModal() {
           case 'frais_de_travaux':
           case 'honoraires_immomalin':
           case 'mobilier_equipement':
-            newData.budget = Number(newData.frais_de_notaire + newData.prix_du_bien + newData.frais_dagence + newData.frais_de_travaux + newData.honoraires_immomalin + newData.mobilier_equipement);
+            _newData.budget = Number(_newData.frais_de_notaire + _newData.prix_du_bien + _newData.frais_dagence + _newData.frais_de_travaux + _newData.honoraires_immomalin + _newData.mobilier_equipement);
             break;
         }
         /* SOLDE */
@@ -13476,7 +13595,7 @@ function manageAddModal() {
         switch (theKey) {
           case 'total_charges_annuelles':
           case 'total_revenus_annuelles':
-            newData.solde = Number(newData.total_revenus_annuelles - newData.total_charges_annuelles);
+            _newData.solde = Number(_newData.total_revenus_annuelles - _newData.total_charges_annuelles);
             break;
         }
         /* RENTABILITE NET */
@@ -13491,7 +13610,7 @@ function manageAddModal() {
           case 'frais_de_travaux':
           case 'honoraires_immomalin':
           case 'mobilier_equipement':
-            newData.rentabilite_net = Number((newData.loyer_previsionnel_mensuelles - newData.total_charges_mensuelles) * 12 / (newData.prix_du_bien + newData.frais_dagence + newData.frais_de_travaux + newData.frais_de_notaire + newData.honoraires_immomalin + newData.mobilier_equipement));
+            _newData.rentabilite_net = Number((_newData.loyer_previsionnel_mensuelles - _newData.total_charges_mensuelles) * 12 / (_newData.prix_du_bien + _newData.frais_dagence + _newData.frais_de_travaux + _newData.frais_de_notaire + _newData.honoraires_immomalin + _newData.mobilier_equipement));
             break;
         }
         /* RENTABILITE BRUT */
@@ -13502,7 +13621,7 @@ function manageAddModal() {
           case 'prix_du_bien':
           case 'frais_dagence':
           case 'frais_de_travaux':
-            newData.rentabilite_brut = Number(newData.loyer_previsionnel_annuelles / (newData.prix_du_bien + newData.frais_dagence + newData.frais_de_travaux));
+            _newData.rentabilite_brut = Number(_newData.loyer_previsionnel_annuelles / (_newData.prix_du_bien + _newData.frais_dagence + _newData.frais_de_travaux));
             break;
         }
         /* CASHFLOW BRUT */
@@ -13511,7 +13630,7 @@ function manageAddModal() {
         switch (theKey) {
           case 'loyer_previsionnel_mensuelles':
           case 'total_charges_mensuelles':
-            newData.cashflow_mensuel_brut = Number(newData.loyer_previsionnel_mensuelles - newData.total_charges_mensuelles);
+            _newData.cashflow_mensuel_brut = Number(_newData.loyer_previsionnel_mensuelles - _newData.total_charges_mensuelles);
             break;
         }
         /* PRIX M CARRE */
@@ -13521,12 +13640,13 @@ function manageAddModal() {
           case 'frais_dagence':
           case 'prix_du_bien':
           case 'superficie':
-            newData.prix_au_m = Number((newData.prix_du_bien + newData.frais_dagence) / newData.superficie);
+            _newData.prix_au_m = Number((_newData.prix_du_bien + _newData.frais_dagence) / _newData.superficie);
             break;
         }
 
         newState = _objectSpread(_objectSpread({}, state), {}, {
-          addProprieteModal: newData
+          isAnnuelleModif: setModif,
+          addProprieteModal: _newData
         });
       } else {
         newState = _objectSpread(_objectSpread({}, state), {}, {
@@ -13615,11 +13735,11 @@ function manageAddModal() {
 
     case _constants__WEBPACK_IMPORTED_MODULE_0__["SET_CLIENT_ADD_MODAL"]:
       if (action.payload.key != 'resetTheForm') {
-        var _newData = Object.assign({}, state.addClientModal);
+        var _newData2 = Object.assign({}, state.addClientModal);
 
-        _newData[action.payload.key] = action.payload.data;
+        _newData2[action.payload.key] = action.payload.data;
         newState = _objectSpread(_objectSpread({}, state), {}, {
-          addClientModal: _newData
+          addClientModal: _newData2
         });
       } else {
         newState = _objectSpread(_objectSpread({}, state), {}, {
@@ -13647,11 +13767,11 @@ function manageAddModal() {
 
     case _constants__WEBPACK_IMPORTED_MODULE_0__["SET_CHASSEUR_ADD_MODAL"]:
       if (action.payload.key != 'resetTheForm') {
-        var _newData2 = Object.assign({}, state.addChasseurModal);
+        var _newData3 = Object.assign({}, state.addChasseurModal);
 
-        _newData2[action.payload.key] = action.payload.data;
+        _newData3[action.payload.key] = action.payload.data;
         newState = _objectSpread(_objectSpread({}, state), {}, {
-          addChasseurModal: _newData2
+          addChasseurModal: _newData3
         });
       } else {
         newState = _objectSpread(_objectSpread({}, state), {}, {
@@ -13673,18 +13793,7 @@ function manageAddModal() {
     case _constants__WEBPACK_IMPORTED_MODULE_0__["UPDATE_USER"]:
       if (action.payload != null && action.payload.role != null) {
         if (action.payload.role == 'client__investisseur') {
-          var initiale = Object.assign({}, initialState.addClientModal);
-
-          var _newData3 = Object.assign(initiale, action.payload);
-
-          _newData3['pseudo'] = action.payload.user_login;
-          _newData3['mail'] = action.payload.user_email;
-          _newData3['edit'] = true;
-          newState = _objectSpread(_objectSpread({}, state), {}, {
-            addClientModal: _newData3
-          });
-        } else {
-          var _initiale = Object.assign({}, initialState.addChasseurModal);
+          var _initiale = Object.assign({}, initialState.addClientModal);
 
           var _newData4 = Object.assign(_initiale, action.payload);
 
@@ -13692,7 +13801,18 @@ function manageAddModal() {
           _newData4['mail'] = action.payload.user_email;
           _newData4['edit'] = true;
           newState = _objectSpread(_objectSpread({}, state), {}, {
-            addChasseurModal: _newData4
+            addClientModal: _newData4
+          });
+        } else {
+          var _initiale2 = Object.assign({}, initialState.addChasseurModal);
+
+          var _newData5 = Object.assign(_initiale2, action.payload);
+
+          _newData5['pseudo'] = action.payload.user_login;
+          _newData5['mail'] = action.payload.user_email;
+          _newData5['edit'] = true;
+          newState = _objectSpread(_objectSpread({}, state), {}, {
+            addChasseurModal: _newData5
           });
         }
       } else {
@@ -13729,12 +13849,6 @@ function manageAddModal() {
 
       return newState || state;
 
-    case _constants__WEBPACK_IMPORTED_MODULE_0__["UPDATE_PROPRIETE"]:
-      newState = _objectSpread(_objectSpread({}, state), {}, {
-        addProprieteModal: action.payload
-      });
-      return newState || state;
-
     default:
       return state;
   }
@@ -13753,7 +13867,7 @@ function manageAddModal() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return manageDossier; });
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./src/constants/index.js");
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
@@ -13990,7 +14104,7 @@ function manageGeneral() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return managePropriete; });
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./src/constants/index.js");
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
@@ -14166,7 +14280,7 @@ function managePropriete() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return manageUser; });
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./src/constants/index.js");
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
@@ -15005,7 +15119,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -15592,7 +15706,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../theme/design/componentsDesign */ "./src/theme/design/componentsDesign.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
@@ -15612,7 +15726,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -15835,7 +15949,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../theme/design/componentsDesign */ "./src/theme/design/componentsDesign.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
@@ -15855,7 +15969,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -16120,7 +16234,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../theme/design/componentsDesign */ "./src/theme/design/componentsDesign.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
@@ -16140,7 +16254,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -16278,7 +16392,7 @@ var AddPropriete = /*#__PURE__*/function (_Component) {
         accept: ".png, .jpg, .jpeg",
         label: "Ajouter des photos"
       })), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        value: this.props.modalData.titre,
+        value: this.props.modalData.title,
         onChange: this.props.handleChangeModal,
         required: true,
         type: "text",
@@ -16419,7 +16533,6 @@ var AddPropriete = /*#__PURE__*/function (_Component) {
         onChange: this.props.handleChangeModal,
         required: true,
         type: "number",
-        step: ".01",
         id: "caves",
         label: "Nombre de cave"
       }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -16427,7 +16540,6 @@ var AddPropriete = /*#__PURE__*/function (_Component) {
         onChange: this.props.handleChangeModal,
         required: true,
         type: "number",
-        step: ".01",
         id: "terrases",
         label: "Nombre de terrase"
       }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -16435,7 +16547,6 @@ var AddPropriete = /*#__PURE__*/function (_Component) {
         onChange: this.props.handleChangeModal,
         required: true,
         type: "number",
-        step: ".01",
         id: "balcons",
         label: "Nombre de balcon"
       })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -16443,7 +16554,6 @@ var AddPropriete = /*#__PURE__*/function (_Component) {
         onChange: this.props.handleChangeModal,
         required: true,
         type: "number",
-        step: ".01",
         id: "varangues",
         label: "Nombre de varangue"
       }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -16451,7 +16561,6 @@ var AddPropriete = /*#__PURE__*/function (_Component) {
         onChange: this.props.handleChangeModal,
         required: true,
         type: "number",
-        step: ".01",
         id: "piscines",
         label: "Nombre de piscine"
       }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -16459,7 +16568,6 @@ var AddPropriete = /*#__PURE__*/function (_Component) {
         onChange: this.props.handleChangeModal,
         required: true,
         type: "number",
-        step: ".01",
         id: "jacuzzis",
         label: "Nombre de jacuzzi"
       })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["TitleForm"], null, "Copropri\xE9t\xE9"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -16882,7 +16990,7 @@ var AddPropriete = /*#__PURE__*/function (_Component) {
         type: "number",
         step: ".01",
         id: "rentabilite_net",
-        label: "Brut",
+        label: "Net",
         readonly: true,
         disabled: true
       }), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -16893,7 +17001,7 @@ var AddPropriete = /*#__PURE__*/function (_Component) {
         type: "number",
         step: ".01",
         id: "rentabilite_brut",
-        label: "Net",
+        label: "Brut",
         readonly: true,
         disabled: true
       }))), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["Label"], null, "Cashflow Brut"), /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -16986,7 +17094,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -17331,7 +17439,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -17451,7 +17559,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -17569,7 +17677,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -17719,7 +17827,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -18113,7 +18221,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -18221,7 +18329,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -18352,7 +18460,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _resources_pencil_svg__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_resources_pencil_svg__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../theme/design/componentsDesign */ "./src/theme/design/componentsDesign.jsx");
 /* harmony import */ var _components_Galery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Galery */ "./src/components/Galery.jsx");
-/* harmony import */ var _lib_functions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../lib/functions */ "./src/lib/functions.js");
+/* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/Button */ "./src/components/Button.jsx");
+/* harmony import */ var _lib_functions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../lib/functions */ "./src/lib/functions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -18369,7 +18478,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -18392,6 +18501,7 @@ function _templateObject() {
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var Component = wp.element.Component;
+
 
 
 
@@ -18528,7 +18638,14 @@ var ProprieteModal = /*#__PURE__*/function (_Component) {
         red: this.props.modalData.statut == 'Hors ligne',
         green: this.props.modalData.statut == 'En ligne',
         margin: "0 20px"
-      }, this.props.modalData.statut), this.props.role == 'superviseur' || this.props.role == 'administrator' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["StyledButton"], {
+      }, this.props.modalData.statut), this.props.role == 'superviseur' || this.props.role == 'administrator' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        action: "updatePropriete",
+        idToSee: this.props.modalData.id,
+        src: _resources_pencil_svg__WEBPACK_IMPORTED_MODULE_4___default.a,
+        iconRight: true,
+        small: true,
+        alignCenter: true
+      }, "Modifier"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["StyledButton"], {
         onClick: this.handleClick,
         red: this.props.modalData.statut != 'Hors ligne',
         green: this.props.modalData.statut != 'En ligne',
@@ -18545,19 +18662,19 @@ var ProprieteModal = /*#__PURE__*/function (_Component) {
         label: "Nom du chasseur"
       }, nomChasseur != null ? nomChasseur : 'Non renseigné'), /*#__PURE__*/React.createElement(AssociateText, {
         label: "Frais de notaire"
-      }, this.props.modalData.frais_de_notaire != '' && this.props.modalData.frais_de_notaire != null ? Object(_lib_functions__WEBPACK_IMPORTED_MODULE_7__["formatPrix"])(this.props.modalData.frais_de_notaire, true) + ' €' : 'Non renseigné'), /*#__PURE__*/React.createElement(AssociateText, {
+      }, this.props.modalData.frais_de_notaire != '' && this.props.modalData.frais_de_notaire != null ? Object(_lib_functions__WEBPACK_IMPORTED_MODULE_8__["formatPrix"])(this.props.modalData.frais_de_notaire, true) + ' €' : 'Non renseigné'), /*#__PURE__*/React.createElement(AssociateText, {
         label: "Rentabilit\xE9 Brute"
-      }, this.props.modalData.rentabilite_brut != '' && this.props.modalData.rentabilite_brut != null ? Object(_lib_functions__WEBPACK_IMPORTED_MODULE_7__["formatPrix"])(this.props.modalData.rentabilite_brut, true) + ' %' : 'Non renseigné'), /*#__PURE__*/React.createElement(AssociateText, {
+      }, this.props.modalData.rentabilite_brut != '' && this.props.modalData.rentabilite_brut != null ? Object(_lib_functions__WEBPACK_IMPORTED_MODULE_8__["formatPrix"])(this.props.modalData.rentabilite_brut, true) + ' %' : 'Non renseigné'), /*#__PURE__*/React.createElement(AssociateText, {
         label: "Honoraires IMMO Malin"
-      }, this.props.modalData.honoraires_immomalin != '' && this.props.modalData.honoraires_immomalin != null ? Object(_lib_functions__WEBPACK_IMPORTED_MODULE_7__["formatPrix"])(this.props.modalData.honoraires_immomalin, true) + ' €' : 'Non renseigné')), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(AssociateText, {
+      }, this.props.modalData.honoraires_immomalin != '' && this.props.modalData.honoraires_immomalin != null ? Object(_lib_functions__WEBPACK_IMPORTED_MODULE_8__["formatPrix"])(this.props.modalData.honoraires_immomalin, true) + ' €' : 'Non renseigné')), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(AssociateText, {
         label: "Prix d\u2019acquisition"
-      }, this.props.modalData.budget != '' && this.props.modalData.budget != null ? Object(_lib_functions__WEBPACK_IMPORTED_MODULE_7__["formatPrix"])(this.props.modalData.budget, true) + ' €' : 'Non renseigné'), /*#__PURE__*/React.createElement(AssociateText, {
+      }, this.props.modalData.budget != '' && this.props.modalData.budget != null ? Object(_lib_functions__WEBPACK_IMPORTED_MODULE_8__["formatPrix"])(this.props.modalData.budget, true) + ' €' : 'Non renseigné'), /*#__PURE__*/React.createElement(AssociateText, {
         label: "Co\xFBt d\u2019ameublement"
-      }, this.props.modalData.mobilier_equipement != '' && this.props.modalData.mobilier_equipement != null ? Object(_lib_functions__WEBPACK_IMPORTED_MODULE_7__["formatPrix"])(this.props.modalData.mobilier_equipement, true) + ' €' : 'Non renseigné'), /*#__PURE__*/React.createElement(AssociateText, {
+      }, this.props.modalData.mobilier_equipement != '' && this.props.modalData.mobilier_equipement != null ? Object(_lib_functions__WEBPACK_IMPORTED_MODULE_8__["formatPrix"])(this.props.modalData.mobilier_equipement, true) + ' €' : 'Non renseigné'), /*#__PURE__*/React.createElement(AssociateText, {
         label: "Cashflow mensuel Brut"
-      }, this.props.modalData.cashflow_mensuel_brut != '' && this.props.modalData.cashflow_mensuel_brut != null ? Object(_lib_functions__WEBPACK_IMPORTED_MODULE_7__["formatPrix"])(this.props.modalData.cashflow_mensuel_brut, true) + ' €' : 'Non renseigné'), /*#__PURE__*/React.createElement(AssociateText, {
+      }, this.props.modalData.cashflow_mensuel_brut != '' && this.props.modalData.cashflow_mensuel_brut != null ? Object(_lib_functions__WEBPACK_IMPORTED_MODULE_8__["formatPrix"])(this.props.modalData.cashflow_mensuel_brut, true) + ' €' : 'Non renseigné'), /*#__PURE__*/React.createElement(AssociateText, {
         label: "Prix au m\xB2"
-      }, this.props.modalData.prix_au_m != '' && this.props.modalData.prix_au_m != null ? Object(_lib_functions__WEBPACK_IMPORTED_MODULE_7__["formatPrix"])(this.props.modalData.prix_au_m, true) + ' €' : 'Non renseigné'))), this.props.modalData.photos.length > 0 && /*#__PURE__*/React.createElement(_components_Galery__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }, this.props.modalData.prix_au_m != '' && this.props.modalData.prix_au_m != null ? Object(_lib_functions__WEBPACK_IMPORTED_MODULE_8__["formatPrix"])(this.props.modalData.prix_au_m, true) + ' €' : 'Non renseigné'))), this.props.modalData.photos.length > 0 && /*#__PURE__*/React.createElement(_components_Galery__WEBPACK_IMPORTED_MODULE_6__["default"], {
         thumbnail: this.props.modalData.thumbnail,
         images: this.props.modalData.photos
       })), this.props.modalData.clientPositionne.length > 0 && /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["Text"], {
@@ -18632,7 +18749,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 

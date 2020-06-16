@@ -10,7 +10,7 @@ import { formatPrix } from '../lib/functions';
 const StyledTable = styled.table`
     margin-top: 40px;
     border-collapse: collapse;
-` 
+`
 
 const Line = styled.tr`
     padding: 20px 0;
@@ -56,7 +56,7 @@ const Line = styled.tr`
                 filter: invert(1) !important;
             }
         `}
-` 
+`
 
 const ValThHead = styled.th`
     min-width: 115px;
@@ -127,7 +127,7 @@ class LineTable extends Component {
         } else {
             this.setState({ lineStat: null });
         }
-        
+
     }
 
     render() {
@@ -165,7 +165,7 @@ class LineTable extends Component {
                     returnVal = <ValTd><img src={objVal} /></ValTd>;
                 } else {
                     if (Array.isArray(value) && (objVal != null && objVal != '')) {
-                        if (value[1] == '%' || value[1] == '€') {                        
+                        if (value[1] == '%' || value[1] == '€') {
                             returnVal = <ValTd>{formatPrix(objVal, true)} {value[1]}</ValTd>;
                         } else {
                             returnVal = <ValTd>{objVal} {value[1]}</ValTd>;
@@ -195,7 +195,7 @@ class LineTable extends Component {
                     returnVal = <ValTd><img src={returnVal} /></ValTd>;
                 } else {
                     if (Array.isArray(value) && (returnVal != null && returnVal != '')) {
-                        if (value[1] == '%' || value[1] == '€') {
+                        if (value[1] == '%' || value[1] == '€') {
                             returnVal = <ValTd>{formatPrix(returnVal, true)} {value[1]}</ValTd>;
                         } else {
                             returnVal = <ValTd>{returnVal} {value[1]}</ValTd>;
@@ -220,32 +220,32 @@ class LineTable extends Component {
                 switch (this.props.actions) {
                     case "user":
                         optionTable.push(<ValTd>
-                                            <Button
-                                                src={IconView}
-                                                isImg
-                                                noInvert
-                                                action='user'
-                                                idToSee={this.props.id} /></ValTd>);
+                            <Button
+                                src={IconView}
+                                isImg
+                                noInvert
+                                action='user'
+                                idToSee={this.props.id} /></ValTd>);
                         break;
 
                     case "propriete":
                         optionTable.push(<ValTd>
-                                            <Button
-                                                src={IconView}
-                                                isImg
-                                                noInvert
-                                                action='propriete'
-                                                idToSee={this.props.id} /></ValTd>);
+                            <Button
+                                src={IconView}
+                                isImg
+                                noInvert
+                                action='propriete'
+                                idToSee={this.props.id} /></ValTd>);
                         break;
 
                     case "dossier":
                         optionTable.push(<ValTd>
-                                            <Button
-                                                src={IconView}
-                                                isImg
-                                                noInvert
-                                                action='dossier'
-                                                idToSee={this.props.id} /></ValTd>);
+                            <Button
+                                src={IconView}
+                                isImg
+                                noInvert
+                                action='dossier'
+                                idToSee={this.props.id} /></ValTd>);
                         break;
                 }
             }
@@ -280,13 +280,13 @@ export default function Table(props) {
             }
         });
         const contentTable = props.data.map(item => <LineTable
-                                                            key={item.id}
-                                                            isDossier={props.isDossier}
-                                                            delete={props.deleteType}
-                                                            actions={props.actionType}
-                                                            id={item.id}
-                                                            object={item}
-                                                            orderKeys={props.listeProps} />);
+            key={item.id}
+            isDossier={props.isDossier}
+            delete={props.deleteType}
+            actions={props.actionType}
+            id={item.id}
+            object={item}
+            orderKeys={props.listeProps} />);
 
         return (
             <StyledTable>

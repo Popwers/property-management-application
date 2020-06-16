@@ -310,7 +310,7 @@ const ImagePrev = (props) => {
         props.onClick(props.src, props.file);
     }
 
-    return(
+    return (
         <ImgPrevContainer onClick={handleClick}>
             <CloseHover />
             <StyledFilesImg src={props.src} />
@@ -477,6 +477,7 @@ export default class Input extends Component {
     render() {
         let haveSuffix = '';
         let input = null;
+        let decimalScale = 0;
         let thousandSeparator = ' ';
         let decimalSeparator = ',';
         let value = null;
@@ -509,91 +510,97 @@ export default class Input extends Component {
             listFiles = this.state.previewImg.map(element => <ImagePrev src={element.preview} file={element.file} onClick={this.handleDeleteFiles} />);
         }
 
+        if (this.props.step) {
+            if (this.props.step == '.01') {
+                decimalScale = 2;
+            }
+        }
+
         if (this.props.type == 'number') {
             input = <StyledNumberFormat
-                        format={this.props.tel ? "##.## ## ## ##" : null}
-                        value={value}
-                        decimalScale={this.props.tel ? null : 2}
-                        step={this.props.step ? this.props.step : 1}
-                        min={this.props.min ? this.props.min : 0}
-                        max={this.props.max ? this.props.max : null}
-                        id={this.props.id}
-                        name={this.props.id}
-                        required={this.props.required}
-                        readonly={this.props.readonly}
-                        disabled={this.props.disabled}
-                        thousandSeparator={this.props.tel ? false : thousandSeparator}
-                        decimalSeparator={this.props.tel ? null : decimalSeparator}
-                        allowNegative={false}
-                        allowLeadingZeros={this.props.tel ? true : false}
-                        suffix={this.props.tel ? null : haveSuffix}
-                        placeholder={this.props.placeholder}
-                        onValueChange={this.handleChangeNumber}
-                        inlineLabel={this.props.inline}
-                    />
+                format={this.props.tel ? "##.## ## ## ##" : null}
+                value={value}
+                decimalScale={this.props.tel ? null : decimalScale}
+                step={this.props.step ? this.props.step : 1}
+                min={this.props.min ? this.props.min : 0}
+                max={this.props.max ? this.props.max : null}
+                id={this.props.id}
+                name={this.props.id}
+                required={this.props.required}
+                readonly={this.props.readonly}
+                disabled={this.props.disabled}
+                thousandSeparator={this.props.tel ? false : thousandSeparator}
+                decimalSeparator={this.props.tel ? null : decimalSeparator}
+                allowNegative={false}
+                allowLeadingZeros={this.props.tel ? true : false}
+                suffix={this.props.tel ? null : haveSuffix}
+                placeholder={this.props.placeholder}
+                onValueChange={this.handleChangeNumber}
+                inlineLabel={this.props.inline}
+            />
         } else if (this.props.type == 'textarea') {
             input = <StyledArea
-                        value={value}
-                        required={this.props.required}
-                        id={this.props.id}
-                        name={this.props.id}
-                        placeholder={this.props.placeholder}
-                        onChange={this.handleChange}></StyledArea>;
+                value={value}
+                required={this.props.required}
+                id={this.props.id}
+                name={this.props.id}
+                placeholder={this.props.placeholder}
+                onChange={this.handleChange}></StyledArea>;
         } else if (this.props.type == 'select') {
             input = <StyledSelect
-                        value={value}
-                        required={this.props.required}
-                        id={this.props.id}
-                        name={this.props.id}
-                        onChange={this.handleChange} >
-                        <option value="" selected disabled hidden>Choisir...</option>
-                        {this.props.list.map(item => <option>{item}</option>)}
-                    </StyledSelect>;
+                value={value}
+                required={this.props.required}
+                id={this.props.id}
+                name={this.props.id}
+                onChange={this.handleChange} >
+                <option value="" selected disabled hidden>Choisir...</option>
+                {this.props.list.map(item => <option>{item}</option>)}
+            </StyledSelect>;
         } else if (this.props.type == 'checkbox') {
             input = <ToogleSwith
-                        type={this.props.type}
-                        value={value}
-                        checked={value}
-                        id={this.props.id}
-                        name={this.props.id}
-                        required={this.props.required}
-                        onChange={this.handleChange}
-                        inlineLabel={this.props.inline}
-                    />
+                type={this.props.type}
+                value={value}
+                checked={value}
+                id={this.props.id}
+                name={this.props.id}
+                required={this.props.required}
+                onChange={this.handleChange}
+                inlineLabel={this.props.inline}
+            />
         } else if (this.props.type == 'file') {
             input = <StyledFiles
-                        type={this.props.type}
-                        value={value}
-                        id={this.props.id}
-                        name={this.props.id}
-                        multiple={this.props.multiple}
-                        accept={this.props.accept}
-                        required={this.props.required}
-                        disabled={this.props.disabled}
-                        placeholder={this.props.placeholder}
-                        onChange={this.handleChangeFiles}
-                        inlineLabel={this.props.inline}
-                    />
+                type={this.props.type}
+                value={value}
+                id={this.props.id}
+                name={this.props.id}
+                multiple={this.props.multiple}
+                accept={this.props.accept}
+                required={this.props.required}
+                disabled={this.props.disabled}
+                placeholder={this.props.placeholder}
+                onChange={this.handleChangeFiles}
+                inlineLabel={this.props.inline}
+            />
         } else {
             input = <StyledInput
-                        type={this.props.type}
-                        value={value}
-                        id={this.props.id}
-                        name={this.props.id}
-                        required={this.props.required}
-                        readonly={this.props.readonly}
-                        disabled={this.props.disabled}
-                        placeholder={this.props.placeholder}
-                        onChange={this.handleChange}
-                        inlineLabel={this.props.inline}
-                    />
+                type={this.props.type}
+                value={value}
+                id={this.props.id}
+                name={this.props.id}
+                required={this.props.required}
+                readonly={this.props.readonly}
+                disabled={this.props.disabled}
+                placeholder={this.props.placeholder}
+                onChange={this.handleChange}
+                inlineLabel={this.props.inline}
+            />
         }
 
         return (
             <Container isFile={this.props.type == 'file' ? true : false}>
                 {this.props.label &&
-                    <Label 
-                        isFile={this.props.type == 'file' ? true : false} 
+                    <Label
+                        isFile={this.props.type == 'file' ? true : false}
                         htmlFor={this.props.id} inlineLabel={this.props.inline} > {this.props.label} </Label>
                 }
 
@@ -601,7 +608,7 @@ export default class Input extends Component {
 
                 {this.props.type == 'file' &&
                     <ContainerPreview>
-                    {listFiles}
+                        {listFiles}
                     </ContainerPreview>
                 }
             </Container>

@@ -36,17 +36,17 @@ export function getAllProprietes() {
         action.append('action', 'get_proprietes_data');
 
         await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', action)
-        .then(function (response) {
-            responseReq = formatToJson(response.data);
-        })
-        .catch(function (error) {
-            responseReq = error;
-            statutRes = 'error';
-        });
+            .then(function (response) {
+                responseReq = formatToJson(response.data);
+            })
+            .catch(function (error) {
+                responseReq = error;
+                statutRes = 'error';
+            });
 
         dispatch({ type: GET_PROPRIETE, payload: { data: responseReq, statut: statutRes } });
     }
-};
+}
 
 export function getAllDossiers() {
     return async function (dispatch) {
@@ -71,32 +71,32 @@ export function getAllDossiers() {
 
         dispatch({ type: GET_DOSSIER, payload: { data: responseReq, statut: statutRes } });
     }
-};
+}
 
 export function getAllUsers() {
     return async function (dispatch) {
         let responseReq = null;
         let statutRes = 'success';
-        
+
         let action = new FormData();
         action.append('action', 'get_users_data');
 
         await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', action)
-        .then(function (response) {
-            responseReq = formatToJson(response.data);
-            if (responseReq == 'fail') {
-                statutRes = 'success';
-                responseReq = null;
-            }
-        })
-        .catch(function (error) {
-            responseReq = error;
-            statutRes = 'error';
-        });
+            .then(function (response) {
+                responseReq = formatToJson(response.data);
+                if (responseReq == 'fail') {
+                    statutRes = 'success';
+                    responseReq = null;
+                }
+            })
+            .catch(function (error) {
+                responseReq = error;
+                statutRes = 'error';
+            });
 
         dispatch({ type: GET_USER, payload: { data: responseReq, statut: statutRes } });
     }
-};
+}
 
 /** UTILITY ACTIONS **/
 
@@ -109,21 +109,21 @@ export function getLogout() {
         action.append('action', 'get_logOut_data');
 
         await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', action)
-        .then(function (response) {
-            responseReq = formatToJson(response.data);
-            if (responseReq == 'fail') {
-                statutRes = 'success';
-                responseReq = null;
-            }
-        })
-        .catch(function (error) {
-            responseReq = error;
-            statutRes = 'error';
-        });
+            .then(function (response) {
+                responseReq = formatToJson(response.data);
+                if (responseReq == 'fail') {
+                    statutRes = 'success';
+                    responseReq = null;
+                }
+            })
+            .catch(function (error) {
+                responseReq = error;
+                statutRes = 'error';
+            });
 
         dispatch({ type: GET_LOGOUT, payload: { data: responseReq, statut: statutRes } });
     }
-};
+}
 
 export function getHomeUrl() {
     return async function (dispatch) {
@@ -132,28 +132,28 @@ export function getHomeUrl() {
 
         let action = new FormData();
         action.append('action', 'get_homeUrl_data');
-        
+
         await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', action)
-        .then(function (response) {
-            responseReq = formatToJson(response.data);
-            if (responseReq == 'fail') {
-                statutRes = 'success';
-                responseReq = null;
-            }
-        })
-        .catch(function (error) {
-            responseReq = error;
-            statutRes = 'error';
-        });
+            .then(function (response) {
+                responseReq = formatToJson(response.data);
+                if (responseReq == 'fail') {
+                    statutRes = 'success';
+                    responseReq = null;
+                }
+            })
+            .catch(function (error) {
+                responseReq = error;
+                statutRes = 'error';
+            });
 
         dispatch({ type: GET_ADRESSE_SITE, payload: { data: responseReq, statut: statutRes } });
     }
-};
+}
 
 /** LOADER TOOGLE **/
 
 export function toogleLoader(statut = null, messageShow = 'Veuillez patienter ...') {
-    return { type: TOOGLE_LOADER, payload: { statut: statut, message: messageShow} };
+    return { type: TOOGLE_LOADER, payload: { statut: statut, message: messageShow } };
 }
 
 /** MODAL TOOGLE **/
@@ -194,21 +194,21 @@ export function getPersonalData() {
         action.append('action', 'get_personal_data');
 
         await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', action)
-        .then(function (response) {
-            responseReq = formatToJson(response.data);
-            if (responseReq == 'fail') {
-                statutRes = 'success';
-                responseReq = null;
-            }
-        })
-        .catch(function (error) {
-            responseReq = error;
-            statutRes = 'error';
-        });
+            .then(function (response) {
+                responseReq = formatToJson(response.data);
+                if (responseReq == 'fail') {
+                    statutRes = 'success';
+                    responseReq = null;
+                }
+            })
+            .catch(function (error) {
+                responseReq = error;
+                statutRes = 'error';
+            });
 
         dispatch({ type: GET_MY_DATA, payload: { data: responseReq, statut: statutRes } });
     }
-};
+}
 
 /** ADD MODAL **/
 
@@ -238,7 +238,7 @@ export function seeUserData(id) {
 }
 
 export function seeProprieteData(id, dossiers) {
-    return { type: SEE_PROPRIETE, payload: { id: id, dossiers: dossiers }};
+    return { type: SEE_PROPRIETE, payload: { id: id, dossiers: dossiers } };
 }
 
 export function seeDossierData(id) {

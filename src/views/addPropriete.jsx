@@ -47,18 +47,18 @@ class AddPropriete extends Component {
                 this.props.registerDataProgress(fakeID, percentageProgress);
             },
         })
-        .then(response => {
-            let result = formatToJson(response.data);
-            if (result.id == null) {
-                console.log('error');
-            }
-        })
-        .catch(error => {
-            console.log(error);
-        })
-        .then(() => {
-            this.props.registerDataProgress(fakeID, 100);
-        });
+            .then(response => {
+                let result = formatToJson(response.data);
+                if (result.id == null) {
+                    console.log('error');
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
+            .then(() => {
+                this.props.registerDataProgress(fakeID, 100);
+            });
 
         this.props.getAllProprietes();
     }
@@ -73,7 +73,7 @@ class AddPropriete extends Component {
                     <Input value={this.props.modalData.filesPhotos} onChange={this.props.handleChangeModal} type="file" id="filesPhotos" multiple accept=".png, .jpg, .jpeg" label='Ajouter des photos' />
                 </RowInput>
 
-                <Input value={this.props.modalData.titre} onChange={this.props.handleChangeModal} required type="text" id="title" label="Titre" />
+                <Input value={this.props.modalData.title} onChange={this.props.handleChangeModal} required type="text" id="title" label="Titre" />
 
                 <Input value={this.props.modalData.description} onChange={this.props.handleChangeModal} type='textarea' id="description" label='Courte description' />
                 <Input value={this.props.modalData.adresse_postale} onChange={this.props.handleChangeModal} type='text' id="adresse_postale" label='Adresse postale' />
@@ -120,15 +120,15 @@ class AddPropriete extends Component {
                 <TitleForm>Agencement extérieur</TitleForm>
 
                 <RowInput>
-                    <Input value={this.props.modalData.caves} onChange={this.props.handleChangeModal} required type="number" step=".01" id="caves" label='Nombre de cave' />
-                    <Input value={this.props.modalData.terrases} onChange={this.props.handleChangeModal} required type="number" step=".01" id="terrases" label='Nombre de terrase' />
-                    <Input value={this.props.modalData.balcons} onChange={this.props.handleChangeModal} required type="number" step=".01" id="balcons" label='Nombre de balcon' />
+                    <Input value={this.props.modalData.caves} onChange={this.props.handleChangeModal} required type="number" id="caves" label='Nombre de cave' />
+                    <Input value={this.props.modalData.terrases} onChange={this.props.handleChangeModal} required type="number" id="terrases" label='Nombre de terrase' />
+                    <Input value={this.props.modalData.balcons} onChange={this.props.handleChangeModal} required type="number" id="balcons" label='Nombre de balcon' />
                 </RowInput>
 
                 <RowInput>
-                    <Input value={this.props.modalData.varangues} onChange={this.props.handleChangeModal} required type="number" step=".01" id="varangues" label='Nombre de varangue' />
-                    <Input value={this.props.modalData.piscines} onChange={this.props.handleChangeModal} required type="number" step=".01" id="piscines" label='Nombre de piscine' />
-                    <Input value={this.props.modalData.jacuzzis} onChange={this.props.handleChangeModal} required type="number" step=".01" id="jacuzzis" label='Nombre de jacuzzi' />
+                    <Input value={this.props.modalData.varangues} onChange={this.props.handleChangeModal} required type="number" id="varangues" label='Nombre de varangue' />
+                    <Input value={this.props.modalData.piscines} onChange={this.props.handleChangeModal} required type="number" id="piscines" label='Nombre de piscine' />
+                    <Input value={this.props.modalData.jacuzzis} onChange={this.props.handleChangeModal} required type="number" id="jacuzzis" label='Nombre de jacuzzi' />
                 </RowInput>
 
 
@@ -299,8 +299,8 @@ class AddPropriete extends Component {
                 <RowInput>
                     <Label>Rentabilité</Label>
                     <RowInput dispatch>
-                        <Input value={this.props.modalData.rentabilite_net} onChange={this.props.handleChangeModal} required pourcent type="number" step=".01" id="rentabilite_net" label='Brut' readonly disabled />
-                        <Input value={this.props.modalData.rentabilite_brut} onChange={this.props.handleChangeModal} required pourcent type="number" step=".01" id="rentabilite_brut" label='Net' readonly disabled />
+                        <Input value={this.props.modalData.rentabilite_net} onChange={this.props.handleChangeModal} required pourcent type="number" step=".01" id="rentabilite_net" label='Net' readonly disabled />
+                        <Input value={this.props.modalData.rentabilite_brut} onChange={this.props.handleChangeModal} required pourcent type="number" step=".01" id="rentabilite_brut" label='Brut' readonly disabled />
                     </RowInput>
                 </RowInput>
 

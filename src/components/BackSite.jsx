@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 const { Component } = wp.element;
 
 import { connect } from 'react-redux';

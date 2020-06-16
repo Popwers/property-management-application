@@ -47,9 +47,11 @@ function Button(props) {
                     break;
 
                 case "updatePropriete":
-                    let returnProp = props.listPropriete.filter(item => item.id == props.idToSee);
+                    let returnProp = props.listPropriete.filter(item => item.id == props.idToSee)[0];
                     props.updateProprieteData('null');
                     props.updateProprieteData(returnProp);
+
+                    props.toogleProprieteModal();
                     props.toogleAddPropriete();
                     break;
 
@@ -59,11 +61,11 @@ function Button(props) {
                     props.updateUserData(returnUser);
                     props.toogleUserModal();
 
-                    if (returnUser.role == 'client__investisseur') {                        
+                    if (returnUser.role == 'client__investisseur') {
                         props.toogleAddClient();
                     } else {
                         props.toogleAddChasseur();
-                    }                    
+                    }
                     break;
             }
         }
