@@ -125,7 +125,6 @@ class ProprieteModal extends Component {
                     }
                     {this.props.role == 'superviseur' || this.props.role == 'administrator' &&
                         <div>
-                            <Button action='updatePropriete' idToSee={this.props.modalData.id} src={IconPencil} iconRight small alignCenter>Modifier</Button>
                             <StyledButton
                                 onClick={this.handleClick}
                                 red={this.props.modalData.statut != 'Hors ligne'}

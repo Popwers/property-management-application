@@ -156,15 +156,7 @@ class LineTable extends Component {
                     }
                 }
 
-                if (searchKey == 'BChasseur') {
-                    returnVal = <ValTd><BChasseur width wrap idChasseur={this.props.object.id} /></ValTd>;
-                } else if (searchKey == 'CA_component_final') {
-                    returnVal = <ValTd><CAComponent projetFinaux idChasseur={this.props.object.id} /></ValTd>;
-                } else if (searchKey == 'CA_component_previ') {
-                    returnVal = <ValTd><CAComponent projetEnCours idChasseur={this.props.object.id} /></ValTd>;
-                } else if (searchKey == 'commission_component') {
-                    returnVal = <ValTd><Commission ficheBien={this.props.object.id} /></ValTd>;
-                } else if (searchKey == 'id') {
+                if (searchKey == 'id') {
                     returnVal = <ValTh scope="row">{objVal}</ValTh>;
                 } else if (searchKey == 'last_update') {
                     if (this.props.object.statut == 'En attente') {
@@ -194,7 +186,13 @@ class LineTable extends Component {
                     }
                 }
 
-                if (searchKey == 'BChasseur') {
+                if (searchKey == 'statut') {
+                    if (returnVal != 'En attente') {
+                        returnVal = <ValTd><Text badge green={returnVal == 'Projet loué'} margin='0 20px'>{returnVal}</Text></ValTd>;
+                    } else {
+                        returnVal = <ValTd>{returnVal}</ValTd>;
+                    }
+                } else if (searchKey == 'BChasseur') {
                     returnVal = <ValTd><BChasseur width wrap idChasseur={this.props.object.id} /></ValTd>;
                 } else if (searchKey == 'CA_component_final') {
                     returnVal = <ValTd><CAComponent projetFinaux idChasseur={this.props.object.id} /></ValTd>;

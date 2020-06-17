@@ -13211,27 +13211,7 @@ var LineTable = /*#__PURE__*/function (_Component) {
               }
             }
 
-            if (searchKey == 'BChasseur') {
-              returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_BChasseur__WEBPACK_IMPORTED_MODULE_5__["default"], {
-                width: true,
-                wrap: true,
-                idChasseur: _this2.props.object.id
-              }));
-            } else if (searchKey == 'CA_component_final') {
-              returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_CAComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
-                projetFinaux: true,
-                idChasseur: _this2.props.object.id
-              }));
-            } else if (searchKey == 'CA_component_previ') {
-              returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_CAComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
-                projetEnCours: true,
-                idChasseur: _this2.props.object.id
-              }));
-            } else if (searchKey == 'commission_component') {
-              returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_Commission__WEBPACK_IMPORTED_MODULE_3__["default"], {
-                ficheBien: _this2.props.object.id
-              }));
-            } else if (searchKey == 'id') {
+            if (searchKey == 'id') {
               returnVal = /*#__PURE__*/React.createElement(ValTh, {
                 scope: "row"
               }, objVal);
@@ -13266,7 +13246,17 @@ var LineTable = /*#__PURE__*/function (_Component) {
             }
           }
 
-          if (searchKey == 'BChasseur') {
+          if (searchKey == 'statut') {
+            if (returnVal != 'En attente') {
+              returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_6__["Text"], {
+                badge: true,
+                green: returnVal == 'Projet loué',
+                margin: "0 20px"
+              }, returnVal));
+            } else {
+              returnVal = /*#__PURE__*/React.createElement(ValTd, null, returnVal);
+            }
+          } else if (searchKey == 'BChasseur') {
             returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_BChasseur__WEBPACK_IMPORTED_MODULE_5__["default"], {
               width: true,
               wrap: true,
@@ -18675,7 +18665,8 @@ var DossierModal = /*#__PURE__*/function (_Component) {
         fontSize: "22px"
       }, "Dossier N\xB0", this.props.modalData.id), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_3__["Text"], {
         badge: true,
-        blue: true,
+        green: this.props.modalData.statut == 'Projet loué',
+        orange: this.props.modalData.statut == 'En attente',
         margin: "0 20px"
       }, this.props.modalData.statut)), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_3__["Text"], {
         bold: true,
@@ -19218,14 +19209,7 @@ var ProprieteModal = /*#__PURE__*/function (_Component) {
         iconRight: true,
         small: true,
         alignCenter: true
-      }, "Modifier")), this.props.role == 'superviseur' || this.props.role == 'administrator' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        action: "updatePropriete",
-        idToSee: this.props.modalData.id,
-        src: _resources_pencil_svg__WEBPACK_IMPORTED_MODULE_4___default.a,
-        iconRight: true,
-        small: true,
-        alignCenter: true
-      }, "Modifier"), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["StyledButton"], {
+      }, "Modifier")), this.props.role == 'superviseur' || this.props.role == 'administrator' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["StyledButton"], {
         onClick: this.handleClick,
         red: this.props.modalData.statut != 'Hors ligne',
         green: this.props.modalData.statut != 'En ligne',

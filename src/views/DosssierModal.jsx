@@ -301,7 +301,11 @@ class DossierModal extends Component {
             <>
                 <Row alignCenter>
                     <Text bold fontSize='22px'>Dossier N°{this.props.modalData.id}</Text>
-                    <Text badge blue margin='0 20px'>{this.props.modalData.statut}</Text>
+                    <Text
+                        badge
+                        green={this.props.modalData.statut == 'Projet loué'}
+                        orange={this.props.modalData.statut == 'En attente'}
+                        margin='0 20px'>{this.props.modalData.statut}</Text>
                 </Row>
 
                 <Text bold margin='0 0 40px 0' fontSize='16px'>Client positionné le {this.props.modalData.first_date}</Text>
