@@ -4,6 +4,8 @@ import styled, { css } from 'styled-components';
 import Button from '../components/Button';
 import DeleteButton from '../components/DeleteButton';
 import Commission from '../components/Commission';
+import CAComponent from '../components/CAComponent';
+import BChasseur from '../components/BChasseur';
 import { Text } from '../theme/design/componentsDesign';
 import IconView from '../resources/eye.svg';
 import { formatPrix } from '../lib/functions';
@@ -154,7 +156,13 @@ class LineTable extends Component {
                     }
                 }
 
-                if (searchKey == 'commission_component') {
+                if (searchKey == 'BChasseur') {
+                    returnVal = <ValTd><BChasseur width wrap idChasseur={this.props.object.id} /></ValTd>;
+                } else if (searchKey == 'CA_component_final') {
+                    returnVal = <ValTd><CAComponent projetFinaux idChasseur={this.props.object.id} /></ValTd>;
+                } else if (searchKey == 'CA_component_previ') {
+                    returnVal = <ValTd><CAComponent projetEnCours idChasseur={this.props.object.id} /></ValTd>;
+                } else if (searchKey == 'commission_component') {
                     returnVal = <ValTd><Commission ficheBien={this.props.object.id} /></ValTd>;
                 } else if (searchKey == 'id') {
                     returnVal = <ValTh scope="row">{objVal}</ValTh>;
@@ -186,7 +194,13 @@ class LineTable extends Component {
                     }
                 }
 
-                if (searchKey == 'commission_component') {
+                if (searchKey == 'BChasseur') {
+                    returnVal = <ValTd><BChasseur width wrap idChasseur={this.props.object.id} /></ValTd>;
+                } else if (searchKey == 'CA_component_final') {
+                    returnVal = <ValTd><CAComponent projetFinaux idChasseur={this.props.object.id} /></ValTd>;
+                } else if (searchKey == 'CA_component_previ') {
+                    returnVal = <ValTd><CAComponent projetEnCours idChasseur={this.props.object.id} /></ValTd>;
+                } else if (searchKey == 'commission_component') {
                     returnVal = <ValTd><Commission ficheBien={this.props.object.id} /></ValTd>;
                 } else if (searchKey == 'id') {
                     returnVal = <ValTh scope="row">{returnVal}</ValTh>;

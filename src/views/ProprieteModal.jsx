@@ -118,6 +118,11 @@ class ProprieteModal extends Component {
                 <Row alignCenter>
                     <Text bold fontSize='22px'>Propriete N°{this.props.modalData.id}</Text>
                     <Text badge red={this.props.modalData.statut == 'Hors ligne'} green={this.props.modalData.statut == 'En ligne'} margin='0 20px'>{this.props.modalData.statut}</Text>
+                    {this.props.role != 'client__investisseur' &&
+                        <div>
+                            <Button action='updatePropriete' idToSee={this.props.modalData.id} src={IconPencil} iconRight small alignCenter>Modifier</Button>
+                        </div>
+                    }
                     {this.props.role == 'superviseur' || this.props.role == 'administrator' &&
                         <div>
                             <Button action='updatePropriete' idToSee={this.props.modalData.id} src={IconPencil} iconRight small alignCenter>Modifier</Button>

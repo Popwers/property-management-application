@@ -10439,6 +10439,204 @@ function updateProprieteData(proprieteData) {
 
 /***/ }),
 
+/***/ "./src/components/BChasseur.jsx":
+/*!**************************************!*\
+  !*** ./src/components/BChasseur.jsx ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions */ "./src/actions/index.js");
+/* harmony import */ var _lib_functions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/functions */ "./src/lib/functions.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var _theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../theme/design/componentsDesign */ "./src/theme/design/componentsDesign.jsx");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _templateObject4() {
+  var data = _taggedTemplateLiteral(["\n    min-width: 160px;\n    margin: 0;\n"]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n    margin-bottom: 10px;\n    position: relative;\n    width: 100%;\n    min-width: 180px;\n    height: 14px;\n    margin-right: 20px;\n    border-radius: 20px;\n    background: #A5A5A5;\n    box-shadow: ", ";\n\n    &:before {\n        content: \"\";\n        position: absolute;\n        left: 0;\n        width: ", "%;\n        height: 14px;\n        border-radius: 20px;\n        ", ";\n        transition: width 0.5s;\n    }\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n    margin-bottom: 0px;\n    width: ", ";\n    flex-wrap: ", ";\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    align-items: center;\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+/* eslint-disable react/react-in-jsx-scope */
+var Component = wp.element.Component;
+
+
+
+
+
+var FlexRow = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].div(_templateObject());
+var BarreContainer = Object(styled_components__WEBPACK_IMPORTED_MODULE_3__["default"])(FlexRow)(_templateObject2(), function (props) {
+  return props.width ? '180px' : null;
+}, function (props) {
+  return props.wrap ? 'wrap' : null;
+});
+var Barre = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].div(_templateObject3(), function (props) {
+  return props.theme.shadows;
+}, function (props) {
+  return props.pourcentage * 100 / props.max;
+}, function (props) {
+  return props.theme.orangeRadius;
+});
+var TextBarre = Object(styled_components__WEBPACK_IMPORTED_MODULE_3__["default"])(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Text"])(_templateObject4());
+
+function BarreBonus(props) {
+  return /*#__PURE__*/React.createElement(BarreContainer, {
+    width: props.width,
+    wrap: props.wrap
+  }, /*#__PURE__*/React.createElement(Barre, {
+    pourcentage: props.pourcentage,
+    max: props.max
+  }), /*#__PURE__*/React.createElement(TextBarre, null, Object(_lib_functions__WEBPACK_IMPORTED_MODULE_2__["formatPrix"])(props.pourcentage), " \u20AC / ", Object(_lib_functions__WEBPACK_IMPORTED_MODULE_2__["formatPrix"])(props.max), " \u20AC ", /*#__PURE__*/React.createElement("br", null), props.title));
+}
+
+var BChasseur = /*#__PURE__*/function (_Component) {
+  _inherits(BChasseur, _Component);
+
+  var _super = _createSuper(BChasseur);
+
+  function BChasseur(props) {
+    _classCallCheck(this, BChasseur);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(BChasseur, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.getAllDossiers();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this = this;
+
+      var CA = 0;
+      var max = 0;
+
+      if (this.props.listDossier != null && Array.isArray(this.props.listDossier)) {
+        var projetFinaux = this.props.listDossier.filter(function (dossier) {
+          return dossier.id_fiche_produit.chasseur.id == _this.props.idChasseur;
+        });
+        projetFinaux = projetFinaux.filter(function (dossier) {
+          return dossier.statut == 'Projet loué';
+        });
+
+        if (Array.isArray(projetFinaux)) {
+          if (projetFinaux.length > 0) {
+            projetFinaux.forEach(function (element) {
+              var honoraire = Number(element.id_fiche_produit.honoraires_immomalin);
+              if (!Number.isNaN(honoraire) && honoraire > 0) CA += honoraire;
+            });
+          }
+        }
+      }
+
+      if (CA <= 50000) {
+        max = 50000;
+      } else if (CA >= 50001 && CA <= 100000) {
+        max = 100000;
+      } else if (CA >= 100001 && CA <= 200000) {
+        max = 200000;
+      } else if (CA >= 200001 && CA <= 350000) {
+        max = 350000;
+      } else if (CA >= 350001 && CA <= 500000) {
+        max = 500000;
+      } else if (CA >= 500001) {
+        max = 500000;
+        CA = 500000;
+      }
+
+      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(BarreBonus, {
+        title: "De chiffre d\u2019affaire",
+        pourcentage: CA,
+        max: max,
+        width: this.props.width,
+        wrap: this.props.wrap
+      }));
+    }
+  }]);
+
+  return BChasseur;
+}(Component);
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    getAllDossiers: function getAllDossiers() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getAllDossiers"])());
+    }
+  };
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    listDossier: state.manageDossier.listDossier.data
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(BChasseur));
+
+/***/ }),
+
 /***/ "./src/components/BackSite.jsx":
 /*!*************************************!*\
   !*** ./src/components/BackSite.jsx ***!
@@ -10731,6 +10929,132 @@ var mapStateToProps = function mapStateToProps(state) {
 
 /***/ }),
 
+/***/ "./src/components/CAComponent.jsx":
+/*!****************************************!*\
+  !*** ./src/components/CAComponent.jsx ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions */ "./src/actions/index.js");
+/* harmony import */ var _lib_functions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/functions */ "./src/lib/functions.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/* eslint-disable react/react-in-jsx-scope */
+var Component = wp.element.Component;
+
+
+
+
+var CAComponent = /*#__PURE__*/function (_Component) {
+  _inherits(CAComponent, _Component);
+
+  var _super = _createSuper(CAComponent);
+
+  function CAComponent(props) {
+    _classCallCheck(this, CAComponent);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(CAComponent, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.getAllDossiers();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this = this;
+
+      var CA = 0;
+
+      if (this.props.projetEnCours) {
+        if (this.props.listDossier != null && Array.isArray(this.props.listDossier)) {
+          var projetEnCours = this.props.listDossier.filter(function (dossier) {
+            return dossier.id_fiche_produit.chasseur.id == _this.props.idChasseur;
+          });
+          projetEnCours = projetEnCours.filter(function (dossier) {
+            return dossier.statut != 'Projet loué';
+          });
+
+          if (Array.isArray(projetEnCours)) {
+            if (projetEnCours.length > 0) {
+              projetEnCours.forEach(function (element) {
+                var honoraire = Number(element.id_fiche_produit.honoraires_immomalin);
+                if (!Number.isNaN(honoraire) && honoraire > 0) CA += honoraire;
+              });
+            }
+          }
+        }
+      } else if (this.props.projetFinaux) {
+        if (this.props.listDossier != null && Array.isArray(this.props.listDossier)) {
+          var projetFinaux = this.props.listDossier.filter(function (dossier) {
+            return dossier.id_fiche_produit.chasseur.id == _this.props.idChasseur;
+          });
+          projetFinaux = projetFinaux.filter(function (dossier) {
+            return dossier.statut == 'Projet loué';
+          });
+
+          if (Array.isArray(projetFinaux)) {
+            if (projetFinaux.length > 0) {
+              projetFinaux.forEach(function (element) {
+                var honoraire = Number(element.id_fiche_produit.honoraires_immomalin);
+                if (!Number.isNaN(honoraire) && honoraire > 0) CA += honoraire;
+              });
+            }
+          }
+        }
+      }
+
+      return /*#__PURE__*/React.createElement(React.Fragment, null, Object(_lib_functions__WEBPACK_IMPORTED_MODULE_2__["formatPrix"])(CA) + ' €');
+    }
+  }]);
+
+  return CAComponent;
+}(Component);
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    getAllDossiers: function getAllDossiers() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getAllDossiers"])());
+    }
+  };
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    listDossier: state.manageDossier.listDossier.data
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(CAComponent));
+
+/***/ }),
+
 /***/ "./src/components/CardStat.jsx":
 /*!*************************************!*\
   !*** ./src/components/CardStat.jsx ***!
@@ -10834,8 +11158,7 @@ function Card(props) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions */ "./src/actions/index.js");
-/* harmony import */ var _lib_functions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/functions */ "./src/lib/functions.js");
+/* harmony import */ var _lib_functions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/functions */ "./src/lib/functions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10863,7 +11186,6 @@ var Component = wp.element.Component;
 
 
 
-
 var Commission = /*#__PURE__*/function (_Component) {
   _inherits(Commission, _Component);
 
@@ -10874,11 +11196,6 @@ var Commission = /*#__PURE__*/function (_Component) {
 
     return _super.call(this, props);
   }
-  /*componentDidMount() {
-      this.props.getAllDossiers();
-      this.props.getAllProprietes();
-  }*/
-
 
   _createClass(Commission, [{
     key: "render",
@@ -10976,23 +11293,12 @@ var Commission = /*#__PURE__*/function (_Component) {
         }
       }
 
-      return /*#__PURE__*/React.createElement(React.Fragment, null, Object(_lib_functions__WEBPACK_IMPORTED_MODULE_2__["formatPrix"])(commission) + ' €');
+      return /*#__PURE__*/React.createElement(React.Fragment, null, Object(_lib_functions__WEBPACK_IMPORTED_MODULE_1__["formatPrix"])(commission) + ' €');
     }
   }]);
 
   return Commission;
 }(Component);
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    getAllDossiers: function getAllDossiers() {
-      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getAllDossiers"])());
-    },
-    getAllProprietes: function getAllProprietes() {
-      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getAllProprietes"])());
-    }
-  };
-};
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
@@ -12697,10 +13003,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Button */ "./src/components/Button.jsx");
 /* harmony import */ var _components_DeleteButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/DeleteButton */ "./src/components/DeleteButton.jsx");
 /* harmony import */ var _components_Commission__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Commission */ "./src/components/Commission.jsx");
-/* harmony import */ var _theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../theme/design/componentsDesign */ "./src/theme/design/componentsDesign.jsx");
-/* harmony import */ var _resources_eye_svg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../resources/eye.svg */ "./src/resources/eye.svg");
-/* harmony import */ var _resources_eye_svg__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_resources_eye_svg__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _lib_functions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lib/functions */ "./src/lib/functions.js");
+/* harmony import */ var _components_CAComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/CAComponent */ "./src/components/CAComponent.jsx");
+/* harmony import */ var _components_BChasseur__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/BChasseur */ "./src/components/BChasseur.jsx");
+/* harmony import */ var _theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../theme/design/componentsDesign */ "./src/theme/design/componentsDesign.jsx");
+/* harmony import */ var _resources_eye_svg__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../resources/eye.svg */ "./src/resources/eye.svg");
+/* harmony import */ var _resources_eye_svg__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_resources_eye_svg__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _lib_functions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../lib/functions */ "./src/lib/functions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -12815,6 +13123,8 @@ var Component = wp.element.Component;
 
 
 
+
+
 var StyledTable = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].table(_templateObject());
 var Line = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].tr(_templateObject2(), function (props) {
   return props.lineStat == 'disable' && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject3());
@@ -12901,7 +13211,23 @@ var LineTable = /*#__PURE__*/function (_Component) {
               }
             }
 
-            if (searchKey == 'commission_component') {
+            if (searchKey == 'BChasseur') {
+              returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_BChasseur__WEBPACK_IMPORTED_MODULE_5__["default"], {
+                width: true,
+                wrap: true,
+                idChasseur: _this2.props.object.id
+              }));
+            } else if (searchKey == 'CA_component_final') {
+              returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_CAComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
+                projetFinaux: true,
+                idChasseur: _this2.props.object.id
+              }));
+            } else if (searchKey == 'CA_component_previ') {
+              returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_CAComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
+                projetEnCours: true,
+                idChasseur: _this2.props.object.id
+              }));
+            } else if (searchKey == 'commission_component') {
               returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_Commission__WEBPACK_IMPORTED_MODULE_3__["default"], {
                 ficheBien: _this2.props.object.id
               }));
@@ -12922,7 +13248,7 @@ var LineTable = /*#__PURE__*/function (_Component) {
             } else {
               if (Array.isArray(value) && objVal != null && objVal != '') {
                 if (value[1] == '%' || value[1] == '€') {
-                  returnVal = /*#__PURE__*/React.createElement(ValTd, null, Object(_lib_functions__WEBPACK_IMPORTED_MODULE_6__["formatPrix"])(objVal, true), " ", value[1]);
+                  returnVal = /*#__PURE__*/React.createElement(ValTd, null, Object(_lib_functions__WEBPACK_IMPORTED_MODULE_8__["formatPrix"])(objVal, true), " ", value[1]);
                 } else {
                   returnVal = /*#__PURE__*/React.createElement(ValTd, null, objVal, " ", value[1]);
                 }
@@ -12940,7 +13266,23 @@ var LineTable = /*#__PURE__*/function (_Component) {
             }
           }
 
-          if (searchKey == 'commission_component') {
+          if (searchKey == 'BChasseur') {
+            returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_BChasseur__WEBPACK_IMPORTED_MODULE_5__["default"], {
+              width: true,
+              wrap: true,
+              idChasseur: this.props.object.id
+            }));
+          } else if (searchKey == 'CA_component_final') {
+            returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_CAComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
+              projetFinaux: true,
+              idChasseur: this.props.object.id
+            }));
+          } else if (searchKey == 'CA_component_previ') {
+            returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_CAComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
+              projetEnCours: true,
+              idChasseur: this.props.object.id
+            }));
+          } else if (searchKey == 'commission_component') {
             returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_Commission__WEBPACK_IMPORTED_MODULE_3__["default"], {
               ficheBien: this.props.object.id
             }));
@@ -12961,7 +13303,7 @@ var LineTable = /*#__PURE__*/function (_Component) {
           } else {
             if (Array.isArray(value) && returnVal != null && returnVal != '') {
               if (value[1] == '%' || value[1] == '€') {
-                returnVal = /*#__PURE__*/React.createElement(ValTd, null, Object(_lib_functions__WEBPACK_IMPORTED_MODULE_6__["formatPrix"])(returnVal, true), " ", value[1]);
+                returnVal = /*#__PURE__*/React.createElement(ValTd, null, Object(_lib_functions__WEBPACK_IMPORTED_MODULE_8__["formatPrix"])(returnVal, true), " ", value[1]);
               } else {
                 returnVal = /*#__PURE__*/React.createElement(ValTd, null, returnVal, " ", value[1]);
               }
@@ -12977,7 +13319,7 @@ var LineTable = /*#__PURE__*/function (_Component) {
       ;
 
       if (this.props["delete"] == 'propriete') {
-        optionTable.push( /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Text"], {
+        optionTable.push( /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_6__["Text"], {
           badge: true,
           red: this.props.object.statut == 'Hors ligne',
           green: this.props.object.statut == 'En ligne',
@@ -12990,7 +13332,7 @@ var LineTable = /*#__PURE__*/function (_Component) {
           switch (this.props.actions) {
             case "user":
               optionTable.push( /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                src: _resources_eye_svg__WEBPACK_IMPORTED_MODULE_5___default.a,
+                src: _resources_eye_svg__WEBPACK_IMPORTED_MODULE_7___default.a,
                 isImg: true,
                 noInvert: true,
                 action: "user",
@@ -13000,7 +13342,7 @@ var LineTable = /*#__PURE__*/function (_Component) {
 
             case "propriete":
               optionTable.push( /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                src: _resources_eye_svg__WEBPACK_IMPORTED_MODULE_5___default.a,
+                src: _resources_eye_svg__WEBPACK_IMPORTED_MODULE_7___default.a,
                 isImg: true,
                 noInvert: true,
                 action: "propriete",
@@ -13010,7 +13352,7 @@ var LineTable = /*#__PURE__*/function (_Component) {
 
             case "dossier":
               optionTable.push( /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                src: _resources_eye_svg__WEBPACK_IMPORTED_MODULE_5___default.a,
+                src: _resources_eye_svg__WEBPACK_IMPORTED_MODULE_7___default.a,
                 isImg: true,
                 noInvert: true,
                 action: "dossier",
@@ -17349,8 +17691,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_CardStat__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/CardStat */ "./src/components/CardStat.jsx");
 /* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/Button */ "./src/components/Button.jsx");
 /* harmony import */ var _components_Commission__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/Commission */ "./src/components/Commission.jsx");
-/* harmony import */ var _resources_pencil_svg__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../resources/pencil.svg */ "./src/resources/pencil.svg");
-/* harmony import */ var _resources_pencil_svg__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_resources_pencil_svg__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _components_BChasseur__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/BChasseur */ "./src/components/BChasseur.jsx");
+/* harmony import */ var _resources_pencil_svg__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../resources/pencil.svg */ "./src/resources/pencil.svg");
+/* harmony import */ var _resources_pencil_svg__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_resources_pencil_svg__WEBPACK_IMPORTED_MODULE_10__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17372,36 +17715,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _templateObject10() {
-  var data = _taggedTemplateLiteral(["\n    min-width: 160px;\n    margin: 0;\n"]);
-
-  _templateObject10 = function _templateObject10() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject9() {
-  var data = _taggedTemplateLiteral(["\n    position: relative;\n    width: 100%;\n    height: 14px;\n    margin-right: 20px;\n    border-radius: 20px;\n    background: #A5A5A5;\n    box-shadow: ", ";\n\n    &:before {\n        content: \"\";\n        position: absolute;\n        width: ", "%;\n        height: 14px;\n        border-radius: 20px;\n        ", ";\n        transition: width 0.5s;\n    }\n"]);
-
-  _templateObject9 = function _templateObject9() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject8() {
-  var data = _taggedTemplateLiteral(["\n    margin-bottom: 40px;\n"]);
-
-  _templateObject8 = function _templateObject8() {
-    return data;
-  };
-
-  return data;
-}
 
 function _templateObject7() {
   var data = _taggedTemplateLiteral(["\n    margin-top: 40px;\n    margin-bottom: 10px;\n"]);
@@ -17486,6 +17799,7 @@ var Component = wp.element.Component;
 
 
 
+
 var enteteDossier = {
   'id': 'ID Projet',
   'id_fiche_produit.chasseur.display_name': 'Prénom Chasseur',
@@ -17506,22 +17820,6 @@ var HeadDiv = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div(_tem
 var FlexRow = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject5());
 var CardsContainer = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject6());
 var H2 = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].h2(_templateObject7());
-var BarreContainer = Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["default"])(FlexRow)(_templateObject8());
-var Barre = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject9(), function (props) {
-  return props.theme.shadows;
-}, function (props) {
-  return props.pourcentage * 100 / props.max;
-}, function (props) {
-  return props.theme.orangeRadius;
-});
-var TextBarre = Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["default"])(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Text"])(_templateObject10());
-
-function BarreBonus(props) {
-  return /*#__PURE__*/React.createElement(BarreContainer, null, /*#__PURE__*/React.createElement(Barre, {
-    pourcentage: props.pourcentage,
-    max: props.max
-  }), /*#__PURE__*/React.createElement(TextBarre, null, Object(_lib_functions__WEBPACK_IMPORTED_MODULE_3__["formatPrix"])(props.pourcentage), " \u20AC / ", Object(_lib_functions__WEBPACK_IMPORTED_MODULE_3__["formatPrix"])(props.max), " \u20AC ", /*#__PURE__*/React.createElement("br", null), props.title));
-}
 
 var Board = /*#__PURE__*/function (_Component) {
   _inherits(Board, _Component);
@@ -17608,16 +17906,14 @@ var Board = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["TitleSection"], null, "Bonjour, ", this.props.myUserData.first_name ? this.props.myUserData.first_name : 'Utilisateur')), /*#__PURE__*/React.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
         small: true,
         light: true,
-        src: _resources_pencil_svg__WEBPACK_IMPORTED_MODULE_9___default.a,
+        src: _resources_pencil_svg__WEBPACK_IMPORTED_MODULE_10___default.a,
         iconRight: true,
         action: "user",
         idToSee: this.props.myUserData.id
       }, "Mon compte")), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Text"], {
         light: true
-      }, "Vous avez 0 notifications"), this.props.userData.role == 'chasseur' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(H2, null, "Prochain Bonus"), /*#__PURE__*/React.createElement(BarreBonus, {
-        title: "De chiffre d\u2019affaire",
-        pourcentage: 70000,
-        max: 120000
+      }, "Vous avez 0 notifications"), this.props.userData.role == 'chasseur' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(H2, null, "Prochain Bonus"), /*#__PURE__*/React.createElement(_components_BChasseur__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        idChasseur: this.props.userData.id
       }))), /*#__PURE__*/React.createElement(CardsContainer, null, /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_6__["default"], {
         blue: true,
         title: "Nombre de projet en cours",
@@ -17697,8 +17993,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_functions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/functions */ "./src/lib/functions.js");
 /* harmony import */ var _theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../theme/design/componentsDesign */ "./src/theme/design/componentsDesign.jsx");
 /* harmony import */ var _components_Table__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Table */ "./src/components/Table.jsx");
-var _entete;
-
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17721,8 +18015,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 var Component = wp.element.Component;
 
 
@@ -17730,12 +18022,14 @@ var Component = wp.element.Component;
 
 
 var title = 'Liste des chasseurs';
-var entete = (_entete = {
+var entete = {
   'first_name': 'Prénom Chasseur',
   'telephone': 'Téléphone',
   'user_email': 'Mail',
-  '': ['Total CA réalisé', '€']
-}, _defineProperty(_entete, "", ['Total CA prévisionnel', '€']), _defineProperty(_entete, "", 'Barre de progession vers son prochain BONUS'), _entete);
+  'CA_component_final': ['Total CA réalisé', '€'],
+  'CA_component_previ': ['Total CA prévisionnel', '€'],
+  'BChasseur': 'Prochain Bonus'
+};
 
 var Chasseur = /*#__PURE__*/function (_Component) {
   _inherits(Chasseur, _Component);
@@ -18917,7 +19211,14 @@ var ProprieteModal = /*#__PURE__*/function (_Component) {
         red: this.props.modalData.statut == 'Hors ligne',
         green: this.props.modalData.statut == 'En ligne',
         margin: "0 20px"
-      }, this.props.modalData.statut), this.props.role == 'superviseur' || this.props.role == 'administrator' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      }, this.props.modalData.statut), this.props.role != 'client__investisseur' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        action: "updatePropriete",
+        idToSee: this.props.modalData.id,
+        src: _resources_pencil_svg__WEBPACK_IMPORTED_MODULE_4___default.a,
+        iconRight: true,
+        small: true,
+        alignCenter: true
+      }, "Modifier")), this.props.role == 'superviseur' || this.props.role == 'administrator' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
         action: "updatePropriete",
         idToSee: this.props.modalData.id,
         src: _resources_pencil_svg__WEBPACK_IMPORTED_MODULE_4___default.a,

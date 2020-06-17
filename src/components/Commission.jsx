@@ -1,18 +1,12 @@
 /* eslint-disable react/react-in-jsx-scope */
 const { Component } = wp.element;
 import { connect } from 'react-redux';
-import { getAllDossiers, getAllProprietes } from '../actions';
 import { formatPrix } from '../lib/functions';
 
 class Commission extends Component {
     constructor(props) {
         super(props);
     }
-
-    /*componentDidMount() {
-        this.props.getAllDossiers();
-        this.props.getAllProprietes();
-    }*/
 
     render() {
         let commission = 0;
@@ -99,13 +93,6 @@ class Commission extends Component {
         return (
             <>{formatPrix(commission) + ' €'}</>
         );
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        getAllDossiers: () => dispatch(getAllDossiers()),
-        getAllProprietes: () => dispatch(getAllProprietes())
     }
 }
 

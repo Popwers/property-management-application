@@ -11,6 +11,7 @@ import Table from '../components/Table';
 import CardStat from '../components/CardStat';
 import Button from '../components/Button';
 import Commission from '../components/Commission';
+import BChasseur from '../components/BChasseur';
 import iconPencil from '../resources/pencil.svg';
 
 const enteteDossier = {
@@ -61,44 +62,6 @@ const H2 = styled.h2`
     margin-top: 40px;
     margin-bottom: 10px;
 `
-
-const BarreContainer = styled(FlexRow)`
-    margin-bottom: 40px;
-`
-
-const Barre = styled.div`
-    position: relative;
-    width: 100%;
-    height: 14px;
-    margin-right: 20px;
-    border-radius: 20px;
-    background: #A5A5A5;
-    box-shadow: ${props => props.theme.shadows};
-
-    &:before {
-        content: "";
-        position: absolute;
-        width: ${props => (props.pourcentage * 100 / props.max)}%;
-        height: 14px;
-        border-radius: 20px;
-        ${props => props.theme.orangeRadius};
-        transition: width 0.5s;
-    }
-`
-
-const TextBarre = styled(Text)`
-    min-width: 160px;
-    margin: 0;
-`
-
-function BarreBonus(props) {
-    return (
-        <BarreContainer>
-            <Barre pourcentage={props.pourcentage} max={props.max} />
-            <TextBarre>{formatPrix(props.pourcentage)} € / {formatPrix(props.max)} € <br />{props.title}</TextBarre>
-        </BarreContainer>
-    );
-}
 
 class Board extends Component {
     constructor(props) {
@@ -181,7 +144,7 @@ class Board extends Component {
                         {(this.props.userData.role == 'chasseur') &&
                             <>
                                 <H2>Prochain Bonus</H2>
-                                <BarreBonus title="De chiffre d’affaire" pourcentage={70000} max={120000} />
+                                <BChasseur idChasseur={this.props.userData.id} />
                             </>
                         }
                     </HeadDiv>

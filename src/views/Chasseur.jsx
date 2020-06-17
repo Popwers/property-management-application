@@ -13,9 +13,9 @@ const entete = {
     'first_name': 'Prénom Chasseur',
     'telephone': 'Téléphone',
     'user_email': 'Mail',
-    '': ['Total CA réalisé', '€'],
-    '': ['Total CA prévisionnel', '€'],
-    '': 'Barre de progession vers son prochain BONUS'
+    'CA_component_final': ['Total CA réalisé', '€'],
+    'CA_component_previ': ['Total CA prévisionnel', '€'],
+    'BChasseur': 'Prochain Bonus'
 };
 
 class Chasseur extends Component {
