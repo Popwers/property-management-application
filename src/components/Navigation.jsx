@@ -365,11 +365,11 @@ class Navigation extends Component {
 			}
 
 			// ALL
-			{/*showLink.push(<NavLink src={Bell}							
-							name="Notifications"
-							currentLink={this.state.currentLink}
-							changeView={this.handleChangeLink}
-							closeMenu={this.props.statMenu} />);*/}
+			showLink.push(<NavLink src={Bell}
+				name="Notifications"
+				currentLink={this.state.currentLink}
+				changeView={this.handleChangeLink}
+				closeMenu={this.props.statMenu} />);
 
 			// ONLY CHASSEUR AND SUPERVISEUR
 			if (this.props.myUserData.role != 'client__investisseur') {

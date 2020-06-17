@@ -10,10 +10,17 @@ class Commission extends Component {
 
     render() {
         let commission = 0;
+        let projetEnCours = null;
+        let projetFinaux = null;
 
         if (this.props.projetEnCours) {
             if (this.props.listDossier != null && Array.isArray(this.props.listDossier)) {
-                let projetEnCours = this.props.listDossier.filter(dossier => dossier.id_fiche_produit.chasseur.id == this.props.idChasseur);
+                if (this.props.isSuperviseur) {
+                    projetEnCours = this.props.listDossier;
+                } else {
+                    projetEnCours = this.props.listDossier.filter(dossier => dossier.id_fiche_produit.chasseur.id == this.props.idChasseur);
+                }
+
                 projetEnCours = projetEnCours.filter(dossier => dossier.statut != 'Projet loué');
 
                 if (Array.isArray(projetEnCours)) {
@@ -39,7 +46,12 @@ class Commission extends Component {
             }
         } else if (this.props.projetFinaux) {
             if (this.props.listDossier != null && Array.isArray(this.props.listDossier)) {
-                let projetFinaux = this.props.listDossier.filter(dossier => dossier.id_fiche_produit.chasseur.id == this.props.idChasseur);
+                if (this.props.isSuperviseur) {
+                    projetFinaux = this.props.listDossier;
+                } else {
+                    projetFinaux = this.props.listDossier.filter(dossier => dossier.id_fiche_produit.chasseur.id == this.props.idChasseur);
+                }
+
                 projetFinaux = projetFinaux.filter(dossier => dossier.statut == 'Projet loué');
 
                 if (Array.isArray(projetFinaux)) {

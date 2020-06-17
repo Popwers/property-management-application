@@ -98,7 +98,7 @@ const ValTd = styled.td`
     font-family: ${props => props.theme.robot};
     font-size: 13px;
     font-weight: ${props => props.theme.light};
-    text-align: center;
+    text-align: ${props => props.right ? 'null' : 'center'};
 
     &:first-child {
         padding-left: 0px;
@@ -137,103 +137,119 @@ class LineTable extends Component {
         let listItems = new Array();
         let optionTable = new Array();
 
-        // Pour chaque entête on assigne la valeurs correspondant
-        for (let [searchKey, value] of Object.entries(this.props.orderKeys)) {
-            let returnVal = this.props.object[searchKey];
+        if (this.props.notification) {
+            switch (this.props.object.type_notification) {
+                case 'newDossier':
+                case 'newPropriete':
+                    listItems.push(<ValTd right>{this.props.object.description}</ValTd>);
+                    listItems.push(<ValTd right>{convertDate(this.props.object.date_notification)}</ValTd>);
+                    break;
 
-            // Si la clé est un sous element on va le chercher
-            if (searchKey.indexOf('.') != -1) {
-                searchKey = searchKey.split(".");
-
-                let objVal = this.props.object;
-                searchKey.forEach(key => {
-                    objVal = objVal[key];
-                });
-
-                if (searchKey == 'last_update') {
-                    if (this.props.object.statut == 'En attente') {
-                        objVal = this.props.object.first_date;
-                    }
-                }
-
-                if (searchKey == 'id') {
-                    returnVal = <ValTh scope="row">{objVal}</ValTh>;
-                } else if (searchKey == 'last_update') {
-                    if (this.props.object.statut == 'En attente') {
-                        returnVal = <ValTd>{objVal}</ValTd>;
+                case 'updateDossier':
+                    if (this.props.userData.role == 'client__investisseur') {
+                        listItems.push(<ValTd right>Votre dossier {this.props.object.description}</ValTd>);
+                        listItems.push(<ValTd right>{convertDate(this.props.object.date_notification)}</ValTd>);
                     } else {
-                        returnVal = <ValTd>{convertDate(objVal)}</ValTd>;
+                        listItems.push(<ValTd right>Le dossier n°{this.props.object.id_type} {this.props.object.description}</ValTd>);
+                        listItems.push(<ValTd right>{convertDate(this.props.object.date_notification)}</ValTd>);
                     }
-                } else if (searchKey.indexOf('photo') != -1 || searchKey == 'thumbnail' && (objVal != null && objVal != false)) {
-                    returnVal = <ValTd><img src={objVal} /></ValTd>;
-                } else {
-                    if (Array.isArray(value) && (objVal != null && objVal != '')) {
-                        if (value[1] == '%' || value[1] == '€') {
-                            returnVal = <ValTd>{formatPrix(objVal, true)} {value[1]}</ValTd>;
-                        } else {
-                            returnVal = <ValTd>{objVal} {value[1]}</ValTd>;
-                        }
-                    } else {
-                        returnVal = <ValTd>{objVal}</ValTd>;
-                    }
-                }
-
-                listItems.push(returnVal);
-            } else {
-                if (searchKey == 'last_update') {
-                    if (this.props.object.statut == 'En attente') {
-                        returnVal = this.props.object.first_date;
-                    }
-                }
-
-                if (searchKey == 'statut') {
-                    if (returnVal != 'En attente') {
-                        returnVal = <ValTd><Text badge green={returnVal == 'Projet loué'} margin='0 20px'>{returnVal}</Text></ValTd>;
-                    } else {
-                        returnVal = <ValTd>{returnVal}</ValTd>;
-                    }
-                } else if (searchKey == 'BChasseur') {
-                    returnVal = <ValTd><BChasseur width wrap idChasseur={this.props.object.id} /></ValTd>;
-                } else if (searchKey == 'CA_component_final') {
-                    returnVal = <ValTd><CAComponent projetFinaux idChasseur={this.props.object.id} /></ValTd>;
-                } else if (searchKey == 'CA_component_previ') {
-                    returnVal = <ValTd><CAComponent projetEnCours idChasseur={this.props.object.id} /></ValTd>;
-                } else if (searchKey == 'commission_component') {
-                    returnVal = <ValTd><Commission ficheBien={this.props.object.id} /></ValTd>;
-                } else if (searchKey == 'id') {
-                    returnVal = <ValTh scope="row">{returnVal}</ValTh>;
-                } else if (searchKey == 'last_update') {
-                    if (this.props.object.statut == 'En attente') {
-                        returnVal = <ValTd>{returnVal}</ValTd>;
-                    } else {
-                        returnVal = <ValTd>{convertDate(returnVal)}</ValTd>;
-                    }
-                } else if (searchKey.indexOf('photo') != -1 || searchKey == 'thumbnail' && (returnVal != null && returnVal != false)) {
-                    returnVal = <ValTd><img src={returnVal} /></ValTd>;
-                } else {
-                    if (Array.isArray(value) && (returnVal != null && returnVal != '')) {
-                        if (value[1] == '%' || value[1] == '€') {
-                            returnVal = <ValTd>{formatPrix(returnVal, true)} {value[1]}</ValTd>;
-                        } else {
-                            returnVal = <ValTd>{returnVal} {value[1]}</ValTd>;
-                        }
-                    } else {
-                        returnVal = <ValTd>{returnVal}</ValTd>;
-                    }
-                }
-
-                listItems.push(returnVal);
+                    break;
             }
-        };
+        } else {
+            // Pour chaque entête on assigne la valeurs correspondant
+            for (let [searchKey, value] of Object.entries(this.props.orderKeys)) {
+                let returnVal = this.props.object[searchKey];
 
-        if (this.props.delete == 'propriete') {
-            optionTable.push(<ValTd><Text badge red={this.props.object.statut == 'Hors ligne'} green={this.props.object.statut == 'En ligne'} margin='0 20px'>{this.props.object.statut}</Text></ValTd>)
-        }
+                // Si la clé est un sous element on va le chercher
+                if (searchKey.indexOf('.') != -1) {
+                    searchKey = searchKey.split(".");
 
-        if (this.props.actions) {
-            if (Array.isArray(this.props.actions)) {
+                    let objVal = this.props.object;
+                    searchKey.forEach(key => {
+                        objVal = objVal[key];
+                    });
 
-            } else {
+                    if (searchKey == 'last_update') {
+                        if (this.props.object.statut == 'En attente') {
+                            objVal = this.props.object.first_date;
+                        }
+                    }
+
+                    if (searchKey == 'id') {
+                        returnVal = <ValTh scope="row">{objVal}</ValTh>;
+                    } else if (searchKey == 'last_update') {
+                        if (this.props.object.statut == 'En attente') {
+                            returnVal = <ValTd>{objVal}</ValTd>;
+                        } else {
+                            returnVal = <ValTd>{convertDate(objVal)}</ValTd>;
+                        }
+                    } else if (searchKey.indexOf('photo') != -1 || searchKey == 'thumbnail' && (objVal != null && objVal != false)) {
+                        returnVal = <ValTd><img src={objVal} /></ValTd>;
+                    } else {
+                        if (Array.isArray(value) && (objVal != null && objVal != '')) {
+                            if (value[1] == '%' || value[1] == '€') {
+                                returnVal = <ValTd>{formatPrix(objVal, true)} {value[1]}</ValTd>;
+                            } else {
+                                returnVal = <ValTd>{objVal} {value[1]}</ValTd>;
+                            }
+                        } else {
+                            returnVal = <ValTd>{objVal}</ValTd>;
+                        }
+                    }
+
+                    listItems.push(returnVal);
+                } else {
+                    if (searchKey == 'last_update') {
+                        if (this.props.object.statut == 'En attente') {
+                            returnVal = this.props.object.first_date;
+                        }
+                    }
+
+                    if (searchKey == 'statut') {
+                        if (returnVal != 'En attente') {
+                            returnVal = <ValTd><Text badge green={returnVal == 'Projet loué'} margin='0 20px'>{returnVal}</Text></ValTd>;
+                        } else {
+                            returnVal = <ValTd>{returnVal}</ValTd>;
+                        }
+                    } else if (searchKey == 'BChasseur') {
+                        returnVal = <ValTd><BChasseur width wrap idChasseur={this.props.object.id} /></ValTd>;
+                    } else if (searchKey == 'CA_component_final') {
+                        returnVal = <ValTd><CAComponent projetFinaux idChasseur={this.props.object.id} /></ValTd>;
+                    } else if (searchKey == 'CA_component_previ') {
+                        returnVal = <ValTd><CAComponent projetEnCours idChasseur={this.props.object.id} /></ValTd>;
+                    } else if (searchKey == 'commission_component') {
+                        returnVal = <ValTd><Commission ficheBien={this.props.object.id} /></ValTd>;
+                    } else if (searchKey == 'id') {
+                        returnVal = <ValTh scope="row">{returnVal}</ValTh>;
+                    } else if (searchKey == 'last_update') {
+                        if (this.props.object.statut == 'En attente') {
+                            returnVal = <ValTd>{returnVal}</ValTd>;
+                        } else {
+                            returnVal = <ValTd>{convertDate(returnVal)}</ValTd>;
+                        }
+                    } else if (searchKey.indexOf('photo') != -1 || searchKey == 'thumbnail' && (returnVal != null && returnVal != false)) {
+                        returnVal = <ValTd><img src={returnVal} /></ValTd>;
+                    } else {
+                        if (Array.isArray(value) && (returnVal != null && returnVal != '')) {
+                            if (value[1] == '%' || value[1] == '€') {
+                                returnVal = <ValTd>{formatPrix(returnVal, true)} {value[1]}</ValTd>;
+                            } else {
+                                returnVal = <ValTd>{returnVal} {value[1]}</ValTd>;
+                            }
+                        } else {
+                            returnVal = <ValTd>{returnVal}</ValTd>;
+                        }
+                    }
+
+                    listItems.push(returnVal);
+                }
+            };
+
+            if (this.props.delete == 'propriete') {
+                optionTable.push(<ValTd><Text badge red={this.props.object.statut == 'Hors ligne'} green={this.props.object.statut == 'En ligne'} margin='0 20px'>{this.props.object.statut}</Text></ValTd>)
+            }
+
+            if (this.props.actions) {
                 switch (this.props.actions) {
                     case "user":
                         optionTable.push(<ValTd>
@@ -266,10 +282,10 @@ class LineTable extends Component {
                         break;
                 }
             }
-        }
 
-        if (this.props.delete) {
-            optionTable.push(<ValTd><DeleteButton type={this.props.delete} id={this.props.id} onClick={this.handleDelete} /></ValTd>)
+            if (this.props.delete) {
+                optionTable.push(<ValTd><DeleteButton type={this.props.delete} id={this.props.id} onClick={this.handleDelete} /></ValTd>)
+            }
         }
 
         return (
@@ -288,6 +304,20 @@ export default function Table(props) {
         return <div>Chargement...</div>;
     } else if (props.statut != null && props.data == null) {
         return <div>{props.empty}</div>;
+    } else if (props.type != null && props.type == 'notification') {
+        const contentTable = props.data.map(item => <LineTable
+            userData={props.userData}
+            notification
+            key={item.id}
+            id={item.id}
+            object={item} />);
+        return (
+            <StyledTable>
+                <tbody>
+                    {contentTable}
+                </tbody>
+            </StyledTable>
+        );
     } else {
         const headTable = Object.values(props.listeProps).map(item => {
             if (Array.isArray(item)) {

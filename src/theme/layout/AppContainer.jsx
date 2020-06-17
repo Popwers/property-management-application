@@ -6,7 +6,8 @@ import {
     getAllProprietes,
     getAllDossiers,
     getAllUsers,
-    getPersonalData
+    getPersonalData,
+    getAllNotifications,
 } from '../../actions';
 
 import styled, { css } from 'styled-components';
@@ -109,6 +110,7 @@ class AppContainer extends Component {
 
     componentDidMount() {
         setInterval(() => {
+            this.props.getAllNotifications();
             this.props.getAllProprietes();
             this.props.getAllDossiers();
             this.props.getAllUsers();
@@ -179,6 +181,7 @@ class AppContainer extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
+        getAllNotifications: () => dispatch(getAllNotifications()),
         getAllProprietes: () => dispatch(getAllProprietes()),
         getAllDossiers: () => dispatch(getAllDossiers()),
         getAllUsers: () => dispatch(getAllUsers()),

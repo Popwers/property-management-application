@@ -9,6 +9,8 @@ export const GET_USER = "GET_USER";
 export const UPDATE_USER = "UPDATE_USER";
 export const SEE_USER = "SEE_USER";
 
+export const GET_NOTIFICATION = "GET_NOTIFICATION";
+
 export const GET_MY_DATA = "GET_MY_DATA";
 export const GET_LOGOUT = "GET_LOGOUT";
 export const GET_ADRESSE_SITE = "GET_ADRESSE_SITE";

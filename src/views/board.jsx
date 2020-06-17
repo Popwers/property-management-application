@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { getAllDossiers, toogleUserModal, getAllUsers } from '../actions';
 
 import styled, { css } from 'styled-components';
-import { setDocumentTitle, formatPrix } from '../lib/functions';
+import { setDocumentTitle } from '../lib/functions';
 import { TitleSection, Text, Inline } from '../theme/design/componentsDesign';
 
 import Table from '../components/Table';
@@ -171,7 +171,10 @@ class Board extends Component {
                             <CardStat
                                 orange
                                 title="Total Commission prévisionnel">
-                                <Commission projetEnCours idChasseur={this.props.userData.id} />
+                                <Commission
+                                    projetEnCours
+                                    isSuperviseur={this.props.userData.role == 'superviseur' || this.props.userData.role == 'administrator'}
+                                    idChasseur={this.props.userData.id} />
                             </CardStat>
 
                             <CardStat
@@ -185,7 +188,10 @@ class Board extends Component {
                             <CardStat
                                 orange
                                 title="Total Commission encaissé">
-                                <Commission projetFinaux idChasseur={this.props.userData.id} />
+                                <Commission
+                                    projetFinaux
+                                    isSuperviseur={this.props.userData.role == 'superviseur' || this.props.userData.role == 'administrator'}
+                                    idChasseur={this.props.userData.id} />
                             </CardStat>
 
                             <CardStat

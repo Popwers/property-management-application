@@ -23,8 +23,8 @@ import {
     SET_PROPRIETE_ADD_MODAL,
     SET_CLIENT_ADD_MODAL,
     SET_CHASSEUR_ADD_MODAL,
-    SET_REGISTER_DATA
-
+    SET_REGISTER_DATA,
+    GET_NOTIFICATION,
 } from "../constants";
 
 export function getAllProprietes() {
@@ -95,6 +95,27 @@ export function getAllUsers() {
             });
 
         dispatch({ type: GET_USER, payload: { data: responseReq, statut: statutRes } });
+    }
+}
+
+export function getAllNotifications() {
+    return async function (dispatch) {
+        let responseReq = null;
+        let statutRes = 'success';
+
+        let action = new FormData();
+        action.append('action', 'get_notification_data');
+
+        await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', action)
+            .then(function (response) {
+                responseReq = formatToJson(response.data);
+            })
+            .catch(function (error) {
+                responseReq = error;
+                statutRes = 'error';
+            });
+
+        dispatch({ type: GET_NOTIFICATION, payload: { data: responseReq, statut: statutRes } });
     }
 }
 

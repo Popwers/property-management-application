@@ -9995,7 +9995,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************!*\
   !*** ./src/actions/index.js ***!
   \******************************/
-/*! exports provided: getAllProprietes, getAllDossiers, getAllUsers, getLogout, getHomeUrl, toogleLoader, toogleAddClient, toogleAddChasseur, toogleAddPropriete, toogleUserModal, toogleDossierModal, toogleProprieteModal, getPersonalData, handleChangeAddProprieteModal, handleChangeAddClientModal, handleChangeAddChasseurModal, registerDataProgress, seeUserData, seeProprieteData, seeDossierData, updateUserData, updateProprieteData */
+/*! exports provided: getAllProprietes, getAllDossiers, getAllUsers, getAllNotifications, getLogout, getHomeUrl, toogleLoader, toogleAddClient, toogleAddChasseur, toogleAddPropriete, toogleUserModal, toogleDossierModal, toogleProprieteModal, getPersonalData, handleChangeAddProprieteModal, handleChangeAddClientModal, handleChangeAddChasseurModal, registerDataProgress, seeUserData, seeProprieteData, seeDossierData, updateUserData, updateProprieteData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10003,6 +10003,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllProprietes", function() { return getAllProprietes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllDossiers", function() { return getAllDossiers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllUsers", function() { return getAllUsers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllNotifications", function() { return getAllNotifications; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLogout", function() { return getLogout; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getHomeUrl", function() { return getHomeUrl; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toogleLoader", function() { return toogleLoader; });
@@ -10169,9 +10170,7 @@ function getAllUsers() {
     };
   }();
 }
-/** UTILITY ACTIONS **/
-
-function getLogout() {
+function getAllNotifications() {
   return /*#__PURE__*/function () {
     var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch) {
       var responseReq, statutRes, action;
@@ -10182,8 +10181,52 @@ function getLogout() {
               responseReq = null;
               statutRes = 'success';
               action = new FormData();
-              action.append('action', 'get_logOut_data');
+              action.append('action', 'get_notification_data');
               _context4.next = 6;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../wp-content/themes/themeplocatif/ajax-board.php', action).then(function (response) {
+                responseReq = Object(_lib_functions__WEBPACK_IMPORTED_MODULE_1__["formatToJson"])(response.data);
+              })["catch"](function (error) {
+                responseReq = error;
+                statutRes = 'error';
+              });
+
+            case 6:
+              dispatch({
+                type: _constants__WEBPACK_IMPORTED_MODULE_2__["GET_NOTIFICATION"],
+                payload: {
+                  data: responseReq,
+                  statut: statutRes
+                }
+              });
+
+            case 7:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+
+    return function (_x4) {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+}
+/** UTILITY ACTIONS **/
+
+function getLogout() {
+  return /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(dispatch) {
+      var responseReq, statutRes, action;
+      return regeneratorRuntime.wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              responseReq = null;
+              statutRes = 'success';
+              action = new FormData();
+              action.append('action', 'get_logOut_data');
+              _context5.next = 6;
               return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../wp-content/themes/themeplocatif/ajax-board.php', action).then(function (response) {
                 responseReq = Object(_lib_functions__WEBPACK_IMPORTED_MODULE_1__["formatToJson"])(response.data);
 
@@ -10207,30 +10250,30 @@ function getLogout() {
 
             case 7:
             case "end":
-              return _context4.stop();
+              return _context5.stop();
           }
         }
-      }, _callee4);
+      }, _callee5);
     }));
 
-    return function (_x4) {
-      return _ref4.apply(this, arguments);
+    return function (_x5) {
+      return _ref5.apply(this, arguments);
     };
   }();
 }
 function getHomeUrl() {
   return /*#__PURE__*/function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(dispatch) {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(dispatch) {
       var responseReq, statutRes, action;
-      return regeneratorRuntime.wrap(function _callee5$(_context5) {
+      return regeneratorRuntime.wrap(function _callee6$(_context6) {
         while (1) {
-          switch (_context5.prev = _context5.next) {
+          switch (_context6.prev = _context6.next) {
             case 0:
               responseReq = null;
               statutRes = 'success';
               action = new FormData();
               action.append('action', 'get_homeUrl_data');
-              _context5.next = 6;
+              _context6.next = 6;
               return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../wp-content/themes/themeplocatif/ajax-board.php', action).then(function (response) {
                 responseReq = Object(_lib_functions__WEBPACK_IMPORTED_MODULE_1__["formatToJson"])(response.data);
 
@@ -10254,14 +10297,14 @@ function getHomeUrl() {
 
             case 7:
             case "end":
-              return _context5.stop();
+              return _context6.stop();
           }
         }
-      }, _callee5);
+      }, _callee6);
     }));
 
-    return function (_x5) {
-      return _ref5.apply(this, arguments);
+    return function (_x6) {
+      return _ref6.apply(this, arguments);
     };
   }();
 }
@@ -10314,17 +10357,17 @@ function toogleProprieteModal() {
 
 function getPersonalData() {
   return /*#__PURE__*/function () {
-    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(dispatch) {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(dispatch) {
       var responseReq, statutRes, action;
-      return regeneratorRuntime.wrap(function _callee6$(_context6) {
+      return regeneratorRuntime.wrap(function _callee7$(_context7) {
         while (1) {
-          switch (_context6.prev = _context6.next) {
+          switch (_context7.prev = _context7.next) {
             case 0:
               responseReq = null;
               statutRes = 'success';
               action = new FormData();
               action.append('action', 'get_personal_data');
-              _context6.next = 6;
+              _context7.next = 6;
               return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../wp-content/themes/themeplocatif/ajax-board.php', action).then(function (response) {
                 responseReq = Object(_lib_functions__WEBPACK_IMPORTED_MODULE_1__["formatToJson"])(response.data);
 
@@ -10348,14 +10391,14 @@ function getPersonalData() {
 
             case 7:
             case "end":
-              return _context6.stop();
+              return _context7.stop();
           }
         }
-      }, _callee6);
+      }, _callee7);
     }));
 
-    return function (_x6) {
-      return _ref6.apply(this, arguments);
+    return function (_x7) {
+      return _ref7.apply(this, arguments);
     };
   }();
 }
@@ -11203,12 +11246,19 @@ var Commission = /*#__PURE__*/function (_Component) {
       var _this = this;
 
       var commission = 0;
+      var projetEnCours = null;
+      var projetFinaux = null;
 
       if (this.props.projetEnCours) {
         if (this.props.listDossier != null && Array.isArray(this.props.listDossier)) {
-          var projetEnCours = this.props.listDossier.filter(function (dossier) {
-            return dossier.id_fiche_produit.chasseur.id == _this.props.idChasseur;
-          });
+          if (this.props.isSuperviseur) {
+            projetEnCours = this.props.listDossier;
+          } else {
+            projetEnCours = this.props.listDossier.filter(function (dossier) {
+              return dossier.id_fiche_produit.chasseur.id == _this.props.idChasseur;
+            });
+          }
+
           projetEnCours = projetEnCours.filter(function (dossier) {
             return dossier.statut != 'Projet loué';
           });
@@ -11236,9 +11286,14 @@ var Commission = /*#__PURE__*/function (_Component) {
         }
       } else if (this.props.projetFinaux) {
         if (this.props.listDossier != null && Array.isArray(this.props.listDossier)) {
-          var projetFinaux = this.props.listDossier.filter(function (dossier) {
-            return dossier.id_fiche_produit.chasseur.id == _this.props.idChasseur;
-          });
+          if (this.props.isSuperviseur) {
+            projetFinaux = this.props.listDossier;
+          } else {
+            projetFinaux = this.props.listDossier.filter(function (dossier) {
+              return dossier.id_fiche_produit.chasseur.id == _this.props.idChasseur;
+            });
+          }
+
           projetFinaux = projetFinaux.filter(function (dossier) {
             return dossier.statut == 'Projet loué';
           });
@@ -12915,13 +12970,13 @@ var Navigation = /*#__PURE__*/function (_Component) {
         } // ALL
 
 
-        {}
-        /*showLink.push(<NavLink src={Bell}							
-        			name="Notifications"
-        			currentLink={this.state.currentLink}
-        			changeView={this.handleChangeLink}
-        			closeMenu={this.props.statMenu} />);*/
-        // ONLY CHASSEUR AND SUPERVISEUR
+        showLink.push( /*#__PURE__*/React.createElement(NavLink, {
+          src: _resources_bell_svg__WEBPACK_IMPORTED_MODULE_8___default.a,
+          name: "Notifications",
+          currentLink: this.state.currentLink,
+          changeView: this.handleChangeLink,
+          closeMenu: this.props.statMenu
+        })); // ONLY CHASSEUR AND SUPERVISEUR
 
         if (this.props.myUserData.role != 'client__investisseur') {
           showLink.push( /*#__PURE__*/React.createElement(NavLink, {
@@ -13044,7 +13099,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n    padding: 20px 10px;\n    font-family: ", ";\n    font-size: 13px;\n    font-weight: ", ";\n    text-align: center;\n\n    &:first-child {\n        padding-left: 0px;\n    }\n\n    img {\n        width: 100%;\n        width: 100px;\n        height: 100px;\n        object-fit: cover;\n        border-radius: 15px;\n        box-shadow: ", ";\n    }\n"]);
+  var data = _taggedTemplateLiteral(["\n    padding: 20px 10px;\n    font-family: ", ";\n    font-size: 13px;\n    font-weight: ", ";\n    text-align: ", ";\n\n    &:first-child {\n        padding-left: 0px;\n    }\n\n    img {\n        width: 100%;\n        width: 100px;\n        height: 100px;\n        object-fit: cover;\n        border-radius: 15px;\n        box-shadow: ", ";\n    }\n"]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -13148,6 +13203,8 @@ var ValTd = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].td(_templa
 }, function (props) {
   return props.theme.light;
 }, function (props) {
+  return props.right ? 'null' : 'center';
+}, function (props) {
   return props.theme.shadows;
 });
 
@@ -13188,137 +13245,169 @@ var LineTable = /*#__PURE__*/function (_Component) {
       var _this2 = this;
 
       var listItems = new Array();
-      var optionTable = new Array(); // Pour chaque entête on assigne la valeurs correspondant
+      var optionTable = new Array();
 
-      for (var _i = 0, _Object$entries = Object.entries(this.props.orderKeys); _i < _Object$entries.length; _i++) {
-        var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
-            searchKey = _Object$entries$_i[0],
-            value = _Object$entries$_i[1];
+      if (this.props.notification) {
+        switch (this.props.object.type_notification) {
+          case 'newDossier':
+          case 'newPropriete':
+            listItems.push( /*#__PURE__*/React.createElement(ValTd, {
+              right: true
+            }, this.props.object.description));
+            listItems.push( /*#__PURE__*/React.createElement(ValTd, {
+              right: true
+            }, convertDate(this.props.object.date_notification)));
+            break;
 
-        var returnVal = this.props.object[searchKey]; // Si la clé est un sous element on va le chercher
+          case 'updateDossier':
+            if (this.props.userData.role == 'client__investisseur') {
+              listItems.push( /*#__PURE__*/React.createElement(ValTd, {
+                right: true
+              }, "Votre dossier ", this.props.object.description));
+              listItems.push( /*#__PURE__*/React.createElement(ValTd, {
+                right: true
+              }, convertDate(this.props.object.date_notification)));
+            } else {
+              listItems.push( /*#__PURE__*/React.createElement(ValTd, {
+                right: true
+              }, "Le dossier n\xB0", this.props.object.id_type, " ", this.props.object.description));
+              listItems.push( /*#__PURE__*/React.createElement(ValTd, {
+                right: true
+              }, convertDate(this.props.object.date_notification)));
+            }
 
-        if (searchKey.indexOf('.') != -1) {
-          (function () {
-            searchKey = searchKey.split(".");
-            var objVal = _this2.props.object;
-            searchKey.forEach(function (key) {
-              objVal = objVal[key];
-            });
+            break;
+        }
+      } else {
+        // Pour chaque entête on assigne la valeurs correspondant
+        for (var _i = 0, _Object$entries = Object.entries(this.props.orderKeys); _i < _Object$entries.length; _i++) {
+          var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+              searchKey = _Object$entries$_i[0],
+              value = _Object$entries$_i[1];
 
+          var returnVal = this.props.object[searchKey]; // Si la clé est un sous element on va le chercher
+
+          if (searchKey.indexOf('.') != -1) {
+            (function () {
+              searchKey = searchKey.split(".");
+              var objVal = _this2.props.object;
+              searchKey.forEach(function (key) {
+                objVal = objVal[key];
+              });
+
+              if (searchKey == 'last_update') {
+                if (_this2.props.object.statut == 'En attente') {
+                  objVal = _this2.props.object.first_date;
+                }
+              }
+
+              if (searchKey == 'id') {
+                returnVal = /*#__PURE__*/React.createElement(ValTh, {
+                  scope: "row"
+                }, objVal);
+              } else if (searchKey == 'last_update') {
+                if (_this2.props.object.statut == 'En attente') {
+                  returnVal = /*#__PURE__*/React.createElement(ValTd, null, objVal);
+                } else {
+                  returnVal = /*#__PURE__*/React.createElement(ValTd, null, convertDate(objVal));
+                }
+              } else if (searchKey.indexOf('photo') != -1 || searchKey == 'thumbnail' && objVal != null && objVal != false) {
+                returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement("img", {
+                  src: objVal
+                }));
+              } else {
+                if (Array.isArray(value) && objVal != null && objVal != '') {
+                  if (value[1] == '%' || value[1] == '€') {
+                    returnVal = /*#__PURE__*/React.createElement(ValTd, null, Object(_lib_functions__WEBPACK_IMPORTED_MODULE_8__["formatPrix"])(objVal, true), " ", value[1]);
+                  } else {
+                    returnVal = /*#__PURE__*/React.createElement(ValTd, null, objVal, " ", value[1]);
+                  }
+                } else {
+                  returnVal = /*#__PURE__*/React.createElement(ValTd, null, objVal);
+                }
+              }
+
+              listItems.push(returnVal);
+            })();
+          } else {
             if (searchKey == 'last_update') {
-              if (_this2.props.object.statut == 'En attente') {
-                objVal = _this2.props.object.first_date;
+              if (this.props.object.statut == 'En attente') {
+                returnVal = this.props.object.first_date;
               }
             }
 
-            if (searchKey == 'id') {
+            if (searchKey == 'statut') {
+              if (returnVal != 'En attente') {
+                returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_6__["Text"], {
+                  badge: true,
+                  green: returnVal == 'Projet loué',
+                  margin: "0 20px"
+                }, returnVal));
+              } else {
+                returnVal = /*#__PURE__*/React.createElement(ValTd, null, returnVal);
+              }
+            } else if (searchKey == 'BChasseur') {
+              returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_BChasseur__WEBPACK_IMPORTED_MODULE_5__["default"], {
+                width: true,
+                wrap: true,
+                idChasseur: this.props.object.id
+              }));
+            } else if (searchKey == 'CA_component_final') {
+              returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_CAComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
+                projetFinaux: true,
+                idChasseur: this.props.object.id
+              }));
+            } else if (searchKey == 'CA_component_previ') {
+              returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_CAComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
+                projetEnCours: true,
+                idChasseur: this.props.object.id
+              }));
+            } else if (searchKey == 'commission_component') {
+              returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_Commission__WEBPACK_IMPORTED_MODULE_3__["default"], {
+                ficheBien: this.props.object.id
+              }));
+            } else if (searchKey == 'id') {
               returnVal = /*#__PURE__*/React.createElement(ValTh, {
                 scope: "row"
-              }, objVal);
+              }, returnVal);
             } else if (searchKey == 'last_update') {
-              if (_this2.props.object.statut == 'En attente') {
-                returnVal = /*#__PURE__*/React.createElement(ValTd, null, objVal);
+              if (this.props.object.statut == 'En attente') {
+                returnVal = /*#__PURE__*/React.createElement(ValTd, null, returnVal);
               } else {
-                returnVal = /*#__PURE__*/React.createElement(ValTd, null, convertDate(objVal));
+                returnVal = /*#__PURE__*/React.createElement(ValTd, null, convertDate(returnVal));
               }
-            } else if (searchKey.indexOf('photo') != -1 || searchKey == 'thumbnail' && objVal != null && objVal != false) {
+            } else if (searchKey.indexOf('photo') != -1 || searchKey == 'thumbnail' && returnVal != null && returnVal != false) {
               returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement("img", {
-                src: objVal
+                src: returnVal
               }));
             } else {
-              if (Array.isArray(value) && objVal != null && objVal != '') {
+              if (Array.isArray(value) && returnVal != null && returnVal != '') {
                 if (value[1] == '%' || value[1] == '€') {
-                  returnVal = /*#__PURE__*/React.createElement(ValTd, null, Object(_lib_functions__WEBPACK_IMPORTED_MODULE_8__["formatPrix"])(objVal, true), " ", value[1]);
+                  returnVal = /*#__PURE__*/React.createElement(ValTd, null, Object(_lib_functions__WEBPACK_IMPORTED_MODULE_8__["formatPrix"])(returnVal, true), " ", value[1]);
                 } else {
-                  returnVal = /*#__PURE__*/React.createElement(ValTd, null, objVal, " ", value[1]);
+                  returnVal = /*#__PURE__*/React.createElement(ValTd, null, returnVal, " ", value[1]);
                 }
               } else {
-                returnVal = /*#__PURE__*/React.createElement(ValTd, null, objVal);
+                returnVal = /*#__PURE__*/React.createElement(ValTd, null, returnVal);
               }
             }
 
             listItems.push(returnVal);
-          })();
-        } else {
-          if (searchKey == 'last_update') {
-            if (this.props.object.statut == 'En attente') {
-              returnVal = this.props.object.first_date;
-            }
           }
-
-          if (searchKey == 'statut') {
-            if (returnVal != 'En attente') {
-              returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_6__["Text"], {
-                badge: true,
-                green: returnVal == 'Projet loué',
-                margin: "0 20px"
-              }, returnVal));
-            } else {
-              returnVal = /*#__PURE__*/React.createElement(ValTd, null, returnVal);
-            }
-          } else if (searchKey == 'BChasseur') {
-            returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_BChasseur__WEBPACK_IMPORTED_MODULE_5__["default"], {
-              width: true,
-              wrap: true,
-              idChasseur: this.props.object.id
-            }));
-          } else if (searchKey == 'CA_component_final') {
-            returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_CAComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
-              projetFinaux: true,
-              idChasseur: this.props.object.id
-            }));
-          } else if (searchKey == 'CA_component_previ') {
-            returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_CAComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
-              projetEnCours: true,
-              idChasseur: this.props.object.id
-            }));
-          } else if (searchKey == 'commission_component') {
-            returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_Commission__WEBPACK_IMPORTED_MODULE_3__["default"], {
-              ficheBien: this.props.object.id
-            }));
-          } else if (searchKey == 'id') {
-            returnVal = /*#__PURE__*/React.createElement(ValTh, {
-              scope: "row"
-            }, returnVal);
-          } else if (searchKey == 'last_update') {
-            if (this.props.object.statut == 'En attente') {
-              returnVal = /*#__PURE__*/React.createElement(ValTd, null, returnVal);
-            } else {
-              returnVal = /*#__PURE__*/React.createElement(ValTd, null, convertDate(returnVal));
-            }
-          } else if (searchKey.indexOf('photo') != -1 || searchKey == 'thumbnail' && returnVal != null && returnVal != false) {
-            returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement("img", {
-              src: returnVal
-            }));
-          } else {
-            if (Array.isArray(value) && returnVal != null && returnVal != '') {
-              if (value[1] == '%' || value[1] == '€') {
-                returnVal = /*#__PURE__*/React.createElement(ValTd, null, Object(_lib_functions__WEBPACK_IMPORTED_MODULE_8__["formatPrix"])(returnVal, true), " ", value[1]);
-              } else {
-                returnVal = /*#__PURE__*/React.createElement(ValTd, null, returnVal, " ", value[1]);
-              }
-            } else {
-              returnVal = /*#__PURE__*/React.createElement(ValTd, null, returnVal);
-            }
-          }
-
-          listItems.push(returnVal);
         }
-      }
 
-      ;
+        ;
 
-      if (this.props["delete"] == 'propriete') {
-        optionTable.push( /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_6__["Text"], {
-          badge: true,
-          red: this.props.object.statut == 'Hors ligne',
-          green: this.props.object.statut == 'En ligne',
-          margin: "0 20px"
-        }, this.props.object.statut)));
-      }
+        if (this.props["delete"] == 'propriete') {
+          optionTable.push( /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_6__["Text"], {
+            badge: true,
+            red: this.props.object.statut == 'Hors ligne',
+            green: this.props.object.statut == 'En ligne',
+            margin: "0 20px"
+          }, this.props.object.statut)));
+        }
 
-      if (this.props.actions) {
-        if (Array.isArray(this.props.actions)) {} else {
+        if (this.props.actions) {
           switch (this.props.actions) {
             case "user":
               optionTable.push( /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -13351,14 +13440,14 @@ var LineTable = /*#__PURE__*/function (_Component) {
               break;
           }
         }
-      }
 
-      if (this.props["delete"]) {
-        optionTable.push( /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_DeleteButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          type: this.props["delete"],
-          id: this.props.id,
-          onClick: this.handleDelete
-        })));
+        if (this.props["delete"]) {
+          optionTable.push( /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_DeleteButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            type: this.props["delete"],
+            id: this.props.id,
+            onClick: this.handleDelete
+          })));
+        }
       }
 
       return /*#__PURE__*/React.createElement(Line, {
@@ -13378,6 +13467,17 @@ function Table(props) {
     return /*#__PURE__*/React.createElement("div", null, "Chargement...");
   } else if (props.statut != null && props.data == null) {
     return /*#__PURE__*/React.createElement("div", null, props.empty);
+  } else if (props.type != null && props.type == 'notification') {
+    var contentTable = props.data.map(function (item) {
+      return /*#__PURE__*/React.createElement(LineTable, {
+        userData: props.userData,
+        notification: true,
+        key: item.id,
+        id: item.id,
+        object: item
+      });
+    });
+    return /*#__PURE__*/React.createElement(StyledTable, null, /*#__PURE__*/React.createElement("tbody", null, contentTable));
   } else {
     var headTable = Object.values(props.listeProps).map(function (item) {
       if (Array.isArray(item)) {
@@ -13392,7 +13492,8 @@ function Table(props) {
         }, item);
       }
     });
-    var contentTable = props.data.map(function (item) {
+
+    var _contentTable = props.data.map(function (item) {
       return /*#__PURE__*/React.createElement(LineTable, {
         key: item.id,
         isDossier: props.isDossier,
@@ -13403,7 +13504,8 @@ function Table(props) {
         orderKeys: props.listeProps
       });
     });
-    return /*#__PURE__*/React.createElement(StyledTable, null, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, headTable)), /*#__PURE__*/React.createElement("tbody", null, contentTable));
+
+    return /*#__PURE__*/React.createElement(StyledTable, null, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, headTable)), /*#__PURE__*/React.createElement("tbody", null, _contentTable));
   }
 }
 
@@ -13587,7 +13689,7 @@ var mapStateToProps = function mapStateToProps(state) {
 /*!********************************!*\
   !*** ./src/constants/index.js ***!
   \********************************/
-/*! exports provided: GET_PROPRIETE, UPDATE_PROPRIETE, SEE_PROPRIETE, GET_DOSSIER, SEE_DOSSIER, GET_USER, UPDATE_USER, SEE_USER, GET_MY_DATA, GET_LOGOUT, GET_ADRESSE_SITE, TOOGLE_LOADER, TOOGLE_CLIENT_ADD_MODAL, TOOGLE_CHASSEUR_ADD_MODAL, TOOGLE_PROPRIETE_ADD_MODAL, TOOGLE_USER_MODAL, TOOGLE_DOSSIER_MODAL, TOOGLE_PROPRIETE_MODAL, SET_PROPRIETE_ADD_MODAL, SET_CLIENT_ADD_MODAL, SET_CHASSEUR_ADD_MODAL, SET_REGISTER_DATA */
+/*! exports provided: GET_PROPRIETE, UPDATE_PROPRIETE, SEE_PROPRIETE, GET_DOSSIER, SEE_DOSSIER, GET_USER, UPDATE_USER, SEE_USER, GET_NOTIFICATION, GET_MY_DATA, GET_LOGOUT, GET_ADRESSE_SITE, TOOGLE_LOADER, TOOGLE_CLIENT_ADD_MODAL, TOOGLE_CHASSEUR_ADD_MODAL, TOOGLE_PROPRIETE_ADD_MODAL, TOOGLE_USER_MODAL, TOOGLE_DOSSIER_MODAL, TOOGLE_PROPRIETE_MODAL, SET_PROPRIETE_ADD_MODAL, SET_CLIENT_ADD_MODAL, SET_CHASSEUR_ADD_MODAL, SET_REGISTER_DATA */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13600,6 +13702,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_USER", function() { return GET_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_USER", function() { return UPDATE_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SEE_USER", function() { return SEE_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_NOTIFICATION", function() { return GET_NOTIFICATION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_MY_DATA", function() { return GET_MY_DATA; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_LOGOUT", function() { return GET_LOGOUT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ADRESSE_SITE", function() { return GET_ADRESSE_SITE; });
@@ -13622,6 +13725,7 @@ var SEE_DOSSIER = "SEE_DOSSIER";
 var GET_USER = "GET_USER";
 var UPDATE_USER = "UPDATE_USER";
 var SEE_USER = "SEE_USER";
+var GET_NOTIFICATION = "GET_NOTIFICATION";
 var GET_MY_DATA = "GET_MY_DATA";
 var GET_LOGOUT = "GET_LOGOUT";
 var GET_ADRESSE_SITE = "GET_ADRESSE_SITE";
@@ -14688,6 +14792,46 @@ function manageGeneral() {
 
 /***/ }),
 
+/***/ "./src/reducers/notificationReducer.js":
+/*!*********************************************!*\
+  !*** ./src/reducers/notificationReducer.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return manageNotification; });
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./src/constants/index.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+var initialState = {
+  listNotification: []
+};
+function manageNotification() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  var newState;
+
+  switch (action.type) {
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["GET_NOTIFICATION"]:
+      newState = _objectSpread(_objectSpread({}, state), {}, {
+        listNotification: action.payload
+      });
+      return newState || state;
+
+    default:
+      return state;
+  }
+}
+
+/***/ }),
+
 /***/ "./src/reducers/proprieteReducer.js":
 /*!******************************************!*\
   !*** ./src/reducers/proprieteReducer.js ***!
@@ -15101,7 +15245,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reducers_proprieteReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../reducers/proprieteReducer */ "./src/reducers/proprieteReducer.js");
 /* harmony import */ var _reducers_dossierReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../reducers/dossierReducer */ "./src/reducers/dossierReducer.js");
 /* harmony import */ var _reducers_userReducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../reducers/userReducer */ "./src/reducers/userReducer.js");
-/* harmony import */ var _reducers_addModalReducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../reducers/addModalReducer */ "./src/reducers/addModalReducer.js");
+/* harmony import */ var _reducers_notificationReducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../reducers/notificationReducer */ "./src/reducers/notificationReducer.js");
+/* harmony import */ var _reducers_addModalReducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../reducers/addModalReducer */ "./src/reducers/addModalReducer.js");
+
 
 
 
@@ -15111,10 +15257,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   general: _reducers_generalReducer__WEBPACK_IMPORTED_MODULE_2__["default"],
-  addModal: _reducers_addModalReducer__WEBPACK_IMPORTED_MODULE_6__["default"],
+  addModal: _reducers_addModalReducer__WEBPACK_IMPORTED_MODULE_7__["default"],
   managePropriete: _reducers_proprieteReducer__WEBPACK_IMPORTED_MODULE_3__["default"],
   manageDossier: _reducers_dossierReducer__WEBPACK_IMPORTED_MODULE_4__["default"],
-  manageUser: _reducers_userReducer__WEBPACK_IMPORTED_MODULE_5__["default"]
+  manageUser: _reducers_userReducer__WEBPACK_IMPORTED_MODULE_5__["default"],
+  manageNotification: _reducers_notificationReducer__WEBPACK_IMPORTED_MODULE_6__["default"]
 });
 var composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || redux__WEBPACK_IMPORTED_MODULE_0__["compose"];
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(rootReducer, composeEnhancers(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"]))));
@@ -15844,6 +15991,8 @@ var AppContainer = /*#__PURE__*/function (_Component) {
       var _this2 = this;
 
       setInterval(function () {
+        _this2.props.getAllNotifications();
+
         _this2.props.getAllProprietes();
 
         _this2.props.getAllDossiers();
@@ -15910,6 +16059,9 @@ var AppContainer = /*#__PURE__*/function (_Component) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
+    getAllNotifications: function getAllNotifications() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getAllNotifications"])());
+    },
     getAllProprietes: function getAllProprietes() {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getAllProprietes"])());
     },
@@ -17917,6 +18069,7 @@ var Board = /*#__PURE__*/function (_Component) {
         title: "Total Commission pr\xE9visionnel"
       }, /*#__PURE__*/React.createElement(_components_Commission__WEBPACK_IMPORTED_MODULE_8__["default"], {
         projetEnCours: true,
+        isSuperviseur: this.props.userData.role == 'superviseur' || this.props.userData.role == 'administrator',
         idChasseur: this.props.userData.id
       })), /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_6__["default"], {
         orange: true,
@@ -17928,6 +18081,7 @@ var Board = /*#__PURE__*/function (_Component) {
         title: "Total Commission encaiss\xE9"
       }, /*#__PURE__*/React.createElement(_components_Commission__WEBPACK_IMPORTED_MODULE_8__["default"], {
         projetFinaux: true,
+        isSuperviseur: this.props.userData.role == 'superviseur' || this.props.userData.role == 'administrator',
         idChasseur: this.props.userData.id
       })), /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_6__["default"], {
         orange: true,
@@ -18795,24 +18949,17 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 var Component = wp.element.Component;
 
 
 
 
 
-var title = 'Liste des propriétés';
-
-var entete = _defineProperty({
-  'chasseur.first_name': 'Prénom du chasseur',
-  'thumbnail': 'Photo',
-  'type_bien': 'Type de bien',
-  'ville': 'Ville',
-  'interlocuteur': 'Nom de l\'interlocuteur',
-  'honoraires_immomalin': 'CA ImmoMalin'
-}, "honoraires_immomalin", 'Commission Chasseur');
+var title = 'Liste des notifications';
+var entete = {
+  'description': '',
+  'date_notification': ''
+};
 
 var Notification = /*#__PURE__*/function (_Component) {
   _inherits(Notification, _Component);
@@ -18829,17 +18976,97 @@ var Notification = /*#__PURE__*/function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       Object(_lib_functions__WEBPACK_IMPORTED_MODULE_2__["setDocumentTitle"])(title);
+      this.props.getAllNotifications();
       this.props.getAllProprietes();
       this.props.getAllDossiers();
-      this.props.getAllUsers();
     }
   }, {
     key: "render",
     value: function render() {
+      var _this = this;
+
+      var data = null;
+      var newData = new Array();
+
+      if (this.props.list.data != null) {
+        if (this.props.myUserData.role == 'client__investisseur') {
+          data = this.props.list.data.filter(function (notif) {
+            return notif.type_notification == 'updateDossier' || notif.type_notification == 'newPropriete';
+          });
+
+          if (Array.isArray(data)) {
+            if (data.length > 0) {
+              var listDossier = this.props.listDossier.filter(function (dossier) {
+                return dossier.id_client.id == _this.props.myUserData.id;
+              });
+              data.forEach(function (notif) {
+                if (notif.type_notification == 'updateDossier') {
+                  if (Array.isArray(listDossier)) {
+                    if (listDossier.length > 0) {
+                      listDossier.forEach(function (dossier) {
+                        if (dossier.id == notif.id_type) newData.push(notif);
+                      });
+                    }
+                  }
+                } else {
+                  newData.push(notif);
+                }
+              });
+            } else {
+              newData = null;
+            }
+          } else {
+            newData = null;
+          }
+        } else if (this.props.userData.role == 'chasseur') {
+          data = this.props.list.data.filter(function (notif) {
+            return notif.type_notification == 'newDossier' || notif.type_notification == 'newPropriete';
+          });
+
+          if (Array.isArray(data)) {
+            if (data.length > 0) {
+              var _listDossier = this.props.listDossier.filter(function (dossier) {
+                return dossier.id_fiche_produit.chasseur.id == _this.props.myUserData.id;
+              });
+
+              data.forEach(function (notif) {
+                if (notif.type_notification == 'newDossier') {
+                  if (Array.isArray(_listDossier)) {
+                    if (_listDossier.length > 0) {
+                      _listDossier.forEach(function (dossier) {
+                        if (dossier.id == notif.id_type) newData.push(notif);
+                      });
+                    }
+                  }
+                } else {
+                  newData.push(notif);
+                }
+              });
+            } else {
+              newData = null;
+            }
+          } else {
+            newData = null;
+          }
+        } else {
+          newData = this.props.list.data;
+        }
+
+        if (Array.isArray(newData)) {
+          if (newData.length < 1) {
+            newData = null;
+          }
+        } else {
+          newData = null;
+        }
+      }
+
       return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_3__["TitleSection"], null, title), /*#__PURE__*/React.createElement(_components_Table__WEBPACK_IMPORTED_MODULE_4__["default"], {
         listeProps: entete,
         empty: "Aucune notification pour le moment",
-        data: this.props.list.data ? this.props.list.data : null,
+        type: "notification",
+        userData: this.props.myUserData,
+        data: newData,
         statut: this.props.list.statut ? this.props.list.statut : null
       }));
     }
@@ -18850,6 +19077,9 @@ var Notification = /*#__PURE__*/function (_Component) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
+    getAllNotifications: function getAllNotifications() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getAllNotifications"])());
+    },
     getAllProprietes: function getAllProprietes() {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getAllProprietes"])());
     },
@@ -18861,7 +19091,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    list: state.managePropriete.listPropriete
+    list: state.manageNotification.listNotification,
+    listDossier: state.manageDossier.listDossier.data,
+    myUserData: state.general.myData.data
   };
 };
 
