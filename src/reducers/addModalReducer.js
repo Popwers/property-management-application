@@ -128,8 +128,74 @@ export default function manageAddModal(state = initialState, action) {
                         if (key == "chasseur") {
                             newData[key] = newData[key].id.toString();
                         } else {
-                            newData[key] = newData[key].toString();
-                            newData[key] = newData[key].replace('.', ',');
+                            switch (key) {
+                                case 'cashflow_mensuel_brut':
+                                case 'rentabilite_net':
+                                case 'prix_au_m':
+                                case 'rentabilite_brut':
+                                case 'annee':
+                                case 'superficie':
+                                case 'superficie_habitable':
+                                case 'nombre_de_pieces':
+                                case 'nombre_de_chambre':
+                                case 'nombre_de_salles_de_bains':
+                                case 'nombre_de_wc':
+                                case 'nombre_de_celliers':
+                                case 'nombre_de_buanderies':
+                                case 'niveaux':
+                                case 'prix_du_bien':
+                                case 'frais_dagence':
+                                case 'frais_de_travaux':
+                                case 'frais_de_notaire':
+                                case 'honoraires_immomalin':
+                                case 'mobilier_equipement':
+                                case 'projet_global':
+                                case 'budget':
+                                case 'charges_copropriete_mensuelles':
+                                case 'charges_copropriete_annuelles':
+                                case 'taxe_fonciere_mensuelles':
+                                case 'taxe_fonciere_annuelles':
+                                case 'assurance_pno_mensuelles':
+                                case 'assurance_pno_annuelles':
+                                case 'assurances_locatives_mensuelles':
+                                case 'assurances_locatives_annuelles':
+                                case 'gestion_locative_mensuelles':
+                                case 'gestion_locative_annuelles':
+                                case 'frais_divers_mensuelles':
+                                case 'frais_divers_annuelles':
+                                case 'frais_electricite_mensuelles':
+                                case 'frais_electricite_annuelles':
+                                case 'frais_eau_mensuelles':
+                                case 'frais_eau_annuelles':
+                                case 'forfait_internet_mensuelles':
+                                case 'forfait_internet_annuelles':
+                                case 'total_charges_mensuelles':
+                                case 'total_charges_annuelles':
+                                case 'loyer_previsionnel_mensuelles':
+                                case 'loyer_previsionnel_annuelles':
+                                case 'vacance_locative':
+                                case 'total_revenus_mensuelles':
+                                case 'total_revenus_annuelles':
+                                case 'solde':
+                                case 'nombre_de_lots':
+                                case 'derniere_assemble':
+                                case 'caves':
+                                case 'terrases':
+                                case 'balcons':
+                                case 'varangues':
+                                case 'piscines':
+                                case 'jacuzzis':
+                                    if (!Number.isNaN(Number(newData[key]))) {
+                                        newData[key] = Number(newData[key]);
+                                    } else {
+                                        newData[key] = 0;
+                                    }
+                                    break;
+
+                                default:
+                                    newData[key] = newData[key].toString();
+                                    break;
+                            }
                         }
                     }
                 }
@@ -223,7 +289,6 @@ export default function manageAddModal(state = initialState, action) {
             }
 
             return newState || state;
-            break;
 
         case SET_PROPRIETE_ADD_MODAL:
             if (action.payload.key != 'resetTheForm') {

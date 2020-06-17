@@ -16,7 +16,7 @@ const enteteSuperviseur = {
     'ville': 'Ville',
     'interlocuteur': 'Nom de l\'interlocuteur',
     'honoraires_immomalin': ['CA ImmoMalin', '€'],
-    'honoraires_immomalin': ['Commission Chasseur', '€'],
+    'commission_component': ['Commission Chasseur', '€'],
 };
 
 const enteteChasseur = {
@@ -25,7 +25,7 @@ const enteteChasseur = {
     'ville': 'Ville',
     'interlocuteur': 'Nom de l\'interlocuteur',
     'honoraires_immomalin': ['CA ImmoMalin', '€'],
-    'honoraires_immomalin': ['Commission Chasseur', '€'],
+    'commission_component': ['Commission Chasseur', '€'],
 };
 
 class Propriete extends Component {

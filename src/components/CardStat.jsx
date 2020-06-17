@@ -10,7 +10,7 @@ const CardContainer = styled.div`
     box-shadow: 0 5px 20px rgba(251,97,7, 0.4);
     padding: 25px 35px;
     margin: 20px;
-    min-width: 275px;
+    min-width: 330px;
     max-height: 150px;
 
     span {
@@ -28,7 +28,7 @@ const CardContainer = styled.div`
         }
     }
 
-    ${props => 
+    ${props =>
         props.orange &&
         css`
             ${props => props.theme.orangeRadius};
@@ -48,10 +48,16 @@ const CardContainer = styled.div`
 `
 
 export default function Card(props) {
+    let value = props.value;
+
+    if (props.children) {
+        value = props.children;
+    }
+
     return (
         <CardContainer green={props.green} blue={props.blue} orange={props.orange} >
             <span>{props.title}</span>
-            <span>{props.euros ? formatPrix(props.value) + ' €' : props.value}</span>
+            <span>{props.euros ? formatPrix(value) + ' €' : value}</span>
         </CardContainer>
     );
 }

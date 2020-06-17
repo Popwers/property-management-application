@@ -10,6 +10,7 @@ import { TitleSection, Text, Inline } from '../theme/design/componentsDesign';
 import Table from '../components/Table';
 import CardStat from '../components/CardStat';
 import Button from '../components/Button';
+import Commission from '../components/Commission';
 import iconPencil from '../resources/pencil.svg';
 
 const enteteDossier = {
@@ -142,7 +143,7 @@ class Board extends Component {
                     if (projetEnCours.length > 0) {
                         countProjet = projetEnCours.length;
                         projetEnCours.forEach(element => {
-                            let honoraire = Number(element.honoraires_immomalin);
+                            let honoraire = Number(element.id_fiche_produit.honoraires_immomalin);
                             if (!Number.isNaN(honoraire)) chiffreEstimationProjet += honoraire;
                         });
                     }
@@ -152,7 +153,7 @@ class Board extends Component {
                     if (projetFinaux.length > 0) {
                         countProjetFinal = projetFinaux.length;
                         projetFinaux.forEach(element => {
-                            let honoraire = Number(element.honoraires_immomalin);
+                            let honoraire = Number(element.id_fiche_produit.honoraires_immomalin);
                             if (!Number.isNaN(honoraire)) chiffreProjetFacture += honoraire;
                         });
                     }
@@ -166,17 +167,17 @@ class Board extends Component {
                     <HeadDiv>
                         <FlexRow>
                             <Inline marginRight="20px"><TitleSection>Bonjour, {this.props.myUserData.first_name ? this.props.myUserData.first_name : 'Utilisateur'}</TitleSection></Inline>
-                            <Button 
-                                small 
-                                light 
-                                src={iconPencil} 
-                                iconRight 
+                            <Button
+                                small
+                                light
+                                src={iconPencil}
+                                iconRight
                                 action='user'
                                 idToSee={this.props.myUserData.id} >Mon compte</Button>
                         </FlexRow>
 
                         <Text light>Vous avez 0 notifications</Text>
-                        
+
                         {(this.props.userData.role == 'chasseur') &&
                             <>
                                 <H2>Prochain Bonus</H2>
@@ -187,13 +188,13 @@ class Board extends Component {
 
                     <CardsContainer>
                         <CardStat
-                            blue 
-                            title="Nombre de projet en cours" 
+                            blue
+                            title="Nombre de projet en cours"
                             value={countProjet} />
 
                         <CardStat
                             green
-                            title={this.props.userData.role == 'client__investisseur' ? 'Nombre de projet finalisé' : 'Nombre de projet facturé'} 
+                            title={this.props.userData.role == 'client__investisseur' ? 'Nombre de projet finalisé' : 'Nombre de projet facturé'}
                             value={countProjetFinal} />
                     </CardsContainer>
                 </FlexDiv>
@@ -206,13 +207,13 @@ class Board extends Component {
                         <CardsContainer>
                             <CardStat
                                 orange
-                                title="Total Commission prévisionnel" 
-                                value={4000}
-                                euros />
+                                title="Total Commission prévisionnel">
+                                <Commission projetEnCours idChasseur={this.props.userData.id} />
+                            </CardStat>
 
                             <CardStat
-                                orange 
-                                title="Total Chiffre d’affaire ImmoMalin facturé" 
+                                orange
+                                title="Total Chiffre d’affaire ImmoMalin facturé"
                                 value={chiffreProjetFacture}
                                 euros />
                         </CardsContainer>
@@ -220,9 +221,9 @@ class Board extends Component {
                         <CardsContainer>
                             <CardStat
                                 orange
-                                title="Total Commission encaissé"
-                                value={4000}
-                                euros />
+                                title="Total Commission encaissé">
+                                <Commission projetFinaux idChasseur={this.props.userData.id} />
+                            </CardStat>
 
                             <CardStat
                                 orange
@@ -251,7 +252,7 @@ class Board extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return { 
+    return {
         myUserData: state.general.myData.data,
         list: state.manageDossier.listDossier
     };

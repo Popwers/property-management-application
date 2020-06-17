@@ -10774,7 +10774,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    justify-content: space-between;\n    border-radius: 30px;\n    box-shadow: 0 5px 20px rgba(251,97,7, 0.4);\n    padding: 25px 35px;\n    margin: 20px;\n    min-width: 275px;\n    max-height: 150px;\n\n    span {\n        max-width: 75%;\n        font-size: 22px;\n        color: ", ";\n        font-family: ", ";\n        font-weight: ", ";\n\n        &:last-of-type {\n            font-size: 50px;\n            align-self: flex-end;\n            margin-top: 10px;\n            text-shadow: ", ";\n        }\n    }\n\n    ", ";\n\n    ", ";\n\n    ", ";\n"]);
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    justify-content: space-between;\n    border-radius: 30px;\n    box-shadow: 0 5px 20px rgba(251,97,7, 0.4);\n    padding: 25px 35px;\n    margin: 20px;\n    min-width: 330px;\n    max-height: 150px;\n\n    span {\n        max-width: 75%;\n        font-size: 22px;\n        color: ", ";\n        font-family: ", ";\n        font-weight: ", ";\n\n        &:last-of-type {\n            font-size: 50px;\n            align-self: flex-end;\n            margin-top: 10px;\n            text-shadow: ", ";\n        }\n    }\n\n    ", ";\n\n    ", ";\n\n    ", ";\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -10809,12 +10809,199 @@ var CardContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].di
   });
 });
 function Card(props) {
+  var value = props.value;
+
+  if (props.children) {
+    value = props.children;
+  }
+
   return /*#__PURE__*/React.createElement(CardContainer, {
     green: props.green,
     blue: props.blue,
     orange: props.orange
-  }, /*#__PURE__*/React.createElement("span", null, props.title), /*#__PURE__*/React.createElement("span", null, props.euros ? Object(_lib_functions__WEBPACK_IMPORTED_MODULE_1__["formatPrix"])(props.value) + ' €' : props.value));
+  }, /*#__PURE__*/React.createElement("span", null, props.title), /*#__PURE__*/React.createElement("span", null, props.euros ? Object(_lib_functions__WEBPACK_IMPORTED_MODULE_1__["formatPrix"])(value) + ' €' : value));
 }
+
+/***/ }),
+
+/***/ "./src/components/Commission.jsx":
+/*!***************************************!*\
+  !*** ./src/components/Commission.jsx ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions */ "./src/actions/index.js");
+/* harmony import */ var _lib_functions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/functions */ "./src/lib/functions.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/* eslint-disable react/react-in-jsx-scope */
+var Component = wp.element.Component;
+
+
+
+
+var Commission = /*#__PURE__*/function (_Component) {
+  _inherits(Commission, _Component);
+
+  var _super = _createSuper(Commission);
+
+  function Commission(props) {
+    _classCallCheck(this, Commission);
+
+    return _super.call(this, props);
+  }
+  /*componentDidMount() {
+      this.props.getAllDossiers();
+      this.props.getAllProprietes();
+  }*/
+
+
+  _createClass(Commission, [{
+    key: "render",
+    value: function render() {
+      var _this = this;
+
+      var commission = 0;
+
+      if (this.props.projetEnCours) {
+        if (this.props.listDossier != null && Array.isArray(this.props.listDossier)) {
+          var projetEnCours = this.props.listDossier.filter(function (dossier) {
+            return dossier.id_fiche_produit.chasseur.id == _this.props.idChasseur;
+          });
+          projetEnCours = projetEnCours.filter(function (dossier) {
+            return dossier.statut != 'Projet loué';
+          });
+
+          if (Array.isArray(projetEnCours)) {
+            if (projetEnCours.length > 0) {
+              projetEnCours.forEach(function (element) {
+                var honoraire = Number(element.id_fiche_produit.honoraires_immomalin);
+                var total_projet = Number(element.id_fiche_produit.projet_global);
+
+                if (!Number.isNaN(total_projet) && total_projet > 0) {
+                  if (total_projet <= 100000) {
+                    commission += 1000;
+                  } else if (total_projet >= 100001 && total_projet <= 250000) {
+                    commission += 1500;
+                  } else {
+                    if (!Number.isNaN(honoraire)) {
+                      commission += Number((10 / 100 * honoraire).toFixed(2));
+                    }
+                  }
+                }
+              });
+            }
+          }
+        }
+      } else if (this.props.projetFinaux) {
+        if (this.props.listDossier != null && Array.isArray(this.props.listDossier)) {
+          var projetFinaux = this.props.listDossier.filter(function (dossier) {
+            return dossier.id_fiche_produit.chasseur.id == _this.props.idChasseur;
+          });
+          projetFinaux = projetFinaux.filter(function (dossier) {
+            return dossier.statut == 'Projet loué';
+          });
+
+          if (Array.isArray(projetFinaux)) {
+            if (projetFinaux.length > 0) {
+              projetFinaux.forEach(function (element) {
+                var honoraire = Number(element.id_fiche_produit.honoraires_immomalin);
+                var total_projet = Number(element.id_fiche_produit.projet_global);
+
+                if (!Number.isNaN(total_projet) && total_projet > 0) {
+                  if (total_projet <= 100000) {
+                    commission += 1000;
+                  } else if (total_projet >= 100001 && total_projet <= 250000) {
+                    commission += 1500;
+                  } else {
+                    if (!Number.isNaN(honoraire)) {
+                      commission += Number((10 / 100 * honoraire).toFixed(2));
+                    }
+                  }
+                }
+              });
+            }
+          }
+        }
+      } else if (this.props.ficheBien) {
+        if (this.props.listProjet != null && Array.isArray(this.props.listProjet)) {
+          var listProp = this.props.listProjet.filter(function (propriete) {
+            return propriete.id == _this.props.ficheBien;
+          });
+
+          if (Array.isArray(listProp)) {
+            if (listProp.length > 0) {
+              listProp.forEach(function (element) {
+                var honoraire = Number(element.honoraires_immomalin);
+                var total_projet = Number(element.projet_global);
+
+                if (!Number.isNaN(total_projet) && total_projet > 0) {
+                  if (total_projet <= 100000) {
+                    commission += 1000;
+                  } else if (total_projet >= 100001 && total_projet <= 250000) {
+                    commission += 1500;
+                  } else {
+                    if (!Number.isNaN(honoraire)) {
+                      commission += Number((10 / 100 * honoraire).toFixed(2));
+                    }
+                  }
+                }
+              });
+            }
+          }
+        }
+      }
+
+      return /*#__PURE__*/React.createElement(React.Fragment, null, Object(_lib_functions__WEBPACK_IMPORTED_MODULE_2__["formatPrix"])(commission) + ' €');
+    }
+  }]);
+
+  return Commission;
+}(Component);
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    getAllDossiers: function getAllDossiers() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getAllDossiers"])());
+    },
+    getAllProprietes: function getAllProprietes() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getAllProprietes"])());
+    }
+  };
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    listDossier: state.manageDossier.listDossier.data,
+    listProjet: state.managePropriete.listPropriete.data
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps)(Commission));
 
 /***/ }),
 
@@ -12509,10 +12696,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 /* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Button */ "./src/components/Button.jsx");
 /* harmony import */ var _components_DeleteButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/DeleteButton */ "./src/components/DeleteButton.jsx");
-/* harmony import */ var _theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../theme/design/componentsDesign */ "./src/theme/design/componentsDesign.jsx");
-/* harmony import */ var _resources_eye_svg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../resources/eye.svg */ "./src/resources/eye.svg");
-/* harmony import */ var _resources_eye_svg__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_resources_eye_svg__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _lib_functions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../lib/functions */ "./src/lib/functions.js");
+/* harmony import */ var _components_Commission__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Commission */ "./src/components/Commission.jsx");
+/* harmony import */ var _theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../theme/design/componentsDesign */ "./src/theme/design/componentsDesign.jsx");
+/* harmony import */ var _resources_eye_svg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../resources/eye.svg */ "./src/resources/eye.svg");
+/* harmony import */ var _resources_eye_svg__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_resources_eye_svg__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _lib_functions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lib/functions */ "./src/lib/functions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -12626,6 +12814,7 @@ var Component = wp.element.Component;
 
 
 
+
 var StyledTable = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].table(_templateObject());
 var Line = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].tr(_templateObject2(), function (props) {
   return props.lineStat == 'disable' && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject3());
@@ -12712,7 +12901,11 @@ var LineTable = /*#__PURE__*/function (_Component) {
               }
             }
 
-            if (searchKey == 'id') {
+            if (searchKey == 'commission_component') {
+              returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_Commission__WEBPACK_IMPORTED_MODULE_3__["default"], {
+                ficheBien: _this2.props.object.id
+              }));
+            } else if (searchKey == 'id') {
               returnVal = /*#__PURE__*/React.createElement(ValTh, {
                 scope: "row"
               }, objVal);
@@ -12729,7 +12922,7 @@ var LineTable = /*#__PURE__*/function (_Component) {
             } else {
               if (Array.isArray(value) && objVal != null && objVal != '') {
                 if (value[1] == '%' || value[1] == '€') {
-                  returnVal = /*#__PURE__*/React.createElement(ValTd, null, Object(_lib_functions__WEBPACK_IMPORTED_MODULE_5__["formatPrix"])(objVal, true), " ", value[1]);
+                  returnVal = /*#__PURE__*/React.createElement(ValTd, null, Object(_lib_functions__WEBPACK_IMPORTED_MODULE_6__["formatPrix"])(objVal, true), " ", value[1]);
                 } else {
                   returnVal = /*#__PURE__*/React.createElement(ValTd, null, objVal, " ", value[1]);
                 }
@@ -12747,7 +12940,11 @@ var LineTable = /*#__PURE__*/function (_Component) {
             }
           }
 
-          if (searchKey == 'id') {
+          if (searchKey == 'commission_component') {
+            returnVal = /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_Commission__WEBPACK_IMPORTED_MODULE_3__["default"], {
+              ficheBien: this.props.object.id
+            }));
+          } else if (searchKey == 'id') {
             returnVal = /*#__PURE__*/React.createElement(ValTh, {
               scope: "row"
             }, returnVal);
@@ -12764,7 +12961,7 @@ var LineTable = /*#__PURE__*/function (_Component) {
           } else {
             if (Array.isArray(value) && returnVal != null && returnVal != '') {
               if (value[1] == '%' || value[1] == '€') {
-                returnVal = /*#__PURE__*/React.createElement(ValTd, null, Object(_lib_functions__WEBPACK_IMPORTED_MODULE_5__["formatPrix"])(returnVal, true), " ", value[1]);
+                returnVal = /*#__PURE__*/React.createElement(ValTd, null, Object(_lib_functions__WEBPACK_IMPORTED_MODULE_6__["formatPrix"])(returnVal, true), " ", value[1]);
               } else {
                 returnVal = /*#__PURE__*/React.createElement(ValTd, null, returnVal, " ", value[1]);
               }
@@ -12780,7 +12977,7 @@ var LineTable = /*#__PURE__*/function (_Component) {
       ;
 
       if (this.props["delete"] == 'propriete') {
-        optionTable.push( /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_3__["Text"], {
+        optionTable.push( /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Text"], {
           badge: true,
           red: this.props.object.statut == 'Hors ligne',
           green: this.props.object.statut == 'En ligne',
@@ -12793,7 +12990,7 @@ var LineTable = /*#__PURE__*/function (_Component) {
           switch (this.props.actions) {
             case "user":
               optionTable.push( /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                src: _resources_eye_svg__WEBPACK_IMPORTED_MODULE_4___default.a,
+                src: _resources_eye_svg__WEBPACK_IMPORTED_MODULE_5___default.a,
                 isImg: true,
                 noInvert: true,
                 action: "user",
@@ -12803,7 +13000,7 @@ var LineTable = /*#__PURE__*/function (_Component) {
 
             case "propriete":
               optionTable.push( /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                src: _resources_eye_svg__WEBPACK_IMPORTED_MODULE_4___default.a,
+                src: _resources_eye_svg__WEBPACK_IMPORTED_MODULE_5___default.a,
                 isImg: true,
                 noInvert: true,
                 action: "propriete",
@@ -12813,7 +13010,7 @@ var LineTable = /*#__PURE__*/function (_Component) {
 
             case "dossier":
               optionTable.push( /*#__PURE__*/React.createElement(ValTd, null, /*#__PURE__*/React.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                src: _resources_eye_svg__WEBPACK_IMPORTED_MODULE_4___default.a,
+                src: _resources_eye_svg__WEBPACK_IMPORTED_MODULE_5___default.a,
                 isImg: true,
                 noInvert: true,
                 action: "dossier",
@@ -13371,8 +13568,75 @@ function manageAddModal() {
             if (key == "chasseur") {
               newData[key] = newData[key].id.toString();
             } else {
-              newData[key] = newData[key].toString();
-              newData[key] = newData[key].replace('.', ',');
+              switch (key) {
+                case 'cashflow_mensuel_brut':
+                case 'rentabilite_net':
+                case 'prix_au_m':
+                case 'rentabilite_brut':
+                case 'annee':
+                case 'superficie':
+                case 'superficie_habitable':
+                case 'nombre_de_pieces':
+                case 'nombre_de_chambre':
+                case 'nombre_de_salles_de_bains':
+                case 'nombre_de_wc':
+                case 'nombre_de_celliers':
+                case 'nombre_de_buanderies':
+                case 'niveaux':
+                case 'prix_du_bien':
+                case 'frais_dagence':
+                case 'frais_de_travaux':
+                case 'frais_de_notaire':
+                case 'honoraires_immomalin':
+                case 'mobilier_equipement':
+                case 'projet_global':
+                case 'budget':
+                case 'charges_copropriete_mensuelles':
+                case 'charges_copropriete_annuelles':
+                case 'taxe_fonciere_mensuelles':
+                case 'taxe_fonciere_annuelles':
+                case 'assurance_pno_mensuelles':
+                case 'assurance_pno_annuelles':
+                case 'assurances_locatives_mensuelles':
+                case 'assurances_locatives_annuelles':
+                case 'gestion_locative_mensuelles':
+                case 'gestion_locative_annuelles':
+                case 'frais_divers_mensuelles':
+                case 'frais_divers_annuelles':
+                case 'frais_electricite_mensuelles':
+                case 'frais_electricite_annuelles':
+                case 'frais_eau_mensuelles':
+                case 'frais_eau_annuelles':
+                case 'forfait_internet_mensuelles':
+                case 'forfait_internet_annuelles':
+                case 'total_charges_mensuelles':
+                case 'total_charges_annuelles':
+                case 'loyer_previsionnel_mensuelles':
+                case 'loyer_previsionnel_annuelles':
+                case 'vacance_locative':
+                case 'total_revenus_mensuelles':
+                case 'total_revenus_annuelles':
+                case 'solde':
+                case 'nombre_de_lots':
+                case 'derniere_assemble':
+                case 'caves':
+                case 'terrases':
+                case 'balcons':
+                case 'varangues':
+                case 'piscines':
+                case 'jacuzzis':
+                  if (!Number.isNaN(Number(newData[key]))) {
+                    newData[key] = Number(newData[key]);
+                  } else {
+                    newData[key] = 0;
+                  }
+
+                  break;
+
+                default:
+                  newData[key] = newData[key].toString();
+                  break;
+              }
             }
           }
         }
@@ -13465,7 +13729,6 @@ function manageAddModal() {
       }
 
       return newState || state;
-      break;
 
     case _constants__WEBPACK_IMPORTED_MODULE_0__["SET_PROPRIETE_ADD_MODAL"]:
       if (action.payload.key != 'resetTheForm') {
@@ -16312,23 +16575,28 @@ var AddPropriete = /*#__PURE__*/function (_Component) {
                     data.append(key, this.props.modalData[key]);
                   } else {
                     if (this.props.modalData[key] != null) {
-                      _iterator = _createForOfIteratorHelper(this.props.modalData[key]);
+                      if (Array.isArray(this.props.modalData[key])) {
+                        if (this.props.modalData[key].length > 0) {
+                          _iterator = _createForOfIteratorHelper(this.props.modalData[key]);
 
-                      try {
-                        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-                          item = _step.value;
-                          data.append('files[]', item);
+                          try {
+                            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                              item = _step.value;
+                              data.append('files[]', item);
+                            }
+                          } catch (err) {
+                            _iterator.e(err);
+                          } finally {
+                            _iterator.f();
+                          }
                         }
-                      } catch (err) {
-                        _iterator.e(err);
-                      } finally {
-                        _iterator.f();
                       }
                     }
                   }
                 }
 
-                _context.next = 10;
+                data.append('chasseur', Number(this.props.chasseurID));
+                _context.next = 11;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../wp-content/themes/themeplocatif/ajax-board.php', data, {
                   headers: {
                     'Content-Type': 'multipart/form-data'
@@ -16352,10 +16620,10 @@ var AddPropriete = /*#__PURE__*/function (_Component) {
                   _this2.props.registerDataProgress(fakeID, 100);
                 });
 
-              case 10:
+              case 11:
                 this.props.getAllProprietes();
 
-              case 11:
+              case 12:
               case "end":
                 return _context.stop();
             }
@@ -16685,7 +16953,7 @@ var AddPropriete = /*#__PURE__*/function (_Component) {
         step: ".01",
         id: "honoraires_immomalin",
         euro: true,
-        label: "Commission chasseur"
+        label: "Honoraires ImmoMalin"
       })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["RowInput"], {
         result: true
       }, /*#__PURE__*/React.createElement(_components_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -17080,8 +17348,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Table__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Table */ "./src/components/Table.jsx");
 /* harmony import */ var _components_CardStat__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/CardStat */ "./src/components/CardStat.jsx");
 /* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/Button */ "./src/components/Button.jsx");
-/* harmony import */ var _resources_pencil_svg__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../resources/pencil.svg */ "./src/resources/pencil.svg");
-/* harmony import */ var _resources_pencil_svg__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_resources_pencil_svg__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _components_Commission__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/Commission */ "./src/components/Commission.jsx");
+/* harmony import */ var _resources_pencil_svg__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../resources/pencil.svg */ "./src/resources/pencil.svg");
+/* harmony import */ var _resources_pencil_svg__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_resources_pencil_svg__WEBPACK_IMPORTED_MODULE_9__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17216,6 +17485,7 @@ var Component = wp.element.Component;
 
 
 
+
 var enteteDossier = {
   'id': 'ID Projet',
   'id_fiche_produit.chasseur.display_name': 'Prénom Chasseur',
@@ -17315,7 +17585,7 @@ var Board = /*#__PURE__*/function (_Component) {
             if (projetEnCours.length > 0) {
               countProjet = projetEnCours.length;
               projetEnCours.forEach(function (element) {
-                var honoraire = Number(element.honoraires_immomalin);
+                var honoraire = Number(element.id_fiche_produit.honoraires_immomalin);
                 if (!Number.isNaN(honoraire)) chiffreEstimationProjet += honoraire;
               });
             }
@@ -17325,7 +17595,7 @@ var Board = /*#__PURE__*/function (_Component) {
             if (projetFinaux.length > 0) {
               countProjetFinal = projetFinaux.length;
               projetFinaux.forEach(function (element) {
-                var honoraire = Number(element.honoraires_immomalin);
+                var honoraire = Number(element.id_fiche_produit.honoraires_immomalin);
                 if (!Number.isNaN(honoraire)) chiffreProjetFacture += honoraire;
               });
             }
@@ -17338,7 +17608,7 @@ var Board = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["TitleSection"], null, "Bonjour, ", this.props.myUserData.first_name ? this.props.myUserData.first_name : 'Utilisateur')), /*#__PURE__*/React.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
         small: true,
         light: true,
-        src: _resources_pencil_svg__WEBPACK_IMPORTED_MODULE_8___default.a,
+        src: _resources_pencil_svg__WEBPACK_IMPORTED_MODULE_9___default.a,
         iconRight: true,
         action: "user",
         idToSee: this.props.myUserData.id
@@ -17358,20 +17628,22 @@ var Board = /*#__PURE__*/function (_Component) {
         value: countProjetFinal
       }))), this.props.userData.role != 'client__investisseur' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["TitleSection"], null, "Vos chiffres"), /*#__PURE__*/React.createElement(CardsContainer, null, /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_6__["default"], {
         orange: true,
-        title: "Total Commission pr\xE9visionnel",
-        value: 4000,
-        euros: true
-      }), /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        title: "Total Commission pr\xE9visionnel"
+      }, /*#__PURE__*/React.createElement(_components_Commission__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        projetEnCours: true,
+        idChasseur: this.props.userData.id
+      })), /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_6__["default"], {
         orange: true,
         title: "Total Chiffre d\u2019affaire ImmoMalin factur\xE9",
         value: chiffreProjetFacture,
         euros: true
       })), /*#__PURE__*/React.createElement(CardsContainer, null, /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_6__["default"], {
         orange: true,
-        title: "Total Commission encaiss\xE9",
-        value: 4000,
-        euros: true
-      }), /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        title: "Total Commission encaiss\xE9"
+      }, /*#__PURE__*/React.createElement(_components_Commission__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        projetFinaux: true,
+        idChasseur: this.props.userData.id
+      })), /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_6__["default"], {
         orange: true,
         title: "Total Chiffre d\u2019affaire ImmoMalin pr\xE9visionnel",
         value: chiffreEstimationProjet,
@@ -17462,8 +17734,8 @@ var entete = (_entete = {
   'first_name': 'Prénom Chasseur',
   'telephone': 'Téléphone',
   'user_email': 'Mail',
-  '': 'Secteur'
-}, _defineProperty(_entete, "", ['Total CA réalisé', '€']), _defineProperty(_entete, "", ['Total CA prévisionnel', '€']), _defineProperty(_entete, "", 'Barre de progession vers son prochain BONUS'), _entete);
+  '': ['Total CA réalisé', '€']
+}, _defineProperty(_entete, "", ['Total CA prévisionnel', '€']), _defineProperty(_entete, "", 'Barre de progession vers son prochain BONUS'), _entete);
 
 var Chasseur = /*#__PURE__*/function (_Component) {
   _inherits(Chasseur, _Component);
@@ -17810,7 +18082,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions */ "./src/actions/index.js");
 /* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Button */ "./src/components/Button.jsx");
 /* harmony import */ var _components_Galery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Galery */ "./src/components/Galery.jsx");
-/* harmony import */ var _lib_functions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../lib/functions */ "./src/lib/functions.js");
+/* harmony import */ var _components_Commission__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/Commission */ "./src/components/Commission.jsx");
+/* harmony import */ var _lib_functions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../lib/functions */ "./src/lib/functions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -17890,6 +18163,7 @@ function _templateObject() {
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var Component = wp.element.Component;
+
 
 
 
@@ -18077,9 +18351,14 @@ var DossierModal = /*#__PURE__*/function (_Component) {
         type_bien = this.props.modalData.id_fiche_produit.type_bien;
         artisan = this.props.modalData.id_fiche_produit.artisan;
         interlocuteur = this.props.modalData.id_fiche_produit.interlocuteur;
-        honoraires_immomalin = this.props.modalData.id_fiche_produit.honoraires_immomalin;
         prix_au_m = this.props.modalData.id_fiche_produit.prix_au_m;
         photos = this.props.modalData.id_fiche_produit.photos;
+
+        if (this.props.modalData.id_fiche_produit.id) {
+          honoraires_immomalin = /*#__PURE__*/React.createElement(_components_Commission__WEBPACK_IMPORTED_MODULE_7__["default"], {
+            ficheBien: this.props.modalData.id_fiche_produit.id
+          });
+        }
       }
 
       if (this.props.modalData.id_client != null) {
@@ -18122,7 +18401,7 @@ var DossierModal = /*#__PURE__*/function (_Component) {
         label: "Nom de l\u2019interlocuteur"
       }, interlocuteur != null && interlocuteur != '' ? interlocuteur : 'Non renseigné'), /*#__PURE__*/React.createElement(AssociateText, {
         label: "Estimation commission"
-      }, honoraires_immomalin != null && honoraires_immomalin != '' ? honoraires_immomalin + ' €' : 'Non renseigné')), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(AssociateText, {
+      }, honoraires_immomalin != null ? honoraires_immomalin : 'Non renseigné')), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(AssociateText, {
         label: "Nom du client"
       }, nomClient != null && nomClient != '' ? nomClient : 'Non renseigné'), /*#__PURE__*/React.createElement(AssociateText, {
         label: "Mail"
@@ -18130,7 +18409,7 @@ var DossierModal = /*#__PURE__*/function (_Component) {
         label: "T\xE9l\xE9phone"
       }, telephone != null && telephone != '' ? telephone : 'Non renseigné'), /*#__PURE__*/React.createElement(AssociateText, {
         label: "Prix au m\xB2"
-      }, prix_au_m != null && prix_au_m != '' ? Object(_lib_functions__WEBPACK_IMPORTED_MODULE_7__["formatPrix"])(prix_au_m, true) + ' €' : 'Non renseigné'))), photos.length > 0 && /*#__PURE__*/React.createElement(_components_Galery__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }, prix_au_m != null && prix_au_m != '' ? Object(_lib_functions__WEBPACK_IMPORTED_MODULE_8__["formatPrix"])(prix_au_m, true) + ' €' : 'Non renseigné'))), photos.length > 0 && /*#__PURE__*/React.createElement(_components_Galery__WEBPACK_IMPORTED_MODULE_6__["default"], {
         images: photos
       })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_3__["Text"], {
         bold: true,
@@ -18231,6 +18510,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var Component = wp.element.Component;
 
 
@@ -18238,15 +18519,15 @@ var Component = wp.element.Component;
 
 
 var title = 'Liste des propriétés';
-var entete = {
+
+var entete = _defineProperty({
   'chasseur.first_name': 'Prénom du chasseur',
   'thumbnail': 'Photo',
   'type_bien': 'Type de bien',
   'ville': 'Ville',
   'interlocuteur': 'Nom de l\'interlocuteur',
-  'CA': 'CA ImmoMalin',
-  'honoraires_immomalin': 'Commission Chasseur'
-};
+  'honoraires_immomalin': 'CA ImmoMalin'
+}, "honoraires_immomalin", 'Commission Chasseur');
 
 var Notification = /*#__PURE__*/function (_Component) {
   _inherits(Notification, _Component);
@@ -18339,8 +18620,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 var Component = wp.element.Component;
 
 
@@ -18348,23 +18627,23 @@ var Component = wp.element.Component;
 
 
 var title = 'Liste des propriétés';
-
-var enteteSuperviseur = _defineProperty({
+var enteteSuperviseur = {
   'chasseur.first_name': 'Prénom du chasseur',
   'thumbnail': 'Photo',
   'type_bien': 'Type de bien',
   'ville': 'Ville',
   'interlocuteur': 'Nom de l\'interlocuteur',
-  'honoraires_immomalin': ['CA ImmoMalin', '€']
-}, "honoraires_immomalin", ['Commission Chasseur', '€']);
-
-var enteteChasseur = _defineProperty({
+  'honoraires_immomalin': ['CA ImmoMalin', '€'],
+  'commission_component': ['Commission Chasseur', '€']
+};
+var enteteChasseur = {
   'thumbnail': 'Photo',
   'type_bien': 'Type de bien',
   'ville': 'Ville',
   'interlocuteur': 'Nom de l\'interlocuteur',
-  'honoraires_immomalin': ['CA ImmoMalin', '€']
-}, "honoraires_immomalin", ['Commission Chasseur', '€']);
+  'honoraires_immomalin': ['CA ImmoMalin', '€'],
+  'commission_component': ['Commission Chasseur', '€']
+};
 
 var Propriete = /*#__PURE__*/function (_Component) {
   _inherits(Propriete, _Component);

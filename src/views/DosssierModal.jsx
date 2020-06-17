@@ -7,6 +7,7 @@ import { Text, AlignCenter, Row } from '../theme/design/componentsDesign';
 import { getAllDossiers, seeDossierData } from '../actions';
 import Button from '../components/Button';
 import Galery from '../components/Galery';
+import Commission from '../components/Commission';
 import { formatPrix } from '../lib/functions';
 
 const ContainerBlue = styled.div`
@@ -172,7 +173,7 @@ const StatutDossier = (props) => {
         <StepProcess>
             <ul>
                 {props.step.map(item => {
-                    return(
+                    return (
                         <LiStyled key={item[0] + '' + props.id} validate={item[1] != null && item[1] != '' && item[1] != '0000-00-00'} current={props.current == item[0] && props.current != 'Projet loué'}>
                             <h3>{item[0]}<br />{item[1] != '0000-00-00' && item[1] != '' && item[1] != null ? convertDate(item[1]) : null}</h3>
                         </LiStyled>
@@ -213,18 +214,18 @@ class DossierModal extends Component {
         data.append('actionString', dataSend);
 
         await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', data)
-        .then(function (response) {
-            responseReq = formatToJson(response.data);
-            if (responseReq == 'fail') {
-                statutRes = 'success';
-                responseReq = null;
-            }
-        })
-        .catch(function (error) {
-            responseReq = error;
-            statutRes = 'error';
-        });
-        
+            .then(function (response) {
+                responseReq = formatToJson(response.data);
+                if (responseReq == 'fail') {
+                    statutRes = 'success';
+                    responseReq = null;
+                }
+            })
+            .catch(function (error) {
+                responseReq = error;
+                statutRes = 'error';
+            });
+
         await this.props.getAllDossiers();
         await this.props.seeDossierData(this.props.modalData.id);
         this.setState({ isLoading: false });
@@ -275,9 +276,12 @@ class DossierModal extends Component {
             type_bien = this.props.modalData.id_fiche_produit.type_bien;
             artisan = this.props.modalData.id_fiche_produit.artisan;
             interlocuteur = this.props.modalData.id_fiche_produit.interlocuteur;
-            honoraires_immomalin = this.props.modalData.id_fiche_produit.honoraires_immomalin;
             prix_au_m = this.props.modalData.id_fiche_produit.prix_au_m;
             photos = this.props.modalData.id_fiche_produit.photos;
+
+            if (this.props.modalData.id_fiche_produit.id) {
+                honoraires_immomalin = <Commission ficheBien={this.props.modalData.id_fiche_produit.id} />;
+            }
         }
 
         if (this.props.modalData.id_client != null) {
@@ -324,8 +328,7 @@ class DossierModal extends Component {
                             </AssociateText>
 
                             <AssociateText label='Estimation commission'>
-                                {honoraires_immomalin != null
-                                    && honoraires_immomalin != '' ? honoraires_immomalin + ' €' : 'Non renseigné'}
+                                {honoraires_immomalin != null ? honoraires_immomalin : 'Non renseigné'}
                             </AssociateText>
                         </div>
 
@@ -361,14 +364,14 @@ class DossierModal extends Component {
                 <StatutDossier step={step} current={this.props.modalData.statut} id={this.props.modalData.id} />
 
                 <AlignCenter>
-                    <Button 
-                        hide={this.props.modalData.statut == 'En attente'} 
-                        disable={this.state.isLoading} 
-                        small light 
+                    <Button
+                        hide={this.props.modalData.statut == 'En attente'}
+                        disable={this.state.isLoading}
+                        small light
                         onClick={() => this.handleClick('previous')}>Revenir à l’étape précédente</Button>
-                    <Button 
-                        hide={this.props.modalData.statut == 'Projet loué'} 
-                        disable={this.state.isLoading} small green light 
+                    <Button
+                        hide={this.props.modalData.statut == 'Projet loué'}
+                        disable={this.state.isLoading} small green light
                         onClick={() => this.handleClick('next')}>Valider "{this.props.modalData.statut}"</Button>
                 </AlignCenter>
             </>

@@ -30,12 +30,18 @@ class AddPropriete extends Component {
                 data.append(key, this.props.modalData[key]);
             } else {
                 if (this.props.modalData[key] != null) {
-                    for (var item of this.props.modalData[key]) {
-                        data.append('files[]', item);
+                    if (Array.isArray(this.props.modalData[key])) {
+                        if (this.props.modalData[key].length > 0) {
+                            for (var item of this.props.modalData[key]) {
+                                data.append('files[]', item);
+                            }
+                        }
                     }
                 }
             }
         }
+
+        data.append('chasseur', Number(this.props.chasseurID));
 
         await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', data, {
             headers: {
@@ -173,7 +179,7 @@ class AddPropriete extends Component {
                 <RowInput>
                     <Input value={this.props.modalData.frais_de_travaux} onChange={this.props.handleChangeModal} required type="number" step=".01" id="frais_de_travaux" euro label='Estimation Travaux' />
                     <Input value={this.props.modalData.mobilier_equipement} onChange={this.props.handleChangeModal} required type="number" step=".01" id="mobilier_equipement" euro label='Mobilier / Equipement' />
-                    <Input value={this.props.modalData.honoraires_immomalin} onChange={this.props.handleChangeModal} required type="number" step=".01" id="honoraires_immomalin" euro label='Commission chasseur' />
+                    <Input value={this.props.modalData.honoraires_immomalin} onChange={this.props.handleChangeModal} required type="number" step=".01" id="honoraires_immomalin" euro label='Honoraires ImmoMalin' />
                 </RowInput>
 
                 <RowInput result>

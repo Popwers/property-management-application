@@ -3,6 +3,7 @@ const { Component } = wp.element;
 import styled, { css } from 'styled-components';
 import Button from '../components/Button';
 import DeleteButton from '../components/DeleteButton';
+import Commission from '../components/Commission';
 import { Text } from '../theme/design/componentsDesign';
 import IconView from '../resources/eye.svg';
 import { formatPrix } from '../lib/functions';
@@ -153,7 +154,9 @@ class LineTable extends Component {
                     }
                 }
 
-                if (searchKey == 'id') {
+                if (searchKey == 'commission_component') {
+                    returnVal = <ValTd><Commission ficheBien={this.props.object.id} /></ValTd>;
+                } else if (searchKey == 'id') {
                     returnVal = <ValTh scope="row">{objVal}</ValTh>;
                 } else if (searchKey == 'last_update') {
                     if (this.props.object.statut == 'En attente') {
@@ -183,7 +186,9 @@ class LineTable extends Component {
                     }
                 }
 
-                if (searchKey == 'id') {
+                if (searchKey == 'commission_component') {
+                    returnVal = <ValTd><Commission ficheBien={this.props.object.id} /></ValTd>;
+                } else if (searchKey == 'id') {
                     returnVal = <ValTh scope="row">{returnVal}</ValTh>;
                 } else if (searchKey == 'last_update') {
                     if (this.props.object.statut == 'En attente') {

@@ -13,7 +13,6 @@ const entete = {
     'first_name': 'Prénom Chasseur',
     'telephone': 'Téléphone',
     'user_email': 'Mail',
-    '': 'Secteur',
     '': ['Total CA réalisé', '€'],
     '': ['Total CA prévisionnel', '€'],
     '': 'Barre de progession vers son prochain BONUS'

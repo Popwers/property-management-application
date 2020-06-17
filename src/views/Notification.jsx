@@ -15,7 +15,7 @@ const entete = {
     'type_bien': 'Type de bien',
     'ville': 'Ville',
     'interlocuteur': 'Nom de l\'interlocuteur',
-    'CA': 'CA ImmoMalin',
+    'honoraires_immomalin': 'CA ImmoMalin',
     'honoraires_immomalin': 'Commission Chasseur'
 };
 
