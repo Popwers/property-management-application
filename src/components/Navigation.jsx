@@ -297,7 +297,6 @@ class Navigation extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			showLoader: true,
 			currentLink: 'Tableau de bord',
 		}
 
@@ -309,10 +308,6 @@ class Navigation extends Component {
 		this.props.getAllNotifications();
 		this.props.toogleLoader(true, 'Chargement des données en cours ...');
 	}
-
-	/*componentDidUpdate() {
-		(this.props.myUserData.role != 'load' && this.props.loaderStat.statut) ? this.props.toogleLoader(false, 'Chargement des données en cours ...') : null;
-	}*/
 
 	handleChangeLink(newLink) {
 		this.setState({ currentLink: newLink });
@@ -333,7 +328,7 @@ class Navigation extends Component {
 			let countNotifPropriete = 0;
 			let countAllNotif = 0;
 
-			if (this.props.list.data != null) {
+			if (this.props.list.data != null && Array.isArray(this.props.list.data)) {
 				if (this.props.myUserData.role == 'client__investisseur') {
 					data = this.props.list.data.filter(notif => notif.type_notification == 'updateDossier' || notif.type_notification == 'newPropriete');
 
