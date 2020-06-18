@@ -25,6 +25,7 @@ import {
     SET_CHASSEUR_ADD_MODAL,
     SET_REGISTER_DATA,
     GET_NOTIFICATION,
+    COUNT_NOTIFICATION,
 } from "../constants";
 
 export function getAllProprietes() {
@@ -274,4 +275,10 @@ export function updateUserData(userData) {
 
 export function updateProprieteData(proprieteData) {
     return { type: UPDATE_PROPRIETE, payload: proprieteData };
+}
+
+/** NOTIFICATION COUNT **/
+
+export function setNotificationCount(value) {
+    return { type: COUNT_NOTIFICATION, payload: value };
 }

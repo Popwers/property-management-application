@@ -104,6 +104,14 @@ const ValTd = styled.td`
         padding-left: 0px;
     }
 
+    ${props =>
+        props.bold &&
+        css`
+            font-weight: ${props => props.theme.regular};
+        `
+    };
+    
+
     img {
         width: 100%;
         width: 100px;
@@ -138,20 +146,31 @@ class LineTable extends Component {
         let optionTable = new Array();
 
         if (this.props.notification) {
+            let isRead = true;
+            if (Array.isArray(this.props.object.users_see)) {
+                if (this.props.object.users_see.length > 0) {
+                    this.props.object.users_see.forEach(user => {
+                        if (user['ID'] == this.props.userData.id) {
+                            isRead = false;
+                        }
+                    });
+                }
+            }
+
             switch (this.props.object.type_notification) {
                 case 'newDossier':
                 case 'newPropriete':
-                    listItems.push(<ValTd right>{this.props.object.description}</ValTd>);
-                    listItems.push(<ValTd right>{convertDate(this.props.object.date_notification)}</ValTd>);
+                    listItems.push(<ValTd bold={isRead} right>{this.props.object.description}</ValTd>);
+                    listItems.push(<ValTd bold={isRead} right>{convertDate(this.props.object.date_notification)}</ValTd>);
                     break;
 
                 case 'updateDossier':
                     if (this.props.userData.role == 'client__investisseur') {
-                        listItems.push(<ValTd right>Votre dossier {this.props.object.description}</ValTd>);
-                        listItems.push(<ValTd right>{convertDate(this.props.object.date_notification)}</ValTd>);
+                        listItems.push(<ValTd bold={isRead} right>Votre dossier {this.props.object.description}</ValTd>);
+                        listItems.push(<ValTd bold={isRead} right>{convertDate(this.props.object.date_notification)}</ValTd>);
                     } else {
-                        listItems.push(<ValTd right>Le dossier n°{this.props.object.id_type} {this.props.object.description}</ValTd>);
-                        listItems.push(<ValTd right>{convertDate(this.props.object.date_notification)}</ValTd>);
+                        listItems.push(<ValTd bold={isRead} right>Le dossier n°{this.props.object.id_type} {this.props.object.description}</ValTd>);
+                        listItems.push(<ValTd bold={isRead} right>{convertDate(this.props.object.date_notification)}</ValTd>);
                     }
                     break;
             }

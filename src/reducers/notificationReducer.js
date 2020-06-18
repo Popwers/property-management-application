@@ -1,9 +1,11 @@
 import {
     GET_NOTIFICATION,
+    COUNT_NOTIFICATION,
 } from "../constants";
 
 const initialState = {
     listNotification: [],
+    countNotifications: 0,
 };
 
 export default function manageNotification(state = initialState, action) {
@@ -14,6 +16,14 @@ export default function manageNotification(state = initialState, action) {
             newState = {
                 ...state,
                 listNotification: action.payload
+            }
+
+            return newState || state;
+
+        case COUNT_NOTIFICATION:
+            newState = {
+                ...state,
+                countNotifications: action.payload
             }
 
             return newState || state;

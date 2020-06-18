@@ -1,5 +1,6 @@
 const { Component } = wp.element;
 
+import axios from 'axios';
 import { connect } from 'react-redux';
 import {
     getAllNotifications,
@@ -34,6 +35,7 @@ class Notification extends Component {
     render() {
         let data = null;
         let newData = new Array();
+        let finalData = new Array();
 
         if (this.props.list.data != null) {
             if (this.props.myUserData.role == 'client__investisseur') {
@@ -61,7 +63,7 @@ class Notification extends Component {
                 } else {
                     newData = null;
                 }
-            } else if (this.props.userData.role == 'chasseur') {
+            } else if (this.props.myUserData.role == 'chasseur') {
                 data = this.props.list.data.filter(notif => notif.type_notification == 'newDossier' || notif.type_notification == 'newPropriete');
 
                 if (Array.isArray(data)) {
@@ -90,12 +92,61 @@ class Notification extends Component {
                 newData = this.props.list.data;
             }
 
+            let importantNotif = new Array();
+            let notImportantNotif = new Array();
+
             if (Array.isArray(newData)) {
                 if (newData.length < 1) {
-                    newData = null;
+                    finalData = null;
+                } else if (newData.length > 0) {
+                    newData.forEach(item => {
+                        if (Array.isArray(item.users_see)) {
+                            if (item.users_see.length > 0) {
+                                let addNotif = false;
+                                item.users_see.forEach(user => {
+                                    if (user['ID'] == this.props.myUserData.id) {
+                                        addNotif = true;
+                                    }
+                                });
+
+                                if (addNotif) {
+                                    notImportantNotif.push(item);
+                                } else {
+                                    importantNotif.push(item);
+                                }
+                            } else {
+                                importantNotif.push(item);
+                            }
+                        } else {
+                            importantNotif.push(item);
+                        }
+                    });
+
+                    if (importantNotif.length < 10 && notImportantNotif.length > 0) {
+                        let count = 0;
+                        importantNotif.forEach(notif => finalData.push(notif));
+                        notImportantNotif.forEach(notif => {
+                            if (count < 10) {
+                                finalData.push(notif);
+                            }
+                        });
+                    } else {
+                        finalData = importantNotif;
+                    }
+
+                    if (Array.isArray(importantNotif)) {
+                        if (importantNotif.length > 0) {
+                            importantNotif.forEach(notif => {
+                                setTimeout(async () => {
+                                    await disableNotification(notif.id, this.props.myUserData.id);
+                                    this.props.getAllNotifications();
+                                }, 10000);
+                            });
+                        }
+                    }
                 }
             } else {
-                newData = null;
+                finalData = null;
             }
         }
 
@@ -107,11 +158,33 @@ class Notification extends Component {
                     empty='Aucune notification pour le moment'
                     type='notification'
                     userData={this.props.myUserData}
-                    data={newData}
+                    data={finalData}
                     statut={this.props.list.statut ? this.props.list.statut : null} />
             </>
         );
     }
+}
+
+async function disableNotification(id, user_id) {
+    let data = new FormData();
+    data.append('action', 'disable_notification_board');
+    data.append('id', id);
+    data.append('user_id', user_id);
+
+    await axios.post('../wp-content/themes/themeplocatif/ajax-board.php', data, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+    })
+        .then(response => {
+            let result = formatToJson(response.data);
+            if (result != 'success') {
+                console.log('error');
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
 }
 
 const mapDispatchToProps = dispatch => {

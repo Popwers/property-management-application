@@ -139,7 +139,10 @@ class Board extends Component {
                                 idToSee={this.props.myUserData.id} >Mon compte</Button>
                         </FlexRow>
 
-                        <Text light>Vous avez 0 notifications</Text>
+                        <Text light>{
+                            this.props.countNotification != null && this.props.countNotification > 0
+                                ? `Vous avez ${this.props.countNotification} notifications.`
+                                : "Vous n'avez aucunes notifications."}</Text>
 
                         {(this.props.userData.role == 'chasseur') &&
                             <>
@@ -223,7 +226,8 @@ class Board extends Component {
 const mapStateToProps = (state) => {
     return {
         myUserData: state.general.myData.data,
-        list: state.manageDossier.listDossier
+        list: state.manageDossier.listDossier,
+        countNotification: state.manageNotification.countNotifications,
     };
 }
 

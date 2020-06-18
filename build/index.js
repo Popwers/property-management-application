@@ -9995,7 +9995,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************!*\
   !*** ./src/actions/index.js ***!
   \******************************/
-/*! exports provided: getAllProprietes, getAllDossiers, getAllUsers, getAllNotifications, getLogout, getHomeUrl, toogleLoader, toogleAddClient, toogleAddChasseur, toogleAddPropriete, toogleUserModal, toogleDossierModal, toogleProprieteModal, getPersonalData, handleChangeAddProprieteModal, handleChangeAddClientModal, handleChangeAddChasseurModal, registerDataProgress, seeUserData, seeProprieteData, seeDossierData, updateUserData, updateProprieteData */
+/*! exports provided: getAllProprietes, getAllDossiers, getAllUsers, getAllNotifications, getLogout, getHomeUrl, toogleLoader, toogleAddClient, toogleAddChasseur, toogleAddPropriete, toogleUserModal, toogleDossierModal, toogleProprieteModal, getPersonalData, handleChangeAddProprieteModal, handleChangeAddClientModal, handleChangeAddChasseurModal, registerDataProgress, seeUserData, seeProprieteData, seeDossierData, updateUserData, updateProprieteData, setNotificationCount */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10023,6 +10023,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "seeDossierData", function() { return seeDossierData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateUserData", function() { return updateUserData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateProprieteData", function() { return updateProprieteData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setNotificationCount", function() { return setNotificationCount; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _lib_functions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/functions */ "./src/lib/functions.js");
@@ -10477,6 +10478,14 @@ function updateProprieteData(proprieteData) {
   return {
     type: _constants__WEBPACK_IMPORTED_MODULE_2__["UPDATE_PROPRIETE"],
     payload: proprieteData
+  };
+}
+/** NOTIFICATION COUNT **/
+
+function setNotificationCount(value) {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_2__["COUNT_NOTIFICATION"],
+    payload: value
   };
 }
 
@@ -12894,6 +12903,7 @@ var Navigation = /*#__PURE__*/function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.getPersonalData();
+      this.props.getAllNotifications();
       this.props.toogleLoader(true, 'Chargement des données en cours ...');
     }
   }, {
@@ -12917,7 +12927,134 @@ var Navigation = /*#__PURE__*/function (_Component) {
       var showLink = new Array();
 
       if (this.props.myUserData.role != 'load') {
-        // ALL
+        // Count Notifications
+        var data = null;
+        var countNotifDossier = 0;
+        var countNotifPropriete = 0;
+        var countAllNotif = 0;
+
+        if (this.props.list.data != null) {
+          if (this.props.myUserData.role == 'client__investisseur') {
+            data = this.props.list.data.filter(function (notif) {
+              return notif.type_notification == 'updateDossier' || notif.type_notification == 'newPropriete';
+            });
+
+            if (Array.isArray(data)) {
+              if (data.length > 0) {
+                var listDossier = this.props.listDossier.filter(function (dossier) {
+                  return dossier.id_client.id == _this2.props.myUserData.id;
+                });
+                data.forEach(function (notif) {
+                  var isRead = true;
+
+                  if (Array.isArray(notif.users_see)) {
+                    if (notif.users_see.length > 0) {
+                      notif.users_see.forEach(function (user) {
+                        if (user['ID'] == _this2.props.myUserData.id) {
+                          isRead = false;
+                        }
+                      });
+                    }
+                  }
+
+                  if (isRead) {
+                    if (notif.type_notification == 'updateDossier') {
+                      if (Array.isArray(listDossier)) {
+                        if (listDossier.length > 0) {
+                          listDossier.forEach(function (dossier) {
+                            if (dossier.id == notif.id_type) {
+                              countAllNotif++;
+                            }
+                          });
+                        }
+                      }
+                    } else {
+                      countAllNotif++;
+                    }
+                  }
+                });
+              }
+            }
+          } else if (this.props.myUserData.role == 'chasseur') {
+            data = this.props.list.data.filter(function (notif) {
+              return notif.type_notification == 'newDossier' || notif.type_notification == 'newPropriete';
+            });
+
+            if (Array.isArray(data)) {
+              if (data.length > 0) {
+                var _listDossier = this.props.listDossier.filter(function (dossier) {
+                  return dossier.id_fiche_produit.chasseur.id == _this2.props.myUserData.id;
+                });
+
+                data.forEach(function (notif) {
+                  var isRead = true;
+
+                  if (Array.isArray(notif.users_see)) {
+                    if (notif.users_see.length > 0) {
+                      notif.users_see.forEach(function (user) {
+                        if (user['ID'] == _this2.props.myUserData.id) {
+                          isRead = false;
+                        }
+                      });
+                    }
+                  }
+
+                  if (isRead) {
+                    if (notif.type_notification == 'newDossier') {
+                      if (Array.isArray(_listDossier)) {
+                        if (_listDossier.length > 0) {
+                          _listDossier.forEach(function (dossier) {
+                            if (dossier.id == notif.id_type) {
+                              countAllNotif++;
+                              countNotifDossier++;
+                            }
+                          });
+                        }
+                      }
+                    } else {
+                      countAllNotif++;
+                      countNotifPropriete++;
+                    }
+                  }
+                });
+              }
+            }
+          } else {
+            data = this.props.list.data;
+
+            if (Array.isArray(data)) {
+              if (data.length > 0) {
+                data.forEach(function (notif) {
+                  var isRead = true;
+
+                  if (Array.isArray(notif.users_see)) {
+                    if (notif.users_see.length > 0) {
+                      notif.users_see.forEach(function (user) {
+                        if (user['ID'] == _this2.props.myUserData.id) {
+                          isRead = false;
+                        }
+                      });
+                    }
+                  }
+
+                  if (isRead) {
+                    if (notif.type_notification == 'newPropriete') {
+                      countNotifPropriete++;
+                    } else if (notif.type_notification == 'newDossier') {
+                      countNotifDossier++;
+                    }
+
+                    countAllNotif++;
+                  }
+                });
+              }
+            }
+          }
+
+          this.props.setNotificationCount(countAllNotif);
+        } // ALL
+
+
         showLink.push( /*#__PURE__*/React.createElement(NavLink, {
           src: _resources_chart_pie_svg__WEBPACK_IMPORTED_MODULE_4___default.a,
           name: "Tableau de bord",
@@ -12930,6 +13067,7 @@ var Navigation = /*#__PURE__*/function (_Component) {
           showLink.push( /*#__PURE__*/React.createElement(NavLink, {
             src: _resources_home_svg__WEBPACK_IMPORTED_MODULE_5___default.a,
             name: "Propri\xE9t\xE9s",
+            notifications: countNotifPropriete > 0 ? countNotifPropriete : null,
             currentLink: this.state.currentLink,
             changeView: this.handleChangeLink,
             closeMenu: this.props.statMenu,
@@ -12973,6 +13111,7 @@ var Navigation = /*#__PURE__*/function (_Component) {
         showLink.push( /*#__PURE__*/React.createElement(NavLink, {
           src: _resources_bell_svg__WEBPACK_IMPORTED_MODULE_8___default.a,
           name: "Notifications",
+          notifications: countAllNotif > 0 ? countAllNotif : null,
           currentLink: this.state.currentLink,
           changeView: this.handleChangeLink,
           closeMenu: this.props.statMenu
@@ -12982,6 +13121,7 @@ var Navigation = /*#__PURE__*/function (_Component) {
           showLink.push( /*#__PURE__*/React.createElement(NavLink, {
             src: _resources_folder_svg__WEBPACK_IMPORTED_MODULE_9___default.a,
             name: "Suivi dossiers",
+            notifications: countNotifDossier > 0 ? countNotifDossier : null,
             currentLink: this.state.currentLink,
             changeView: this.handleChangeLink,
             closeMenu: this.props.statMenu
@@ -13009,6 +13149,12 @@ var Navigation = /*#__PURE__*/function (_Component) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
+    setNotificationCount: function setNotificationCount(value) {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["setNotificationCount"])(value));
+    },
+    getAllNotifications: function getAllNotifications() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getAllNotifications"])());
+    },
     getPersonalData: function getPersonalData() {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getPersonalData"])());
     },
@@ -13036,6 +13182,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 var mapStateToProps = function mapStateToProps(state) {
   return {
     myUserData: state.general.myData.data,
+    list: state.manageNotification.listNotification,
     loaderStat: state.general.loader
   };
 };
@@ -13098,8 +13245,18 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _templateObject8() {
+  var data = _taggedTemplateLiteral(["\n            font-weight: ", ";\n        "]);
+
+  _templateObject8 = function _templateObject8() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n    padding: 20px 10px;\n    font-family: ", ";\n    font-size: 13px;\n    font-weight: ", ";\n    text-align: ", ";\n\n    &:first-child {\n        padding-left: 0px;\n    }\n\n    img {\n        width: 100%;\n        width: 100px;\n        height: 100px;\n        object-fit: cover;\n        border-radius: 15px;\n        box-shadow: ", ";\n    }\n"]);
+  var data = _taggedTemplateLiteral(["\n    padding: 20px 10px;\n    font-family: ", ";\n    font-size: 13px;\n    font-weight: ", ";\n    text-align: ", ";\n\n    &:first-child {\n        padding-left: 0px;\n    }\n\n    ", ";\n    \n\n    img {\n        width: 100%;\n        width: 100px;\n        height: 100px;\n        object-fit: cover;\n        border-radius: 15px;\n        box-shadow: ", ";\n    }\n"]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -13205,6 +13362,10 @@ var ValTd = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].td(_templa
 }, function (props) {
   return props.right ? 'null' : 'center';
 }, function (props) {
+  return props.bold && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject8(), function (props) {
+    return props.theme.regular;
+  });
+}, function (props) {
   return props.theme.shadows;
 });
 
@@ -13248,13 +13409,27 @@ var LineTable = /*#__PURE__*/function (_Component) {
       var optionTable = new Array();
 
       if (this.props.notification) {
+        var isRead = true;
+
+        if (Array.isArray(this.props.object.users_see)) {
+          if (this.props.object.users_see.length > 0) {
+            this.props.object.users_see.forEach(function (user) {
+              if (user['ID'] == _this2.props.userData.id) {
+                isRead = false;
+              }
+            });
+          }
+        }
+
         switch (this.props.object.type_notification) {
           case 'newDossier':
           case 'newPropriete':
             listItems.push( /*#__PURE__*/React.createElement(ValTd, {
+              bold: isRead,
               right: true
             }, this.props.object.description));
             listItems.push( /*#__PURE__*/React.createElement(ValTd, {
+              bold: isRead,
               right: true
             }, convertDate(this.props.object.date_notification)));
             break;
@@ -13262,16 +13437,20 @@ var LineTable = /*#__PURE__*/function (_Component) {
           case 'updateDossier':
             if (this.props.userData.role == 'client__investisseur') {
               listItems.push( /*#__PURE__*/React.createElement(ValTd, {
+                bold: isRead,
                 right: true
               }, "Votre dossier ", this.props.object.description));
               listItems.push( /*#__PURE__*/React.createElement(ValTd, {
+                bold: isRead,
                 right: true
               }, convertDate(this.props.object.date_notification)));
             } else {
               listItems.push( /*#__PURE__*/React.createElement(ValTd, {
+                bold: isRead,
                 right: true
               }, "Le dossier n\xB0", this.props.object.id_type, " ", this.props.object.description));
               listItems.push( /*#__PURE__*/React.createElement(ValTd, {
+                bold: isRead,
                 right: true
               }, convertDate(this.props.object.date_notification)));
             }
@@ -13689,7 +13868,7 @@ var mapStateToProps = function mapStateToProps(state) {
 /*!********************************!*\
   !*** ./src/constants/index.js ***!
   \********************************/
-/*! exports provided: GET_PROPRIETE, UPDATE_PROPRIETE, SEE_PROPRIETE, GET_DOSSIER, SEE_DOSSIER, GET_USER, UPDATE_USER, SEE_USER, GET_NOTIFICATION, GET_MY_DATA, GET_LOGOUT, GET_ADRESSE_SITE, TOOGLE_LOADER, TOOGLE_CLIENT_ADD_MODAL, TOOGLE_CHASSEUR_ADD_MODAL, TOOGLE_PROPRIETE_ADD_MODAL, TOOGLE_USER_MODAL, TOOGLE_DOSSIER_MODAL, TOOGLE_PROPRIETE_MODAL, SET_PROPRIETE_ADD_MODAL, SET_CLIENT_ADD_MODAL, SET_CHASSEUR_ADD_MODAL, SET_REGISTER_DATA */
+/*! exports provided: GET_PROPRIETE, UPDATE_PROPRIETE, SEE_PROPRIETE, GET_DOSSIER, SEE_DOSSIER, GET_USER, UPDATE_USER, SEE_USER, GET_NOTIFICATION, COUNT_NOTIFICATION, GET_MY_DATA, GET_LOGOUT, GET_ADRESSE_SITE, TOOGLE_LOADER, TOOGLE_CLIENT_ADD_MODAL, TOOGLE_CHASSEUR_ADD_MODAL, TOOGLE_PROPRIETE_ADD_MODAL, TOOGLE_USER_MODAL, TOOGLE_DOSSIER_MODAL, TOOGLE_PROPRIETE_MODAL, SET_PROPRIETE_ADD_MODAL, SET_CLIENT_ADD_MODAL, SET_CHASSEUR_ADD_MODAL, SET_REGISTER_DATA */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13703,6 +13882,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_USER", function() { return UPDATE_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SEE_USER", function() { return SEE_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_NOTIFICATION", function() { return GET_NOTIFICATION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "COUNT_NOTIFICATION", function() { return COUNT_NOTIFICATION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_MY_DATA", function() { return GET_MY_DATA; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_LOGOUT", function() { return GET_LOGOUT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ADRESSE_SITE", function() { return GET_ADRESSE_SITE; });
@@ -13726,6 +13906,7 @@ var GET_USER = "GET_USER";
 var UPDATE_USER = "UPDATE_USER";
 var SEE_USER = "SEE_USER";
 var GET_NOTIFICATION = "GET_NOTIFICATION";
+var COUNT_NOTIFICATION = "COUNT_NOTIFICATION";
 var GET_MY_DATA = "GET_MY_DATA";
 var GET_LOGOUT = "GET_LOGOUT";
 var GET_ADRESSE_SITE = "GET_ADRESSE_SITE";
@@ -14811,7 +14992,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var initialState = {
-  listNotification: []
+  listNotification: [],
+  countNotifications: 0
 };
 function manageNotification() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -14822,6 +15004,12 @@ function manageNotification() {
     case _constants__WEBPACK_IMPORTED_MODULE_0__["GET_NOTIFICATION"]:
       newState = _objectSpread(_objectSpread({}, state), {}, {
         listNotification: action.payload
+      });
+      return newState || state;
+
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["COUNT_NOTIFICATION"]:
+      newState = _objectSpread(_objectSpread({}, state), {}, {
+        countNotifications: action.payload
       });
       return newState || state;
 
@@ -15262,9 +15450,13 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
   manageDossier: _reducers_dossierReducer__WEBPACK_IMPORTED_MODULE_4__["default"],
   manageUser: _reducers_userReducer__WEBPACK_IMPORTED_MODULE_5__["default"],
   manageNotification: _reducers_notificationReducer__WEBPACK_IMPORTED_MODULE_6__["default"]
-});
-var composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || redux__WEBPACK_IMPORTED_MODULE_0__["compose"];
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(rootReducer, composeEnhancers(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"]))));
+}); //const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(rootReducer, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"])
+/*composeEnhancers(
+    applyMiddleware(thunk)
+)*/
+));
 
 /***/ }),
 
@@ -18054,7 +18246,7 @@ var Board = /*#__PURE__*/function (_Component) {
         idToSee: this.props.myUserData.id
       }, "Mon compte")), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["Text"], {
         light: true
-      }, "Vous avez 0 notifications"), this.props.userData.role == 'chasseur' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(H2, null, "Prochain Bonus"), /*#__PURE__*/React.createElement(_components_BChasseur__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      }, this.props.countNotification != null && this.props.countNotification > 0 ? "Vous avez ".concat(this.props.countNotification, " notifications.") : "Vous n'avez aucunes notifications."), this.props.userData.role == 'chasseur' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(H2, null, "Prochain Bonus"), /*#__PURE__*/React.createElement(_components_BChasseur__WEBPACK_IMPORTED_MODULE_9__["default"], {
         idChasseur: this.props.userData.id
       }))), /*#__PURE__*/React.createElement(CardsContainer, null, /*#__PURE__*/React.createElement(_components_CardStat__WEBPACK_IMPORTED_MODULE_6__["default"], {
         blue: true,
@@ -18104,7 +18296,8 @@ var Board = /*#__PURE__*/function (_Component) {
 var mapStateToProps = function mapStateToProps(state) {
   return {
     myUserData: state.general.myData.data,
-    list: state.manageDossier.listDossier
+    list: state.manageDossier.listDossier,
+    countNotification: state.manageNotification.countNotifications
   };
 };
 
@@ -18922,12 +19115,18 @@ var mapStateToProps = function mapStateToProps(state) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions */ "./src/actions/index.js");
-/* harmony import */ var _lib_functions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/functions */ "./src/lib/functions.js");
-/* harmony import */ var _theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../theme/design/componentsDesign */ "./src/theme/design/componentsDesign.jsx");
-/* harmony import */ var _components_Table__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Table */ "./src/components/Table.jsx");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ "./src/actions/index.js");
+/* harmony import */ var _lib_functions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../lib/functions */ "./src/lib/functions.js");
+/* harmony import */ var _theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../theme/design/componentsDesign */ "./src/theme/design/componentsDesign.jsx");
+/* harmony import */ var _components_Table__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Table */ "./src/components/Table.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -18955,6 +19154,7 @@ var Component = wp.element.Component;
 
 
 
+
 var title = 'Liste des notifications';
 var entete = {
   'description': '',
@@ -18975,7 +19175,7 @@ var Notification = /*#__PURE__*/function (_Component) {
   _createClass(Notification, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      Object(_lib_functions__WEBPACK_IMPORTED_MODULE_2__["setDocumentTitle"])(title);
+      Object(_lib_functions__WEBPACK_IMPORTED_MODULE_3__["setDocumentTitle"])(title);
       this.props.getAllNotifications();
       this.props.getAllProprietes();
       this.props.getAllDossiers();
@@ -18987,6 +19187,7 @@ var Notification = /*#__PURE__*/function (_Component) {
 
       var data = null;
       var newData = new Array();
+      var finalData = new Array();
 
       if (this.props.list.data != null) {
         if (this.props.myUserData.role == 'client__investisseur') {
@@ -19018,7 +19219,7 @@ var Notification = /*#__PURE__*/function (_Component) {
           } else {
             newData = null;
           }
-        } else if (this.props.userData.role == 'chasseur') {
+        } else if (this.props.myUserData.role == 'chasseur') {
           data = this.props.list.data.filter(function (notif) {
             return notif.type_notification == 'newDossier' || notif.type_notification == 'newPropriete';
           });
@@ -19052,21 +19253,86 @@ var Notification = /*#__PURE__*/function (_Component) {
           newData = this.props.list.data;
         }
 
+        var importantNotif = new Array();
+        var notImportantNotif = new Array();
+
         if (Array.isArray(newData)) {
           if (newData.length < 1) {
-            newData = null;
+            finalData = null;
+          } else if (newData.length > 0) {
+            newData.forEach(function (item) {
+              if (Array.isArray(item.users_see)) {
+                if (item.users_see.length > 0) {
+                  var addNotif = false;
+                  item.users_see.forEach(function (user) {
+                    if (user['ID'] == _this.props.myUserData.id) {
+                      addNotif = true;
+                    }
+                  });
+
+                  if (addNotif) {
+                    notImportantNotif.push(item);
+                  } else {
+                    importantNotif.push(item);
+                  }
+                } else {
+                  importantNotif.push(item);
+                }
+              } else {
+                importantNotif.push(item);
+              }
+            });
+
+            if (importantNotif.length < 10 && notImportantNotif.length > 0) {
+              var count = 0;
+              importantNotif.forEach(function (notif) {
+                return finalData.push(notif);
+              });
+              notImportantNotif.forEach(function (notif) {
+                if (count < 10) {
+                  finalData.push(notif);
+                }
+              });
+            } else {
+              finalData = importantNotif;
+            }
+
+            if (Array.isArray(importantNotif)) {
+              if (importantNotif.length > 0) {
+                importantNotif.forEach(function (notif) {
+                  setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                    return regeneratorRuntime.wrap(function _callee$(_context) {
+                      while (1) {
+                        switch (_context.prev = _context.next) {
+                          case 0:
+                            _context.next = 2;
+                            return disableNotification(notif.id, _this.props.myUserData.id);
+
+                          case 2:
+                            _this.props.getAllNotifications();
+
+                          case 3:
+                          case "end":
+                            return _context.stop();
+                        }
+                      }
+                    }, _callee);
+                  })), 10000);
+                });
+              }
+            }
           }
         } else {
-          newData = null;
+          finalData = null;
         }
       }
 
-      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_3__["TitleSection"], null, title), /*#__PURE__*/React.createElement(_components_Table__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_4__["TitleSection"], null, title), /*#__PURE__*/React.createElement(_components_Table__WEBPACK_IMPORTED_MODULE_5__["default"], {
         listeProps: entete,
         empty: "Aucune notification pour le moment",
         type: "notification",
         userData: this.props.myUserData,
-        data: newData,
+        data: finalData,
         statut: this.props.list.statut ? this.props.list.statut : null
       }));
     }
@@ -19075,16 +19341,56 @@ var Notification = /*#__PURE__*/function (_Component) {
   return Notification;
 }(Component);
 
+function disableNotification(_x, _x2) {
+  return _disableNotification.apply(this, arguments);
+}
+
+function _disableNotification() {
+  _disableNotification = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(id, user_id) {
+    var data;
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            data = new FormData();
+            data.append('action', 'disable_notification_board');
+            data.append('id', id);
+            data.append('user_id', user_id);
+            _context2.next = 6;
+            return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../wp-content/themes/themeplocatif/ajax-board.php', data, {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            }).then(function (response) {
+              var result = formatToJson(response.data);
+
+              if (result != 'success') {
+                console.log('error');
+              }
+            })["catch"](function (error) {
+              console.log(error);
+            });
+
+          case 6:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+  return _disableNotification.apply(this, arguments);
+}
+
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     getAllNotifications: function getAllNotifications() {
-      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getAllNotifications"])());
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getAllNotifications"])());
     },
     getAllProprietes: function getAllProprietes() {
-      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getAllProprietes"])());
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getAllProprietes"])());
     },
     getAllDossiers: function getAllDossiers() {
-      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getAllDossiers"])());
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getAllDossiers"])());
     }
   };
 };
@@ -19097,7 +19403,7 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(Notification));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Notification));
 
 /***/ }),
 

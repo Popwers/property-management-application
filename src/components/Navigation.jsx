@@ -9,6 +9,8 @@ import {
 	toogleAddPropriete,
 	updateUserData,
 	updateProprieteData,
+	getAllNotifications,
+	setNotificationCount,
 } from '../actions';
 
 import styled, { css } from 'styled-components';
@@ -304,6 +306,7 @@ class Navigation extends Component {
 
 	componentDidMount() {
 		this.props.getPersonalData();
+		this.props.getAllNotifications();
 		this.props.toogleLoader(true, 'Chargement des données en cours ...');
 	}
 
@@ -320,6 +323,119 @@ class Navigation extends Component {
 		let showLink = new Array();
 
 		if (this.props.myUserData.role != 'load') {
+			// Count Notifications
+			let data = null;
+			let countNotifDossier = 0;
+			let countNotifPropriete = 0;
+			let countAllNotif = 0;
+
+			if (this.props.list.data != null) {
+				if (this.props.myUserData.role == 'client__investisseur') {
+					data = this.props.list.data.filter(notif => notif.type_notification == 'updateDossier' || notif.type_notification == 'newPropriete');
+
+					if (Array.isArray(data)) {
+						if (data.length > 0) {
+							let listDossier = this.props.listDossier.filter(dossier => dossier.id_client.id == this.props.myUserData.id);
+							data.forEach(notif => {
+								let isRead = true;
+								if (Array.isArray(notif.users_see)) {
+									if (notif.users_see.length > 0) {
+										notif.users_see.forEach(user => {
+											if (user['ID'] == this.props.myUserData.id) {
+												isRead = false;
+											}
+										});
+									}
+								}
+
+								if (isRead) {
+									if (notif.type_notification == 'updateDossier') {
+										if (Array.isArray(listDossier)) {
+											if (listDossier.length > 0) {
+												listDossier.forEach(dossier => {
+													if (dossier.id == notif.id_type) {
+														countAllNotif++;
+													}
+												});
+											}
+										}
+									} else {
+										countAllNotif++;
+									}
+								}
+							});
+						}
+					}
+				} else if (this.props.myUserData.role == 'chasseur') {
+					data = this.props.list.data.filter(notif => notif.type_notification == 'newDossier' || notif.type_notification == 'newPropriete');
+
+					if (Array.isArray(data)) {
+						if (data.length > 0) {
+							let listDossier = this.props.listDossier.filter(dossier => dossier.id_fiche_produit.chasseur.id == this.props.myUserData.id);
+							data.forEach(notif => {
+								let isRead = true;
+								if (Array.isArray(notif.users_see)) {
+									if (notif.users_see.length > 0) {
+										notif.users_see.forEach(user => {
+											if (user['ID'] == this.props.myUserData.id) {
+												isRead = false;
+											}
+										});
+									}
+								}
+
+								if (isRead) {
+									if (notif.type_notification == 'newDossier') {
+										if (Array.isArray(listDossier)) {
+											if (listDossier.length > 0) {
+												listDossier.forEach(dossier => {
+													if (dossier.id == notif.id_type) {
+														countAllNotif++;
+														countNotifDossier++;
+													}
+												});
+											}
+										}
+									} else {
+										countAllNotif++;
+										countNotifPropriete++;
+									}
+								}
+							});
+						}
+					}
+				} else {
+					data = this.props.list.data;
+
+					if (Array.isArray(data)) {
+						if (data.length > 0) {
+							data.forEach(notif => {
+								let isRead = true;
+								if (Array.isArray(notif.users_see)) {
+									if (notif.users_see.length > 0) {
+										notif.users_see.forEach(user => {
+											if (user['ID'] == this.props.myUserData.id) {
+												isRead = false;
+											}
+										});
+									}
+								}
+
+								if (isRead) {
+									if (notif.type_notification == 'newPropriete') {
+										countNotifPropriete++;
+									} else if (notif.type_notification == 'newDossier') {
+										countNotifDossier++;
+									}
+									countAllNotif++;
+								}
+							});
+						}
+					}
+				}
+
+				this.props.setNotificationCount(countAllNotif);
+			}
 
 			// ALL
 			showLink.push(<NavLink src={Chart}
@@ -332,6 +448,7 @@ class Navigation extends Component {
 			if (this.props.myUserData.role != 'client__investisseur') {
 				showLink.push(<NavLink src={Home}
 					name="Propriétés"
+					notifications={countNotifPropriete > 0 ? countNotifPropriete : null}
 					currentLink={this.state.currentLink}
 					changeView={this.handleChangeLink}
 					closeMenu={this.props.statMenu}
@@ -367,6 +484,7 @@ class Navigation extends Component {
 			// ALL
 			showLink.push(<NavLink src={Bell}
 				name="Notifications"
+				notifications={countAllNotif > 0 ? countAllNotif : null}
 				currentLink={this.state.currentLink}
 				changeView={this.handleChangeLink}
 				closeMenu={this.props.statMenu} />);
@@ -375,6 +493,7 @@ class Navigation extends Component {
 			if (this.props.myUserData.role != 'client__investisseur') {
 				showLink.push(<NavLink src={Folder}
 					name="Suivi dossiers"
+					notifications={countNotifDossier > 0 ? countNotifDossier : null}
 					currentLink={this.state.currentLink}
 					changeView={this.handleChangeLink}
 					closeMenu={this.props.statMenu} />);
@@ -405,6 +524,8 @@ class Navigation extends Component {
 
 const mapDispatchToProps = dispatch => {
 	return {
+		setNotificationCount: (value) => dispatch(setNotificationCount(value)),
+		getAllNotifications: () => dispatch(getAllNotifications()),
 		getPersonalData: () => dispatch(getPersonalData()),
 		toogleLoader: (statut, message) => dispatch(toogleLoader(statut, message)),
 		toogleAddClient: () => dispatch(toogleAddClient()),
@@ -418,6 +539,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = (state) => {
 	return {
 		myUserData: state.general.myData.data,
+		list: state.manageNotification.listNotification,
 		loaderStat: state.general.loader
 	};
 }

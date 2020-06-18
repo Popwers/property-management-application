@@ -12,10 +12,10 @@ const GlobalStyle = createGlobalStyle`
 `
 
 export default (props) => {
-    return (
-        <ThemeProvider theme={themeVariable}>
-            <GlobalStyle />
-            {props.children}
-        </ThemeProvider>
-    );
+	return (
+		<ThemeProvider theme={themeVariable}>
+			<GlobalStyle />
+			{props.children}
+		</ThemeProvider>
+	);
 }

@@ -22,7 +22,7 @@ function Switcher(props) {
         case 'Chasseurs':
             renderView = <Chasseur userData={props.myUserData} />;
             break;
-            
+
         case 'Mes clients':
             renderView = <Client userData={props.myUserData} />;
             break;
@@ -34,7 +34,7 @@ function Switcher(props) {
         case 'Suivi dossiers':
             renderView = <Dossier userData={props.myUserData} />;
             break;
-    
+
         default:
             renderView = <Board userData={props.myUserData} />;
             break;
