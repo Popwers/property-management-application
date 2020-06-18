@@ -310,9 +310,9 @@ class Navigation extends Component {
 		this.props.toogleLoader(true, 'Chargement des données en cours ...');
 	}
 
-	componentDidUpdate() {
+	/*componentDidUpdate() {
 		(this.props.myUserData.role != 'load' && this.props.loaderStat.statut) ? this.props.toogleLoader(false, 'Chargement des données en cours ...') : null;
-	}
+	}*/
 
 	handleChangeLink(newLink) {
 		this.setState({ currentLink: newLink });
@@ -322,7 +322,11 @@ class Navigation extends Component {
 	render() {
 		let showLink = new Array();
 
-		if (this.props.myUserData.role != 'load') {
+		if (this.props.myUserData.role != 'load' && this.props.myUserData.role != null) {
+			if (this.props.loaderStat.statut) {
+				this.props.toogleLoader(false, 'Chargement des données en cours ...');
+			}
+
 			// Count Notifications
 			let data = null;
 			let countNotifDossier = 0;
@@ -504,6 +508,10 @@ class Navigation extends Component {
 					closeMenu={this.props.statMenu} />);
 			}
 
+		} else {
+			if (!this.props.loaderStat.statut) {
+				this.props.toogleLoader(true, 'Chargement des données en cours ...');
+			}
 		}
 
 		return (

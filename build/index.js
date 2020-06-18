@@ -12906,11 +12906,10 @@ var Navigation = /*#__PURE__*/function (_Component) {
       this.props.getAllNotifications();
       this.props.toogleLoader(true, 'Chargement des données en cours ...');
     }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      this.props.myUserData.role != 'load' && this.props.loaderStat.statut ? this.props.toogleLoader(false, 'Chargement des données en cours ...') : null;
-    }
+    /*componentDidUpdate() {
+    	(this.props.myUserData.role != 'load' && this.props.loaderStat.statut) ? this.props.toogleLoader(false, 'Chargement des données en cours ...') : null;
+    }*/
+
   }, {
     key: "handleChangeLink",
     value: function handleChangeLink(newLink) {
@@ -12926,8 +12925,12 @@ var Navigation = /*#__PURE__*/function (_Component) {
 
       var showLink = new Array();
 
-      if (this.props.myUserData.role != 'load') {
-        // Count Notifications
+      if (this.props.myUserData.role != 'load' && this.props.myUserData.role != null) {
+        if (this.props.loaderStat.statut) {
+          this.props.toogleLoader(false, 'Chargement des données en cours ...');
+        } // Count Notifications
+
+
         var data = null;
         var countNotifDossier = 0;
         var countNotifPropriete = 0;
@@ -13132,6 +13135,10 @@ var Navigation = /*#__PURE__*/function (_Component) {
             changeView: this.handleChangeLink,
             closeMenu: this.props.statMenu
           }));
+        }
+      } else {
+        if (!this.props.loaderStat.statut) {
+          this.props.toogleLoader(true, 'Chargement des données en cours ...');
         }
       }
 
@@ -15457,9 +15464,9 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
   manageDossier: _reducers_dossierReducer__WEBPACK_IMPORTED_MODULE_4__["default"],
   manageUser: _reducers_userReducer__WEBPACK_IMPORTED_MODULE_5__["default"],
   manageNotification: _reducers_notificationReducer__WEBPACK_IMPORTED_MODULE_6__["default"]
-}); //const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(rootReducer, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"])));
+});
+var composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || redux__WEBPACK_IMPORTED_MODULE_0__["compose"];
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(rootReducer, composeEnhancers(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"]))));
 
 /***/ }),
 
