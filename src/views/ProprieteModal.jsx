@@ -192,7 +192,7 @@ class ProprieteModal extends Component {
                             </AssociateText>
                         </div>
                     </ContainerBlue>
-                    {this.props.modalData.photos.length > 0 &&
+                    {(this.props.modalData.photos.length > 0 || this.props.modalData.thumbnail) &&
                         <Galery thumbnail={this.props.modalData.thumbnail} images={this.props.modalData.photos} />
                     }
                 </Row>

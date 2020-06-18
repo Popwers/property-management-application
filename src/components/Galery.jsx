@@ -98,7 +98,12 @@ export default class Galery extends Component {
     }
 
     componentDidMount() {
-        let current = this.props.images[0].guid;
+        let current = null;
+
+        if (this.props.images.length > 0 && Array.isArray(this.props.images)) {
+            current = this.props.images[0].guid;
+        }
+
         if (this.props.thumbnail) {
             current = this.props.thumbnail;
         }
@@ -109,7 +114,7 @@ export default class Galery extends Component {
         let haveThumbnail = false;
         let nbImages = 0;
 
-        if (this.props.images.length > 0) {
+        if (this.props.images.length > 0 && Array.isArray(this.props.images)) {
             nbImages = this.props.images.length;
         }
 
@@ -117,13 +122,13 @@ export default class Galery extends Component {
             haveThumbnail = true;
             nbImages++;
         }
-        
+
         return (
             <>
                 <GaleryStyled>
                     <ContainerPictures>
-                        <img src={this.state.currentImg} 
-                            alt='Photo principale' 
+                        <img src={this.state.currentImg}
+                            alt='Photo principale'
                             onClick={() => this.setState({ showFullscreen: true, imgFullscreen: this.state.currentImg })} />
                     </ContainerPictures>
 
@@ -138,7 +143,7 @@ export default class Galery extends Component {
                                 </div>
                             }
 
-                            {this.props.images.length > 0 &&
+                            {(this.props.images.length > 0 && Array.isArray(this.props.images)) &&
                                 this.props.images.map(img =>
                                     <div>
                                         <img
