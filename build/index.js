@@ -18974,6 +18974,7 @@ var DossierModal = /*#__PURE__*/function (_Component) {
       var honoraires_immomalin = null;
       var prix_au_m = null;
       var photos = new Array();
+      var thumbnail = null;
       var user_email = null;
       var telephone = null;
       var adresse_postale = null;
@@ -18997,6 +18998,7 @@ var DossierModal = /*#__PURE__*/function (_Component) {
         interlocuteur = this.props.modalData.id_fiche_produit.interlocuteur;
         prix_au_m = this.props.modalData.id_fiche_produit.prix_au_m;
         photos = this.props.modalData.id_fiche_produit.photos;
+        thumbnail = this.props.modalData.id_fiche_produit.thumbnail;
 
         if (this.props.modalData.id_fiche_produit.id) {
           honoraires_immomalin = /*#__PURE__*/React.createElement(_components_Commission__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -19054,7 +19056,8 @@ var DossierModal = /*#__PURE__*/function (_Component) {
         label: "T\xE9l\xE9phone"
       }, telephone != null && telephone != '' ? telephone : 'Non renseigné'), /*#__PURE__*/React.createElement(AssociateText, {
         label: "Prix au m\xB2"
-      }, prix_au_m != null && prix_au_m != '' ? Object(_lib_functions__WEBPACK_IMPORTED_MODULE_8__["formatPrix"])(prix_au_m, true) + ' €' : 'Non renseigné'))), photos.length > 0 && /*#__PURE__*/React.createElement(_components_Galery__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }, prix_au_m != null && prix_au_m != '' ? Object(_lib_functions__WEBPACK_IMPORTED_MODULE_8__["formatPrix"])(prix_au_m, true) + ' €' : 'Non renseigné'))), (photos.length > 0 || thumbnail) && /*#__PURE__*/React.createElement(_components_Galery__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        thumbnail: thumbnail,
         images: photos
       })), /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_3__["Text"], {
         bold: true,

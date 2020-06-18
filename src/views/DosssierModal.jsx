@@ -255,6 +255,7 @@ class DossierModal extends Component {
         let honoraires_immomalin = null;
         let prix_au_m = null;
         let photos = new Array();
+        let thumbnail = null;
         let user_email = null;
         let telephone = null;
         let adresse_postale = null;
@@ -278,6 +279,7 @@ class DossierModal extends Component {
             interlocuteur = this.props.modalData.id_fiche_produit.interlocuteur;
             prix_au_m = this.props.modalData.id_fiche_produit.prix_au_m;
             photos = this.props.modalData.id_fiche_produit.photos;
+            thumbnail = this.props.modalData.id_fiche_produit.thumbnail;
 
             if (this.props.modalData.id_fiche_produit.id) {
                 honoraires_immomalin = <Commission ficheBien={this.props.modalData.id_fiche_produit.id} />;
@@ -358,8 +360,8 @@ class DossierModal extends Component {
                             </AssociateText>
                         </div>
                     </ContainerBlue>
-                    {photos.length > 0 &&
-                        <Galery images={photos} />
+                    {(photos.length > 0 || thumbnail) &&
+                        <Galery thumbnail={thumbnail} images={photos} />
                     }
                 </Row>
 
