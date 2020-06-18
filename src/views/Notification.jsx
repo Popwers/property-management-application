@@ -8,6 +8,7 @@ import {
     getAllDossiers,
 } from '../actions';
 
+import { formatToJson } from '../lib/functions';
 import { setDocumentTitle } from '../lib/functions';
 import { TitleSection } from '../theme/design/componentsDesign';
 import Table from '../components/Table';
