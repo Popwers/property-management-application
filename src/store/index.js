@@ -23,7 +23,4 @@ const rootReducer = combineReducers({
 export default createStore(
     rootReducer,
     applyMiddleware(thunk)
-    /*composeEnhancers(
-        applyMiddleware(thunk)
-    )*/
 );

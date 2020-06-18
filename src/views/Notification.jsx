@@ -43,7 +43,11 @@ class Notification extends Component {
 
                 if (Array.isArray(data)) {
                     if (data.length > 0) {
-                        let listDossier = this.props.listDossier.filter(dossier => dossier.id_client.id == this.props.myUserData.id);
+                        let listDossier = null;
+                        if (this.props.listDossier != null && Array.isArray(this.props.listDossier)) {
+                            listDossier = this.props.listDossier.filter(dossier => dossier.id_fiche_produit.chasseur.id == this.props.myUserData.id);
+                        }
+
                         data.forEach(notif => {
                             if (notif.type_notification == 'updateDossier') {
                                 if (Array.isArray(listDossier)) {
@@ -64,11 +68,15 @@ class Notification extends Component {
                     newData = null;
                 }
             } else if (this.props.myUserData.role == 'chasseur') {
-                data = this.props.list.data.filter(notif => notif.type_notification == 'newDossier' || notif.type_notification == 'newPropriete');
+                data = this.props.list.data.filter(notif => notif.type_notification == 'newDossier');
 
                 if (Array.isArray(data)) {
                     if (data.length > 0) {
-                        let listDossier = this.props.listDossier.filter(dossier => dossier.id_fiche_produit.chasseur.id == this.props.myUserData.id);
+                        let listDossier = null;
+                        if (this.props.listDossier != null && Array.isArray(this.props.listDossier)) {
+                            listDossier = this.props.listDossier.filter(dossier => dossier.id_fiche_produit.chasseur.id == this.props.myUserData.id);
+                        }
+
                         data.forEach(notif => {
                             if (notif.type_notification == 'newDossier') {
                                 if (Array.isArray(listDossier)) {
@@ -78,8 +86,6 @@ class Notification extends Component {
                                         });
                                     }
                                 }
-                            } else {
-                                newData.push(notif);
                             }
                         });
                     } else {

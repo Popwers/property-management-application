@@ -123,7 +123,7 @@ class ProprieteModal extends Component {
                             <Button action='updatePropriete' idToSee={this.props.modalData.id} src={IconPencil} iconRight small alignCenter>Modifier</Button>
                         </div>
                     }
-                    {this.props.role == 'superviseur' || this.props.role == 'administrator' &&
+                    {(this.props.role == 'superviseur' || this.props.role == 'administrator') &&
                         <div>
                             <StyledButton
                                 onClick={this.handleClick}

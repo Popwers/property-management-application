@@ -335,7 +335,11 @@ class Navigation extends Component {
 
 					if (Array.isArray(data)) {
 						if (data.length > 0) {
-							let listDossier = this.props.listDossier.filter(dossier => dossier.id_client.id == this.props.myUserData.id);
+							let listDossier = null;
+							if (this.props.listDossier != null && Array.isArray(this.props.listDossier)) {
+								listDossier = this.props.listDossier.filter(dossier => dossier.id_client.id == this.props.myUserData.id);
+							}
+
 							data.forEach(notif => {
 								let isRead = true;
 								if (Array.isArray(notif.users_see)) {
@@ -367,11 +371,15 @@ class Navigation extends Component {
 						}
 					}
 				} else if (this.props.myUserData.role == 'chasseur') {
-					data = this.props.list.data.filter(notif => notif.type_notification == 'newDossier' || notif.type_notification == 'newPropriete');
+					data = this.props.list.data.filter(notif => notif.type_notification == 'newDossier');
 
 					if (Array.isArray(data)) {
 						if (data.length > 0) {
-							let listDossier = this.props.listDossier.filter(dossier => dossier.id_fiche_produit.chasseur.id == this.props.myUserData.id);
+							let listDossier = null;
+							if (this.props.listDossier != null && Array.isArray(this.props.listDossier)) {
+								listDossier = this.props.listDossier.filter(dossier => dossier.id_fiche_produit.chasseur.id == this.props.myUserData.id);
+							}
+
 							data.forEach(notif => {
 								let isRead = true;
 								if (Array.isArray(notif.users_see)) {
@@ -396,9 +404,6 @@ class Navigation extends Component {
 												});
 											}
 										}
-									} else {
-										countAllNotif++;
-										countNotifPropriete++;
 									}
 								}
 							});
@@ -502,7 +507,7 @@ class Navigation extends Component {
 		}
 
 		return (
-			<NavContainer closeMenu={this.props.statMenu}>
+			<NavContainer closeMenu={this.props.statMenu} >
 				<Avatar closeMenu={this.props.statMenu}>
 					<div className='imgContainer'>
 						<img src={this.props.myUserData.avatar != 'default' ? this.props.myUserData.avatar : IconDefault} />
@@ -540,6 +545,7 @@ const mapStateToProps = (state) => {
 	return {
 		myUserData: state.general.myData.data,
 		list: state.manageNotification.listNotification,
+		listDossier: state.manageDossier.listDossier.data,
 		loaderStat: state.general.loader
 	};
 }

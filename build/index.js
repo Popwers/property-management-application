@@ -12941,9 +12941,14 @@ var Navigation = /*#__PURE__*/function (_Component) {
 
             if (Array.isArray(data)) {
               if (data.length > 0) {
-                var listDossier = this.props.listDossier.filter(function (dossier) {
-                  return dossier.id_client.id == _this2.props.myUserData.id;
-                });
+                var listDossier = null;
+
+                if (this.props.listDossier != null && Array.isArray(this.props.listDossier)) {
+                  listDossier = this.props.listDossier.filter(function (dossier) {
+                    return dossier.id_client.id == _this2.props.myUserData.id;
+                  });
+                }
+
                 data.forEach(function (notif) {
                   var isRead = true;
 
@@ -12977,14 +12982,18 @@ var Navigation = /*#__PURE__*/function (_Component) {
             }
           } else if (this.props.myUserData.role == 'chasseur') {
             data = this.props.list.data.filter(function (notif) {
-              return notif.type_notification == 'newDossier' || notif.type_notification == 'newPropriete';
+              return notif.type_notification == 'newDossier';
             });
 
             if (Array.isArray(data)) {
               if (data.length > 0) {
-                var _listDossier = this.props.listDossier.filter(function (dossier) {
-                  return dossier.id_fiche_produit.chasseur.id == _this2.props.myUserData.id;
-                });
+                var _listDossier = null;
+
+                if (this.props.listDossier != null && Array.isArray(this.props.listDossier)) {
+                  _listDossier = this.props.listDossier.filter(function (dossier) {
+                    return dossier.id_fiche_produit.chasseur.id == _this2.props.myUserData.id;
+                  });
+                }
 
                 data.forEach(function (notif) {
                   var isRead = true;
@@ -13011,9 +13020,6 @@ var Navigation = /*#__PURE__*/function (_Component) {
                           });
                         }
                       }
-                    } else {
-                      countAllNotif++;
-                      countNotifPropriete++;
                     }
                   }
                 });
@@ -13183,6 +13189,7 @@ var mapStateToProps = function mapStateToProps(state) {
   return {
     myUserData: state.general.myData.data,
     list: state.manageNotification.listNotification,
+    listDossier: state.manageDossier.listDossier.data,
     loaderStat: state.general.loader
   };
 };
@@ -15452,11 +15459,7 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
   manageNotification: _reducers_notificationReducer__WEBPACK_IMPORTED_MODULE_6__["default"]
 }); //const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(rootReducer, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"])
-/*composeEnhancers(
-    applyMiddleware(thunk)
-)*/
-));
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(rootReducer, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"])));
 
 /***/ }),
 
@@ -19197,9 +19200,14 @@ var Notification = /*#__PURE__*/function (_Component) {
 
           if (Array.isArray(data)) {
             if (data.length > 0) {
-              var listDossier = this.props.listDossier.filter(function (dossier) {
-                return dossier.id_client.id == _this.props.myUserData.id;
-              });
+              var listDossier = null;
+
+              if (this.props.listDossier != null && Array.isArray(this.props.listDossier)) {
+                listDossier = this.props.listDossier.filter(function (dossier) {
+                  return dossier.id_fiche_produit.chasseur.id == _this.props.myUserData.id;
+                });
+              }
+
               data.forEach(function (notif) {
                 if (notif.type_notification == 'updateDossier') {
                   if (Array.isArray(listDossier)) {
@@ -19221,14 +19229,18 @@ var Notification = /*#__PURE__*/function (_Component) {
           }
         } else if (this.props.myUserData.role == 'chasseur') {
           data = this.props.list.data.filter(function (notif) {
-            return notif.type_notification == 'newDossier' || notif.type_notification == 'newPropriete';
+            return notif.type_notification == 'newDossier';
           });
 
           if (Array.isArray(data)) {
             if (data.length > 0) {
-              var _listDossier = this.props.listDossier.filter(function (dossier) {
-                return dossier.id_fiche_produit.chasseur.id == _this.props.myUserData.id;
-              });
+              var _listDossier = null;
+
+              if (this.props.listDossier != null && Array.isArray(this.props.listDossier)) {
+                _listDossier = this.props.listDossier.filter(function (dossier) {
+                  return dossier.id_fiche_produit.chasseur.id == _this.props.myUserData.id;
+                });
+              }
 
               data.forEach(function (notif) {
                 if (notif.type_notification == 'newDossier') {
@@ -19239,8 +19251,6 @@ var Notification = /*#__PURE__*/function (_Component) {
                       });
                     }
                   }
-                } else {
-                  newData.push(notif);
                 }
               });
             } else {
@@ -19747,7 +19757,7 @@ var ProprieteModal = /*#__PURE__*/function (_Component) {
         iconRight: true,
         small: true,
         alignCenter: true
-      }, "Modifier")), this.props.role == 'superviseur' || this.props.role == 'administrator' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["StyledButton"], {
+      }, "Modifier")), (this.props.role == 'superviseur' || this.props.role == 'administrator') && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(_theme_design_componentsDesign__WEBPACK_IMPORTED_MODULE_5__["StyledButton"], {
         onClick: this.handleClick,
         red: this.props.modalData.statut != 'Hors ligne',
         green: this.props.modalData.statut != 'En ligne',
