@@ -37,7 +37,7 @@ class UserModal extends Component {
         }
 
         return (
-            <>  
+            <>
                 <Avatar>
                     <img src={avatar} />
                 </Avatar>
@@ -60,7 +60,7 @@ class UserModal extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        
+
     }
 }
 

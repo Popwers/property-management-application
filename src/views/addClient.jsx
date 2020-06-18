@@ -252,18 +252,18 @@ class AddClient extends Component {
                 this.props.registerDataProgress(fakeID, percentageProgress);
             },
         })
-        .then(response => {
-            let result = formatToJson(response.data);
-            if (result.id == null) {
-                console.log('error');
-            }
-        })
-        .catch(error => {
-            console.log(error);
-        })
-        .then(() => {
-            this.props.registerDataProgress(fakeID, 100);
-        });
+            .then(response => {
+                let result = formatToJson(response.data);
+                if (result.id == null) {
+                    console.log('error');
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
+            .then(() => {
+                this.props.registerDataProgress(fakeID, 100);
+            });
 
         this.props.getAllUsers();
     }
@@ -300,11 +300,11 @@ class AddClient extends Component {
                     <Input value={this.props.modalData.ville} onChange={this.props.handleChangeModal} required type="text" id="ville" label="Ville" />
                 </RowInput>
 
-                <RowInput>  
+                <RowInput>
                     <Input value={this.props.modalData.etat_province_region} onChange={this.props.handleChangeModal} type="text" id="etat_province_region" label="État / Province / Région" />
                     <Input value={this.props.modalData.zip_code_postal} onChange={this.props.handleChangeModal} required type="text" id="zip_code_postal" label="ZIP / Code postal" />
-                    <Input value={this.props.modalData.pays} onChange={this.props.handleChangeModal} type='select' id="pays" label='Pays' list={listPays} required /> 
-                </RowInput>                  
+                    <Input value={this.props.modalData.pays} onChange={this.props.handleChangeModal} type='select' id="pays" label='Pays' list={listPays} required />
+                </RowInput>
 
                 <SendButton noMarginLeft type="submit">Enregistrer</SendButton>
             </Form>

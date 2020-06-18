@@ -45,18 +45,18 @@ class AddChasseur extends Component {
                 this.props.registerDataProgress(fakeID, percentageProgress);
             },
         })
-        .then(response => {
-            let result = formatToJson(response.data);
-            if (result.id == null) {
-                console.log('error');
-            }
-        })
-        .catch(error => {
-            console.log(error);
-        })
-        .then(() => {
-            this.props.registerDataProgress(fakeID, 100);
-        });
+            .then(response => {
+                let result = formatToJson(response.data);
+                if (result.id == null) {
+                    console.log('error');
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
+            .then(() => {
+                this.props.registerDataProgress(fakeID, 100);
+            });
 
         this.props.getAllUsers();
     }

@@ -31,7 +31,7 @@ class Chasseur extends Component {
     render() {
         let data = null;
 
-        if (this.props.list.data != null) {
+        if (this.props.list.data != null && Array.isArray(this.props.list.data)) {
             data = this.props.list.data.filter(user => user.role == 'chasseur');
 
             if (Array.isArray(data)) {

@@ -81,7 +81,7 @@ class Board extends Component {
         let chiffreEstimationProjet = 0;
         let chiffreProjetFacture = 0;
 
-        if (this.props.list.data != null) {
+        if (this.props.list.data != null && Array.isArray(this.props.list.data)) {
             if (this.props.userData.role == 'client__investisseur') {
                 data = this.props.list.data.filter(dossier => dossier.id_client.id == this.props.userData.id);
             } else if (this.props.userData.role == 'chasseur') {

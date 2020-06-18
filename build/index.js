@@ -18187,7 +18187,7 @@ var Board = /*#__PURE__*/function (_Component) {
       var chiffreEstimationProjet = 0;
       var chiffreProjetFacture = 0;
 
-      if (this.props.list.data != null) {
+      if (this.props.list.data != null && Array.isArray(this.props.list.data)) {
         if (this.props.userData.role == 'client__investisseur') {
           data = this.props.list.data.filter(function (dossier) {
             return dossier.id_client.id == _this.props.userData.id;
@@ -18393,7 +18393,7 @@ var Chasseur = /*#__PURE__*/function (_Component) {
     value: function render() {
       var data = null;
 
-      if (this.props.list.data != null) {
+      if (this.props.list.data != null && Array.isArray(this.props.list.data)) {
         data = this.props.list.data.filter(function (user) {
           return user.role == 'chasseur';
         });
@@ -18511,7 +18511,7 @@ var Client = /*#__PURE__*/function (_Component) {
     value: function render() {
       var data = null;
 
-      if (this.props.list.data != null) {
+      if (this.props.list.data != null && Array.isArray(this.props.list.data)) {
         data = this.props.list.data.filter(function (user) {
           return user.role == 'client__investisseur';
         });
@@ -18647,7 +18647,7 @@ var Dossier = /*#__PURE__*/function (_Component) {
       var data = null;
       var entete = enteteSuperviseur;
 
-      if (this.props.list.data != null) {
+      if (this.props.list.data != null && Array.isArray(this.props.list.data)) {
         if (this.props.userData.role == 'chasseur') {
           data = this.props.list.data.filter(function (dossier) {
             return dossier.id_fiche_produit.chasseur.id == _this.props.userData.id;
@@ -19192,7 +19192,7 @@ var Notification = /*#__PURE__*/function (_Component) {
       var newData = new Array();
       var finalData = new Array();
 
-      if (this.props.list.data != null) {
+      if (this.props.list.data != null && Array.isArray(this.props.list.data)) {
         if (this.props.myUserData.role == 'client__investisseur') {
           data = this.props.list.data.filter(function (notif) {
             return notif.type_notification == 'updateDossier' || notif.type_notification == 'newPropriete';
@@ -19503,7 +19503,7 @@ var Propriete = /*#__PURE__*/function (_Component) {
       var data = null;
       var entete = enteteSuperviseur;
 
-      if (this.props.list.data != null) {
+      if (this.props.list.data != null && Array.isArray(this.props.list.data)) {
         if (this.props.userData.role == 'chasseur') {
           data = this.props.list.data.filter(function (propriete) {
             return propriete.chasseur.id == _this.props.userData.id;

@@ -37,7 +37,7 @@ class Notification extends Component {
         let newData = new Array();
         let finalData = new Array();
 
-        if (this.props.list.data != null) {
+        if (this.props.list.data != null && Array.isArray(this.props.list.data)) {
             if (this.props.myUserData.role == 'client__investisseur') {
                 data = this.props.list.data.filter(notif => notif.type_notification == 'updateDossier' || notif.type_notification == 'newPropriete');
 

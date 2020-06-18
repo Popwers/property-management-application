@@ -42,7 +42,7 @@ class Propriete extends Component {
         let data = null;
         let entete = enteteSuperviseur;
 
-        if (this.props.list.data != null) {
+        if (this.props.list.data != null && Array.isArray(this.props.list.data)) {
             if (this.props.userData.role == 'chasseur') {
                 data = this.props.list.data.filter(propriete => propriete.chasseur.id == this.props.userData.id);
                 entete = enteteChasseur;
