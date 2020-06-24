@@ -388,7 +388,9 @@ export default function manageAddModal(state = initialState, action) {
                 switch (theKey) {
                     case 'vacance_locative':
                     case 'loyer_previsionnel_annuelles':
-                        newData.total_revenus_annuelles = Number(newData.loyer_previsionnel_annuelles / ((newData.vacance_locative / 100) + 1));
+                        //newData.total_revenus_annuelles = Number(newData.loyer_previsionnel_annuelles / ((newData.vacance_locative / 100) + 1));
+
+                        newData.total_revenus_annuelles = Number(newData.loyer_previsionnel_annuelles - (((newData.vacance_locative / 100) * newData.loyer_previsionnel_annuelles)));
                         break;
                 }
 
@@ -396,7 +398,9 @@ export default function manageAddModal(state = initialState, action) {
                 switch (theKey) {
                     case 'vacance_locative':
                     case 'loyer_previsionnel_mensuelles':
-                        newData.total_revenus_mensuelles = Number(newData.loyer_previsionnel_mensuelles / ((newData.vacance_locative / 100) + 1));
+                        //newData.total_revenus_mensuelles = Number(newData.loyer_previsionnel_mensuelles / ((newData.vacance_locative / 100) + 1));
+
+                        newData.total_revenus_mensuelles = Number(newData.loyer_previsionnel_mensuelles - (((newData.vacance_locative / 100) * newData.loyer_previsionnel_mensuelles)));
                         break;
                 }
 
@@ -441,7 +445,7 @@ export default function manageAddModal(state = initialState, action) {
                     case 'frais_de_travaux':
                     case 'honoraires_immomalin':
                     case 'mobilier_equipement':
-                        newData.rentabilite_net = Number(((newData.loyer_previsionnel_mensuelles - newData.total_charges_mensuelles) * 12) / (newData.prix_du_bien + newData.frais_dagence + newData.frais_de_travaux + newData.frais_de_notaire + newData.honoraires_immomalin + newData.mobilier_equipement));
+                        newData.rentabilite_net = Number((((newData.loyer_previsionnel_mensuelles - newData.total_charges_mensuelles) * 12) / (newData.prix_du_bien + newData.frais_dagence + newData.frais_de_travaux + newData.frais_de_notaire + newData.honoraires_immomalin + newData.mobilier_equipement)) * 100);
                         break;
                 }
 
@@ -451,7 +455,7 @@ export default function manageAddModal(state = initialState, action) {
                     case 'prix_du_bien':
                     case 'frais_dagence':
                     case 'frais_de_travaux':
-                        newData.rentabilite_brut = Number(newData.loyer_previsionnel_annuelles / (newData.prix_du_bien + newData.frais_dagence + newData.frais_de_travaux));
+                        newData.rentabilite_brut = Number((newData.loyer_previsionnel_annuelles / (newData.prix_du_bien + newData.frais_dagence + newData.frais_de_travaux)) * 100);
                         break;
                 }
 

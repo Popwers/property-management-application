@@ -133,7 +133,7 @@ class AppContainer extends Component {
                             <div></div>
                         </MenuBurger>
 
-                        <Title>Projet<span>locatif</span></Title>
+                        <Title>IMMO’<span>MALIN</span></Title>
                     </ContainerTitle>
 
                     <LogOut />
