@@ -64,9 +64,9 @@ class BackSite extends Component {
 
 	render() {
 		return (
-			<StyledButton id='backSite' href={this.props.href}>
+			<StyledButton id='backSite' href={this.props.href + '/liste-proprietes/'}>
 				<img src={Icon} />
-				<span>Retour sur le site</span>
+				<span>Retour sur les annonces</span>
 			</StyledButton>
 		);
 	}
