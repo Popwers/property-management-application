@@ -96,7 +96,19 @@ class Notification extends Component {
                     newData = null;
                 }
             } else {
-                newData = this.props.list.data;
+                data = this.props.list.data.filter(notif => notif.type_notification != 'newPropriete');
+
+                if (Array.isArray(data)) {
+                    if (data.length > 0) {
+                        data.forEach(notif => {
+                            newData.push(notif);
+                        });
+                    } else {
+                        newData = null;
+                    }
+                } else {
+                    newData = null;
+                }
             }
 
             let importantNotif = new Array();

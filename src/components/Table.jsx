@@ -159,6 +159,7 @@ class LineTable extends Component {
 
             switch (this.props.object.type_notification) {
                 case 'newDossier':
+                case 'newProprieteNoValid':
                 case 'newPropriete':
                     listItems.push(<ValTd bold={isRead} right>{this.props.object.description}</ValTd>);
                     listItems.push(<ValTd bold={isRead} right>{convertDate(this.props.object.date_notification)}</ValTd>);

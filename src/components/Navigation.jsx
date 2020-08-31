@@ -409,7 +409,7 @@ class Navigation extends Component {
 						}
 					}
 				} else {
-					data = this.props.list.data;
+					data = this.props.list.data.filter(notif => notif.type_notification != 'newPropriete');
 
 					if (Array.isArray(data)) {
 						if (data.length > 0) {
@@ -426,7 +426,7 @@ class Navigation extends Component {
 								}
 
 								if (isRead) {
-									if (notif.type_notification == 'newPropriete') {
+									if (notif.type_notification == 'newProprieteNoValid') {
 										countNotifPropriete++;
 									} else if (notif.type_notification == 'newDossier') {
 										countNotifDossier++;
