@@ -1,3 +1,4 @@
-# Projet locatif Board
+# Property management application
 
-Application connecté avec un site Wordpress pour gérer des biens proposé à des investisseurs !
+A property management application created for a client.<br/>
+The application allows to register properties with detailed information and thus perform calculations of profitability at purchase.
