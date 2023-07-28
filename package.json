@@ -35,7 +35,7 @@
 		"eslint-plugin-react-hooks": "^1.7.0",
 		"react-dom": "^16.13.1",
 		"react-number-format": "^4.4.1",
-		"react-redux": "^7.2.0",
+		"react-redux": "^7.2.9",
 		"react-router-dom": "^5.2.0",
 		"redux": "^4.0.5",
 		"styled-components": "^5.1.1"
