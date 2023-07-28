@@ -1,43 +1,47 @@
 {
-	"name": "loca-board",
-	"version": "1.0.0",
-	"description": "Simple dashboard connect to wordpress for Locatif Project management.",
-	"main": "index.js",
-	"author": "Lionel Bataille",
-	"license": "ISC",
-	"scripts": {
-		"build": "wp-scripts build",
-		"start": "wp-scripts start"
-	},
-	"devDependencies": {
-		"@babel/core": "^7.10.2",
-		"@babel/preset-env": "^7.10.2",
-		"@babel/preset-react": "^7.10.1",
-		"@wordpress/eslint-plugin": "^3.4.1",
-		"@wordpress/scripts": "^6.1.1",
-		"babel-loader": "^8.1.0",
-		"css-loader": "^3.6.0",
-		"eslint": "^7.2.0",
-		"eslint-plugin-react": "^7.20.0",
-		"file-loader": "^6.0.0",
-		"node-sass": "^4.14.1",
-		"redux-thunk": "^2.3.0",
-		"sass-loader": "^8.0.2",
-		"style-loader": "^1.2.1",
-		"svg-url-loader": "^5.0.1",
-		"url-loader": "^4.1.0"
-	},
-	"dependencies": {
-		"axios": "^0.21.1",
-		"eslint-plugin-jsdoc": "^15.12.2",
-		"eslint-plugin-jsx-a11y": "^6.3.0",
-		"eslint-plugin-prettier": "^3.1.4",
-		"eslint-plugin-react-hooks": "^1.7.0",
-		"react-dom": "^16.13.1",
-		"react-number-format": "^4.4.1",
-		"react-redux": "^7.2.0",
-		"react-router-dom": "^5.2.0",
-		"redux": "^4.0.5",
-		"styled-components": "^5.1.1"
-	}
+  "name": "loca-board",
+  "version": "1.0.0",
+  "description": "Simple dashboard connect to wordpress for Locatif Project management.",
+  "main": "index.js",
+  "author": "Lionel Bataille",
+  "license": "ISC",
+  "scripts": {
+    "build": "wp-scripts build",
+    "start": "wp-scripts start",
+    "prepare": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/preset-react": "^7.10.1",
+    "@wordpress/eslint-plugin": "^3.4.1",
+    "@wordpress/scripts": "^6.1.1",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^3.6.0",
+    "eslint": "^7.2.0",
+    "eslint-plugin-react": "^7.20.0",
+    "file-loader": "^6.0.0",
+    "node-sass": "^4.14.1",
+    "redux-thunk": "^2.3.0",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.2.1",
+    "svg-url-loader": "^5.0.1",
+    "url-loader": "^4.1.0"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "eslint-plugin-jsdoc": "^15.12.2",
+    "eslint-plugin-jsx-a11y": "^6.3.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "react-dom": "^16.13.1",
+    "react-number-format": "^4.4.1",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "styled-components": "^5.1.1",
+    "@snyk/protect": "latest"
+  },
+  "snyk": true
 }
